@@ -27,23 +27,25 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExam07DecemberGroup2Ta
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExam07DecemberGroup1Task2", "FundamentalsFinalExam07December2019Group1Task2\FinalExam07DecemberGroup1Task2.csproj", "{C778E90D-6501-4553-A479-36A1AD17F84A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExamRetake10AprilTask2", "FundamentalsFinalExamRetake10April2020Task2\FinalExamRetake10AprilTask2.csproj", "{26CC3173-82E4-40AA-B745-018D5EDEDC1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExamRetake10AprilTask2", "FundamentalsFinalExamRetake10April2020Task2\FinalExamRetake10AprilTask2.csproj", "{26CC3173-82E4-40AA-B745-018D5EDEDC1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExam04AprilGroup2Task2", "FundamentalsFinalExam04April2020Group2Task2\FinalExam04AprilGroup2Task2.csproj", "{9B1D0352-C0AF-44B3-A7CA-61BE4A5FD08F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExam04AprilGroup2Task2", "FundamentalsFinalExam04April2020Group2Task2\FinalExam04AprilGroup2Task2.csproj", "{9B1D0352-C0AF-44B3-A7CA-61BE4A5FD08F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExam04AprilGroup2Task1", "FinalExam04AprilGroup2Task1\FinalExam04AprilGroup2Task1.csproj", "{97AD543D-CEA1-445E-B103-E3CCCCCE2D8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExam04AprilGroup2Task1", "FinalExam04AprilGroup2Task1\FinalExam04AprilGroup2Task1.csproj", "{97AD543D-CEA1-445E-B103-E3CCCCCE2D8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExamRetake10AprilTask3", "FinalExamRetake10AprilTask3\FinalExamRetake10AprilTask3.csproj", "{D6E36E07-A99C-42A0-9C39-E9B889382571}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExamRetake10AprilTask3", "FinalExamRetake10AprilTask3\FinalExamRetake10AprilTask3.csproj", "{D6E36E07-A99C-42A0-9C39-E9B889382571}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExam07DecemberGroup1Task1", "FinalExam07DecemberGroup1Task1\FinalExam07DecemberGroup1Task1.csproj", "{CF260AFA-B375-44A9-BCC2-5FEC0C71B43D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExam07DecemberGroup1Task1", "FinalExam07DecemberGroup1Task1\FinalExam07DecemberGroup1Task1.csproj", "{CF260AFA-B375-44A9-BCC2-5FEC0C71B43D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExam07DecemberGroup1Task3", "FinalExam07DecemberGroup1Task3\FinalExam07DecemberGroup1Task3.csproj", "{0507D557-B2A0-4A3C-8164-425FB12CD7BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExam07DecemberGroup1Task3", "FinalExam07DecemberGroup1Task3\FinalExam07DecemberGroup1Task3.csproj", "{0507D557-B2A0-4A3C-8164-425FB12CD7BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExamRetake9AugustTask2", "FinalExamRetake13DecemberTask2\FinalExamRetake9AugustTask2.csproj", "{C229F787-87DD-403E-9A4A-1751FC2B8586}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExamRetake9AugustTask2", "FinalExamRetake13DecemberTask2\FinalExamRetake9AugustTask2.csproj", "{C229F787-87DD-403E-9A4A-1751FC2B8586}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExamRetake13DecemberТаск2", "FinalExamRetake13DecemberТаск2\FinalExamRetake13DecemberТаск2.csproj", "{7DBC69B4-BDF5-4B04-80CD-C7B5411B460F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExamRetake13DecemberТаск2", "FinalExamRetake13DecemberТаск2\FinalExamRetake13DecemberТаск2.csproj", "{7DBC69B4-BDF5-4B04-80CD-C7B5411B460F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExam04AprilGroup1Task2", "FinalExam04AprilTask2\FinalExam04AprilGroup1Task2.csproj", "{997DD463-89AA-4610-B5E8-8F3A018E4BC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinalExam04AprilGroup1Task2", "FinalExam04AprilTask2\FinalExam04AprilGroup1Task2.csproj", "{997DD463-89AA-4610-B5E8-8F3A018E4BC8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinalExamRetake15August2020Task1", "FinalExamRetake15August2020Task1\FinalExamRetake15August2020Task1.csproj", "{2D49B80C-7A16-4EC6-BDA1-839B207A0CC8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +137,10 @@ Global
 		{997DD463-89AA-4610-B5E8-8F3A018E4BC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{997DD463-89AA-4610-B5E8-8F3A018E4BC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{997DD463-89AA-4610-B5E8-8F3A018E4BC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D49B80C-7A16-4EC6-BDA1-839B207A0CC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D49B80C-7A16-4EC6-BDA1-839B207A0CC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D49B80C-7A16-4EC6-BDA1-839B207A0CC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D49B80C-7A16-4EC6-BDA1-839B207A0CC8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
