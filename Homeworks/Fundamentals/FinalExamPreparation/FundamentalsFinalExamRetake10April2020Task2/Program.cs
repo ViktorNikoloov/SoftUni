@@ -32,6 +32,7 @@ namespace FundamentalsFinalExamRetake10April2020Task2
             if (matches.Count > 0)
             {
                 Console.WriteLine($"{matches.Count} word pairs found!");
+
                 if (pairs.Count > 0)
                 {
                     Console.Write(@$"The mirror words are:
