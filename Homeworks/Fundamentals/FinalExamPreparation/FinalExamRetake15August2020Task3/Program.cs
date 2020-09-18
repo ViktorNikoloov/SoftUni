@@ -20,7 +20,7 @@ namespace FinalExamRetake15August2020Task3
     {
         static void Main(string[] args)
         {
-            Dictionary<string, PieceInformation> pieces = new Dictionary<string, PieceInformation>();
+            SortedDictionary<string, PieceInformation> pieces = new SortedDictionary<string, PieceInformation>();
             int n = int.Parse(Console.ReadLine());
 
             for (int i = 0; i < n; i++) //{piece}|{composer}|{key}
@@ -69,7 +69,7 @@ namespace FinalExamRetake15August2020Task3
                 }
                 else if (command == "ChangeKey")
                 {
-                    string newKey = commands[2];
+                    
 
                     if (!pieces.ContainsKey(piece))
                     {
@@ -77,22 +77,26 @@ namespace FinalExamRetake15August2020Task3
                     }
                     else
                     {
-                        pieces[piece].Key.Replace(pieces[piece].Key, newKey);
+                        string oldKey = pieces[piece].Key;
+                        string newKey = commands[2];
 
-                        Console.WriteLine($"Changed the key of {piece} to {newKey}!");
+                        pieces[piece].Key = newKey;
+                        
+                        Console.WriteLine($"Changed the key of {piece} to {pieces[piece].Key}!");
                     }
 
-                }
 
+                }
+                
                 commands = Console.ReadLine().Split("|", StringSplitOptions.RemoveEmptyEntries);
             }
 
-            var sortedPieces = pieces.OrderBy(x => x.Key).OrderByDescending(x => x.Value.Composer).ToDictionary(x => x, y => y);
+            var sortedPieces = pieces.OrderBy(x => x.Key).ThenBy(x => x.Value.Composer).ToDictionary(x => x.Key, y => y.Value);
 
-            //foreach (var item in sortedPieces)
-            //{
-            //    Console.WriteLine($"{piece.Key} -> Composer: {}, Key: {key}");
-            //}
+            foreach (var piece in sortedPieces)
+            {
+                Console.WriteLine($"{piece.Key} -> Composer: {piece.Value.Composer}, Key: {piece.Value.Key}");
+            }
         }
 
         
