@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace _3.MaximumAndMinimumElement
+namespace _03.MaximumAndMinimumElement
 {
     class Program
     {
