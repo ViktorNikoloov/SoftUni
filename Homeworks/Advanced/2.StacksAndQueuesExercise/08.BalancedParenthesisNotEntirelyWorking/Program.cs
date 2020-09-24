@@ -30,7 +30,7 @@ namespace _08.BalancedParenthesis
                 char currLeftScope = leftSide.Dequeue();
                 char currRightScope = rightSide.Pop();
 
-                if (!((leftSide.Count == rightSide.Count) && 
+                if (!((leftSide.Count == rightSide.Count) &&
                     (currLeftScope == '(' && currRightScope == ')') ||
                     (currLeftScope == ')' && currRightScope == '(') ||
                     (currLeftScope == '[' && currRightScope == ']') ||

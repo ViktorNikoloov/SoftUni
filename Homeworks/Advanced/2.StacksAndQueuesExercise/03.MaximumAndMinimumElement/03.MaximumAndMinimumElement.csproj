@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>_08.BalancedParenthesis</RootNamespace>
+    <RootNamespace>_03.MaximumAndMinimumElement</RootNamespace>
   </PropertyGroup>
 
 </Project>

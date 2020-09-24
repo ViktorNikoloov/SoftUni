@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <RootNamespace>_08.BalancedParenthesisOnlyWithQueue</RootNamespace>
+    <RootNamespace>_01.BasicStackOperations</RootNamespace>
   </PropertyGroup>
 
 </Project>
