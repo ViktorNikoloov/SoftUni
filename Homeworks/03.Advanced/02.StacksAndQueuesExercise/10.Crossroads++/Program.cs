@@ -14,49 +14,99 @@ namespace _10.Crossroads__
             string command = Console.ReadLine();
 
             Queue<string> cars = new Queue<string>();
-            bool isSafety = false;
+            Queue<char> crossingCar = new Queue<char>();
+
+            bool isSafety = true;
             string currCar = string.Empty;
+            int carsPassed = 0;
 
             while (command != "END")
             {
-                cars.Enqueue(command);
-
-                if (command == "green")
+                if (command != "green")
                 {
-                    Queue<char> crossingCar = new Queue<char>(cars.Dequeue());
-                    currCar = crossingCar.ToString();
+                    cars.Enqueue(command);
+                }
+                else if (command == "green")
+                {
+                    currCar = cars.Dequeue();
+                    crossingCar = new Queue<char>(currCar);
 
                     for (int i = 0; i < greenLight; i++)
                     {
                         if (crossingCar.Count == 0)
                         {
-                            crossingCar = new Queue<char>(cars.Dequeue());
-                            currCar = crossingCar.ToString();
+                            if (cars.Count == 0)
+                            {
+                                carsPassed++;
+                                break;
+                            }
+                            else
+                            {
+                                currCar = cars.Dequeue();
+                                crossingCar = new Queue<char>(currCar);
+
+                            }
+                            carsPassed++;
 
                         }
                         crossingCar.Dequeue();
-                    }
 
-                    for (int i = 0; i < freeWindow; i++)
-                    {
-                        if (crossingCar.Count == 0)
+                        if (i == greenLight - 1)
                         {
-                            break;
+                            for (int j = 0; j < freeWindow; j++)
+                            {
+                                if (crossingCar.Count == 0)
+                                {
+                                    break;
+                                }
+
+                                crossingCar.Dequeue();
+
+                            }
+                            if (crossingCar.Count != 0)
+                            {
+                                isSafety = false;
+                                break;
+
+                            }
+                            else
+                            {
+                                carsPassed++;
+
+                            }
                         }
 
-                        crossingCar.Dequeue();
-                        
                     }
-
-                    if (crossingCar.Count == 0)
+                    if (!isSafety)
                     {
-                        isSafety = true;
+                        break;
+
                     }
 
                 }
 
 
+
                 command = Console.ReadLine();
+            }
+
+
+
+            if (crossingCar.Count != 0)
+            {
+                isSafety = false;
+            }
+
+            if (isSafety)
+            {
+                Console.WriteLine("Everyone is safe.");
+                Console.WriteLine($"{carsPassed} total cars passed the crossroads.");
+            }
+            else
+            {
+                Console.WriteLine("A crash happened!");
+                Console.WriteLine($"{currCar} was hit at {crossingCar.Dequeue()}.");
+
             }
         }
     }
