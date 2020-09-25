@@ -26,7 +26,7 @@ namespace _10.Crossroads__
                 {
                     cars.Enqueue(command);
                 }
-                else if (command == "green")
+                else if (command == "green" && cars.Count != 0)
                 {
                     currCar = cars.Dequeue();
                     crossingCar = new Queue<char>(currCar);
@@ -44,7 +44,6 @@ namespace _10.Crossroads__
                             {
                                 currCar = cars.Dequeue();
                                 crossingCar = new Queue<char>(currCar);
-
                             }
                             carsPassed++;
 
@@ -59,7 +58,6 @@ namespace _10.Crossroads__
                                 {
                                     break;
                                 }
-
                                 crossingCar.Dequeue();
 
                             }
@@ -67,12 +65,10 @@ namespace _10.Crossroads__
                             {
                                 isSafety = false;
                                 break;
-
                             }
                             else
                             {
                                 carsPassed++;
-
                             }
                         }
 
@@ -85,11 +81,8 @@ namespace _10.Crossroads__
 
                 }
 
-
-
                 command = Console.ReadLine();
             }
-
 
 
             if (crossingCar.Count != 0)
@@ -106,7 +99,6 @@ namespace _10.Crossroads__
             {
                 Console.WriteLine("A crash happened!");
                 Console.WriteLine($"{currCar} was hit at {crossingCar.Dequeue()}.");
-
             }
         }
     }
