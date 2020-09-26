@@ -3,17 +3,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.SumMatrixElements", "01.SumMatrixElements\01.SumMatrixElements.csproj", "{755DE668-AB91-4C3A-B68B-1621BA9E2CF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.SumMatrixElements", "01.SumMatrixElements\01.SumMatrixElements.csproj", "{755DE668-AB91-4C3A-B68B-1621BA9E2CF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.SumMatrixColumns", "02.SumMatrixColumns\02.SumMatrixColumns.csproj", "{831ABF51-DEB1-4E6B-BA4A-BD9EB5B87F63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.SumMatrixColumns", "02.SumMatrixColumns\02.SumMatrixColumns.csproj", "{831ABF51-DEB1-4E6B-BA4A-BD9EB5B87F63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.PrimaryDiagonal", "03.PrimaryDiagonal\03.PrimaryDiagonal.csproj", "{1582682F-F81B-42EF-A95D-352D6500406C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.PrimaryDiagonal", "03.PrimaryDiagonal\03.PrimaryDiagonal.csproj", "{1582682F-F81B-42EF-A95D-352D6500406C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.SymbolinMatrix", "04.SymbolinMatrix\04.SymbolinMatrix.csproj", "{981DE7B3-23AE-4634-8297-5AB74514A204}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.SymbolinMatrix", "04.SymbolinMatrix\04.SymbolinMatrix.csproj", "{981DE7B3-23AE-4634-8297-5AB74514A204}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.SquareWithMaximumSum", "05.SquareWithMaximumSum\05.SquareWithMaximumSum.csproj", "{14AE7383-F71C-42CD-810B-FF3620B32A94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "05.SquareWithMaximumSum", "05.SquareWithMaximumSum\05.SquareWithMaximumSum.csproj", "{14AE7383-F71C-42CD-810B-FF3620B32A94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.JaggedArrayModification", "06.JaggedArrayModification\06.JaggedArrayModification.csproj", "{B5803593-822D-4666-8FD9-220106BE6820}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "06.JaggedArrayModification", "06.JaggedArrayModification\06.JaggedArrayModification.csproj", "{B5803593-822D-4666-8FD9-220106BE6820}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.PascalTriangle", "07.PascalTriangle\07.PascalTriangle.csproj", "{4E873211-0A4A-422F-B9C6-6F858F34F92E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{B5803593-822D-4666-8FD9-220106BE6820}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5803593-822D-4666-8FD9-220106BE6820}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5803593-822D-4666-8FD9-220106BE6820}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E873211-0A4A-422F-B9C6-6F858F34F92E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E873211-0A4A-422F-B9C6-6F858F34F92E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E873211-0A4A-422F-B9C6-6F858F34F92E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E873211-0A4A-422F-B9C6-6F858F34F92E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
