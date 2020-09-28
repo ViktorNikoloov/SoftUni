@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.DiagonalDifference", "01.DiagonalDifference\01.DiagonalDifference.csproj", "{C24D476B-EA12-4D29-9288-1F56A83C5815}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.2X2SquaresInMatrix", "02.2X2SquaresInMatrix\02.2X2SquaresInMatrix.csproj", "{11C6EECC-97BD-426A-AD8D-075BCA4AB0C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.2X2SquaresInMatrix", "02.2X2SquaresInMatrix\02.2X2SquaresInMatrix.csproj", "{11C6EECC-97BD-426A-AD8D-075BCA4AB0C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.MaximalSum", "03.MaximalSum\03.MaximalSum.csproj", "{B14EBE91-BAEC-4275-9E7A-562B4AE163CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.MaximalSum", "03.MaximalSum\03.MaximalSum.csproj", "{B14EBE91-BAEC-4275-9E7A-562B4AE163CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.MatrixShuffling", "04.MatrixShuffling\04.MatrixShuffling.csproj", "{005A692A-6DEF-4DA5-AF0C-93B7F1AA42FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.MatrixShuffling", "04.MatrixShuffling\04.MatrixShuffling.csproj", "{005A692A-6DEF-4DA5-AF0C-93B7F1AA42FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.SnakeMoves", "05.SnakeMoves\05.SnakeMoves.csproj", "{6C1E1177-5343-455D-863E-56B901A25557}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{005A692A-6DEF-4DA5-AF0C-93B7F1AA42FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{005A692A-6DEF-4DA5-AF0C-93B7F1AA42FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{005A692A-6DEF-4DA5-AF0C-93B7F1AA42FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C1E1177-5343-455D-863E-56B901A25557}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C1E1177-5343-455D-863E-56B901A25557}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C1E1177-5343-455D-863E-56B901A25557}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C1E1177-5343-455D-863E-56B901A25557}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

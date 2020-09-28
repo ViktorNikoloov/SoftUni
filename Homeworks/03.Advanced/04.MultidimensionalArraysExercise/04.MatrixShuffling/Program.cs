@@ -10,7 +10,6 @@ namespace _04.MatrixShuffling
             int[] sizes = ReadIntArray(" ");
             string[,] matrix = new string[sizes[0], sizes[1]];
             string swap = string.Empty;
-            
 
             for (int row = 0; row < matrix.GetLength(0); row++)
             {
@@ -20,18 +19,10 @@ namespace _04.MatrixShuffling
                     matrix[row, col] = rowData[col];
                 }
             }
-            //string[,] swap = new string[matrix.GetLength(0), matrix.GetLength(1)];
-            
 
             string[] command = Console.ReadLine().Split(); //swap 0 0 1 1
             while (command[0] != "END")
             {
-                string 
-                int firstRow = int.Parse(command[1]);
-                int firstCol = int.Parse(command[2]);
-                int secondRow = int.Parse(command[3]);
-                int secondCol = int.Parse(command[4]);
-
                 if (command[0] !=("swap") 
                     || command.Length != 5 
                     || int.Parse(command[1]) < 0
@@ -48,7 +39,10 @@ namespace _04.MatrixShuffling
                 }
                 else
                 {
-                    
+                    int firstRow = int.Parse(command[1]);
+                    int firstCol = int.Parse(command[2]);
+                    int secondRow = int.Parse(command[3]);
+                    int secondCol= int.Parse(command[4]);
                     swap = matrix[secondRow, secondCol];
 
                     matrix[secondRow, secondCol] = matrix[firstRow, firstCol];
