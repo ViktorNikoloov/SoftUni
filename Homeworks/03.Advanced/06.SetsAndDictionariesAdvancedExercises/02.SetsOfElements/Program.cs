@@ -37,7 +37,7 @@ namespace _02.SetsOfElements
 
             foreach (var number in uniqueSet)
             {
-                Console.WriteLine(number);
+                Console.Write(number + " ");
             }
 
         }
