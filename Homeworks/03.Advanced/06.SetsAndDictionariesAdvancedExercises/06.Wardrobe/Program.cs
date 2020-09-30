@@ -13,34 +13,13 @@ namespace _06.Wardrobe
             int n = int.Parse(Console.ReadLine());
             for (int i = 0; i < n; i++)
             {
-                //string[] input = Console.ReadLine().Split(new string[] {" -> ", ","},StringSplitOptions.RemoveEmptyEntries);
+                string[] input = Console.ReadLine().Split(new string[] { " -> ", "," }, StringSplitOptions.RemoveEmptyEntries);
 
-                //string currColor = input[0];
+                string currColor = input[0];
 
-                //for (int g = 1; g < input.Length; g++)
-                //{
-                //    string currCloth = input[g];
-                //    if (!wardrobe.ContainsKey(currColor))
-                //    {
-                //        wardrobe.Add(currColor, new Dictionary<string, int>());
-                //        wardrobe[currColor].Add(currCloth, 1);
-                //    }
-                //    else if(!wardrobe[currColor].ContainsKey(currCloth))
-                //    {
-                //        wardrobe[currColor].Add(currCloth, 1);
-                //    }
-                //    else
-                //    {
-                //        wardrobe[currColor][currCloth]++;
-                //    }
-                //}
-                string[] command = Console.ReadLine().Split(new string[] {" -> "},StringSplitOptions.RemoveEmptyEntries);
-                
-                string currColor = command[0];
-                string[] inputs = command[1].Split(",", StringSplitOptions.RemoveEmptyEntries);
-
-                foreach (var currCloth in inputs)
+                for (int g = 1; g < input.Length; g++)
                 {
+                    string currCloth = input[g];
                     if (!wardrobe.ContainsKey(currColor))
                     {
                         wardrobe.Add(currColor, new Dictionary<string, int>());
@@ -55,7 +34,6 @@ namespace _06.Wardrobe
                         wardrobe[currColor][currCloth]++;
                     }
                 }
-
 
             }
 
