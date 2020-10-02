@@ -8,9 +8,9 @@ namespace _02.LineNumbers
     {
         static void Main(string[] args)
         {
-            using (StreamReader reader = new StreamReader("../../../../Resources/02. Line Numbers/Input.txt"))
+            using (StreamReader reader = new StreamReader("../../../Input.txt"))
             {
-                using (StreamWriter writer = new StreamWriter("../../../../Resources/02. Line Numbers/Output.txt"))
+                using (StreamWriter writer = new StreamWriter("../../../Output.txt"))
                 {
                     string line = reader.ReadLine();
                     int index = 1;

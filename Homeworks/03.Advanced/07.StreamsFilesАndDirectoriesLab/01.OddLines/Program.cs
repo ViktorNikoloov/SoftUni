@@ -7,9 +7,9 @@ namespace _01.OddLines
     {
         static void Main(string[] args)
         {
-            using (StreamReader reader = new StreamReader("../../../../Resources/01. Odd Lines/input.txt"))
+            using (StreamReader reader = new StreamReader("../../../input.txt"))
             {
-                using (StreamWriter writer = new StreamWriter("../../../../Resources/01. Odd Lines/Output.txt"))
+                using (StreamWriter writer = new StreamWriter("../../../Output.txt"))
                 {
                     string line = reader.ReadLine();
                     int index = 0;
