@@ -11,35 +11,41 @@ namespace _03.WordCount
         {
             List<string> words = File.ReadAllLines("../../../words.txt").ToArray().ToList();
             string[] text = File.ReadAllText("../../../text.txt").ToLower().Split(new char[] { '-', '.', ',', ' ', '?', '!' }, StringSplitOptions.RemoveEmptyEntries).ToArray();
+            Dictionary<string, int> wordCounter = FillDictionary(words, text);
 
-            Dictionary<string, int> wordCounter = new Dictionary<string, int>();
+            WriteFileOnFile(wordCounter, "../../../actualResult.txt");
+            var sortedWordCounter = wordCounter.OrderByDescending(x => x.Value).ToDictionary(k => k.Key, v => v.Value);
+            WriteFileOnFile(sortedWordCounter, "../../../expectedResult.txt");
+        }
 
-            for (int i = 0; i < words.Count; i++)
+        private static Dictionary<string, int> FillDictionary(List<string> list, string[] text)
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+            for (int i = 0; i < list.Count; i++)
             {
                 for (int g = 0; g < text.Length; g++)
                 {
-                    string currWord = words[i];
+                    string currWord = list[i];
                     string currTextWord = text[g];
 
                     if (currWord == currTextWord)
                     {
-                        if (!wordCounter.ContainsKey(currWord))
+                        if (!dictionary.ContainsKey(currWord))
                         {
-                            wordCounter.Add(currWord, 0);
+                            dictionary.Add(currWord, 0);
                         }
 
-                        wordCounter[currWord]++;
+                        dictionary[currWord]++;
                     }
                 }
 
             }
-            Print(wordCounter, "../../../actualResult.txt");
 
-            var sortedWordCounter = wordCounter.OrderByDescending(x => x.Value).ToDictionary(k => k.Key, v => v.Value);
-            Print(sortedWordCounter, "../../../expectedResult.txt");
+            return dictionary;
         }
 
-        private static List<string> Print(Dictionary<string, int> dictionary, string path)
+        private static List<string> WriteFileOnFile(Dictionary<string, int> dictionary, string path)
         {
             List<string> output = new List<string>();
 
