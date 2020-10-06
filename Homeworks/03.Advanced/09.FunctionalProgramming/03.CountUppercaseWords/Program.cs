@@ -8,7 +8,7 @@ namespace _03.CountUppercaseWords
     {
         static void Main(string[] args)
         {
-            Console.ReadLine().Split().Where(s => s[0] == s.ToUpper()[0]).ToList().ForEach(x => Console.WriteLine(x));
+            Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries).Where(s => s[0] == s.ToUpper()[0]).ToList().ForEach(x => Console.WriteLine(x));
         }
     }
 }
