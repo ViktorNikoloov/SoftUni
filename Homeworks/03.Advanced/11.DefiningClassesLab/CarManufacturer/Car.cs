@@ -46,9 +46,10 @@ namespace CarManufacturer
 
         public void Drive(double distance)
         {
-            if ((FuelQuantity - distance * FuelConsumption) < 0)
+            double consumption = (distance * FuelConsumption) / 100;
+            if (FuelQuantity - consumption > 0)
             {
-                FuelQuantity -= distance * FuelConsumption;
+                FuelQuantity -= consumption;
             }
             else
             {
@@ -58,8 +59,7 @@ namespace CarManufacturer
 
         public string WhoAmI()
         {
-
-            return $"Make: {Make}\nModel: {Model}\nYear: {Year}\nFuel: {FuelQuantity:F2}L";
+            return $"Make: {Make}\nModel: {Model}\nYear: {Year}\nHorsePowers: {Engine.HorsePower}\nFuelQuantity: {FuelQuantity}";
         }
     }
 }

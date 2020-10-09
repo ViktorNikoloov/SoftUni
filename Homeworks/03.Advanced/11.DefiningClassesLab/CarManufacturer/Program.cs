@@ -9,83 +9,70 @@ namespace CarManufacturer
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine(new string('-', 20));
-            //Console.WriteLine("1st and 2nd tasks");
-            //Console.WriteLine(new string('-', 20));
+            List<Tire[]> tires = new List<Tire[]>();
+            List<Engine> engines = new List<Engine>();
+            List<Car> cars = new List<Car>();
 
-            //Car car = new Car();
 
-            //car.Make = "VW";
-            //car.Model = "MK3";
-            //car.Year = 1992;
-            //car.FuelQuantity = 500;
-            //car.FuelConsumption = 7;
-            //car.Drive(50);
-
-            //Console.WriteLine(car.WhoAmI());
-
-            //Console.WriteLine(new string('-', 20));
-            //Console.WriteLine("3th task");
-            //Console.WriteLine(new string('-', 20));
-
-            //List<Car> testCar = new List<Car>();
-
-            //string make = Console.ReadLine();
-            //string model = Console.ReadLine();
-            //int year = int.Parse(Console.ReadLine());
-            //double fuelQuantity = double.Parse(Console.ReadLine());
-            //double fuelConsumotion = double.Parse(Console.ReadLine());
-
-            //Car firstCar = new Car();
-            //firstCar.Drive(2);
-            //testCar.Add(firstCar);
-
-            //Car secondCar = new Car(make, model, year);
-            //secondCar.Drive(2);
-            //testCar.Add(secondCar);
-
-            //Car thirdCar = new Car(make, model, year, fuelQuantity, fuelConsumotion);
-            //thirdCar.Drive(2);
-            //testCar.Add(thirdCar);
-
-            //foreach (var test in testCar)
-            //{
-            //    Console.WriteLine(test.WhoAmI());
-            //    Console.WriteLine(new string('-', 20));
-            //}
-
-            Console.WriteLine(new string('-', 20));
-            Console.WriteLine("4th task");
-            Console.WriteLine(new string('-', 20));
-
-            Tire[] tires = new Tire[]
+            string[] tireCommand = Console.ReadLine().Split();
+            while (tireCommand[0] != "No")
             {
-                new Tire(1, 2.5),
-                new Tire(1, 2.1),
-                new Tire(2, 0.5),
-                new Tire(2, 2.3),
-            };
+                int length = tireCommand.Length / 2;
+                int tireCounter = 0;
 
-            Engine engine = new Engine(560, 6300);
-            Car cars = new Car("Lamborghini", "Urus", 2010, 250, 9, engine, tires);
-
-            Console.WriteLine($"Make: {cars.Make}\nModel: {cars.Model}\nYear: {cars.Year}\nFuel: {cars.FuelQuantity:F2}L\nEngine:\n-HorsePower: {cars.Engine.HorsePower}\n-CubicCapacity: {cars.Engine.CubicCapacity}");
-
-            int tiresCounter = 0;
-            foreach (var tire in tires)
-            {
-                tiresCounter++;
-
-                Console.WriteLine($"Tires({tiresCounter}):");
-                Console.WriteLine($"-Pressure: {tire.Pressure}");
-                Console.WriteLine($"-Year: {tire.Year}");
-
-                if (tiresCounter == tires.Length)
+                Tire[] tire = new Tire[length];
+                for (int i = 0; i < length; i++)
                 {
-                    tiresCounter = 0;
+                    int year = int.Parse(tireCommand[tireCounter]);
+                    double pressure = double.Parse(tireCommand[tireCounter + 1]);
+                    tire[i] = new Tire(year, pressure);
+                    tireCounter += 2;
                 }
+
+                tires.Add(tire);
+                tireCommand = Console.ReadLine().Split();
+            }
+
+            string[] engineCommand = Console.ReadLine().Split();
+            while (engineCommand[0] != "Engines")
+            {
+                int horsePower = int.Parse(engineCommand[0]);
+                double cubicCapacity = double.Parse(engineCommand[1]);
+
+                Engine engine = new Engine(horsePower, cubicCapacity);
+                engines.Add(engine);
+
+                engineCommand = Console.ReadLine().Split();
+            }
+
+            string[] carCommand = Console.ReadLine().Split();
+            while (carCommand[0] != "Show")
+            {
+                string make = carCommand[0];
+                string model = carCommand[1];
+                int year = int.Parse(carCommand[2]);
+                double fuelQuantity = double.Parse(carCommand[3]);
+                double fuelConsumption = double.Parse(carCommand[4]);
+                Engine engine = engines[int.Parse(carCommand[5])];
+                Tire[] tire = tires[int.Parse(carCommand[6])];
+
+                Car newCar = new Car(make, model, year, fuelQuantity, fuelConsumption, engine, tire);
+                cars.Add(newCar);
+
+                carCommand = Console.ReadLine().Split();
+            }
+
+            var specialCarss = cars.Where(y => y.Year >= 2017).Where(e => e.Engine.HorsePower > 330).Where(t=>t.Tires.Sum(p=>p.Pressure) >= 9 && t.Tires.Sum(p => p.Pressure) <= 10).ToList();
+            var specialCars = cars.Where(c => c.Year >= 2017
+            && c.Engine.HorsePower > 330
+            && c.Tires.Sum(p => p.Pressure) >= 9
+            && c.Tires.Sum(p => p.Pressure) <= 10).ToList();
+
+            foreach (var car in specialCars)
+            {
+                car.Drive(20);
+                Console.WriteLine(car.WhoAmI());
             }
         }
-        
     }
 }
