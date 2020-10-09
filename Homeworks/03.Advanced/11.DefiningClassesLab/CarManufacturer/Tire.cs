@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Text;
 
 namespace CarManufacturer
@@ -13,7 +14,7 @@ namespace CarManufacturer
             Year = year;
             Pressure = pressure;
         }
-
+       
         public int Year { get; set; }
         public double Pressure { get; set; }
     }

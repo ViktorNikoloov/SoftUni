@@ -54,37 +54,38 @@ namespace CarManufacturer
             //    Console.WriteLine(new string('-', 20));
             //}
 
-            //Console.WriteLine(new string('-', 20));
-            //Console.WriteLine("4th task");
-            //Console.WriteLine(new string('-', 20));
+            Console.WriteLine(new string('-', 20));
+            Console.WriteLine("4th task");
+            Console.WriteLine(new string('-', 20));
 
-            //Tire[] tires = new Tire[]
-            //{
-            //    new Tire(1, 2.5),
-            //    new Tire(1, 2.1),
-            //    new Tire(2, 0.5),
-            //    new Tire(2, 2.3),
-            //};
+            Tire[] tires = new Tire[]
+            {
+                new Tire(1, 2.5),
+                new Tire(1, 2.1),
+                new Tire(2, 0.5),
+                new Tire(2, 2.3),
+            };
 
-            //Engine engine = new Engine(560, 6300);
-            //Car cars = new Car("Lamborghini", "Urus", 2010, 250, 9, engine, tires);
+            Engine engine = new Engine(560, 6300);
+            Car cars = new Car("Lamborghini", "Urus", 2010, 250, 9, engine, tires);
 
-            //Console.WriteLine($"Make: {cars.Make}\nModel: {cars.Model}\nYear: {cars.Year}\nFuel: {cars.FuelQuantity:F2}L\nEngine:\n-HorsePower: {cars.Engine.HorsePower}\n-CubicCapacity: {cars.Engine.CubicCapacity}");
+            Console.WriteLine($"Make: {cars.Make}\nModel: {cars.Model}\nYear: {cars.Year}\nFuel: {cars.FuelQuantity:F2}L\nEngine:\n-HorsePower: {cars.Engine.HorsePower}\n-CubicCapacity: {cars.Engine.CubicCapacity}");
 
-            //int tiresCounter = 0;
-            //foreach (var tire in tires)
-            //{
-            //    tiresCounter++;
+            int tiresCounter = 0;
+            foreach (var tire in tires)
+            {
+                tiresCounter++;
 
-            //    Console.WriteLine($"Tires({tiresCounter}):");
-            //    Console.WriteLine($"-Pressure: {tire.Pressure}");
-            //    Console.WriteLine($"-Year: {tire.Year}");
+                Console.WriteLine($"Tires({tiresCounter}):");
+                Console.WriteLine($"-Pressure: {tire.Pressure}");
+                Console.WriteLine($"-Year: {tire.Year}");
 
-            //    if (tiresCounter == tires.Length)
-            //    {
-            //        tiresCounter = 0;
-            //    }
-            //}
+                if (tiresCounter == tires.Length)
+                {
+                    tiresCounter = 0;
+                }
+            }
         }
+        
     }
 }
