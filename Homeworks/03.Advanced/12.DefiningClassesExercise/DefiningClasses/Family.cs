@@ -22,5 +22,8 @@ namespace DefiningClasses
         public Person GetOldestMember()
             => People.OrderByDescending(p => p.Age).ToList().First();
 
+        public List<Person> GetMembersByAge(int age)
+            => People.Where(p => p.Age > age).OrderBy(p=>p.Name).ToList();
+
     }
 }

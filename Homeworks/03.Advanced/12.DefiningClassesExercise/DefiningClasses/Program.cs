@@ -21,8 +21,12 @@ namespace DefiningClasses
                 members.AddMember(person);
             }
 
-            Person oldestMember = members.GetOldestMember();
-            Console.WriteLine($"{oldestMember.Name} {oldestMember.Age}");
+            var  oldPeople= members.GetMembersByAge(30);
+
+            foreach (var person in oldPeople)
+            {
+                Console.WriteLine($"{person.Name} - {person .Age}");
+            }
         }
     }
 }
