@@ -62,7 +62,7 @@ namespace CarManufacturer
                 carCommand = Console.ReadLine().Split();
             }
 
-            var specialCarss = cars.Where(y => y.Year >= 2017).Where(e => e.Engine.HorsePower > 330).Where(t=>t.Tires.Sum(p=>p.Pressure) >= 9 && t.Tires.Sum(p => p.Pressure) <= 10).ToList();
+            //var specialCars = cars.Where(y => y.Year >= 2017).Where(e => e.Engine.HorsePower > 330).Where(t=>t.Tires.Sum(p=>p.Pressure) >= 9 && t.Tires.Sum(p => p.Pressure) <= 10).ToList();
             var specialCars = cars.Where(c => c.Year >= 2017
             && c.Engine.HorsePower > 330
             && c.Tires.Sum(p => p.Pressure) >= 9
