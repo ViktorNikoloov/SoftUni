@@ -18,20 +18,32 @@ namespace CarSalesman
 
                 string model = enginesInfo[0];
                 int power = int.Parse(enginesInfo[1]);
-                Engine engine = new Engine(model, power);
+
+                Engine engine = null;
                 if (enginesInfo.Length == 4)
                 {
-                    engine.Displacement = enginesInfo[2];
-                    engine.Efficiency = enginesInfo[3];
+                    string displacement = enginesInfo[2];
+                    string efficiency = enginesInfo[3];
+
+                    engine = new Engine(model, power, displacement, efficiency);
+                }
+                else if(enginesInfo.Length == 3)
+                {
+                    string currunt = enginesInfo[2];
+
+                    if (char.IsDigit(currunt[0]))
+                    {
+                        engine = new Engine(model, power, currunt);
+                    }
+                    else
+                    {
+                        engine = new Engine(power, model, currunt);
+                    }
 
                 }
-                else if (enginesInfo[2].Length > 1)
+                else if(enginesInfo.Length == 2)
                 {
-                    engine.Displacement = enginesInfo[2];
-                }
-                else
-                {
-                    engine.Efficiency = enginesInfo[2];
+                    engine = new Engine(model, power);
                 }
 
                 if (!engines.ContainsKey(model))
@@ -42,7 +54,6 @@ namespace CarSalesman
                 else
                 {
                     engines[model] = engine;
-
                 }
 
             }
@@ -51,33 +62,38 @@ namespace CarSalesman
             for (int i = 0; i < carLines; i++)
             {
                 string[] carInfo = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries); //"{model} {engine} {weight} {color}"
-                string model = carInfo[0];
 
+                string model = carInfo[0];
                 Engine engine = engines[carInfo[1]];
-                Car car = new Car(model, engine);
+                Car car = null;
 
                 if (carInfo.Length == 4)
                 {
                     string weight = carInfo[2];
                     string color = carInfo[3];
+                    car = new Car(model, engine, weight, color);
 
                     car.Weight = weight;
                     car.Color = color;
                 }
-                else if (carInfo.Length > 2)
+                else if (carInfo.Length == 3)
                 {
-                    char[] curr = carInfo[2].ToCharArray();
-                    if (char.IsDigit(curr[0]))
+                    string currunt = carInfo[2];
+
+                    if (char.IsDigit(currunt[0]))
                     {
-                        string weight = carInfo[2];
-                        car.Weight = weight;
+                        car = new Car(model, engine, currunt);
                     }
                     else
                     {
-                        string color = carInfo[2];
-                        car.Color = color;
+                        car = new Car(engine, model, currunt);
                     }
                 }
+                else if (carInfo.Length == 2)
+                {
+                    car = new Car(model, engine);
+                }
+
                 if (!cars.Contains(car))
                 {
                     cars.Add(car);
@@ -85,6 +101,7 @@ namespace CarSalesman
                 
 
             }
+
             foreach (var car in cars)
             {
                 Console.WriteLine(car.ToString()); 

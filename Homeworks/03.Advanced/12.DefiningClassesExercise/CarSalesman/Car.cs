@@ -14,26 +14,30 @@ namespace CarSalesman
             Weight = "n/a";
             Color = "n/a";
         }
-        public Car(string model, Engine engine) : this()
+        public Car(string model, Engine engine) 
+            : this()
         {
             Model = model;
             Engine = engine;
         }
 
-        //public Car(string model, Engine engine, string weight) : this(model, engine)
-        //{
-        //    Weight = weight;
-        //}
+        public Car(string model, Engine engine, string weight) 
+            : this(model, engine)
+        {
+            Weight = weight;
+        }
 
-        //public Car(Engine engine, string model, string color) : this(model, engine)
-        //{
-        //    Color = color;
-        //}
+        public Car(Engine engine, string model, string color) 
+            : this(model, engine)
+        {
+            Color = color;
+        }
 
-        //public Car(string model, Engine engine, string weight, string color) : this(model, engine, weight) 
-        //{
-        //    Color = color;
-        //}
+        public Car(string model, Engine engine, string weight, string color) 
+            : this(model, engine, weight)
+        {
+            Color = color;
+        }
 
         public string Model { get; set; }
 
@@ -48,12 +52,12 @@ namespace CarSalesman
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine($"{Model}:");
-            sb.AppendLine($"{Engine.Model}:");
-            sb.AppendLine($"Power: {Engine.Power}");
-            sb.AppendLine($"Displacement: {Engine.Displacement}");
-            sb.AppendLine($"Efficiency: {Engine.Efficiency}");
-            sb.AppendLine($"Weight: {Weight}");
-            sb.AppendLine($"Color: {Color}");
+            sb.AppendLine($"  {Engine.Model}:");
+            sb.AppendLine($"    Power: {Engine.Power}");
+            sb.AppendLine($"    Displacement: {Engine.Displacement}");
+            sb.AppendLine($"    Efficiency: {Engine.Efficiency}");
+            sb.AppendLine($"  Weight: {Weight}");
+            sb.AppendLine($"  Color: {Color}");
 
             return sb.ToString().Trim();
 

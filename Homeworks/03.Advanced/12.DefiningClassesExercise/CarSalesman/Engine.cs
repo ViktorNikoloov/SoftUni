@@ -12,22 +12,29 @@ namespace CarSalesman
             Displacement = "n/a";
             Efficiency = "n/a";
         }
-        public Engine(string model, int power) :this()
+        public Engine(string model, int power) 
+            :this()
         {
             Model = model;
             Power = power;
         }
-        //public Engine(string model, int power, int displacement)
-        //     : this(model, power)
-        //{
-        //    Displacement = displacement;
-        //}
+        public Engine(string model, int power, string displacement)
+             : this(model, power)
+        {
+            Displacement = displacement;
+        }
 
-        //public Engine(string model, int power, int displacement, string efficiency)
-        //    : this(model, power, displacement)
-        //{
-        //    Efficiency = efficiency;
-        //}
+        public Engine(int power, string model, string efficiency) 
+            :this(model, power)
+        {
+            Efficiency = efficiency;
+        }
+
+        public Engine(string model, int power, string displacement, string efficiency)
+            : this(model, power, displacement)
+        {
+            Efficiency = efficiency;
+        }
 
         public string Model { get; set; }
 
