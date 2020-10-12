@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefiningClasses", "DefiningClasses\DefiningClasses.csproj", "{8E5C09CC-E436-49C8-B89F-793CB0FE92F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DefiningClasses", "DefiningClasses\DefiningClasses.csproj", "{8E5C09CC-E436-49C8-B89F-793CB0FE92F1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DateModifier", "DateModifier\DateModifier.csproj", "{F2BAC156-33D9-4AD5-B2F0-38935E00B7E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DateModifier", "DateModifier\DateModifier.csproj", "{F2BAC156-33D9-4AD5-B2F0-38935E00B7E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpeedRacing", "SpeedRacing\SpeedRacing.csproj", "{A3443DA5-C72B-4AAB-B7F5-93AA563339E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SpeedRacing", "SpeedRacing\SpeedRacing.csproj", "{A3443DA5-C72B-4AAB-B7F5-93AA563339E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawData", "RawData\RawData.csproj", "{D4E5850A-369F-478A-BAC8-DF913D2BD717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RawData", "RawData\RawData.csproj", "{D4E5850A-369F-478A-BAC8-DF913D2BD717}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarSalesman", "CarSalesman\CarSalesman.csproj", "{1D8A607F-36A5-437A-BB6F-8DCAD554607D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D4E5850A-369F-478A-BAC8-DF913D2BD717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4E5850A-369F-478A-BAC8-DF913D2BD717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4E5850A-369F-478A-BAC8-DF913D2BD717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D8A607F-36A5-437A-BB6F-8DCAD554607D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8A607F-36A5-437A-BB6F-8DCAD554607D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D8A607F-36A5-437A-BB6F-8DCAD554607D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D8A607F-36A5-437A-BB6F-8DCAD554607D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
