@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace CarSalesman
@@ -8,8 +9,23 @@ namespace CarSalesman
     {
         static void Main(string[] args)
         {
-            Dictionary<string, Engine> engines = new Dictionary<string, Engine>();
-            List<Car> cars = new List<Car>();
+            HashSet<Engine> engines = AddEngines();
+            List<Car> cars = AddCars(engines);
+            PrintCars(cars);
+
+        }
+
+        static void PrintCars(List<Car> cars)
+        {
+            foreach (var car in cars)
+            {
+                Console.WriteLine(car.ToString());
+            }
+        }
+
+        static HashSet<Engine> AddEngines()
+        {
+            HashSet<Engine> engines = new HashSet<Engine>();
 
             int enginesLines = int.Parse(Console.ReadLine());
             for (int i = 0; i < enginesLines; i++)
@@ -27,7 +43,7 @@ namespace CarSalesman
 
                     engine = new Engine(model, power, displacement, efficiency);
                 }
-                else if(enginesInfo.Length == 3)
+                else if (enginesInfo.Length == 3)
                 {
                     string currunt = enginesInfo[2];
 
@@ -41,32 +57,31 @@ namespace CarSalesman
                     }
 
                 }
-                else if(enginesInfo.Length == 2)
+                else if (enginesInfo.Length == 2)
                 {
                     engine = new Engine(model, power);
                 }
 
-                if (!engines.ContainsKey(model))
-                {
-                    engines.Add(model, new Engine());
-                    engines[model] = engine;
-                }
-                else
-                {
-                    engines[model] = engine;
-                }
+                engines.Add(engine);
 
             }
+            return engines;
+        }
 
+        static List<Car> AddCars(HashSet<Engine> engines)
+        {
+            List<Car> cars = new List<Car>();
             int carLines = int.Parse(Console.ReadLine());
             for (int i = 0; i < carLines; i++)
             {
-                string[] carInfo = Console.ReadLine().Split(" ",StringSplitOptions.RemoveEmptyEntries); //"{model} {engine} {weight} {color}"
+                string[] carInfo = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries); //"{model} {engine} {weight} {color}"
 
                 string model = carInfo[0];
-                Engine engine = engines[carInfo[1]];
-                Car car = null;
+                string currEngine = carInfo[1];
 
+                Engine engine = FindEngine(engines, currEngine);
+
+                Car car = null;
                 if (carInfo.Length == 4)
                 {
                     string weight = carInfo[2];
@@ -94,20 +109,28 @@ namespace CarSalesman
                     car = new Car(model, engine);
                 }
 
-                if (!cars.Contains(car))
-                {
-                    cars.Add(car);
-                }
-                
-
+                cars.Add(car);
             }
-
-            foreach (var car in cars)
-            {
-                Console.WriteLine(car.ToString()); 
-            }
-
+            return cars;
         }
+
+        static Engine FindEngine(HashSet<Engine> engines, string model)
+        {
+            Engine engine = null;
+
+            foreach (var item in engines)
+            {
+                if (item.Model == model)
+                {
+                    engine = item;
+                }
+            }
+
+            return engine;
+        }
+
+
     }
 }
+
 

@@ -6,7 +6,6 @@ namespace CarSalesman
 {
     public class Engine
     {
-        
         public Engine()
         {
             Displacement = "n/a";
