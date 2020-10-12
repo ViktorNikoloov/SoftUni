@@ -9,8 +9,10 @@ namespace CarSalesman
     {
         static void Main(string[] args)
         {
+            //Func<HashSet<Engine>, string, Engine> findEnginesDeligate = FindEngine;
+
             HashSet<Engine> engines = AddEngines();
-            List<Car> cars = AddCars(engines);
+            List<Car> cars = AddCars(engines/*, findEnginesDeligate*/);
             PrintCars(cars);
 
         }
@@ -68,7 +70,7 @@ namespace CarSalesman
             return engines;
         }
 
-        static List<Car> AddCars(HashSet<Engine> engines)
+        static List<Car> AddCars(HashSet<Engine> engines/*, Func<HashSet<Engine>, string, Engine> findEngines*/)
         {
             List<Car> cars = new List<Car>();
             int carLines = int.Parse(Console.ReadLine());
@@ -79,7 +81,8 @@ namespace CarSalesman
                 string model = carInfo[0];
                 string currEngine = carInfo[1];
 
-                Engine engine = FindEngine(engines, currEngine);
+               Engine engine = FindEngine(engines, currEngine);
+                //Engine engine = findEngines(engines, currEngine);
 
                 Car car = null;
                 if (carInfo.Length == 4)
