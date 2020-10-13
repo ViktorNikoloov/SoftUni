@@ -18,7 +18,6 @@ namespace PokemonTrainer
                 string pokemonElement = input[2];
                 double pokemonHealth = double.Parse(input[3]);
 
-
                 Pokemon newPokemon = new Pokemon(pokemonName, pokemonElement, pokemonHealth);
                 Trainer trainer = new Trainer(trainerName, newPokemon);
                 if (!trainers.ContainsKey(trainerName))
@@ -36,29 +35,25 @@ namespace PokemonTrainer
             string command = Console.ReadLine();
             while (command != "End")
             {
-                foreach (var trainer in trainers.Values)
+                foreach (var trainer in trainers)
                 {
-                    foreach (var pokemon in trainer.Pokemons)
+                    foreach (var pokemon in trainer.Value.Pokemons)
                     {
                         if (pokemon.Element == command)
                         {
-                            trainer.NumberOfBadges++;
+                            trainer.Value.NumberOfBadges++;
                             break;
                         }
                         else
                         {
                             pokemon.Health -= 10;
-                            if (pokemon.Health <= 0)
-                            {
-                                trainer.Pokemons.Remove(pokemon);
-                            }
+                            
                         }
                     }
 
+                    trainer.Value.Pokemons.RemoveAll(h => h.Health <= 0);
+
                 }
-
-
-
 
                 command = Console.ReadLine();
             }
