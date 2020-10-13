@@ -50,12 +50,16 @@ namespace _02.Bee19August2020
                 }
                 else if (beehive[beeRow, beeCol] == 'O')
                 {
-                    beehive[beeRow, beeCol] = '.';
-                    flowers++;
-                    beeRow++;
+                    continue;
                 }
 
+
                 command = Console.ReadLine();
+            }
+            if (beeRow >= 0 && beeRow < beehive.GetLength(0)
+                && beeCol >= 0 && beeCol < beehive.GetLength(1))
+            {
+                beehive[beeRow, beeCol] = 'B';
             }
 
             if (flowers < 5)
@@ -76,7 +80,7 @@ namespace _02.Bee19August2020
             {
                 for (int col = 0; col < beehive.GetLength(1); col++)
                 {
-                    Console.Write($"{beehive[row, col]} ");
+                    Console.Write($"{beehive[row, col]}");
                 }
                 Console.WriteLine();
             }
