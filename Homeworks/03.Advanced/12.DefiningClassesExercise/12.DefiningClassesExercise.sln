@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PokemonTrainer", "PokemonTr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftUniParking", "SoftUniParking\SoftUniParking.csproj", "{8D10116A-987D-4D1D-82FD-B50FE1D1C887}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VetClinic", "..\..\..\..\Users\Viktor\Desktop\03. VetClinic_Skeleton\VetClinic\VetClinic.csproj", "{8BB8ADD7-BC10-4FD2-843A-16565382CAE5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{8D10116A-987D-4D1D-82FD-B50FE1D1C887}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D10116A-987D-4D1D-82FD-B50FE1D1C887}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D10116A-987D-4D1D-82FD-B50FE1D1C887}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB8ADD7-BC10-4FD2-843A-16565382CAE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB8ADD7-BC10-4FD2-843A-16565382CAE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB8ADD7-BC10-4FD2-843A-16565382CAE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB8ADD7-BC10-4FD2-843A-16565382CAE5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
