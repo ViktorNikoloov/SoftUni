@@ -28,11 +28,11 @@ namespace _04.FindEvensOrOdds
 
             if (evenOrOdd == "odd")
             {
-                numbers.RemoveAll(x => !isEven(x));
+                numbers.RemoveAll(x => isEven(x));
             }
             else
             {
-                numbers.RemoveAll(x => isEven(x));
+                numbers.RemoveAll(x => !isEven(x));
 
             }
 
