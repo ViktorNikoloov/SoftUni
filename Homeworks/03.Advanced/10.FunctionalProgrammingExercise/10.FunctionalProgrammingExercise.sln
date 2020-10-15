@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.ActionPoint", "01.ActionPoint\01.ActionPoint.csproj", "{0AED04E4-78D6-4CC9-9473-116CE17A3DDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.ActionPoint", "01.ActionPoint\01.ActionPoint.csproj", "{0AED04E4-78D6-4CC9-9473-116CE17A3DDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.KnightsOfHonor", "02.KnightsOfHonor\02.KnightsOfHonor.csproj", "{31D0D29F-90D6-49A1-92DB-30EE7EE1B496}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.KnightsOfHonor", "02.KnightsOfHonor\02.KnightsOfHonor.csproj", "{31D0D29F-90D6-49A1-92DB-30EE7EE1B496}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.CustomMinFunction", "03.CustomMinFunction\03.CustomMinFunction.csproj", "{82B9709D-B836-453D-BBD1-769216BBFF85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.CustomMinFunction", "03.CustomMinFunction\03.CustomMinFunction.csproj", "{82B9709D-B836-453D-BBD1-769216BBFF85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.FindEvensOrOdds", "04.FindEvensOrOdds\04.FindEvensOrOdds.csproj", "{926FC627-6415-4B78-80F5-40EB3495B823}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{82B9709D-B836-453D-BBD1-769216BBFF85}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82B9709D-B836-453D-BBD1-769216BBFF85}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82B9709D-B836-453D-BBD1-769216BBFF85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{926FC627-6415-4B78-80F5-40EB3495B823}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{926FC627-6415-4B78-80F5-40EB3495B823}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{926FC627-6415-4B78-80F5-40EB3495B823}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{926FC627-6415-4B78-80F5-40EB3495B823}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
