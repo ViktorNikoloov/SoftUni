@@ -15,7 +15,7 @@ namespace _04.FindEvensOrOdds
 
             int startNum = input[0];
             int endNum = input[1];
-            for (int i = startNum; i < endNum; i++)
+            for (int i = startNum; i <= endNum; i++)
             {
                 numbers.Add(i);
             }
@@ -25,18 +25,23 @@ namespace _04.FindEvensOrOdds
             Predicate<int> isEven = num => num % 2 == 0;
 
             Action<List<int>> printNumbers = num => Console.WriteLine(string.Join(" ", num));
+            List<int> result = new List<int>()
 
             if (evenOrOdd == "odd")
             {
-                numbers.RemoveAll(x => isEven(x));
+                //numbers.RemoveAll(x => isEven(x));
+                result = numbers.FindAll(x => !isEven(x));
+
             }
             else
             {
-                numbers.RemoveAll(x => !isEven(x));
+                //numbers.RemoveAll(x => !isEven(x));
+                result = numbers.FindAll(x => isEven(x));
 
             }
 
-            printNumbers(numbers);
+            //printNumbers(numbers);
+            printNumbers(result);
 
         }
 
