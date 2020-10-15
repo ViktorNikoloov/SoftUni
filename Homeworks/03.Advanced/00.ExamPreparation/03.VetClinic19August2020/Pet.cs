@@ -4,7 +4,7 @@ using System.Text;
 
 namespace VetClinic
 {
-    class Pet
+    public class Pet
     {
         public Pet(string name, int age, string owner)
         {

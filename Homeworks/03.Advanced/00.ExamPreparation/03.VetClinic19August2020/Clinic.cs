@@ -7,7 +7,7 @@ using System.Text;
 
 namespace VetClinic
 {
-    class Clinic
+    public class Clinic
     {
         public Clinic(int capacity)
         {
