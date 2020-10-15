@@ -25,7 +25,7 @@ namespace _04.FindEvensOrOdds
             Predicate<int> isEven = num => num % 2 == 0;
 
             Action<List<int>> printNumbers = num => Console.WriteLine(string.Join(" ", num));
-            List<int> result = new List<int>()
+            List<int> result = new List<int>();
 
             if (evenOrOdd == "odd")
             {
