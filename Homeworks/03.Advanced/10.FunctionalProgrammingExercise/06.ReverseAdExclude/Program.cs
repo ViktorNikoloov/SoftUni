@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _14.ImplementingStackAndQueue
+namespace _06.ReverseAdExclude
 {
     class Program
     {
