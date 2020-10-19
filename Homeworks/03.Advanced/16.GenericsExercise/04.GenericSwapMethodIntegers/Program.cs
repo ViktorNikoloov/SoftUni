@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace _04.GenericSwapMethodIntegers
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
