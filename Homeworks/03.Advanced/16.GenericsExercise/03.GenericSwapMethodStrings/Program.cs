@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace _03.GenericSwapMethodStrings
 {
@@ -16,9 +17,9 @@ namespace _03.GenericSwapMethodStrings
                 list.Add(input);
             }
 
-            string[] swapCommand = Console.ReadLine().Split();
-            int firstIndex = int.Parse(swapCommand[0]);
-            int secondIndex = int.Parse(swapCommand[1]);
+            int[] swapCommand = Console.ReadLine().Split().Select(int.Parse).ToArray();
+            int firstIndex = swapCommand[0];
+            int secondIndex = swapCommand[1];
 
             GenericList<string> genericList = new GenericList<string>(list);
             genericList.SwapIndexes(firstIndex, secondIndex);
