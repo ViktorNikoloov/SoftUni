@@ -24,9 +24,9 @@ namespace _03.GenericSwapMethodStrings
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (var str in List)
+            foreach (var item in List)
             {
-                sb.AppendLine($"{str.GetType()}: {str}");
+                sb.AppendLine($"{item.GetType()}: {item}");
             }
 
            return sb.ToString().Trim();
