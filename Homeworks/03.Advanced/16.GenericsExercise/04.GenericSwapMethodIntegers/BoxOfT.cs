@@ -6,25 +6,31 @@ namespace _04.GenericSwapMethodIntegers
 {
     public class BoxOfT<T>
     {
-        public BoxOfT(List<T> list)
+        public BoxOfT()
         {
-            List = list;
+            Values = new List<T>();
         }
 
-        public List<T> List { get; set; } = new List<T>();
+        public List<T> Values { get; set; }
 
-        public void SwapIndexes(int firstIndex, int secondIndex)
+        public void Swap(int firstIndex, int secondIndex)
         {
-            T swap = List[firstIndex];
-            List[firstIndex] = List[secondIndex];
-            List[secondIndex] = swap;
+            bool isInRange = 0 <= firstIndex && firstIndex < Values.Count && 0 <= secondIndex && secondIndex < Values.Count;
+            if (!isInRange)
+            {
+                throw new InvalidOperationException("Values are not in range !");
+            }
+
+            T swap = Values[firstIndex];
+            Values[firstIndex] = Values [secondIndex];
+            Values[secondIndex] = swap;
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (var item in List)
+            foreach (var item in Values)
             {
                 sb.AppendLine($"{item.GetType()}: {item}");
             }
