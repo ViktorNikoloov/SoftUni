@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using System.Linq;
 
 namespace IteratorsAndComparators
@@ -17,12 +18,44 @@ namespace IteratorsAndComparators
 
         public IEnumerator<Book> GetEnumerator()
         {
-            return Books.GetEnumerator();
+            Books.Sort(new BookComparator());
+            return new LibraryIterator(Books);
         }
+        
 
         IEnumerator IEnumerable.GetEnumerator()
+        => GetEnumerator();
+        
+
+        private class LibraryIterator : IEnumerator<Book>
         {
-            return GetEnumerator();
+            private int index = -1;
+
+            public LibraryIterator(List<Book> books)
+            {
+                Books = books;
+            }
+
+            public List<Book> Books { get; set; }
+
+            public Book Current 
+                => Books[index];
+
+            object IEnumerator.Current 
+                => Books[index];
+
+            public void Dispose()
+            {
+                
+            }
+
+            public bool MoveNext()
+            => ++index < Books.Count;
+
+            public void Reset()
+            {
+                index = -1;
+            }
         }
     }
 }

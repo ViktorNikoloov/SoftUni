@@ -15,7 +15,7 @@ namespace IteratorsAndComparators
 
             foreach (var book in libraryTwo)
             {
-                Console.WriteLine($"{book.Title}");
+                Console.WriteLine($"{book}");
             }
         }
     }
