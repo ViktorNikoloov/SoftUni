@@ -27,27 +27,8 @@ namespace _14.BookWorm26October2019
                 {
                     if (output.Length > 0)
                     {
-
                         output = output.Remove(output.Length - 1);
-                        if (command == "up")
-                        {
-                            playerRow++;
-                        }
-                        else if (command == "down")
-                        {
-                            playerRow--;
-
-                        }
-                        else if (command == "left")
-                        {
-                            playerCol++;
-                        }
-                        else if (command == "right")
-                        {
-                            playerCol--;
-                        }
-                        matrix[playerRow, playerCol] = 'P';
-
+                        Backword(ref playerRow, ref playerCol, command);
                     }
                 }
                 else
@@ -56,12 +37,14 @@ namespace _14.BookWorm26October2019
                     if(char.IsLetter(currLetter))
                     {
                         output += currLetter;
-                        matrix[playerRow, playerCol] = 'P';
                     }
                 }
 
                 command = Console.ReadLine();
             }
+
+            matrix[playerRow, playerCol] = 'P';
+
             Console.WriteLine(output);
             PrintMatrix(matrix);
 
@@ -85,6 +68,26 @@ namespace _14.BookWorm26October2019
             else if (command == "right")
             {
                 playerCol++;
+            }
+        }
+        private static void Backword(ref int playerRow, ref int playerCol, string command)
+        {
+            if (command == "up")
+            {
+                playerRow++;
+            }
+            else if (command == "down")
+            {
+                playerRow--;
+
+            }
+            else if (command == "left")
+            {
+                playerCol++;
+            }
+            else if (command == "right")
+            {
+                playerCol--;
             }
         }
 
