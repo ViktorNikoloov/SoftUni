@@ -21,12 +21,6 @@ namespace Rabbits
         public int Capacity { get; set; }
         public int Count 
             => rabbits.Count;
-        //{
-        //    get
-        //    {
-        //        return rabbits.Count;
-        //    }
-        //}
 
         public void Add(Rabbit rabbit) //- adds an entity to the data if there is room for it
         {
