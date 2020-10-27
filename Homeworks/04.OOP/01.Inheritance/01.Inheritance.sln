@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.SingleInheritance", "01.SingleInheritance", "{15D6A8B3-866C-4331-87D5-D410F180AFE1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farm", "Farm\Farm.csproj", "{5D6D17D9-3EF0-4AFE-BA83-D98701B31A21}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D6D17D9-3EF0-4AFE-BA83-D98701B31A21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D6D17D9-3EF0-4AFE-BA83-D98701B31A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D6D17D9-3EF0-4AFE-BA83-D98701B31A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D6D17D9-3EF0-4AFE-BA83-D98701B31A21}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5D6D17D9-3EF0-4AFE-BA83-D98701B31A21} = {15D6A8B3-866C-4331-87D5-D410F180AFE1}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4BEE4EC8-ED34-4862-89B3-B18D0AE31C78}
+	EndGlobalSection
+EndGlobal
