@@ -5,6 +5,7 @@
         public Child(string name, int age)
             : base(name, age)
         {
+
         }
 
         public override int Age
