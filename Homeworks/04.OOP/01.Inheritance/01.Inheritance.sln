@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.SingleInheritance", "01.SingleInheritance\01.SingleInheritance.csproj", "{B3917454-5637-4B4C-A2F0-02CF1206A304}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.SingleInheritance", "01.SingleInheritance\01.SingleInheritance.csproj", "{B3917454-5637-4B4C-A2F0-02CF1206A304}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.MultipleInheritance", "02.MultipleInheritance\02.MultipleInheritance.csproj", "{E58E94FC-56A6-47D5-B802-F51452F53119}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.MultipleInheritance", "02.MultipleInheritance\02.MultipleInheritance.csproj", "{E58E94FC-56A6-47D5-B802-F51452F53119}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.HierarchicalInheritance", "03.HierarchicalInheritance\03.HierarchicalInheritance.csproj", "{0D13DEF5-3D92-4C23-B3E6-75C2252507A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.HierarchicalInheritance", "03.HierarchicalInheritance\03.HierarchicalInheritance.csproj", "{0D13DEF5-3D92-4C23-B3E6-75C2252507A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomRandomList", "04.RandomList\CustomRandomList.csproj", "{2033C3FC-D253-4218-8061-25F357A3CDF1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{0D13DEF5-3D92-4C23-B3E6-75C2252507A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D13DEF5-3D92-4C23-B3E6-75C2252507A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D13DEF5-3D92-4C23-B3E6-75C2252507A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2033C3FC-D253-4218-8061-25F357A3CDF1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2033C3FC-D253-4218-8061-25F357A3CDF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2033C3FC-D253-4218-8061-25F357A3CDF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2033C3FC-D253-4218-8061-25F357A3CDF1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
