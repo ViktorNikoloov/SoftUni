@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace PersonsInfo
 {
@@ -27,15 +25,14 @@ namespace PersonsInfo
             }
             private set
             {
-                if (value.Length >= 3)
-                {
-                    firstName = value;
-                }
-                else
+                if (value.Length < 3)
                 {
                     throw new ArgumentException("First name cannot contain fewer than 3 symbols!");
                 }
+
+                firstName = value;
             }
+
         }
 
         public string LastName
@@ -46,15 +43,14 @@ namespace PersonsInfo
             }
             private set
             {
-                if (value.Length >= 3)
-                {
-                    lastName = value;
-                }
-                else
+                if (value.Length < 3)
                 {
                     throw new ArgumentException("Last name cannot contain fewer than 3 symbols!");
                 }
+
+                lastName = value;
             }
+
         }
 
         public int Age
@@ -65,15 +61,14 @@ namespace PersonsInfo
             }
             private set
             {
-                if (value > 0)
-                {
-                    age = value;
-                }
-                else
+                if (value <= 0)
                 {
                     throw new ArgumentException("Age cannot be zero or a negative integer!");
                 }
+
+                age = value;
             }
+
         }
 
         public decimal Salary
@@ -84,15 +79,14 @@ namespace PersonsInfo
             }
             set
             {
-                if (value >= 460)
-                {
-                    salary = value;
-                }
-                else
+                if (value < 460)
                 {
                     throw new ArgumentException("Salary cannot be less than 460 leva!");
                 }
+
+                salary = value;
             }
+
         }
 
         public void IncreaseSalary(decimal percentage)
