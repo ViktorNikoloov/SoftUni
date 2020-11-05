@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Animals
 {
     public abstract class Animal
     {
-        private const string Error = "Invalid input!";
+        private const string InvalidInputError = "Invalid input!";
         private string name;
         private int age;
         private string gender;
@@ -24,16 +23,14 @@ namespace Animals
             {
                 return name;
             }
-            set
+            private set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException(Error);
+                    throw new ArgumentException(InvalidInputError);
                 }
-                else
-                {
+              
                     name = value;
-                }
 
             }
         }
@@ -43,16 +40,14 @@ namespace Animals
             {
                 return age;
             }
-            set
+            private set
             {
                 if (value < 0)
                 {
-                    throw new Exception(Error);
+                    throw new Exception(InvalidInputError);
                 }
-                else
-                {
+                
                     age = value;
-                }
             }
         }
         public string Gender
@@ -61,20 +56,16 @@ namespace Animals
             {
                 return gender;
             }
-            set
+            private set
             {
                 if (string.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentException(Error);
+                    throw new ArgumentException(InvalidInputError);
                 }
-                else
-                {
+               
                     gender = value;
-                }
             }
         }
-
-        public abstract string ProduceSound();
 
         public override string ToString()
         {
@@ -86,6 +77,8 @@ namespace Animals
             return sb.ToString().Trim();
 
         }
+
+        public abstract string ProduceSound();
 
     }
 }

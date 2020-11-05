@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Animals
+﻿namespace Animals
 {
     public class Tomcat : Cat
     {
-        private const string MaleCat = "Male";
+        private const string GenderMaleCat = "Male";
 
         public Tomcat(string name, int age) 
-            : base(name, age, MaleCat)
+            : base(name, age, GenderMaleCat)
         {
 
         }

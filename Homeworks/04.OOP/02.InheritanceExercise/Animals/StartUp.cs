@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace Animals
 {
@@ -49,7 +48,6 @@ namespace Animals
                 command = Console.ReadLine();
             }
 
-            
         }
     }
 }
