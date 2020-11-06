@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace _03.ShoppingSpree.Common
+﻿namespace _03.ShoppingSpree.Common
 {
     public static class GlobalConstants
     {

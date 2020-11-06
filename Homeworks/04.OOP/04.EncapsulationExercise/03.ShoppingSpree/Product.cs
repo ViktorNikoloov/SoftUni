@@ -2,14 +2,13 @@
 
 using _03.ShoppingSpree.Common;
 
-
 namespace _03.ShoppingSpree
 {
     public class Product
     {
         private string name;
         private decimal cost;
-        
+
 
         public Product(string name, decimal cost)
         {
@@ -42,13 +41,18 @@ namespace _03.ShoppingSpree
             }
             set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
                     throw new ArgumentException(GlobalConstants.MONEY_EXS_MSG);
                 }
 
                 cost = value;
             }
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }
