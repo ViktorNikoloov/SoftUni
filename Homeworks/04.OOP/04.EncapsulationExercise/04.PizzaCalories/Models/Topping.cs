@@ -12,7 +12,7 @@ namespace _04.PizzaCalories
         private const double VeggiesToppingCalories = 0.8;
         private const double CheeseToppingCalories = 1.1;
         private const double SauceToppingCalories = 0.9;
-        
+
         private string type;
         private double weight;
 
@@ -56,30 +56,33 @@ namespace _04.PizzaCalories
             }
         }
 
-        public string Calories()
+        public double CaloriesPerGram
         {
-            double toppingType = 0;
-            switch (this.Type)
+            get
             {
-                case "Meat":
-                    toppingType = MeatToppingCalories;
-                    break;
+                double toppingType = 0;
+                switch (this.Type)
+                {
+                    case "Meat":
+                        toppingType = MeatToppingCalories;
+                        break;
 
-                case "Veggies":
-                    toppingType = VeggiesToppingCalories;
-                    break;
+                    case "Veggies":
+                        toppingType = VeggiesToppingCalories;
+                        break;
 
-                case "Cheese":
-                    toppingType = CheeseToppingCalories;
-                    break;
+                    case "Cheese":
+                        toppingType = CheeseToppingCalories;
+                        break;
 
-                default:
-                    toppingType = SauceToppingCalories;
-                    break;
+                    default:
+                        toppingType = SauceToppingCalories;
+                        break;
+                }
+
+                return (BaseToppingCalories * this.Weight) * toppingType;
             }
-            double result = (BaseToppingCalories * this.Weight) * toppingType;
-
-            return $"{result:F2}";
         }
+
     }
 }

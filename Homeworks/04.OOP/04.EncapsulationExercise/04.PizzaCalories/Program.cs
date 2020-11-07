@@ -6,12 +6,23 @@ namespace _04.PizzaCalories
     class Program
     {
         static void Main(string[] args)
+
         {
             try
             {
-                string[] pizzaName = Console.ReadLine().Split();
+                string[] pizzaInfo = Console.ReadLine().Split();
 
-                Pizza pizza = new Pizza(pizzaName[1]);
+                string pizzaName = string.Empty;
+                if (pizzaInfo.Length <= 1)
+                {
+                    pizzaName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(pizzaInfo[0].ToLower());
+                }
+                else
+                {
+                    pizzaName = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(pizzaInfo[1].ToLower());
+                }
+
+                Pizza pizza = new Pizza(pizzaName);
 
                 string[] doughtInfo = Console.ReadLine().Split();
                 string doughType = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(doughtInfo[1].ToLower());
@@ -33,25 +44,14 @@ namespace _04.PizzaCalories
                     toppingInfo = Console.ReadLine().Split();
                 }
 
-                Console.WriteLine($"{pizza.Name} - {pizza.TotalCalories} Calories.");
+                Console.WriteLine($"{pizza.Name} - {pizza.TotalCalories:f2} Calories.");
 
             }
             catch (ArgumentException ae)
             {
                 Console.WriteLine(ae.Message);
             }
-
-
-
-
-
-
         }
-
-
-
-
-
     }
 }
 

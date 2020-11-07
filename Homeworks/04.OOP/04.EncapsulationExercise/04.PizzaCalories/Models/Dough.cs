@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 namespace _04.PizzaCalories
 {
@@ -59,7 +58,7 @@ namespace _04.PizzaCalories
 
                 bakingTechnique = value;
             }
-            
+
         }
 
         public double Weight
@@ -79,40 +78,42 @@ namespace _04.PizzaCalories
             }
         }
 
-        public string Calories()
+        public double CaloriesPerGram
         {
-            double doughtCalories = 0;
-            double techniqueCalories = 0;
-
-            switch (this.Type)
+            get
             {
-                case "White":
-                    doughtCalories = WhiteDoughCalories;
-                    break;
+                double doughtCalories = 0;
+                double techniqueCalories = 0;
 
-                default:
-                    doughtCalories = WholegrainDoughCalories;
-                    break;
+                switch (this.Type)
+                {
+                    case "White":
+                        doughtCalories = WhiteDoughCalories;
+                        break;
+
+                    default:
+                        doughtCalories = WholegrainDoughCalories;
+                        break;
+                }
+
+                switch (this.BakingTechnique)
+                {
+                    case "Crispy":
+                        techniqueCalories = CrispyDoughCalories;
+                        break;
+
+                    case "Chewy":
+                        techniqueCalories = ChewyDoughCalories;
+                        break;
+
+                    default:
+                        techniqueCalories = HomemadeDoughCalories;
+                        break;
+
+                }
+
+                return (BaseDoughtCalories * this.Weight) * doughtCalories * techniqueCalories;
             }
-
-            switch (this.BakingTechnique)
-            {
-                case "Crispy":
-                    techniqueCalories = CrispyDoughCalories;
-                    break;
-
-                case "Chewy":
-                    techniqueCalories = ChewyDoughCalories;
-                    break;
-
-                default:
-                    techniqueCalories = HomemadeDoughCalories;
-                    break;
-
-            }
-
-            double result = (BaseDoughtCalories * this.Weight) * doughtCalories * techniqueCalories;
-            return $"{result:F2}";
         }
 
     }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using _04.PizzaCalories;
-
 namespace _04.PizzaCalories
 {
     public class Pizza
@@ -12,7 +10,7 @@ namespace _04.PizzaCalories
 
 
         private string name;
-        private string dough;
+        private Dough dough;
         private readonly List<Topping> toppings;
 
         public Pizza(string name)
@@ -30,7 +28,7 @@ namespace _04.PizzaCalories
             }
             private set
             {
-                if (string.IsNullOrEmpty(value) && (value.Length < 1 || value.Length > 15))
+                if (string.IsNullOrEmpty(value) || (value.Length < 1 || value.Length > 15))
                 {
                     throw new ArgumentException(Name_Arg_Exs_Msg);
                 }
@@ -40,7 +38,17 @@ namespace _04.PizzaCalories
 
         }
 
-        public Dough Dough { get; set; }
+        public Dough Dough
+        {
+            get
+            {
+                return dough;
+            }
+            set
+            {
+                dough = value;
+            }
+        }
 
         public IReadOnlyCollection<Topping> Toppings
         {
@@ -48,26 +56,25 @@ namespace _04.PizzaCalories
             {
                 return toppings.AsReadOnly();
             }
-            
+
         }
 
         public int ToppingsCount
             => toppings.Count;
 
-        public string TotalCalories
+        public double TotalCalories
         {
             get
             {
-                double doughCalories = double.Parse(Dough.Calories());
+                double doughCalories = Dough.CaloriesPerGram;
                 double toppingsCalories = 0;
 
                 foreach (var topping in toppings)
                 {
-                    toppingsCalories += double.Parse(topping.Calories());
+                    toppingsCalories += topping.CaloriesPerGram;
                 }
-                double result = doughCalories + toppingsCalories;
 
-                return $"{result:F2}";
+                return doughCalories + toppingsCalories;
             }
         }
 
