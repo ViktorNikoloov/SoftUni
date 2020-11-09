@@ -1,0 +1,20 @@
+﻿using Cars.Contracts;
+using Cars.Models;
+using System;
+
+namespace Cars
+{
+    public class StartUp
+    {
+        static void Main(string[] args)
+        {
+            ICar seat = new Seat("Leon", "Gray");
+            ICar tesla = new Tesla("Model 3", "Red", 2);
+
+            Console.WriteLine(seat);
+            Console.WriteLine(tesla);
+
+            
+        }
+    }
+}
