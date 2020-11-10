@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.MultipleImplementation", "02.MultipleImplementation\02.MultipleImplementation.csproj", "{0789543E-A397-4ED4-8E1F-C8C60B404FC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.MultipleImplementation", "02.MultipleImplementation\02.MultipleImplementation.csproj", "{0789543E-A397-4ED4-8E1F-C8C60B404FC4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.DefineAnInterfaceIPerson", "01.DefineAnInterfaceIPerson\01.DefineAnInterfaceIPerson.csproj", "{8DE35535-620B-4BDE-8246-E1ACD0FE3B55}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Telephony", "03.Telephony\03.Telephony.csproj", "{32B17E06-8A1E-4A8D-A218-DAF743AC5760}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{0789543E-A397-4ED4-8E1F-C8C60B404FC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0789543E-A397-4ED4-8E1F-C8C60B404FC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0789543E-A397-4ED4-8E1F-C8C60B404FC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DE35535-620B-4BDE-8246-E1ACD0FE3B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DE35535-620B-4BDE-8246-E1ACD0FE3B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DE35535-620B-4BDE-8246-E1ACD0FE3B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DE35535-620B-4BDE-8246-E1ACD0FE3B55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32B17E06-8A1E-4A8D-A218-DAF743AC5760}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32B17E06-8A1E-4A8D-A218-DAF743AC5760}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32B17E06-8A1E-4A8D-A218-DAF743AC5760}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32B17E06-8A1E-4A8D-A218-DAF743AC5760}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
