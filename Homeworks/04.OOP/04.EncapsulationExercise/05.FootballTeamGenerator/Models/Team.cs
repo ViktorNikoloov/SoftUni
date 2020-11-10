@@ -13,10 +13,14 @@ namespace _05.FootballTeamGenerator
         private string name;
         private readonly List<Player> players;
 
+        private Team()
+        {
+            players = new List<Player>();
+        }
         public Team(string name)
+            :this()
         {
             Name = name;
-            players = new List<Player>();
         }
 
         public string Name
@@ -37,6 +41,7 @@ namespace _05.FootballTeamGenerator
         }
         public IReadOnlyCollection<Player> Players
         => players.AsReadOnly();
+        
         
         public void AddPlayer(Player player, string team)
         {
@@ -71,7 +76,7 @@ namespace _05.FootballTeamGenerator
                 throw new ArgumentException(string.Format(Missing_Team_Exs_Msg, team));
             }
 
-            double totalStat = 0;
+            int totalStat = 0;
             foreach (var player in players)
             {
                 totalStat += player.SkillLevel;
@@ -82,7 +87,7 @@ namespace _05.FootballTeamGenerator
                 totalStat = totalStat / players.Count;
             }
 
-            return (int)Math.Round(totalStat);
+            return (int)Math.Round((double)totalStat);
         }
 
        

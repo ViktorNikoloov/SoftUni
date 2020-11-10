@@ -8,16 +8,24 @@ namespace _04.PizzaCalories
         private const string Name_Arg_Exs_Msg = "Pizza name should be between 1 and 15 symbols.";
         private const string Topping_Count_Arg_Exs_Msg = "Number of toppings should be in range [0..10].";
 
+        private const int Min_Name_Length = 1;
+        private const int Max_Name_Length = 15;
+        private const int Max_Toppings_Count = 15;
+
 
         private string name;
         private Dough dough;
         private readonly List<Topping> toppings;
 
+        private Pizza()
+        {
+            toppings = new List<Topping>();
+
+        }
         public Pizza(string name)
+            :this()
         {
             Name = name;
-
-            toppings = new List<Topping>();
         }
 
         public string Name
@@ -28,7 +36,7 @@ namespace _04.PizzaCalories
             }
             private set
             {
-                if (string.IsNullOrEmpty(value) || (value.Length < 1 || value.Length > 15))
+                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value) || (value.Length < Min_Name_Length || value.Length > Max_Name_Length))
                 {
                     throw new ArgumentException(Name_Arg_Exs_Msg);
                 }
@@ -80,7 +88,7 @@ namespace _04.PizzaCalories
 
         public void AddTopping(Topping topping)
         {
-            if (ToppingsCount >= 10)
+            if (ToppingsCount >= Max_Toppings_Count)
             {
                 throw new ArgumentException(Topping_Count_Arg_Exs_Msg);
             }

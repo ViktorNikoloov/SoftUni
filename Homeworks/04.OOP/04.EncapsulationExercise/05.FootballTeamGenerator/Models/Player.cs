@@ -9,13 +9,13 @@ namespace _05.FootballTeamGenerator
         private const string Stat_Exs_Msg = "{0} should be between 0 and 100.";
 
         private string name;
-        private double endurance;
-        private double sprint;
-        private double dribble;
-        private double passing;
-        private double shooting;
+        private int endurance;
+        private int sprint;
+        private int dribble;
+        private int passing;
+        private int shooting;
 
-        public Player(string name, double endurance, double sprint, double dribble, double passing, double shooting)
+        public Player(string name, int endurance, int sprint, int dribble, int passing, int shooting)
         {
             Name = name;
             Endurance = endurance;
@@ -39,58 +39,58 @@ namespace _05.FootballTeamGenerator
             }
         }
 
-        public double Endurance
+        public int Endurance
         {
             get => endurance;
             private set
             {
-                IsAnExeptionAccured(value, "Endurance");
+                IsAnExeptionAccured(value, nameof(this.Endurance));
                 endurance = value;
             }
         }
 
-        public double Sprint
+        public int Sprint
         {
             get => sprint;
             private set
             {
-                IsAnExeptionAccured(value, "Sprint");
+                IsAnExeptionAccured(value, nameof(this.Sprint));
                 sprint = value;
             }
         }
 
-        public double Dribble
+        public int Dribble
         {
             get => dribble;
             private set
             {
-                IsAnExeptionAccured(value, "Dribble");
+                IsAnExeptionAccured(value, nameof(this.Dribble));
                 dribble = value;
             }
         }
 
-        public double Passing
+        public int Passing
         {
             get => passing;
             private set
             {
-                IsAnExeptionAccured(value, "Passing");
+                IsAnExeptionAccured(value, nameof(this.Passing));
                 passing = value;
             }
         }
 
-        public double Shooting
+        public int Shooting
         {
             get => shooting;
             private set
             {
-                IsAnExeptionAccured(value, "Shooting");
+                IsAnExeptionAccured(value, nameof(this.Shooting));
                 shooting = value;
             }
         }
 
-        public double SkillLevel
-        => (Endurance + Sprint + Dribble + Passing + Shooting) / 5.0;
+        public int SkillLevel
+        => (int)Math.Round((double)(Endurance + Sprint + Dribble + Passing + Shooting) / 5.0);
 
 
         private void IsAnExeptionAccured(double value, string stat)

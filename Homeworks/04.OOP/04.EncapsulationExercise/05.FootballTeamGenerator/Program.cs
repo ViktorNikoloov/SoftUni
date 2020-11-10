@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace _05.FootballTeamGenerator
 {
@@ -6,6 +8,7 @@ namespace _05.FootballTeamGenerator
     {
         static void Main(string[] args)
         {
+            List<Team> teams = new List<Team>();
             Team team = null;
 
             string[] input = Console.ReadLine().Split(";");
@@ -40,12 +43,23 @@ namespace _05.FootballTeamGenerator
                     }
                     else if (command == "Rating")
                     {
-                        string teamName = input[1];
 
-                        Console.WriteLine($"{team.Name} - {team.ShowRating(teamName)}");
+                        string teamName = input[1];
+                        if (teams.Count > 0 && teams.Any(t => t.Name == teamName))
+                        {
+                            Console.WriteLine($"{team.Name} - {team.ShowRating(teamName)}");
+                        }
+                        else
+                        {
+                            Console.WriteLine($"Team {teamName} does not exist.");
+                        }
+
+                        //Console.WriteLine($"{team.Name} - {team.ShowRating(teamName)}");
                     }
                     else
                     {
+                        
+
                         if (input.Length <= 1)
                         {
                             team = new Team(input[0]);
@@ -53,6 +67,7 @@ namespace _05.FootballTeamGenerator
                         else
                         {
                             team = new Team(input[1]);
+                            teams.Add(team);
                         }
 
                     }
