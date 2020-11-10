@@ -1,9 +1,9 @@
-﻿using System;
+﻿using _03.Telephony.Models.Contracts;
+using System;
 using System.Linq;
 
-using _03.Telephony.Models.Contracts;
 
-namespace _03.Telephony.Models
+namespace _03.Telephony
 {
     public class StationaryPhone : ICallable
     {

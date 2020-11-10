@@ -1,7 +1,6 @@
-﻿using _03.Telephony.Models;
-using System;
+﻿using System;
 
-namespace _03.Telephony.Core
+namespace _03.Telephony
 {
     public class Engine
     {
@@ -12,50 +11,57 @@ namespace _03.Telephony.Core
 
         public void Run()
         {
-            try
-            {
-                CallTheNumbers();
-                Browsing();
-            }
-            catch (ArgumentException ae)
-            {
-                Console.WriteLine(ae.Message);
-            }
+            string[] numbers = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            string[] sites = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
 
+
+            CallTheNumbers(numbers);
+            Browsing(sites);
 
         }
 
-        private static void Browsing()
+        private static void Browsing(string[] sites)
         {
-            string[] sites = Console.ReadLine().Split();
 
             for (int i = 0; i < sites.Length; i++)
             {
                 string currSite = sites[i];
+                try
+                {
+                    SmartPhone smartPhone = new SmartPhone();
+                    Console.WriteLine(smartPhone.Browse(currSite));
+                }
+                catch (ArgumentException ae)
+                {
+                    Console.WriteLine(ae.Message);
+                }
 
-                SmartPhone smartPhone = new SmartPhone();
-                Console.WriteLine(smartPhone.Browse(currSite));
+
             }
         }
 
-        private static void CallTheNumbers()
+        private static void CallTheNumbers(string[] numbers)
         {
-            string[] numbers = Console.ReadLine().Split();
             for (int i = 0; i < numbers.Length; i++)
             {
                 string currNumber = numbers[i];
-
-                if (currNumber.Length == 10)
+                try
                 {
-                    SmartPhone smartPhone = new SmartPhone();
-                    Console.WriteLine(smartPhone.Call(currNumber));
+                    if (currNumber.Length == 10)
+                    {
+                        SmartPhone smartPhone = new SmartPhone();
+                        Console.WriteLine(smartPhone.Call(currNumber));
+                    }
+                    else
+                    {
+                        StationaryPhone stationaryPhone = new StationaryPhone();
+                        Console.WriteLine(stationaryPhone.Call(currNumber));
+                    }
                 }
-                else
+                catch (ArgumentException ae)
                 {
-                    StationaryPhone stationaryPhone = new StationaryPhone();
-                    Console.WriteLine(stationaryPhone.Call(currNumber));
+                    Console.WriteLine(ae.Message);
                 }
-
             }
         }
     }
