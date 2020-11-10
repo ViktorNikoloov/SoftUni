@@ -1,11 +1,12 @@
-﻿using _03.Telephony.Models.Contracts;
-using System;
+﻿using System;
 using System.Linq;
 
+using _03.Telephony.Models.Contracts;
+using _03.Telephony.Exceptions;
 
 namespace _03.Telephony
 {
-    public class SmartPhone : ICallable, IBrowsable
+    public class SmartPhone : ICallable, IBrowseable
     {
         public SmartPhone()
         {
@@ -15,7 +16,7 @@ namespace _03.Telephony
         {
             if (!number.All(x => char.IsDigit(x)))
             {
-                throw new ArgumentException("Invalid number!");
+                throw new InvalidNumber();
             }
 
             return $"Calling... {number}";
@@ -26,7 +27,7 @@ namespace _03.Telephony
 
             if (url.Any(x => char.IsNumber(x)))
             {
-                throw new ArgumentException("Invalid URL!");
+                throw new InvalidUrl();
             }
 
             return $"Browsing: {url}!";

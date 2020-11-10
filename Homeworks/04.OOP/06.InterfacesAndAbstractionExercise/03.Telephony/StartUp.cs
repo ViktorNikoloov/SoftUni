@@ -1,4 +1,5 @@
-﻿using System;
+﻿using _03.Telephony.IO;
+using _03.Telephony.IO.Contracts;
 
 namespace _03.Telephony
 {
@@ -6,7 +7,10 @@ namespace _03.Telephony
     {
         static void Main(string[] args)
         {
-            Engine engine = new Engine();
+            IReader reader = new ConsoleReader();
+            IWriter writer = new ConsoleWriter();
+
+            Engine engine = new Engine(reader, writer);
             engine.Run();
         }
     }

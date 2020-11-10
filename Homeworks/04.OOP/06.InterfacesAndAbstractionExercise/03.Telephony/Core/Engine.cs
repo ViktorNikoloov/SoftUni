@@ -1,68 +1,76 @@
-﻿using System;
+﻿using _03.Telephony.Exceptions;
+using _03.Telephony.IO.Contracts;
 
 namespace _03.Telephony
 {
     public class Engine
     {
-        public Engine()
-        {
+        private IReader reader;
+        private IWriter writer;
 
+        private StationaryPhone stationaryPhone;
+        private SmartPhone smartPhone;
+
+        private Engine()
+        {
+            stationaryPhone = new StationaryPhone();
+            smartPhone = new SmartPhone();
+        }
+
+        public Engine(IReader reader, IWriter writer)
+            : this()
+        {
+            this.reader = reader;
+            this.writer = writer;
         }
 
         public void Run()
         {
-            string[] numbers = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-            string[] sites = Console.ReadLine().Split(" ", StringSplitOptions.RemoveEmptyEntries);
-
+            string[] numbers = reader.ReadLine().Split(' ');
+            string[] sites = reader.ReadLine().Split(' ');
 
             CallTheNumbers(numbers);
             Browsing(sites);
-
         }
 
-        private static void Browsing(string[] sites)
+        private void Browsing(string[] sites)
         {
 
-            for (int i = 0; i < sites.Length; i++)
+            foreach (var site in sites)
             {
-                string currSite = sites[i];
                 try
                 {
-                    SmartPhone smartPhone = new SmartPhone();
-                    Console.WriteLine(smartPhone.Browse(currSite));
+                    writer.WriteLine(smartPhone.Browse(site));
                 }
-                catch (ArgumentException ae)
+                catch (InvalidUrl iu)
                 {
-                    Console.WriteLine(ae.Message);
+                    writer.WriteLine(iu.Message);
                 }
-
-
             }
+
         }
 
-        private static void CallTheNumbers(string[] numbers)
+        private void CallTheNumbers(string[] numbers)
         {
-            for (int i = 0; i < numbers.Length; i++)
+            foreach (var number in numbers)
             {
-                string currNumber = numbers[i];
                 try
                 {
-                    if (currNumber.Length == 10)
+                    if (number.Length == 10)
                     {
-                        SmartPhone smartPhone = new SmartPhone();
-                        Console.WriteLine(smartPhone.Call(currNumber));
+                        writer.WriteLine(smartPhone.Call(number));
                     }
                     else
                     {
-                        StationaryPhone stationaryPhone = new StationaryPhone();
-                        Console.WriteLine(stationaryPhone.Call(currNumber));
+                        writer.WriteLine(stationaryPhone.Call(number));
                     }
                 }
-                catch (ArgumentException ae)
+                catch (InvalidNumber ine)
                 {
-                    Console.WriteLine(ae.Message);
+                    writer.WriteLine(ine.Message);
                 }
             }
+
         }
     }
 }
