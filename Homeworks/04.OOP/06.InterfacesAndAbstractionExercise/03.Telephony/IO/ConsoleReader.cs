@@ -3,6 +3,8 @@ using System;
 
 namespace _03.Telephony.IO
 {
+    public int MyProperty { get; set; }
+
     public class ConsoleReader : IReader
     {
         public string ReadLine()

@@ -5,6 +5,8 @@ namespace _03.Telephony
 {
     public class Engine
     {
+        public int MyProperty { get; set; }
+
         private IReader reader;
         private IWriter writer;
 

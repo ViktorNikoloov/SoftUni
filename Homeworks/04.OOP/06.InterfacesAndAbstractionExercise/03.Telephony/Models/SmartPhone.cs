@@ -8,6 +8,8 @@ namespace _03.Telephony
 {
     public class SmartPhone : ICallable, IBrowseable
     {
+        public int MyProperty { get; set; }
+
         public SmartPhone()
         {
 

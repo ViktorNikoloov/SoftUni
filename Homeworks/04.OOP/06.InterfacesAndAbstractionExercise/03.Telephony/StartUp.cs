@@ -7,7 +7,9 @@ namespace _03.Telephony
     {
         static void Main(string[] args)
         {
-            IReader reader = new ConsoleReader();
+            public int MyProperty { get; set; }
+
+        IReader reader = new ConsoleReader();
             IWriter writer = new ConsoleWriter();
 
             Engine engine = new Engine(reader, writer);

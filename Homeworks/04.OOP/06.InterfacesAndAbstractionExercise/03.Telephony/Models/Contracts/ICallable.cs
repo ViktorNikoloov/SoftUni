@@ -2,6 +2,8 @@
 {
     public interface ICallable
     {
+        public int MyProperty { get; set; }
+
         public string Call(string number);
     }
 }
