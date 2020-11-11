@@ -9,12 +9,9 @@ namespace _03.Telephony
     {
         public StationaryPhone()
         {
-            public int MyProperty { get; set; }
+        }
 
-
-    }
-
-    public string Call(string number)
+        public string Call(string number)
         {
             if (!number.All(x => char.IsDigit(x)))
             {
@@ -24,4 +21,7 @@ namespace _03.Telephony
             return $"Dialing... {number}";
         }
     }
+
+    
 }
+
