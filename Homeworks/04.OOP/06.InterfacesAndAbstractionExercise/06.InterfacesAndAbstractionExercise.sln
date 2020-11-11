@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "02.MultiImplementation", "0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "01.DefineAnInterfaceIPerson", "01.DefineAnInterfaceIPerson\01.DefineAnInterfaceIPerson.csproj", "{8DE35535-620B-4BDE-8246-E1ACD0FE3B55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Telephony", "03.Telephony\03.Telephony.csproj", "{32B17E06-8A1E-4A8D-A218-DAF743AC5760}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03.Telephony", "03.Telephony\03.Telephony.csproj", "{32B17E06-8A1E-4A8D-A218-DAF743AC5760}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.BorderControl", "04.BorderControl\04.BorderControl.csproj", "{EC7CE134-7C32-4233-8680-28F12AEDB78A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04.BorderControl", "04.BorderControl\04.BorderControl.csproj", "{EC7CE134-7C32-4233-8680-28F12AEDB78A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.BirthdayCelebrations", "05.BirthdayCelebrations\05.BirthdayCelebrations.csproj", "{650B99E2-6FB8-4A2E-B29D-B26C89E1A573}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{EC7CE134-7C32-4233-8680-28F12AEDB78A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC7CE134-7C32-4233-8680-28F12AEDB78A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC7CE134-7C32-4233-8680-28F12AEDB78A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{650B99E2-6FB8-4A2E-B29D-B26C89E1A573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{650B99E2-6FB8-4A2E-B29D-B26C89E1A573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{650B99E2-6FB8-4A2E-B29D-B26C89E1A573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{650B99E2-6FB8-4A2E-B29D-B26C89E1A573}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
