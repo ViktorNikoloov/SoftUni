@@ -4,5 +4,6 @@
     {
         public string Name { get; }
         public int Age { get; }
+        public int MyProperty { get; set; }
     }
 }
