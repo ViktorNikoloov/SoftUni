@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Linq;
 using _04.BorderControl.IO.Contracts;
 using _04.BorderControl.Models;
 using _04.BorderControl.Models.Contracts;
@@ -56,6 +56,8 @@ namespace _04.BorderControl.Core
 
             foreach (var identity in identities)
             {
+                //string idLastTreeNumbers = identity.Id.EndsWith(fakeId);
+
                 string idLastTreeNumbers = identity.Id.Substring(identity.Id.Length - fakeId.Length);
 
                 if (idLastTreeNumbers == fakeId)
@@ -63,6 +65,11 @@ namespace _04.BorderControl.Core
                     writer.WriteLine(identity.Id);
                 }
             }
+
+            //identities.Where(c => c.Id.EndsWith(fakeId))
+            //.Select(c => c.Id)
+            //.ToList()
+            //.ForEach(writer.WriteLine);
         }
     }
 }
