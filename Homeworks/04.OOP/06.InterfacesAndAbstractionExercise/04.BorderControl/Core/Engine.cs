@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
+
 using _04.BorderControl.IO.Contracts;
 using _04.BorderControl.Models;
 using _04.BorderControl.Models.Contracts;
@@ -65,6 +65,8 @@ namespace _04.BorderControl.Core
                     writer.WriteLine(identity.Id);
                 }
             }
+
+            //If you want to use this, you will need using System.Linq;
 
             //identities.Where(c => c.Id.EndsWith(fakeId))
             //.Select(c => c.Id)
