@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-
+ 
+using _07.MilitaryElite.Core.Contracts;
 using _07.MilitaryElite.Exceptions;
 using _07.MilitaryElite.IO.Contracts;
 using _07.MilitaryElite.Models;
@@ -8,13 +10,12 @@ using _07.MilitaryElite.Models.Contracts;
 
 namespace _07.MilitaryElite.Core
 {
-    class Engine
+    public class Engine : IEngine
     {
         private IReader reader;
         private IWriter writer;
 
         private ICollection<ISoldier> soldiers;
-        ISoldier soldier = null;
 
 
         private Engine()
@@ -34,26 +35,26 @@ namespace _07.MilitaryElite.Core
             string command;
             while ((command = reader.ReadLine()) != "End")
             {
-                string[] cmdArg = command.Split(" ", System.StringSplitOptions.RemoveEmptyEntries).ToArray();
+                string[] cmdArg = command.Split(" ",StringSplitOptions.RemoveEmptyEntries).ToArray();
 
                 string soldierType = cmdArg[0];
-                string id = cmdArg[1];
+                int id = int.Parse(cmdArg[1]);
                 string firstName = cmdArg[2];
                 string lastName = cmdArg[3];
 
+                ISoldier soldier = null;
 
                 if (soldierType == "Private")
                 {
                     decimal salary = decimal.Parse(cmdArg[4]);
 
-                    soldier = new Private(id, firstName, lastName, salary);
+                    soldier = new Private(firstName, lastName, id, salary);
                 }
                 else if (soldierType == "LieutenantGeneral")
                 {
                     decimal salary = decimal.Parse(cmdArg[4]);
 
-                    CreateGeneral(cmdArg, id, firstName, lastName, salary);
-
+                    soldier = GreateGeneral(cmdArg, id, firstName, lastName, salary);
                 }
                 else if (soldierType == "Engineer")
                 {
@@ -62,7 +63,9 @@ namespace _07.MilitaryElite.Core
 
                     try
                     {
-                        CreateEngineer(cmdArg, id, firstName, lastName, salary, corps);
+                        IEngineer engineer = CreateEngineer(cmdArg, id, firstName, lastName, salary, corps);
+
+                        soldier = engineer;
                     }
                     catch (InvalidCorpsException ice)
                     {
@@ -77,7 +80,9 @@ namespace _07.MilitaryElite.Core
 
                     try
                     {
-                        CreateCommando(cmdArg, id, firstName, lastName, salary, corps);
+                        ICommando commando = CreateComando(cmdArg, id, firstName, lastName, salary, corps);
+
+                        soldier = commando;
                     }
                     catch (InvalidCorpsException ice)
                     {
@@ -89,9 +94,7 @@ namespace _07.MilitaryElite.Core
                 {
                     int codeNumber = int.Parse(cmdArg[4]);
 
-                    Spy spy = new Spy(id, firstName, lastName, codeNumber);
-                    soldier = spy;
-
+                   soldier = new Spy(firstName, lastName, id, codeNumber);
                 }
 
                 if (soldier != null)
@@ -108,48 +111,12 @@ namespace _07.MilitaryElite.Core
 
         }
 
-        private void CreateCommando(string[] cmdArg, string id, string firstName, string lastName, decimal salary, string corps)
+        private static IEngineer CreateEngineer(string[] cmdArg, int id, string firstName, string lastName, decimal salary, string corps)
         {
-            ICommando commando = new Commando(id, firstName, lastName, salary, corps);
-
-            string[] missions = cmdArg.Skip(6).ToArray();
-            for (int i = 0; i < missions.Length; i += 2)
-            {
-                string codeName = missions[i];
-                string state = missions[i + 1];
-
-                try
-                {
-                    IMission mission = new Mission(codeName, state);
-                    commando.AddMission(mission);
-                }
-                catch (InvalidMissionStateException)
-                {
-                    continue;
-                }
-
-            }
-
-            soldier = commando;
-        }
-
-        private void CreateGeneral(string[] cmdArg, string id, string firstName, string lastName, decimal salary)
-        {
-            ILieutenantGeneral general = new LieutenantGeneral(id, firstName, lastName, salary);
-
-            foreach (var iprivateId in cmdArg.Skip(5))
-            {
-                ISoldier privateToAdd = soldiers.First(x => x.Id == iprivateId);
-                general.AddPrivate(privateToAdd);
-            }
-            soldier = general;
-        }
-
-        private void CreateEngineer(string[] cmdArg, string id, string firstName, string lastName, decimal salary, string corps)
-        {
-            IEngineer engineer = new Engineer(id, firstName, lastName, salary, corps);
+            IEngineer engineer = new Engineer(firstName, lastName, id, salary, corps);
 
             string[] repairs = cmdArg.Skip(6).ToArray();
+
             for (int i = 0; i < repairs.Length; i += 2)
             {
                 string partName = repairs[i];
@@ -159,7 +126,50 @@ namespace _07.MilitaryElite.Core
                 engineer.AddRepair(repair);
             }
 
-            soldier = engineer;
+            return engineer;
         }
+
+        private ILieutenantGeneral GreateGeneral(string[] cmdArg, int id, string firstName, string lastName, decimal salary)
+        {
+            ILieutenantGeneral general = new LieutenantGeneral(firstName, lastName, id, salary);
+
+            foreach (var iprivateId in cmdArg.Skip(5))
+            {
+                ISoldier privateToAdd = soldiers.First(x => x.Id == int.Parse(iprivateId));
+                 
+                general.AddPrivate(privateToAdd);
+            }
+
+            return general;
+        }
+
+        private static ICommando CreateComando(string[] cmdArg, int id, string firstName, string lastName, decimal salary, string corps)
+        {
+            ICommando commando = new Commando(firstName, lastName, id, salary, corps);
+
+            string[] missions = cmdArg.Skip(6).ToArray();
+
+            for (int i = 0; i < missions.Length; i += 2)
+            {
+
+                try
+                {
+                    string codeName = missions[i];
+                    string state = missions[i + 1];
+                     
+                    IMission mission = new Mission(codeName, state);
+                     
+                    commando.AddMission(mission);
+                }
+                catch (InvalidMissionStateException)
+                {
+                    continue;
+                }
+
+            }
+
+            return commando;
+        }
+
     }
 }

@@ -8,7 +8,7 @@ namespace _07.MilitaryElite.Models
     {
         private ICollection<IRepair> repairs;
 
-        public Engineer(string id, string firstName, string lastName, decimal salary, string corps) : base(id, firstName, lastName, salary, corps)
+        public Engineer(string firstName, string lastName, int id, decimal salary, string corps) : base(firstName, lastName, id, salary, corps)
         {
             repairs = new List<IRepair>();
         }
@@ -25,8 +25,7 @@ namespace _07.MilitaryElite.Models
         {
             StringBuilder sb = new StringBuilder();
             sb
-                .AppendLine($"Name: {FirstName} {LastName} Id: {Id} Salary: {Salary:F2}")
-                .AppendLine($"Corps: {Corps.ToString()}")
+                .AppendLine($"{base.ToString()}")
                 .AppendLine("Repairs:");
 
             foreach (var repair in repairs)

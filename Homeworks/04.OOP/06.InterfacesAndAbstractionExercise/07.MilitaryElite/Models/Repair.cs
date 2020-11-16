@@ -2,7 +2,7 @@
 
 namespace _07.MilitaryElite.Models
 {
-    class Repair : IRepair
+    public class Repair : IRepair
     {
         public Repair(string partName, int hoursWorked)
         {

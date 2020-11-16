@@ -3,18 +3,19 @@
 using _07.MilitaryElite.Enumerations;
 using _07.MilitaryElite.Models.Contracts;
 using _07.MilitaryElite.Exceptions;
+using System.Text;
 
 namespace _07.MilitaryElite.Models
 {
     public abstract class SpecialisedSoldier : Private, ISpecialisedSoldier
     {
-        protected SpecialisedSoldier(string id, string firstName, string lastName, decimal salary, string corps)
-            : base(id, firstName, lastName, salary)
+        protected SpecialisedSoldier(string firstName, string lastName, int id, decimal salary, string corps)
+            : base(firstName, lastName, id, salary)
         {
             Corps = TryParseCorps(corps);
         }
 
-        public Corps Corps {get; private set;}
+        public Corps Corps { get; private set; }
 
         public Corps TryParseCorps(string corpsStr)
         {
@@ -29,6 +30,16 @@ namespace _07.MilitaryElite.Models
             }
 
             return corp;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb
+            .AppendLine($"{base.ToString()}")
+            .AppendLine($"Corps: {Corps.ToString()}");
+
+            return sb.ToString().TrimEnd();
         }
     }
 }

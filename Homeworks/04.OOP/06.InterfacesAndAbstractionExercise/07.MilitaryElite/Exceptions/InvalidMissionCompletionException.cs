@@ -2,7 +2,7 @@
 
 namespace _07.MilitaryElite.Exceptions
 {
-    class InvalidMissionCompletionException : Exception
+    public class InvalidMissionCompletionException : Exception
     {
         private const string InvalidMissionExcMsg = "Invalid mission already completed!";
         public InvalidMissionCompletionException()

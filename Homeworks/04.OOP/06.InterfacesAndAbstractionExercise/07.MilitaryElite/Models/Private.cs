@@ -4,7 +4,7 @@ namespace _07.MilitaryElite.Models
 {
     public class Private : Soldier, IPrivate
     {
-        public Private(string id, string firstName, string lastName, decimal salary) 
+        public Private(string firstName, string lastName, int id, decimal salary) 
             :base(firstName, lastName, id)
         {
             Salary = salary;
@@ -14,6 +14,6 @@ namespace _07.MilitaryElite.Models
         public decimal Salary { get; private set; }
 
         public override string ToString()
-        => $"Name: {FirstName} {LastName} Id: {Id} Salary: {Salary:F2}";
+        => $"{base.ToString()} Salary: {Salary:F2}";
     }
 }

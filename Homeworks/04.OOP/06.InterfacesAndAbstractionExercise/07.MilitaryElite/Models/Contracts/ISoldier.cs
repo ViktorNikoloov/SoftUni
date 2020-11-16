@@ -2,7 +2,7 @@
 {
     public interface ISoldier
     {
-        public string Id { get; }
+        public int Id { get; }
 
         public string FirstName { get;}
 

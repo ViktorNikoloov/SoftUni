@@ -24,7 +24,7 @@ namespace _07.MilitaryElite.Models
 
         public void CompleteMission()
         {
-            if (State == State.Finished)
+            if (this.State == State.Finished)
             {
                 throw new InvalidMissionCompletionException();
             }
@@ -47,6 +47,6 @@ namespace _07.MilitaryElite.Models
         }
 
         public override string ToString()
-        => $"Code Name: {CodeName} State: {State}";
+        => $"Code Name: {CodeName} State: {State.ToString()}";
     }
 }

@@ -8,8 +8,8 @@ namespace _07.MilitaryElite.Models
     {
         ICollection<ISoldier> privates;
 
-        public LieutenantGeneral(string id, string firstName, string lastName, decimal salary)
-            : base(id, firstName, lastName, salary)
+        public LieutenantGeneral(string firstName, string lastName, int id, decimal salary)
+            : base(firstName, lastName, id, salary)
         {
             privates = new List<ISoldier>();
         }
@@ -24,8 +24,8 @@ namespace _07.MilitaryElite.Models
         {
             StringBuilder sb = new StringBuilder();
             sb
-                .AppendLine($"Name: {FirstName} {LastName} Id: {Id} Salary: {Salary:F2}")
-                .AppendLine("Privates:");
+                .AppendLine($"{base.ToString()}")
+                .AppendLine("Privates:"); 
 
             foreach (var @private in privates)
             {
