@@ -8,7 +8,7 @@ namespace _07.MilitaryElite
     {
         static void Main(string[] args)
         {
-            IReader reder = new Reader();
+            IReader reader = new Reader();
             IWriter writer = new Writer();
 
             Engine engine = new Engine(reader, writer);

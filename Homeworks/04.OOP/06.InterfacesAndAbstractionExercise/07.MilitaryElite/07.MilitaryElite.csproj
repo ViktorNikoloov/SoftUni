@@ -6,4 +6,10 @@
     <RootNamespace>_07.MilitaryElite</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Factory\**" />
+    <EmbeddedResource Remove="Factory\**" />
+    <None Remove="Factory\**" />
+  </ItemGroup>
+
 </Project>

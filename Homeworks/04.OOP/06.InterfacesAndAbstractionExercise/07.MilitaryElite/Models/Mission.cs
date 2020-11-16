@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Collections.Generic;
 using _07.MilitaryElite.Enumerations;
 using _07.MilitaryElite.Exceptions;
 using _07.MilitaryElite.Models.Contracts;
@@ -8,11 +8,15 @@ namespace _07.MilitaryElite.Models
 {
     public class Mission : IMission
     {
+        ICollection<IMission> missions;
+        
         public Mission(string codeName, string state)
         {
             CodeName = codeName;
             State = TryParseState(state);
         }
+
+        public IReadOnlyCollection<IMission> Missions => (IReadOnlyCollection<IMission>)missions;
 
         public string CodeName { get; private set; }
 
@@ -41,5 +45,8 @@ namespace _07.MilitaryElite.Models
 
             return state;
         }
+
+        public override string ToString()
+        => $"Code Name: {CodeName} State: {State}";
     }
 }

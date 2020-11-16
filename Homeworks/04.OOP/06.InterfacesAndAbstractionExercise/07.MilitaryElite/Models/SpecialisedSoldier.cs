@@ -8,8 +8,8 @@ namespace _07.MilitaryElite.Models
 {
     public abstract class SpecialisedSoldier : Private, ISpecialisedSoldier
     {
-        protected SpecialisedSoldier(string firstName, string lastName, string id, decimal salary, string corps)
-            : base(firstName, lastName, id, salary)
+        protected SpecialisedSoldier(string id, string firstName, string lastName, decimal salary, string corps)
+            : base(id, firstName, lastName, salary)
         {
             Corps = TryParseCorps(corps);
         }
@@ -18,9 +18,9 @@ namespace _07.MilitaryElite.Models
 
         public Corps TryParseCorps(string corpsStr)
         {
-            Corps corps;
+            Corps corp;
 
-            bool parsed = Enum.TryParse<Corps>(corpsStr, out corps);
+            bool parsed = Enum.TryParse<Corps>(corpsStr, out corp);
 
             if (!parsed)
             {
@@ -28,7 +28,7 @@ namespace _07.MilitaryElite.Models
 
             }
 
-            return corps;
+            return corp;
         }
     }
 }

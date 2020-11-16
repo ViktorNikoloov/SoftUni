@@ -13,5 +13,8 @@ namespace _07.MilitaryElite.Models
         public string PartName { get; private set; }
 
         public int HoursWorked { get; private set; }
+
+        public override string ToString()
+        => $"Part Name: {PartName} Hours Worked: {HoursWorked}";
     }
 }

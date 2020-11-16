@@ -1,4 +1,6 @@
-﻿using _07.MilitaryElite.Enumerations;
+﻿using System.Collections.Generic;
+
+using _07.MilitaryElite.Enumerations;
 
 namespace _07.MilitaryElite.Models.Contracts
 {
@@ -9,5 +11,6 @@ namespace _07.MilitaryElite.Models.Contracts
         public State State { get; }
 
         public void CompleteMission();
+
     }
 }
