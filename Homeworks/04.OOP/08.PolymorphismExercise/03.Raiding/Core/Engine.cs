@@ -1,12 +1,11 @@
-﻿using _03.Raiding.Core.Contracts;
-using _03.Raiding.Factories;
-using _03.Raiding.IO.Contracts;
-using _03.Raiding.Models;
-using _03.Raiding.Models.Contracts;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
+using _03.Raiding.Core.Contracts;
+using _03.Raiding.Factories;
+using _03.Raiding.IO.Contracts;
+using _03.Raiding.Models.Contracts;
 
 namespace _03.Raiding.Core
 {
@@ -54,8 +53,6 @@ namespace _03.Raiding.Core
                 {
                     writer.WriteLine(ae.Message);
                 }
-
-
 
             }
             int bossPower = int.Parse(reader.ReadLine());
