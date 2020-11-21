@@ -40,7 +40,6 @@ namespace _04.WildFarm
             {
                 string[] animalArgs = command.Split();
                 animal = animalFactory.CreatAnimal(animalArgs);
-                animal.FoodEaten += 1;
                 if (animal != null)
                 {
                     animals.Add(animal);
@@ -50,19 +49,21 @@ namespace _04.WildFarm
                 food = foodFactory.CreatFood(foodArgs);
 
                 writer.WriteLine(animal.ProduceSound());
+
                 try
                 {
-                    animal.FeedTheAnimal(animalArgs[0], foodArgs[0], int.Parse(foodArgs[1]));
+                    animal.FeedTheAnimal(animal, food);
                 }
                 catch (ArgumentException ae)
                 {
                     Console.WriteLine(ae.Message);
                 }
+                
+            }
 
-                foreach (var animal in animals)
-                {
-                    writer.WriteLine(animal.ToString());
-                }
+            foreach (var animal in animals)
+            {
+                writer.WriteLine(animal.ToString());
             }
         }
 

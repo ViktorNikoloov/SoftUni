@@ -2,6 +2,7 @@
 
 using _04.WildFarm.Common;
 using _04.WildFarm.Models._Contracts.Animal;
+using _04.WildFarm.Models._Contracts.Food;
 
 namespace _04.WildFarm.Models.Animal
 {
@@ -21,8 +22,12 @@ namespace _04.WildFarm.Models.Animal
 
         public abstract string ProduceSound();
 
-        public void FeedTheAnimal(string animalType, string foodType, int quantity)
+        public void FeedTheAnimal(IAnimal animal, IFoodable food)
         {
+            string animalType = animal.GetType().Name;
+            string foodType = food.GetType().Name;
+            int quantity = food.Quantity;
+
             if (IsEatable(animalType, foodType))
             {
                 switch (animalType)
@@ -58,8 +63,14 @@ namespace _04.WildFarm.Models.Animal
                         break;
                 }
 
-                throw new ArgumentException(string.Format(ExceptionMessages.NotEatableMsg, animalType, foodType));
             }
+            else
+            {
+                throw new ArgumentException(string.Format(ExceptionMessages.NotEatableMsg, animalType, foodType));
+
+            }
+
+
         }
 
         private bool IsEatable(string animalType, string foodType)
@@ -79,10 +90,10 @@ namespace _04.WildFarm.Models.Animal
                     }
                     break;
 
-                case "Mice":
+                case "Mouse":
                     switch (foodType)
                     {
-                        case "Friut":
+                        case "Fruit":
                         case "Vegetable":
                             isEatable = true;
                             break;

@@ -1,4 +1,7 @@
-﻿using _04.WildFarm.IO;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
+
+using _04.WildFarm.IO;
 using _04.WildFarm.IO.Contracts;
 
 namespace _04.WildFarm
@@ -7,10 +10,13 @@ namespace _04.WildFarm
     {
         static void Main(string[] args)
         {
-            IReader reader = new Reader();
-            IWriter writer = new Writer();
+            IServiceProvider service = new ServiceCollection()
+                .AddScoped<IReader, Reader>()
+                .AddScoped<IWriter, Writer>()
+                .AddScoped<Engine, Engine>()
+                .BuildServiceProvider();
 
-            Engine engine = new Engine(reader, writer);
+            Engine engine = service.GetService<Engine>();
             engine.Run();
             
         }

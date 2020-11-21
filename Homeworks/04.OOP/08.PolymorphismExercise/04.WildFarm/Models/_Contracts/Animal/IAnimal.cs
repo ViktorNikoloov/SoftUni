@@ -1,4 +1,6 @@
-﻿namespace _04.WildFarm.Models._Contracts.Animal
+﻿using _04.WildFarm.Models._Contracts.Food;
+
+namespace _04.WildFarm.Models._Contracts.Animal
 {
     public interface IAnimal
     {
@@ -10,6 +12,6 @@
 
         public string ProduceSound();
 
-        public void FeedTheAnimal(string animalType, string foodType, int quantity);
+        public void FeedTheAnimal(IAnimal animal, IFoodable food);
     }
 }

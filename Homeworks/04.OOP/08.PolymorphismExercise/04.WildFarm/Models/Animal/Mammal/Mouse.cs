@@ -12,5 +12,10 @@ namespace _04.WildFarm.Models.Animal.Mammal
 
         public override string ProduceSound()
         => "Squeak";
+
+        public override string ToString()
+        {
+            return base.ToString() + $"{Weight}, {LivingRegion}, {FoodEaten}]";
+        }
     }
 }

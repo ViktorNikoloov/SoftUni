@@ -13,6 +13,6 @@ namespace _04.WildFarm.Models.Animal.Mammal
         public string LivingRegion { get; set; }
 
         public override string ToString()
-        =>base.ToString() + $"{Weight}, {LivingRegion}, {FoodEaten}]";
+        =>base.ToString();
     }
 }
