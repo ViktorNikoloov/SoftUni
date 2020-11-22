@@ -12,6 +12,11 @@ namespace CounterStrike.Repositories
     {
         private readonly ICollection<IPlayer> players;
 
+        public PlayerRepository()
+        {
+            players = new List<IPlayer>();
+        }
+
         public IReadOnlyCollection<IPlayer> Models
             => (IReadOnlyCollection<IPlayer>)players;
 
