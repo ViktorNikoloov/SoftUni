@@ -34,14 +34,18 @@ namespace CounterStrike.Models.Maps
                 }
             }
 
+            string outputMessage = string.Empty;
+
             if (terrorists.Any(t=>t.IsAlive))
             {
-                return "Terrorist wins!";
+                outputMessage = "Terrorist wins!";
             }
             else
             {
-               return "Counter Terrorist wins!";
+                outputMessage = "Counter Terrorist wins!";
             }
+
+            return outputMessage;
         }
     }
 }

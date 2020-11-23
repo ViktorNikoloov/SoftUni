@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 using CounterStrike.Models.Guns.Contracts;
 using CounterStrike.Models.Players.Contracts;
@@ -105,6 +106,18 @@ namespace CounterStrike.Models.Players
             {
                 Health = 0;
             }
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb
+                .AppendLine($"{this.GetType().Name}: {Username}")
+                .AppendLine($"--Health: {Health}")
+                .AppendLine($"--Armor: {Armor}")
+                .AppendLine($"--Gun: {Gun.Name}");
+
+            return sb.ToString().TrimEnd();
         }
     }
 }
