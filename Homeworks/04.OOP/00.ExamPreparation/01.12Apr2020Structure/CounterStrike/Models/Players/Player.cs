@@ -41,7 +41,7 @@ namespace CounterStrike.Models.Players
             get => health;
             private set
             {
-                if (value <= 0)
+                if (value < 0)
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidPlayerHealth);
                 }
@@ -79,7 +79,7 @@ namespace CounterStrike.Models.Players
         }
 
         public bool IsAlive
-            => Health > 0 ? true : false; //Health > 0;
+            => Health > 0 ? true : false; //Health >= 0 ?;
 
         public void TakeDamage(int points)
         {
@@ -99,13 +99,14 @@ namespace CounterStrike.Models.Players
             }
             else
             {
+                if (Health - points < 0)
+                {
+                    Health = 0;
+                }
+
                 Health -= points;
             }
 
-            if (Health <= 0)
-            {
-                Health = 0;
-            }
         }
 
         public override string ToString()

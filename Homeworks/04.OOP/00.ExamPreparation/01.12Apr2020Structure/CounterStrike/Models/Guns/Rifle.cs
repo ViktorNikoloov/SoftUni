@@ -2,7 +2,7 @@
 {
     public class Rifle : Gun
     {
-        public Rifle(string name, int bulletsCount) 
+        public Rifle(string name, int bulletsCount)
             : base(name, bulletsCount)
         {
 
@@ -12,11 +12,9 @@
         {
             if (BulletsCount >= 10)
             {
-                if (Name == "Rifle")
-                {
-                    BulletsCount -= 10;
-                    return 10;
-                }
+                BulletsCount -= 10;
+                return 10;
+
             }
 
             return 0;

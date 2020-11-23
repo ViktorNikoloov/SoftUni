@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -16,7 +17,6 @@ using CounterStrike.Models.Maps.Contracts;
 
 using CounterStrike.Models.Players.Contracts;
 using CounterStrike.Models.Players;
-using System.Text;
 
 namespace CounterStrike.Core
 {
@@ -58,7 +58,7 @@ namespace CounterStrike.Core
 
         public string AddPlayer(string type, string username, int health, int armor, string gunName)
         {
-            IGun gunToAdd = guns.FindByName(gunName);
+           IGun gunToAdd = guns.FindByName(gunName);
             if (gunToAdd == null)
             {
                 throw new ArgumentException(ExceptionMessages.GunCannotBeFound);
@@ -68,10 +68,9 @@ namespace CounterStrike.Core
             {
                 player = new Terrorist(username, health, armor, gunToAdd);
             }
-            else if (type == "Rifle")
+            else if (type == "CounterTerrorist")
             {
                 player = new CounterTerrorist(username, health, armor, gunToAdd);
-
             }
             else
             {
@@ -102,9 +101,9 @@ namespace CounterStrike.Core
 
         public string StartGame()
         {
-            ICollection<IPlayer> AlivePlayers = players.Models.Where(ap => ap.IsAlive).ToList();
+            ICollection<IPlayer> аlivePlayers = players.Models.Where(ap => ap.IsAlive).ToList();
 
-            return map.Start(AlivePlayers);
+            return map.Start(аlivePlayers);
         }
     }
 }

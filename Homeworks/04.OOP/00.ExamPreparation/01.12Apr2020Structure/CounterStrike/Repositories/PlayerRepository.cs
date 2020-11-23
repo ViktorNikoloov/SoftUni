@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
+using System.Collections.Generic;
 
 using CounterStrike.Models.Players.Contracts;
 using CounterStrike.Repositories.Contracts;
