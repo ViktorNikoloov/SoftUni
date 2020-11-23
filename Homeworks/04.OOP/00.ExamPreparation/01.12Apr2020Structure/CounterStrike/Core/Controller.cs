@@ -53,12 +53,14 @@ namespace CounterStrike.Core
             }
 
             guns.Add(gun);
-            return $"Successfully added gun {gun.Name}.";
+            return string.Format(OutputMessages.SuccessfullyAddedGun, gun.Name);
+
         }
 
         public string AddPlayer(string type, string username, int health, int armor, string gunName)
         {
            IGun gunToAdd = guns.FindByName(gunName);
+
             if (gunToAdd == null)
             {
                 throw new ArgumentException(ExceptionMessages.GunCannotBeFound);
@@ -78,7 +80,7 @@ namespace CounterStrike.Core
             }
 
             players.Add(player);
-            return $"Successfully added player {player.Username}.";
+            return string.Format(OutputMessages.SuccessfullyAddedPlayer, player.Username);
         }
 
         public string Report()
