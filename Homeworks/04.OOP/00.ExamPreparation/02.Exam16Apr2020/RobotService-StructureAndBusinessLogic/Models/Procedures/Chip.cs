@@ -1,4 +1,8 @@
-﻿using RobotService.Models.Robots.Contracts;
+﻿using System;
+using System.Linq;
+
+using RobotService.Models.Robots.Contracts;
+using RobotService.Utilities.Messages;
 
 namespace RobotService.Models.Procedures
 {
@@ -6,7 +10,10 @@ namespace RobotService.Models.Procedures
     {
         public override void DoService(IRobot robot, int procedureTime)
         {
-            throw new System.NotImplementedException();
+            if (robots.Where(n=>n.KeyAny(x => x.Value.ProcedureTime < procedureTime))
+            {
+                throw new ArgumentException(ExceptionMessages.InsufficientProcedureTime);
+            }
         }
     }
 }

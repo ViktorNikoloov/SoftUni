@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System.Text;
 using RobotService.Models.Procedures.Contracts;
 using RobotService.Models.Robots.Contracts;
 
@@ -14,16 +14,21 @@ namespace RobotService.Models.Procedures
             robots = new List<IRobot>();
         }
 
-        public IReadOnlyCollection<IRobot> Robots
+        protected IReadOnlyCollection<IRobot> Robots
         => (IReadOnlyCollection<IRobot>)robots;
 
         public string History()
         {
-            throw new System.NotImplementedException();
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"{this.GetType().Name}");
+            foreach (var robot in robots)
+            {
+                sb.AppendLine(robot.ToString());
+            }
+
+            return sb.ToString().TrimEnd();
         }
 
         public abstract void DoService(IRobot robot, int procedureTime);
-        
-
     }
 }

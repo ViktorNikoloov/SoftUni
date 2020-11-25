@@ -23,6 +23,7 @@ namespace RobotService.Models.Robots
             isChipped = false;
             isChecked = false;
         }
+
         public Robot(string name, int energy, int happiness, int procedureTime)
             :this()
         {
