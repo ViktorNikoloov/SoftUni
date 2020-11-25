@@ -7,6 +7,7 @@ namespace Tests
 {
     public class DatabaseTests
     {
+        // You must remove all namespaces "Database." in front of Database class before Judge ! 
         [SetUp]
         public void Setup()
         {
