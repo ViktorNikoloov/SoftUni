@@ -1,20 +1,20 @@
 using System;
 
-//using ExtendedDatabase;
+using ExtendedDatabase;
 using NUnit.Framework;
 
 namespace Tests
 {
     public class ExtendedDatabaseTests
     {
-        private ExtendedDatabase extendedDatabase;
+        private ExtendedDatabase.ExtendedDatabase extendedDatabase;
         private Person person;
 
         [SetUp]
         public void Setup()
         {
             person = new Person(100000000L, "Ivan");
-            extendedDatabase = new ExtendedDatabase();
+            extendedDatabase = new ExtendedDatabase.ExtendedDatabase();
         }
 
         //Constructor Initialized tests cases
@@ -36,7 +36,7 @@ namespace Tests
         }
 
         [Test]
-        public void  ExtendedDatabase_Constructor_Should_Throw_Argument_Exception_If_Array_Is_More_Than_16_Elements()
+        public void ExtendedDatabase_Constructor_Should_Throw_Argument_Exception_If_Array_Is_More_Than_16_Elements()
         {
             //Arrange
             Person[] people = new Person[17];
@@ -47,7 +47,7 @@ namespace Tests
 
             //Act - Assert
 
-            Assert.Throws<ArgumentException>(() => new ExtendedDatabase(people));
+            Assert.Throws<ArgumentException>(() => new ExtendedDatabase.ExtendedDatabase(people));
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace Tests
             }
 
             //Act 
-            extendedDatabase = new ExtendedDatabase(people);
+            extendedDatabase = new ExtendedDatabase.ExtendedDatabase(people);
 
             //Assert
             int expectedResult = people.Length;
@@ -103,7 +103,7 @@ namespace Tests
         {
             //Arrange
             person = new Person(personId, personUsername);
-            extendedDatabase = new ExtendedDatabase(person);
+            extendedDatabase = new ExtendedDatabase.ExtendedDatabase(person);
 
             //Act
             Person secondPerson = new Person(secondPersonId, personUsername);
@@ -123,7 +123,7 @@ namespace Tests
         {
             //Arrange
             person = new Person(personId, personUsername);
-            extendedDatabase = new ExtendedDatabase(person);
+            extendedDatabase = new ExtendedDatabase.ExtendedDatabase(person);
 
             //Act
             Person secondPerson = new Person(personId, secondPersonUsername);
@@ -134,10 +134,9 @@ namespace Tests
 
         }
 
-        //Remove action tests cases
+        //Remove action test cases
 
         [Test]
-
         public void Remove_Should_Throw_Invalid_Operation_Exception_If_Array_Is_Empty()
         {
             //Arrange
@@ -170,6 +169,46 @@ namespace Tests
 
         }
 
+        //FindByUsername action test cases
+
+        [Test]
+        [TestCase(null)]
+        [TestCase("")]
+        public void If_Username_Parameter_Is_Empty_Should_Throw_Argument_Null_Exception(string findUsername)
+        {
+            //Arrange
+            extendedDatabase.Add(person);
+
+            //Act - Assert
+            Assert.Throws<ArgumentNullException>(() => extendedDatabase.FindByUsername(findUsername));
+        }
+
+        [Test]
+        [TestCase("Vasil")]
+        [TestCase("Stoyan")]
+        [TestCase("Tanya")]
+        public void If_No_User_Is_Present_By_This_Username_Should_Throw_Invalid_Operation_Exception(string findUsername)
+        {
+            //Arrange
+            extendedDatabase.Add(person);
+
+            //Act - Assert
+            Assert.Throws<InvalidOperationException>(() => extendedDatabase.FindByUsername(findUsername));
+        }
+
+        [Test]
+        public void Find_By_Username_Should_Give_Back_The_Same_Person_We_Looked_For()
+        {
+            //Arrange
+            extendedDatabase.Add(person);
+
+            //Act 
+            Person expectedResult = person;
+            Person actualResult = extendedDatabase.FindByUsername("Ivan");
+
+            //Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
 
     }
 }
