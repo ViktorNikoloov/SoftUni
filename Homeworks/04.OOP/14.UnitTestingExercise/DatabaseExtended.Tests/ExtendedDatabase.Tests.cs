@@ -210,5 +210,58 @@ namespace Tests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
+        //FindById action test cases
+        //[Test]
+        //[TestCase(null)]
+        //[TestCase("")]
+        //public void If_Id_Parameter_Is_Empty_Should_Throw_Argument_Null_Exception(string findUsername)
+        //{
+        //    //Arrange
+        //    extendedDatabase.Add(person);
+
+        //    //Act - Assert
+        //    Assert.Throws<ArgumentNullException>(() => extendedDatabase.FindByUsername(findUsername));
+        //}
+
+        [Test]
+        [TestCase(-425L)]
+        [TestCase(-10000000000000L)]
+        [TestCase(-969461)]
+        public void If_Negative_Id_Is_Found_Should_Throw_Argument_Out_Of_Range_Exception(long findNegativeId)
+        {
+            //Arrange
+            extendedDatabase.Add(person);
+
+            //Act - Assert
+            Assert.Throws<ArgumentOutOfRangeException>(() => extendedDatabase.FindById(findNegativeId));
+        }
+
+        [Test]
+        [TestCase(6516516661L)]
+        [TestCase(456L)]
+        [TestCase(10000000000000000L)]
+        public void If_No_User_Is_Present_By_This_Id_Should_Throw_Invalid_Operation_Exception(long findId)
+        {
+            //Arrange
+            extendedDatabase.Add(person);
+
+            //Act - Assert
+            Assert.Throws<InvalidOperationException>(() => extendedDatabase.FindById(findId));
+        }
+
+        [Test]
+        public void Find_By_Id_Should_Give_Back_The_Same_Person_We_Looked_For()
+        {
+            //Arrange
+            extendedDatabase.Add(person);
+            long personId = person.Id;
+            //Act 
+            Person expectedResult = person;
+            Person actualResult = extendedDatabase.FindById(personId);
+
+            //Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
+
     }
 }

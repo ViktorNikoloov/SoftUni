@@ -35,7 +35,6 @@ namespace ExtendedDatabase
             this.count = data.Length;
         }
 
-        //Not tested if count changed
         public void Add(Person person)
         {
             if (this.count == 16)
