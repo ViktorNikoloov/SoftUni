@@ -210,19 +210,6 @@ namespace Tests
             Assert.AreEqual(expectedResult, actualResult);
         }
 
-        //FindById action test cases
-        //[Test]
-        //[TestCase(null)]
-        //[TestCase("")]
-        //public void If_Id_Parameter_Is_Empty_Should_Throw_Argument_Null_Exception(string findUsername)
-        //{
-        //    //Arrange
-        //    extendedDatabase.Add(person);
-
-        //    //Act - Assert
-        //    Assert.Throws<ArgumentNullException>(() => extendedDatabase.FindByUsername(findUsername));
-        //}
-
         [Test]
         [TestCase(-425L)]
         [TestCase(-10000000000000L)]
