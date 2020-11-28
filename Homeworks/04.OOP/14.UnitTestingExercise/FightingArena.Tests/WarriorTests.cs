@@ -95,10 +95,10 @@ namespace Tests
 
         //Attack cases
         [Test]
-        [TestCase("Viktor", 15, 5, "Nikolay", 15, 100)]
-        [TestCase("Tanya", 40, 29, "Mariya", 40, 100)]
+        [TestCase("Viktor", 15, 30, "Nikolay", 15, 100)]
+        [TestCase("Tanya", 15, 29, "Nikolay", 15, 100)]
 
-        public void IF_Warrior_Attack_With_HP_Below_Min_Atack_HP_Should_Throw_Invalid_Operation_Exception(
+        public void IF_Warrior_Attack_With_HP_Equal_Or_Below_Min_Atack_HP_Should_Throw_Invalid_Operation_Exception(
             string warriorName,
             int warriorDmg,
             int warriorHp, 
@@ -123,10 +123,10 @@ namespace Tests
         }
 
         [Test]
-        [TestCase("Viktor", 15, 100, "Nikolay", 15, 29)]
-        [TestCase("Tanya", 40, 150, "Mariya", 40, 5)]
+        [TestCase("Viktor", 15, 100, "Nikolay", 15, 30)]
+        [TestCase("Tanya", 40, 150, "Mariya", 40, 29)]
 
-        public void IF_Warrior_Attack_Another_Warrior_With_HP_Below_Min_Atack_HP_Should_Throw_Invalid_Operation_Exception(
+        public void IF_Warrior_Attack_Another_Warrior_With_HP_Equal_Or_Below_Min_Atack_HP_Should_Throw_Invalid_Operation_Exception(
             string warriorName,
             int warriorDmg,
             int warriorHp,
@@ -151,8 +151,8 @@ namespace Tests
         }
 
         [Test]
-        [TestCase("Viktor", 15, 30, "Nikolay", 31, 100)]
-        [TestCase("Tanya", 40, 150, "Mariya", 100, 200)]
+        [TestCase("Viktor", 15, 40, "Nikolay", 41, 100)]
+        [TestCase("Tanya", 40, 80, "Mariya", 100, 200)]
 
         public void IF_Warrior_HP_Is_Below_Another_Warrior_Damage_Should_Throw_Invalid_Operation_Exception(
             string warriorName,
@@ -176,6 +176,105 @@ namespace Tests
             //Act - Assert
 
             Assert.Throws<InvalidOperationException>(() => warrior.Attack(barbarian));
+        }
+
+        [Test]
+        [TestCase("Viktor", 15, 80, "Nikolay", 31, 100)]
+        [TestCase("Tanya", 40, 150, "Mariya", 100, 200)]
+
+        public void IF_Warrior_HP_Is_More_Than_Another_Warrior_Damage_Should_Decreased_First_Warrior_HP_With_Second_Warrior_Damage(
+            string warriorName,
+            int warriorDmg,
+            int warriorHp,
+
+            string barbarianName,
+            int barbarianDmg,
+            int barbarianHp)
+        {
+            //Arrange 
+            warrior = new Warrior(
+                name: warriorName,
+                damage: warriorDmg,
+                hp: warriorHp);
+
+            Warrior barbarian = new Warrior(
+                name: barbarianName,
+                damage: barbarianDmg,
+                hp: barbarianHp);
+            //Act
+            warrior.Attack(barbarian);
+
+            //Assert
+            int expectedResult = warriorHp - barbarianDmg;
+            int actualResult = warrior.HP;
+
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+
+        [Test]
+        [TestCase("Viktor", 60, 80, "Nikolay", 31, 59, 0)]
+        [TestCase("Tanya", 100, 150, "Mariya", 100, 40, 0)]
+
+        public void IF_Warrior_Damage_Is_More_Than_Another_Warrior_HP_Should_Set_Another_Warrior_HP_To_Zero(
+            string warriorName,
+            int warriorDmg,
+            int warriorHp,
+
+            string barbarianName,
+            int barbarianDmg,
+            int barbarianHp,
+            int expectedResult)
+        {
+            //Arrange 
+            warrior = new Warrior(
+                name: warriorName,
+                damage: warriorDmg,
+                hp: warriorHp);
+
+            Warrior barbarian = new Warrior(
+                name: barbarianName,
+                damage: barbarianDmg,
+                hp: barbarianHp);
+            //Act
+            warrior.Attack(barbarian);
+
+            //Assert
+            int actualResult = barbarian.HP;
+
+            Assert.AreEqual(actualResult, expectedResult);
+        }
+
+        [Test]
+        [TestCase("Viktor", 60, 80, "Nikolay", 31, 100)]
+        [TestCase("Tanya", 100, 150, "Mariya", 100, 200)]
+
+        public void IF_Warrior_Damage_Is_Less_Than_Another_Warrior_HP_Should_Decreased_Another_Warrior_HP_With_First_Warrior_Damage(
+           string warriorName,
+           int warriorDmg,
+           int warriorHp,
+
+           string barbarianName,
+           int barbarianDmg,
+           int barbarianHp)
+        {
+            //Arrange 
+            warrior = new Warrior(
+                name: warriorName,
+                damage: warriorDmg,
+                hp: warriorHp);
+
+            Warrior barbarian = new Warrior(
+                name: barbarianName,
+                damage: barbarianDmg,
+                hp: barbarianHp);
+            //Act
+            warrior.Attack(barbarian);
+
+            //Assert
+            int expectedResult = barbarianHp - warriorDmg;
+            int actualResult = barbarian.HP;
+
+            Assert.AreEqual(actualResult, expectedResult);
         }
     }
 }
