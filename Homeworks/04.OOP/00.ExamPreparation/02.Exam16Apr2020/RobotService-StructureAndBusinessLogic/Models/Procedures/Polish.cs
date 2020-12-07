@@ -4,9 +4,16 @@ namespace RobotService.Models.Procedures
 {
     public class Polish : Procedure
     {
+        public Polish()
+        {
+
+        }
+
         public override void DoService(IRobot robot, int procedureTime)
         {
-            throw new System.NotImplementedException();
+            robot.Happiness -= 7;
+
+            base.DoService(robot, procedureTime);
         }
     }
 }

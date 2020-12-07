@@ -1,6 +1,4 @@
-﻿using RobotService.Models.Robots.Contracts;
-
-namespace RobotService.Models.Robots
+﻿namespace RobotService.Models.Robots
 {
     public class PetRobot : Robot
     {

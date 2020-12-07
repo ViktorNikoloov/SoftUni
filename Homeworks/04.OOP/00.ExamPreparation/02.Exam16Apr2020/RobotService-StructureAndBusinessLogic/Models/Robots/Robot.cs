@@ -10,21 +10,16 @@ namespace RobotService.Models.Robots
         private string name;
         private int happiness;
         private int energy;
-        private int procedureTime;
-        private string owner;
-        private bool isBought;
-        private bool isChipped;
-        private bool isChecked;
 
         private Robot()
         {
-            owner = "Service";
-            isBought = false;
-            isChipped = false;
-            isChecked = false;
+            Owner = "Service";
+            IsBought = false;
+            IsChipped = false;
+            IsChecked = false;
         }
 
-        public Robot(string name, int energy, int happiness, int procedureTime)
+        protected Robot(string name, int energy, int happiness, int procedureTime)
             :this()
         {
             Name = name;
@@ -47,13 +42,14 @@ namespace RobotService.Models.Robots
             get => happiness;
             set
             {
-                if (0 > value || value > 100)
+                if (value < 0 || value > 100)
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidHappiness);
                 }
 
                 happiness = value;
             }
+
         }
 
         public int Energy
@@ -61,61 +57,29 @@ namespace RobotService.Models.Robots
             get => energy;
             set
             {
-                if (0 > value || value > 100)
+                if (value < 0 || value > 100)
                 {
                     throw new ArgumentException(ExceptionMessages.InvalidEnergy);
                 }
 
                 energy = value;
             }
+
         }
 
-        public int ProcedureTime
-        {
-            get => procedureTime;
-            set
-            {
-                procedureTime = value;
-            }
-        }
+        public int ProcedureTime { get; set; }
 
-        public string Owner
-        {
-            get => owner;
-            set
-            {
-                owner = value;
-            }
-        }
+        public string Owner { get; set; }
 
-        public bool IsBought
-        {
-            get => isBought;
-            set
-            {
-                isBought = value;
-            }
-        }
+        public bool IsBought { get; set; }
 
-        public bool IsChipped
-        {
-            get => isChipped;
-            set
-            {
-                isChipped = value;
-            }
-        }
+        public bool IsChipped { get; set; }
 
-        public bool IsChecked
-        {
-            get => isChecked;
-            set
-            {
-                isChecked = value;
-            }
-        }
+        public bool IsChecked { get; set; }
 
         public override string ToString()
-        => $" Robot type: {this.GetType().Name} - {Name} - Happiness: {Happiness} - Energy: {Energy}";
+        {
+            return $" Robot type: {this.GetType().Name} - {Name} - Happiness: {Happiness} - Energy: {Energy}";
+        }
     }
 }

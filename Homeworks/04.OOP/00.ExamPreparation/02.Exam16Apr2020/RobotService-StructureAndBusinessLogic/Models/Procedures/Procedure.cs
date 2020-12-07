@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Text;
-using RobotService.Models.Procedures.Contracts;
+﻿using RobotService.Models.Procedures.Contracts;
 using RobotService.Models.Robots.Contracts;
+using RobotService.Utilities.Messages;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace RobotService.Models.Procedures
 {
@@ -11,17 +13,15 @@ namespace RobotService.Models.Procedures
 
         protected Procedure()
         {
-            robots = new List<IRobot>();
+            robots = new List<IRobot>().AsReadOnly();
         }
-
-        protected IReadOnlyCollection<IRobot> Robots
-        => (IReadOnlyCollection<IRobot>)robots;
 
         public string History()
         {
             StringBuilder sb = new StringBuilder();
+
             sb.AppendLine($"{this.GetType().Name}");
-            foreach (var robot in robots)
+            foreach (IRobot robot in robots)
             {
                 sb.AppendLine(robot.ToString());
             }
@@ -29,6 +29,15 @@ namespace RobotService.Models.Procedures
             return sb.ToString().TrimEnd();
         }
 
-        public abstract void DoService(IRobot robot, int procedureTime);
+        public virtual void DoService(IRobot robot, int procedureTime)
+        {
+            if (robot.ProcedureTime < procedureTime)
+            {
+                throw new ArgumentException(ExceptionMessages.InsufficientProcedureTime);
+            }
+
+            robots.Add(robot);
+        }
+
     }
 }
