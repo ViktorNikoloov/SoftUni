@@ -1,9 +1,10 @@
-﻿using RobotService.Models.Procedures.Contracts;
+﻿using System;
+using System.Text;
+using System.Collections.Generic;
+
+using RobotService.Models.Procedures.Contracts;
 using RobotService.Models.Robots.Contracts;
 using RobotService.Utilities.Messages;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RobotService.Models.Procedures
 {
@@ -31,6 +32,8 @@ namespace RobotService.Models.Procedures
 
         public virtual void DoService(IRobot robot, int procedureTime)
         {
+            robot.ProcedureTime -= procedureTime;
+
             if (robot.ProcedureTime < procedureTime)
             {
                 throw new ArgumentException(ExceptionMessages.InsufficientProcedureTime);
