@@ -10,19 +10,19 @@ namespace RobotService.Models.Procedures
 {
     public abstract class Procedure : IProcedure
     {
+        protected ICollection<IRobot> robots;
+
         protected Procedure()
         {
-
+            robots = new List<IRobot>();
         }
-
-        protected List<IRobot> Robots { get; } = new List<IRobot>();
 
         public string History()
         {
             StringBuilder sb = new StringBuilder();
 
             sb.AppendLine($"{this.GetType().Name}");
-            foreach (IRobot robot in Robots)
+            foreach (IRobot robot in robots)
             {
                 sb.AppendLine(robot.ToString());
             }

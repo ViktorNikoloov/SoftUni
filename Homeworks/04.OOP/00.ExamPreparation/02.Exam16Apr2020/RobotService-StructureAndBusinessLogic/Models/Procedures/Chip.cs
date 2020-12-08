@@ -25,7 +25,7 @@ namespace RobotService.Models.Procedures
             robot.Happiness -= 5;
             robot.IsChipped = true;
 
-            Robots.Add(robot);
+            robots.Add(robot);
         }
     }
 }

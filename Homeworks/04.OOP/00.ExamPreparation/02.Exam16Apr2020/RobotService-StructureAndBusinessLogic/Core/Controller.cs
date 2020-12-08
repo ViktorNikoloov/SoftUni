@@ -21,12 +21,23 @@ namespace RobotService.Core
     {
         private readonly IGarage garage;
 
+        private IDictionary<string, IProcedure> procedures;
+
         private IProcedure procedure;
         private IRobot robot;
 
         public Controller()
         {
             garage = new Garage();
+            procedures = new Dictionary<string, IProcedure>()
+            {
+                {"Charge", new Charge() },
+                {"Chip", new Chip() },
+                {"Polish", new Polish() },
+                {"Rest", new Rest() },
+                {"Work", new Work() },
+                {"TechCheck", new TechCheck() }
+            };
         }
 
         //NOTE: For each command except for "Manufacture" and "History", you must check if a robot with that name exist in the garage. If it doesn't, throw an ArgumentException with the message "Robot {robot name} does not exist". 
@@ -58,8 +69,8 @@ namespace RobotService.Core
         public string Chip(string robotName, int procedureTime)
         {
             IRobot currRobot = IsExist(robotName);
-            
-            procedure = new Chip();
+
+            procedure = procedures["Chip"];
             procedure.DoService(currRobot, procedureTime);
 
             return string.Format(OutputMessages.ChipProcedure, robotName);
@@ -69,7 +80,7 @@ namespace RobotService.Core
         {
             IRobot currRobot = IsExist(robotName);
 
-            procedure = new TechCheck();
+            procedure = procedures["TechCheck"];
             procedure.DoService(currRobot, procedureTime);
 
             return string.Format(OutputMessages.TechCheckProcedure, robotName);
@@ -79,7 +90,7 @@ namespace RobotService.Core
         {
             IRobot currRobot = IsExist(robotName);
 
-            procedure = new Rest();
+            procedure = procedures["Rest"];
             procedure.DoService(currRobot, procedureTime);
 
             return string.Format(OutputMessages.RestProcedure, robotName);
@@ -89,7 +100,7 @@ namespace RobotService.Core
         {
             IRobot currRobot = IsExist(robotName);
 
-            procedure = new Work();
+            procedure = procedures["Work"];
             procedure.DoService(currRobot, procedureTime);
 
             return string.Format(OutputMessages.WorkProcedure, robotName, procedureTime);
@@ -99,7 +110,7 @@ namespace RobotService.Core
         {
             IRobot currRobot = IsExist(robotName);
 
-            procedure = new Charge();
+            procedure = procedures["Charge"];
             procedure.DoService(currRobot, procedureTime);
 
             return string.Format(OutputMessages.ChargeProcedure, robotName);
@@ -109,7 +120,7 @@ namespace RobotService.Core
         {
             IRobot currRobot = IsExist(robotName);
 
-            procedure = new Polish();
+            procedure = procedures["Polish"];
             procedure.DoService(currRobot, procedureTime);
 
             return string.Format(OutputMessages.PolishProcedure, robotName);
@@ -128,7 +139,7 @@ namespace RobotService.Core
 
         public string History(string procedureType)
         {
-           return procedure.History();
+            return procedures[procedureType].History();
         }
 
         private IRobot IsExist(string name)
