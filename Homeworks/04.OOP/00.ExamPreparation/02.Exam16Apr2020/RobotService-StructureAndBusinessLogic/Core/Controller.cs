@@ -13,12 +13,13 @@ using RobotService.Models.Robots.Contracts;
 using RobotService.Models.Robots;
 
 using RobotService.Utilities.Messages;
+using System.Collections.Generic;
 
 namespace RobotService.Core
 {
     public class Controller : IController
     {
-        private IGarage garage;
+        private readonly IGarage garage;
 
         private IProcedure procedure;
         private IRobot robot;
@@ -57,7 +58,7 @@ namespace RobotService.Core
         public string Chip(string robotName, int procedureTime)
         {
             IRobot currRobot = IsExist(robotName);
-
+            
             procedure = new Chip();
             procedure.DoService(currRobot, procedureTime);
 
@@ -127,7 +128,7 @@ namespace RobotService.Core
 
         public string History(string procedureType)
         {
-            throw new System.NotImplementedException();
+           return procedure.History();
         }
 
         private IRobot IsExist(string name)
@@ -139,5 +140,6 @@ namespace RobotService.Core
 
             return garage.Robots[name];
         }
+
     }
 }

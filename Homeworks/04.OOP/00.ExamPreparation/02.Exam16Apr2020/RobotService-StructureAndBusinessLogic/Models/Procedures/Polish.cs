@@ -15,7 +15,7 @@ namespace RobotService.Models.Procedures
 
             robot.Happiness -= 7;
 
-            robots.Add(robot);
+            Robots.Add(robot);
         }
     }
 }

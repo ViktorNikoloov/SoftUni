@@ -21,7 +21,7 @@ namespace RobotService.Models.Procedures
             robot.Energy -= 8;
             robot.IsChecked = true;
 
-            robots.Add(robot);
+            Robots.Add(robot);
         }
     }
 }
