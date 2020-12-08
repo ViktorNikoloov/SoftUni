@@ -11,6 +11,8 @@ namespace RobotService.Models.Procedures
 
         public override void DoService(IRobot robot, int procedureTime)
         {
+            base.DoService(robot, procedureTime);
+
             if (robot.IsChecked)
             {
                 robot.Energy -= 8;
@@ -19,7 +21,7 @@ namespace RobotService.Models.Procedures
             robot.Energy -= 8;
             robot.IsChecked = true;
 
-            base.DoService(robot, procedureTime);
+            robots.Add(robot);
         }
     }
 }

@@ -1,10 +1,11 @@
-﻿using RobotService.Models.Garages.Contracts;
-using RobotService.Models.Robots.Contracts;
-using RobotService.Utilities.Messages;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+using RobotService.Models.Garages.Contracts;
+using RobotService.Models.Robots.Contracts;
+
+using RobotService.Utilities.Messages;
+
 
 namespace RobotService.Models.Garages
 {
@@ -31,7 +32,7 @@ namespace RobotService.Models.Garages
                 throw new InvalidOperationException(ExceptionMessages.NotEnoughCapacity);
             }
 
-            if (robots.Any(n=>n.Key == robot.Name))
+            if (robots.ContainsKey(robot.Name))
             {
                 throw new ArgumentException(string.Format(ExceptionMessages.ExistingRobot, robot.Name));
             }
@@ -41,23 +42,15 @@ namespace RobotService.Models.Garages
 
         public void Sell(string robotName, string ownerName)
         {
-            if (!robots.Any(n => n.Key == robotName))
+            if (!robots.ContainsKey(robotName))
             {
                 throw new ArgumentException(string.Format(ExceptionMessages.InexistingRobot, robotName));
             }
 
-            IRobot currRobot = null;
+            IRobot robot = robots[robotName];
 
-            foreach (var robot in robots)
-            {
-                if (robot.Key == robotName)
-                {
-                    currRobot = robot.Value;
-                }
-            }
-
-            currRobot.Owner = ownerName;
-            currRobot.IsBought = true;
+            robot.Owner = ownerName;
+            robot.IsBought = true;
             robots.Remove(robotName);
         }
     }

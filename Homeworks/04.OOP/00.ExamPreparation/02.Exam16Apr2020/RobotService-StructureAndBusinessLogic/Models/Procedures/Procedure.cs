@@ -14,7 +14,7 @@ namespace RobotService.Models.Procedures
 
         protected Procedure()
         {
-            robots = new List<IRobot>().AsReadOnly();
+            robots = new List<IRobot>();
         }
 
         public string History()
@@ -32,14 +32,14 @@ namespace RobotService.Models.Procedures
 
         public virtual void DoService(IRobot robot, int procedureTime)
         {
-            robot.ProcedureTime -= procedureTime;
 
             if (robot.ProcedureTime < procedureTime)
             {
                 throw new ArgumentException(ExceptionMessages.InsufficientProcedureTime);
             }
 
-            robots.Add(robot);
+            robot.ProcedureTime -= procedureTime;
+
         }
 
     }

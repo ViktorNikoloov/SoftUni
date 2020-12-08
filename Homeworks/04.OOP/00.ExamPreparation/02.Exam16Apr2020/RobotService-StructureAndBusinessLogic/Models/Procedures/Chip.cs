@@ -14,6 +14,9 @@ namespace RobotService.Models.Procedures
 
         public override void DoService(IRobot robot, int procedureTime)
         {
+            base.DoService(robot, procedureTime);
+
+
             if (robot.IsChipped)
             {
                 throw new ArgumentException(string.Format(ExceptionMessages.AlreadyChipped, robot.Name));
@@ -22,7 +25,7 @@ namespace RobotService.Models.Procedures
             robot.Happiness -= 5;
             robot.IsChipped = true;
 
-            base.DoService(robot, procedureTime);
+            robots.Add(robot);
         }
     }
 }
