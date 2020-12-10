@@ -27,8 +27,6 @@ namespace EasterRaces.Core.Entities
         private readonly DriverRepository driverRepository;
         private readonly RaceRepository raceRepository;
 
-        private readonly IReadOnlyCollection<IDriver> orderedDrivers;
-
         private IDriver driver;
         private ICar car;
         private IRace race;
@@ -38,7 +36,6 @@ namespace EasterRaces.Core.Entities
             carRepository = new CarRepository();
             driverRepository = new DriverRepository();
             raceRepository = new RaceRepository();
-            orderedDrivers = new List<IDriver>().AsReadOnly();
         }
 
         public string CreateDriver(string driverName)
@@ -139,27 +136,39 @@ namespace EasterRaces.Core.Entities
 
         public string StartRace(string raceName)
         {
-            if (raceRepository.GetByName(raceName) == null)
+            race = raceRepository.GetByName(raceName);
+
+            if (race == null)
             {
                 throw new InvalidOperationException(string.Format(ExceptionMessages.RaceNotFound, raceName));
             }
 
-            var orderedDrivers = raceRepository
-                .GetByName(raceName).Drivers
-                .OrderByDescending(x => x.Car
-                .CalculateRacePoints(raceRepository.GetByName(raceName).Laps))
-                .ToList();
-
-            if (orderedDrivers.Count < 3)
+            if (race.Drivers.Count < 3)
             {
                 throw new InvalidOperationException(string.Format(ExceptionMessages.RaceInvalid, raceName, MinValueOfParticipants));
             }
+
+            raceRepository.Remove(race);
+
+            //var orderedDrivers = raceRepository
+            //    .GetByName(raceName).Drivers
+            //    .OrderByDescending(x => x.Car
+            //    .CalculateRacePoints(raceRepository.GetByName(raceName).Laps))
+            //    .Take(3)
+            //    .ToList();
+
+            var orderedDrivers = race.Drivers
+                .OrderByDescending(x => x.Car
+                .CalculateRacePoints(race.Laps))
+                .Take(3)
+                .ToList();
 
             StringBuilder sb = new StringBuilder();
             sb
             .AppendLine(string.Format(OutputMessages.DriverFirstPosition, orderedDrivers[0].Name, raceName))
             .AppendLine(string.Format(OutputMessages.DriverSecondPosition, orderedDrivers[1].Name, raceName))
             .AppendLine(string.Format(OutputMessages.DriverThirdPosition, orderedDrivers[2].Name, raceName));
+
 
             return sb.ToString().TrimEnd();
 
