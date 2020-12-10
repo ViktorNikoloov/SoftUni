@@ -24,7 +24,7 @@ namespace EasterRaces.Repositories.Entities
         => models.Remove(model);
 
         public IRace GetByName(string name)
-        => models.FirstOrDefault(n => n.GetType().Name == name);
+        => models.FirstOrDefault(n => n.Name == name);
 
         public IReadOnlyCollection<IRace> GetAll()
         => (IReadOnlyCollection<IRace>)models;

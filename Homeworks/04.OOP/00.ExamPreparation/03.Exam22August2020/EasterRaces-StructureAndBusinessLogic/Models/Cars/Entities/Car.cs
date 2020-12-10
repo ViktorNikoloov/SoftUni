@@ -31,9 +31,9 @@ namespace EasterRaces.Models.Cars.Entities
             get => model;
             private set
             {
-                if (value.Length < ModelNameMinSymbols || string.IsNullOrWhiteSpace(value))
+                if (string.IsNullOrWhiteSpace(value) || value.Length < ModelNameMinSymbols)
                 {
-                    throw new ArgumentException(string.Format(ExceptionMessages.InvalidModel, Model, ModelNameMinSymbols));
+                    throw new ArgumentException(string.Format(ExceptionMessages.InvalidModel, value, ModelNameMinSymbols));
                 }
 
                 model = value;
@@ -45,9 +45,9 @@ namespace EasterRaces.Models.Cars.Entities
             get => horsePower;
             private set
             {
-                if (HorsePower < minHorsePower || horsePower > maxHorsePower)
+                if (value < minHorsePower || value > maxHorsePower)
                 {
-                    throw new ArgumentException(string.Format(ExceptionMessages.InvalidHorsePower, horsePower));
+                    throw new ArgumentException(string.Format(ExceptionMessages.InvalidHorsePower, value));
                 }
 
                 horsePower = value;

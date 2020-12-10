@@ -11,21 +11,5 @@
         {
 
         }
-
-        //public override int HorsePower
-        //{
-        //    get => horsePower;
-        //    protected set
-        //    {
-        //        if (minHorsePower < DefaultMinHorsePower || maxHorsePower > DefaultMaxHorsePower)
-        //        {
-        //            throw new ArgumentException(string.Format(ExceptionMessages.InvalidHorsePower, horsePower));
-        //        }
-
-        //        horsePower = value;
-        //    }
-        //}
-
-      
     }
 }

@@ -24,7 +24,7 @@ namespace EasterRaces.Repositories.Entities
         => models.Remove(model);
 
         public IDriver GetByName(string name)
-        => models.FirstOrDefault(n => n.GetType().Name == name);
+        => models.FirstOrDefault(n => n.Name == name);
 
         public IReadOnlyCollection<IDriver> GetAll()
         => (IReadOnlyCollection<IDriver>)models;

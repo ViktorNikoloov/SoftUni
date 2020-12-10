@@ -24,9 +24,9 @@ namespace EasterRaces.Models.Drivers.Entities
             get => name;
             private set
             {
-                if (value.Length < NameMinSymbols || string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value) || value.Length < NameMinSymbols)
                 {
-                    throw new ArgumentException(string.Format(ExceptionMessages.InvalidName, Name, NameMinSymbols));
+                    throw new ArgumentException(string.Format(ExceptionMessages.InvalidName, value, NameMinSymbols));
                 }
 
                 name = value;
@@ -43,7 +43,7 @@ namespace EasterRaces.Models.Drivers.Entities
         {
             if (car == null)
             {
-                throw new ArgumentNullException(nameof(ICar), ExceptionMessages.CarInvalid);
+                throw new ArgumentNullException(ExceptionMessages.CarInvalid);
             }
 
             Car = car;
