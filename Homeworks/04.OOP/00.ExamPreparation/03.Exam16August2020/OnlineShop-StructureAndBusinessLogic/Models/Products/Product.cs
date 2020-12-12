@@ -81,7 +81,7 @@ namespace OnlineShop.Models.Products
         public virtual double OverallPerformance
         {
             get => overallPerformance;
-            protected set
+            private set
             {
                 if (value <= 0)
                 {
@@ -93,6 +93,6 @@ namespace OnlineShop.Models.Products
         }
 
         public override string ToString()
-        => $"Overall Performance: {OverallPerformance}. Price: {Price} - {this.GetType().Name}: {Manufacturer} {Model} (Id: {Id})";
+        => $"Overall Performance: {OverallPerformance:F2}. Price: {Price:F2} - {this.GetType().Name}: {Manufacturer} {Model} (Id: {Id})";
     }
 }

@@ -91,18 +91,8 @@ namespace OnlineShop.Models.Products.Computers
         }
 
         public override double OverallPerformance 
-        { 
-            //get => base.OverallPerformance;
-            protected set
-            {
-                if (components.Count != 0)
-                {
-                    var result = base.OverallPerformance + components.Average(x=>x.OverallPerformance);
-
-                }
-
-            }
-        }
+           => components.Count == 0 ? base.OverallPerformance : base.OverallPerformance + components.Average(x => x.OverallPerformance);
+        
 
         public override decimal Price 
             => base.Price + components.Sum(x=>x.Price) + peripherals.Sum(x=>x.Price);
@@ -118,7 +108,7 @@ namespace OnlineShop.Models.Products.Computers
                 sb.AppendLine($"  {component}");
             }
 
-            sb.AppendLine($" Peripherals ({peripherals.Count}); Average Overall Performance ({peripherals.Average(x=>x.OverallPerformance)}):");
+            sb.AppendLine($" Peripherals ({peripherals.Count}); Average Overall Performance ({peripherals.Average(x=>x.OverallPerformance):F2}):");
 
             foreach (var peripheral in peripherals)
             {
