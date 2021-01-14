@@ -1,3 +1,5 @@
+USE Minions
+
 CREATE TABLE Minions
 (
 	Id INT PRIMARY KEY,
