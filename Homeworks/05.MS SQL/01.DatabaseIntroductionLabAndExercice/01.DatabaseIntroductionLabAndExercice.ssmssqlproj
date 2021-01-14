@@ -49,11 +49,17 @@
           <AssociatedConnUserName />
           <FullPath>05.TruncateTableMinions.sql</FullPath>
         </FileNode>
-        <FileNode Name="6.DropAllTables.sql">
+        <FileNode Name="06.DropAllTables.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
-          <FullPath>6.DropAllTables.sql</FullPath>
+          <FullPath>06.DropAllTables.sql</FullPath>
+        </FileNode>
+        <FileNode Name="07.CreateTablePeople.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>07.CreateTablePeople.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
