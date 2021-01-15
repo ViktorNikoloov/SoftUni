@@ -61,11 +61,11 @@
           <AssociatedConnUserName />
           <FullPath>07.CreateTablePeople.sql</FullPath>
         </FileNode>
-        <FileNode Name="8.CreateTableUsers.sql">
+        <FileNode Name="08.CreateTableUsers.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
-          <FullPath>8.CreateTableUsers.sql</FullPath>
+          <FullPath>08.CreateTableUsers.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
