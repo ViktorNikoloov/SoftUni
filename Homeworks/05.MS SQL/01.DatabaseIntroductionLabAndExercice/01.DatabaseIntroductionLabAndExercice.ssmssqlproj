@@ -2,82 +2,75 @@
 <SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="01.DatabaseIntroductionLabAndExercice">
   <Items>
     <LogicalFolder Name="Connections" Type="2" Sorted="true">
-      <Items>
-        <ConnectionNode Name="DESKTOP-ODODGF8\SQLEXPRESS:DESKTOP-ODODGF8\Viktor">
-          <Created>2021-01-14T13:55:49.4585834+02:00</Created>
-          <Type>SQL</Type>
-          <Server>DESKTOP-ODODGF8\SQLEXPRESS</Server>
-          <UserName />
-          <Authentication>Windows Authentication</Authentication>
-          <InitialDB>master</InitialDB>
-          <LoginTimeout>30</LoginTimeout>
-          <ExecutionTimeout>0</ExecutionTimeout>
-          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
-          <ApplicationName>Microsoft SQL Server Management Studio - Query</ApplicationName>
-        </ConnectionNode>
-      </Items>
+      <Items />
     </LogicalFolder>
     <LogicalFolder Name="Queries" Type="0" Sorted="true">
       <Items>
         <FileNode Name="01.CreateDatabase.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>01.CreateDatabase.sql</FullPath>
         </FileNode>
         <FileNode Name="02.CreateTables.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>02.CreateTables.sql</FullPath>
         </FileNode>
         <FileNode Name="03.AlterMinionsTable.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>03.AlterMinionsTable.sql</FullPath>
         </FileNode>
         <FileNode Name="04.InsertRecordsInBothTables.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>04.InsertRecordsInBothTables.sql</FullPath>
         </FileNode>
         <FileNode Name="05.TruncateTableMinions.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>05.TruncateTableMinions.sql</FullPath>
         </FileNode>
         <FileNode Name="06.DropAllTables.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>06.DropAllTables.sql</FullPath>
         </FileNode>
         <FileNode Name="07.CreateTablePeople.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>07.CreateTablePeople.sql</FullPath>
         </FileNode>
         <FileNode Name="08.CreateTableUsers.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>08.CreateTableUsers.sql</FullPath>
         </FileNode>
         <FileNode Name="09.ChangePrimaryKey.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>09.ChangePrimaryKey.sql</FullPath>
         </FileNode>
         <FileNode Name="10. AddCheckConstraint.sql">
-          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
-          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
           <AssociatedConnUserName />
           <FullPath>10. AddCheckConstraint.sql</FullPath>
+        </FileNode>
+        <FileNode Name="11. SetDefaultValueOfAField.sql">
+          <AssociatedConnectionMoniker />
+          <AssociatedConnSrvName />
+          <AssociatedConnUserName />
+          <FullPath>11. SetDefaultValueOfAField.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
