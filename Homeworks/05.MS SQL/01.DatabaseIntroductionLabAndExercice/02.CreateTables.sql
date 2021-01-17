@@ -1,4 +1,5 @@
 USE Minions
+GO
 
 CREATE TABLE Minions
 (

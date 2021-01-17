@@ -1,6 +1,8 @@
 CREATE DATABASE CarRental 
+GO
 
 USE CarRental
+GO
 
 CREATE TABLE Categories 
 (
@@ -12,7 +14,7 @@ CREATE TABLE Categories
 	WeekendRate DECIMAL(2,1) NOT NULL,
 )
 
-INSERT Categories 
+INSERT INTO Categories 
 		VALUES
 		('Minivan', 3.8, 5.6, 5.2, 4.8 ),
 		('Sport', 6.8, 7.6, 4.3, 6.8 ),
@@ -32,7 +34,7 @@ CREATE TABLE Cars
 	Available BIT  NOT NULL
 )
 
-INSERT Cars(PlateNumber,Manufacturer,Model, CarYear,
+INSERT INTO Cars(PlateNumber,Manufacturer,Model, CarYear,
 CategoryId,Doors,Picture,Condition,Available) 
 		VALUES
 		(123456, 'Ford', 'Sharan', '1998.12.10', 1, 5, NULL, 'used', 1),
@@ -48,7 +50,7 @@ CREATE TABLE Employees
 	Notes NVARCHAR(MAX)
 )
 
-INSERT Employees 
+INSERT INTO Employees 
 		VALUES
 		('Viktor', 'Nikolov', 'Mr', NULL),
 		('Stoyan', 'Stoyanov', 'Mr', NULL),
@@ -65,7 +67,7 @@ CREATE TABLE Customers
 	Notes NVARCHAR(MAX)
 )
 
-INSERT Customers 
+INSERT INTO Customers 
 		VALUES
 		(84632002, 'Viktor Nikolov', 'Neva', 'Plovdiv', 4000, NULL),
 		(13223545, 'Georgi Georgiev', NULL, 'Sofia', 54223, NULL),
@@ -90,7 +92,7 @@ CREATE TABLE RentalOrders
 	Notes NVARCHAR(MAX)
 )
 
-INSERT RentalOrders(EmployeeId,CustomerId,CarId,TankLevel,KilometrageStart,
+INSERT INTO RentalOrders(EmployeeId,CustomerId,CarId,TankLevel,KilometrageStart,
 KilometrageEnd,StartDate,EndDate,RateApplied,TaxRate,OrderStatus,Notes) 
 		VALUES
 		(1,1,1,70, 25, 200, '2020/05/12', '2020/05/25', NULL, 200.45, 'apply', NULL),										   

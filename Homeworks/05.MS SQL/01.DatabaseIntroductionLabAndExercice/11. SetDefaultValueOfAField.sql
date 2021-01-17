@@ -1,4 +1,5 @@
 USE Minions
+GO
 
 ALTER TABLE Users
 ADD CONSTRAINT DF_LastLoginTime 

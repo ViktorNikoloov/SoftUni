@@ -1,4 +1,5 @@
 USE Minions
+GO
 
 ALTER TABLE Minions
 ADD TownId INT

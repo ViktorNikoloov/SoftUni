@@ -1,4 +1,5 @@
 USE Minions
+GO
 
 INSERT INTO Towns(Id, Name) VALUES
 (1, 'Sofia'),

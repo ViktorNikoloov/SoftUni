@@ -82,7 +82,7 @@ CREATE TABLE Rooms
 	Notes NVARCHAR(MAX)
 )
 
-INSERT Rooms
+INSERT INTO Rooms
 		VALUES
 		('Single', 'One Person', NULL, 'Reserved', NULL),
 		('Double', 'Two Persons', 5.8, 'Free',NULL),

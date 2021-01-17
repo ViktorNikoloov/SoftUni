@@ -1,4 +1,5 @@
 USE Minions
+GO
 
 CREATE TABLE Users
 (
@@ -11,7 +12,7 @@ CREATE TABLE Users
 	IsDeleted BIT NOT NULL
 )
 
-INSERT Users(Username, [Password], ProfilePicture, LastLoginTime, IsDeleted)
+INSERT INTO Users(Username, [Password], ProfilePicture, LastLoginTime, IsDeleted)
 		VALUES
 		('Viktor', '123456', NULL, '05.15.2017', 0),
 		('Ivan', '463252523', NULL, '12.01.2021', 1),

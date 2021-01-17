@@ -1,4 +1,5 @@
 USE Minions
+GO
 
 ALTER TABLE Users
 DROP CONSTRAINT PK_Users_CompositeIdUsername
