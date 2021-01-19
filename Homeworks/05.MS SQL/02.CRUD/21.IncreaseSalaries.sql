@@ -1,5 +1,6 @@
 USE SoftUni
+GO
 
-SELECT FirstName, LastName, HireDate
+SELECT TOP(7) FirstName, LastName, HireDate
 		FROM Employees
-		ORDER BY HireDate ASC
+		ORDER BY HireDate DESC
