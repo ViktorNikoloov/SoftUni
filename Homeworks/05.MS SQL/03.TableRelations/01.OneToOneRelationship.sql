@@ -1,25 +1,26 @@
 CREATE TABLE Passports
 (
-	PassportID INT IDENTITY(100, 1) PRIMARY KEY,
+	PassportID INT IDENTITY(101, 1) PRIMARY KEY,
 	PassportNumber CHAR(8) UNIQUE NOT NULL
 )
 
-INSERT INTO Passports VALUES
-('N34FG21B'),
-('K65LO4R7'),
-('ZE657QP2')
+INSERT INTO Passports 
+	VALUES
+	('N34FG21B'),
+	('K65LO4R7'),
+	('ZE657QP2')
 
 CREATE TABLE Persons
 (
 	PersonID INT IDENTITY PRIMARY KEY,
 	FirstName NVARCHAR(50) NOT NULL,
 	Salary DECIMAL(8,2) NOT NULL,
-	PassportID INT NOT NULL UNIQUE FOREIGN KEY REFERENCES Passports(PassportID)
+	PassportID INT NOT NULL 
+	UNIQUE FOREIGN KEY REFERENCES Passports(PassportID)
 )
 
-INSERT INTO Persons VALUES
-('Roberto', 43300.00, 1),
-('Tom', 56100.00, 2),
-('Yana', 60200.00, 3)
-
-SELECT * FROM Passports
+INSERT INTO Persons(FirstName, Salary, PassportID)
+	VALUES
+	('Roberto', 43300.00, 101),
+	('Tom', 56100.00, 102),
+	('Yana', 60200.00, 103)
