@@ -4,10 +4,11 @@ CREATE TABLE Students
 	[Name] NVARCHAR(50)
 )
 
-INSERT INTO Students VALUES
-('Mila'),
-('Toni'),
-('Ron')
+INSERT INTO Students 
+	VALUES
+	('Mila'),
+	('Toni'),
+	('Ron')
 
 CREATE TABLE Exams
 (
@@ -15,10 +16,11 @@ CREATE TABLE Exams
 	[Name] NVARCHAR(50)
 )
 
-INSERT INTO Exams VALUES
-('SpringMVC'),
-('Neo4j'),
-('Oracle 11g')
+INSERT INTO Exams 
+	VALUES
+	('SpringMVC'),
+	('Neo4j'),
+	('Oracle 11g')
 
 CREATE TABLE StudentsExams
 (
