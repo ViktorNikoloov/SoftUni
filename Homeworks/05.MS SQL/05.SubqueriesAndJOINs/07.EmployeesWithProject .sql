@@ -9,8 +9,3 @@ SELECT TOP(5) e.EmployeeID, e.FirstName, p.[Name] AS [ProjectName]
 	  AND EndDate IS NULL
 	  ORDER BY e.EmployeeID ASC
 
-
---•	EmployeeID
---•	FirstName
---•	ProjectName
---Filter only employees with a project which has started after 13.08.2002 and it is still ongoing (no end date). Return the first 5 rows sorted by EmployeeID in ascending order.
