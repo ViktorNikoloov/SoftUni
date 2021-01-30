@@ -103,11 +103,29 @@
           <AssociatedConnUserName />
           <FullPath>14.CountriesWithRivers.sql</FullPath>
         </FileNode>
-        <FileNode Name="16.HighestPeakAndLongestRiverByCountry.sql">
+        <FileNode Name="15.ContinentsAndCurrencies.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
-          <FullPath>16.HighestPeakAndLongestRiverByCountry.sql</FullPath>
+          <FullPath>15.ContinentsAndCurrencies.sql</FullPath>
+        </FileNode>
+        <FileNode Name="16.CountriesWithoutAnyMountains.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>16.CountriesWithoutAnyMountains.sql</FullPath>
+        </FileNode>
+        <FileNode Name="17.HighestPeakAndLongestRiverByCountry.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>17.HighestPeakAndLongestRiverByCountry.sql</FullPath>
+        </FileNode>
+        <FileNode Name="18.HighestPeakNameAndElevationByCountry.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>18.HighestPeakNameAndElevationByCountry.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>
