@@ -127,11 +127,11 @@
           <AssociatedConnUserName />
           <FullPath>18.OrdersTable.sql</FullPath>
         </FileNode>
-        <FileNode Name="19. PeopleTable.sql">
+        <FileNode Name="19.PeopleTable.sql">
           <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
           <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
           <AssociatedConnUserName />
-          <FullPath>19. PeopleTable.sql</FullPath>
+          <FullPath>19.PeopleTable.sql</FullPath>
         </FileNode>
       </Items>
     </LogicalFolder>

@@ -1,7 +1,28 @@
 USE Gringotts
 GO
 
-SELECT *
-	FROM WizzardDeposits
+SELECT SUM([Difference]) AS [SumDifference]
+	FROM(
+		 SELECT FirstName AS [Host Wizard],
+		 	    DepositAmount AS [Host Wizard Deposit],
+		 	    LEAD (FirstName)   
+		 	   		OVER (ORDER BY Id) AS [Guest Wizard],
+		 	    LEAD (DepositAmount)
+		 	   		OVER(ORDER BY Id) AS [Guest Wizard Deposit],
+		 	    (DepositAmount - LEAD(DepositAmount)
+		 	   		OVER (ORDER BY Id)) AS [Difference]
+		 FROM WizzardDeposits
+		) AS [WizardsAllInformation]
 
---Mr. Bodrog definitely likes his werewolves more than you. This is your last chance to survive! Give him some data to play his favorite game Rich Wizard, Poor Wizard. The rules are simple: You compare the deposits of every wizard with the wizard after him. If a wizard is the last one in the database, simply ignore it. In the end you have to sum the difference between the deposits.
+	/*SecondSolution*/
+SELECT SUM([Difference]) AS [SumDifference]
+	FROM(
+		 SELECT original.FirstName								 AS [Host Wizard],
+		 	    original.DepositAmount							 AS [Host Wizard Deposit],
+		 		plusOne.FirstName								 AS [Guest Wizard],
+		 		plusOne.DepositAmount							 AS [Guest Wizard Deposit],
+		 		(original.DepositAmount - plusOne.DepositAmount) AS [Difference]
+		 FROM WizzardDeposits AS original
+		 JOIN WizzardDeposits AS plusOne ON plusOne.Id = original.Id + 1
+		) AS [WizardsAllInformation]
+		
