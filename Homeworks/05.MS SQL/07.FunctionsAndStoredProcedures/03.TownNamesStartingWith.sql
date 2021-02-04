@@ -1,12 +1,25 @@
 USE SoftUni
 GO
 
-CREATE PROCEDURE usp_GetTownsStartingWith (@Letter VARCHAR(15))
+CREATE PROCEDURE usp_GetTownsStartingWith (@StartingString NVARCHAR(MAX))
 AS
 BEGIN
-	SELECT [Name]
+	SELECT [Name] AS [Town]
 	FROM Towns
-	WHERE LEFT([Name], 1) = LEFT(@Letter, 1)
+	WHERE LEFT([Name], LEN(@StartingString)) = @StartingString
+END
+GO
+
+EXEC usp_GetTownsStartingWith 'BABO'
+GO
+
+/*SecondSolution*/
+CREATE PROCEDURE usp_GetTownsStartingWith (@StartingString NVARCHAR(MAX))
+AS
+BEGIN
+	SELECT [Name] AS [Town]
+	FROM Towns
+	WHERE [Name] LIKE(@StartingString + '%')
 END
 GO
 

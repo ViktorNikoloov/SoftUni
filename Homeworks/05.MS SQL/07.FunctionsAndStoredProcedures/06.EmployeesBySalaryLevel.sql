@@ -4,7 +4,29 @@ GO
 CREATE PROCEDURE usp_EmployeesBySalaryLevel(@LevelOfSalary VARCHAR(7))
 AS
 BEGIN
-	SELECT FirstName AS [First Name], LastName AS [Last Name]
-		FROM Employees
+	SELECT [EmployeesInfo].[First Name], [EmployeesInfo].[Last Name]
+		FROM (
+			  SELECT FirstName AS [First Name], 
+				     LastName AS [Last Name], 
+				     dbo.ufn_GetSalaryLevel (Salary) AS [SalaryLevel]
+		      FROM Employees
+		     ) AS [EmployeesInfo]
+		WHERE @LevelOfSalary = [SalaryLevel]
+END
+GO
 
---Write a stored procedure usp_EmployeesBySalaryLevel that receive as parameter level of salary (low, average or high) and print the names of all employees that have given level of salary. You should use the function - "dbo.ufn_GetSalaryLevel(@Salary) ", which was part of the previous task, inside your "CREATE PROCEDURE …" query.
+EXEC usp_EmployeesBySalaryLevel 'High'
+GO
+
+/*SecondSolution*/
+CREATE PROCEDURE usp_EmployeesBySalaryLevel(@LevelOfSalary VARCHAR(7))
+AS
+BEGIN
+	SELECT FirstName AS [First Name], 
+		   LastName AS [Last Name]
+	FROM Employees
+	WHERE @LevelOfSalary = dbo.ufn_GetSalaryLevel(Salary)
+END
+GO
+
+EXEC usp_EmployeesBySalaryLevel 'High'
