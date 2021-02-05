@@ -1,7 +1,7 @@
 USE Bank
 GO
 
-CREATE PROCEDURE usp_CalculateFutureValueForAccount(@AccountID INT, @Rate FLOAT)
+CREATE OR ALTER PROCEDURE usp_CalculateFutureValueForAccount(@AccountID INT, @Rate FLOAT)
 AS
 BEGIN
 	DECLARE @Years INT = 5;
@@ -18,7 +18,3 @@ END
 GO
 
 EXEC usp_CalculateFutureValueForAccount 1, 0.1
-
-select * FROM AccountHolders AS ac
-		JOIN Accounts AS a ON ac.Id = a.Id
-/*Your task is to create a stored procedure usp_CalculateFutureValueForAccount that uses the function from the previous problem to give an interest to a person's account for 5 years, along with information about his/her account id, first name, last name and current balance as it is shown in the example below. It should take the AccountId and the interest rate as parameters. Again you are provided with “dbo.ufn_CalculateFutureValue” function which was part of the previous task.*/
