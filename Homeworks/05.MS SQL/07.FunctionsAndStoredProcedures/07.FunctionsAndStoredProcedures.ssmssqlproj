@@ -79,6 +79,24 @@
           <AssociatedConnUserName />
           <FullPath>10.PeopleWithBalanceHigherThan.sql</FullPath>
         </FileNode>
+        <FileNode Name="11.FutureValueFunction.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>11.FutureValueFunction.sql</FullPath>
+        </FileNode>
+        <FileNode Name="12.CalculatingInterest.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>12.CalculatingInterest.sql</FullPath>
+        </FileNode>
+        <FileNode Name="13.ScalarFunctionCashInUserGamesOddRows.sql.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:DESKTOP-ODODGF8\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>DESKTOP-ODODGF8\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>13.ScalarFunctionCashInUserGamesOddRows.sql.sql</FullPath>
+        </FileNode>
       </Items>
     </LogicalFolder>
     <LogicalFolder Name="Miscellaneous" Type="3" Sorted="true">
