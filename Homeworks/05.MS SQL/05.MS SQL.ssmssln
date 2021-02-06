@@ -17,6 +17,8 @@ Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "06.IndicesAndDataAggregatio
 EndProject
 Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "07.FunctionsAndStoredProcedures", "07.FunctionsAndStoredProcedures\07.FunctionsAndStoredProcedures.ssmssqlproj", "{9DBFB068-2F83-418F-80A7-BA5539F6ECA9}"
 EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "08.TriggersAndTransactions", "08.TriggersAndTransactions\08.TriggersAndTransactions.ssmssqlproj", "{43CCC05B-092A-446A-9558-4155656C5CCB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Default|Default = Default|Default
@@ -28,8 +30,9 @@ Global
 		{8E0B19B8-E439-4780-ABF0-EEE29CE56AC6}.Default|Default.ActiveCfg = Default
 		{F086DA98-D51C-4A0A-99E5-160EE211102F}.Default|Default.ActiveCfg = Default
 		{68F652B0-C9C4-4AA7-8FB6-DDE61F16D042}.Default|Default.ActiveCfg = Default
-		{101B5B14-F673-4688-9492-199A53AB684E}.Default|Default.ActiveCfg = Default
 		{9DBFB068-2F83-418F-80A7-BA5539F6ECA9}.Default|Default.ActiveCfg = Default
+		{D05DB07A-82B4-45F9-8050-643BF3F523B8}.Default|Default.ActiveCfg = Default
+		{43CCC05B-092A-446A-9558-4155656C5CCB}.Default|Default.ActiveCfg = Default
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
