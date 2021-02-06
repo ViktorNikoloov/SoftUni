@@ -18,3 +18,12 @@ AS
 			FROM inserted AS i
 			JOIN deleted AS d ON i.Id = d.Id
 GO
+
+UPDATE Accounts
+	SET Balance += 10000
+	WHERE Id BETWEEN 3 AND 6
+GO
+
+SELECT *
+	FROM Logs
+GO
