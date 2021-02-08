@@ -35,7 +35,7 @@ CREATE TABLE Jobs
 	ModelId INT FOREIGN KEY
 				  REFERENCES Models(ModelId) 
 				NOT NULL,
-	[Status] CHAR(11) CHECK(LEN(Status) = 11
+	[Status] CHAR(11) CHECK(LEN(Status) <= 11
 					    AND[Status] IN ('Pending',
 										'In Progress' ,
 										'Finished'))
@@ -81,22 +81,16 @@ CREATE TABLE Parts
 
 CREATE TABLE OrderParts
 (
-	OrderId INT FOREIGN KEY REFERENCES Orders(OrderId) 
-				NOT NULL,
-	PartId INT FOREIGN KEY REFERENCES Parts(PartId) 
-			   NOT NULL,
-	Quantity INT CHECK(Quantity > 0) DEFAULT 1 NOT NULL
-	CONSTRAINT PK_OrderParts
-		PRIMARY KEY(OrderId, PartId)
+	OrderId INT NOT NULL FOREIGN KEY REFERENCES Orders(OrderId),
+	PartId INT NOT NULL FOREIGN KEY REFERENCES Parts(PartId),
+	Quantity INT NOT NULL CHECK(Quantity > 0) DEFAULT 1 
+	PRIMARY KEY(OrderId, PartId)
 )
 
 CREATE TABLE PartsNeeded
 (
-	JobId INT FOREIGN KEY REFERENCES Orders(OrderId) 
-				NOT NULL,
-	PartId INT FOREIGN KEY REFERENCES Parts(PartId) 
-			   NOT NULL,
-	Quantity INT CHECK(Quantity > 0) DEFAULT 1 NOT NULL
-	CONSTRAINT PK_PartsNeeded
-		PRIMARY KEY(JobId, PartId)
+	JobId INT NOT NULL FOREIGN KEY REFERENCES Jobs(JobId),
+	PartId INT NOT NULL FOREIGN KEY REFERENCES Parts(PartId),
+	Quantity INT NOT NULL CHECK(Quantity > 0) DEFAULT 1 
+	PRIMARY KEY(JobId, PartId)
 )
