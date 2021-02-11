@@ -10,5 +10,6 @@ SELECT a.ID, a.Email, c.[Name], COUNT(*) AS [Trips]
 	JOIN Hotels AS h ON r.HotelId = h.Id
 	WHERE a.CityId = h.CityId
 	GROUP BY a.ID, a.Email, c.[Name]
-	ORDER BY [Trips] DESC
+	ORDER BY [Trips] DESC,
+			 a.Id
 
