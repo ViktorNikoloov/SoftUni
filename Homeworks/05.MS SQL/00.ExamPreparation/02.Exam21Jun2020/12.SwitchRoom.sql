@@ -24,7 +24,6 @@ BEGIN
 	DECLARE @TripNeededBeds INT = (SELECT COUNT(ac.AccountId) AS [All Trip's Accounts]
 									FROM Trips AS t
 									JOIN AccountsTrips AS ac ON t.Id = ac.AccountId
-									JOIN Accounts AS a ON ac.AccountId = a.Id
 									GROUP BY ac.TripId
 									HAVING ac.TripId = @TripId
 								  );
