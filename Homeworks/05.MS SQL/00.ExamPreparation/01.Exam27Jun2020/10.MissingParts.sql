@@ -1,13 +1,19 @@
 USE WMS
 GO
 
-
-
---List all parts that are needed for active jobs (not Finished) without sufficient quantity in stock and in pending orders (the sum of parts in stock and parts ordered is less than the required quantity). Order them by part ID (ascending).
---Required columns:
---•	Part ID
---•	Description
---•	Required – number of parts required for active jobs
---•	In Stock – how many of the part are currently in stock
---•	Ordered – how many of the parts are expected to be delivered (associated with order that is not Delivered)
-
+SELECT * 
+	FROM (
+			SELECT DISTINCT p.PartId, 
+			p.[Description], 
+			pn.Quantity AS [Required], 
+			p.StockQty AS [In Stock], 
+			IIF(op.Quantity IS NOT NULL, op.Quantity, 0)  AS [Ordered]
+			FROM Parts AS p
+			LEFT JOIN PartsNeeded AS pn ON p.PartId = pn.PartId
+			LEFT JOIN Jobs AS j ON pn.JobId = j.JobId
+			LEFT JOIN Orders AS o ON j.JobId = o.JobId
+			LEFT JOIN OrderParts AS op ON o.OrderId = op.OrderId
+			WHERE j.[Status]  NOT LIKE 'Finished'
+		) [InfoQuery] 
+	WHERE [Required] > [In Stock] + [Ordered]
+	ORDER BY PartId
