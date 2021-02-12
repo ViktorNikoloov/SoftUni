@@ -1,77 +1,83 @@
 USE WMS
 GO
 
-CREATE PROCEDURE usp_PlaceOrder(@JobID INT, 
-								@PartSerialNum VARCHAR(50), 
+CREATE PROCEDURE usp_PlaceOrder(@JobId INT, 
+								@PartSerialNumber  VARCHAR(50), 
 								@Quantity INT)
 AS
-BEGIN
+	BEGIN
+		IF(@Quantity <= 0)
+			BEGIN
+				THROW 50012, 'Part quantity must be more than zero!', 1
+			END
+		IF((SELECT [Status] 
+			FROM Jobs 
+			WHERE JobId = @JobId) = 'Finished')
+			BEGIN
+				THROW 50011, 'This job is not active!', 1
+			END
+		
 
-	DECLARE @IsJobIdIsNull INT = (
-									SELECT JobId 
-									FROM Jobs 
-									WHERE JobId = @JobID
-								 )
+		DECLARE @isJobNull INT = 
+			(
+				SELECT JobId 
+				FROM Jobs 
+				WHERE JobId = @JobId
+			)
+		IF(@isJobNull IS NULL)
+			BEGIN
+				THROW 50013, 'Job not found!', 1
+			END
 
-	DECLARE @PartID INT = (
-							SELECT PartId 
-							FROM Parts 
-							WHERE SerialNumber = @PartSerialNum
-						  )
+		DECLARE @partId INT = 
+			(
+				SELECT PartId 
+				FROM Parts 
+				WHERE SerialNumber = @PartSerialNumber
+			 )
+		IF(@partId IS NULL)
+			BEGIN
+				THROW 50014, 'Part not found!', 1
+			END
+		IF((SELECT OrderId
+				FROM Orders
+				WHERE JobId = @JobId
+				  AND IssueDate IS NULL) IS NULL)
+			BEGIN
+				INSERT INTO Orders(JobId, IssueDate, Delivered)
+					VALUES(@JobId, NULL, 0)
+			END
 
-	DECLARE @OrderID INT = (
-							SELECT OrderID
-							FROM Orders
-							WHERE JobId = @JobID
-							  AND IssueDate IS NULL
-						   )
+		DECLARE @orderId INT = 
+			(
+				SELECT OrderId
+				FROM Orders
+				WHERE JobId = @JobId
+				  AND IssueDate IS NULL
+		    )
+		
 
-	DECLARE @OrderPartsQuantity INT = (
-										SELECT Quantity
-										FROM OrderParts
-										WHERE OrderId = @OrderID
-										  AND PartId = @PartID
-									  )
+		DECLARE @orderPartsQuantity INT = 
+			(
+				SELECT Quantity
+				FROM OrderParts
+				WHERE OrderId = @orderId
+				  AND PartId = @partId
+			)
+		IF(@orderPartsQuantity IS NULL)
+			BEGIN
+				INSERT INTO OrderParts(OrderId, PartId, Quantity)
+					 VALUES (@orderId, @partId, @Quantity)
+			END
+		ELSE
+			BEGIN
+				UPDATE OrderParts
+					SET Quantity += @Quantity
+					WHERE OrderId = @orderId
+					AND PartId = @partId
+			END
 
-	IF((SELECT [Status] 
-		FROM Jobs 
-		WHERE JobId = @JobID) = 'Finished')
-		BEGIN
-			THROW 5011, 'This job is not active!', 1
-		END
-	IF(@Quantity <= 0)
-		BEGIN
-			THROW 5012, 'Part quantity must be more than zero!', 1
-		END
-	IF(@IsJobIdIsNull IS NULL)
-		BEGIN
-			THROW 5013, 'Job not found!', 1
-		END
-	IF(@PartID IS NULL)
-		BEGIN
-			THROW 5014, 'Part not found!', 1
-		END
-	
-	IF (@OrderID IS NULL)
-		BEGIN
-			INSERT INTO Orders(JobId, IssueDate, Delivered)
-				VALUES(@JobID, NULL, 0)
-		END
-
-	IF(@OrderPartsQuantity IS NULL)
-		BEGIN
-			INSERT INTO OrderParts(OrderId, PartId, Quantity)
-				 VALUES (@OrderID, @PartID, @Quantity)
-		END
-	ELSE
-		BEGIN
-			UPDATE OrderParts
-				SET Quantity += @Quantity
-				WHERE OrderId = @OrderID
-				AND PartId = @PartID
-		END
-
-END
+	END
 GO
 
 DECLARE @err_msg AS NVARCHAR(MAX);
@@ -81,6 +87,44 @@ END TRY
 
 BEGIN CATCH
   SET @err_msg = ERROR_MESSAGE();
-  SELECT @err_msg AS [Response]
+  SELECT @err_msg
 END CATCH
 GO
+
+
+DECLARE @err_msg AS NVARCHAR(MAX);
+BEGIN TRY
+  EXEC usp_PlaceOrder 1, 'ZeroQuantity', 0
+END TRY
+
+BEGIN CATCH
+  SET @err_msg = ERROR_MESSAGE();
+  SELECT @err_msg
+END CATCH
+
+BEGIN TRY
+  EXEC usp_PlaceOrder 23213213, 'JobNotFound', 1
+END TRY
+
+BEGIN CATCH
+  SET @err_msg = ERROR_MESSAGE();
+  SELECT @err_msg
+END CATCH
+
+BEGIN TRY
+  EXEC usp_PlaceOrder 2, 'JobNotActive', 1
+END TRY
+
+BEGIN CATCH
+  SET @err_msg = ERROR_MESSAGE();
+  SELECT @err_msg
+END CATCH
+
+BEGIN TRY
+  EXEC usp_PlaceOrder 45, 'PartNotFound', 1
+END TRY
+
+BEGIN CATCH
+  SET @err_msg = ERROR_MESSAGE();
+  SELECT @err_msg
+END CATCH
