@@ -7,14 +7,17 @@ Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "01.Exam27Jun2020", "01.Exam
 EndProject
 Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "02.Exam21Jun2020", "02.Exam21Jun2020\02.Exam21Jun2020.ssmssqlproj", "{62C04F09-A2B9-4CFE-BFBF-63341E6DD026}"
 EndProject
+Project("{4F2E2C19-372F-40D8-9FA7-9D2138C6997A}") = "03.Exam28Jun2020", "03.Exam28Jun2020\03.Exam28Jun2020.ssmssqlproj", "{A6E9A7CA-EC9A-4AAF-956B-FD7331DA2353}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Default|Default = Default|Default
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{92889E60-AA79-4A26-8FCE-CAFD19E48050}.Default|Default.ActiveCfg = Default
-		{112DE520-EA1E-40A7-9F05-1449DE23F3BA}.Default|Default.ActiveCfg = Default
 		{62C04F09-A2B9-4CFE-BFBF-63341E6DD026}.Default|Default.ActiveCfg = Default
+		{CEEF6B02-B7BA-4467-AEE5-1AD5891DA408}.Default|Default.ActiveCfg = Default
+		{A6E9A7CA-EC9A-4AAF-956B-FD7331DA2353}.Default|Default.ActiveCfg = Default
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
