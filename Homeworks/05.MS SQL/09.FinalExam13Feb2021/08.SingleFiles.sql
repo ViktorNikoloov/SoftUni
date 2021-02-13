@@ -1,6 +1,18 @@
 USE Bitbucket
 GO
 
+
+SELECT  f.Id, 
+		f.[Name], 
+		CONCAT(f.Size, 'KB') AS [Size]
+	FROM Files f
+	FULL JOIN Files p ON p.ParentId = f.Id
+	WHERE p.Id IS NULL
+	ORDER BY Id, 
+			 [Name], 
+			 Size DESC
+
+/*SecondSolution*/
 SELECT  Id, 
 		[Name], 
 		CONCAT(Size, 'KB') AS [Size]
