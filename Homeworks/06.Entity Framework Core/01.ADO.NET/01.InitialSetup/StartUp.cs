@@ -3,18 +3,21 @@ using Microsoft.Data.SqlClient;
 
 namespace _01.InitialSetup
 {
-    class Program
+    class StartUp
     {
+        private const string MasterConnectionString = @"Server=.\SQLEXPRESS;Database=master;Integrated Security=true;";
+        private const string MinionsDBConnectionString = @"Server=.\SQLEXPRESS;Database=MinionsDB;Integrated Security=true;";
+
         static void Main(string[] args)
         {
-            using (SqlConnection masterSqlConnection = new SqlConnection("Server=.\\SQLEXPRESS;Database=master;Integrated Security=true;"))
+            using (SqlConnection masterSqlConnection = new SqlConnection(MasterConnectionString))
             {
                 masterSqlConnection.Open();
                 SqlCommand createmMinionsDB = new SqlCommand("create database MinionsDB", masterSqlConnection);
                 createmMinionsDB.ExecuteNonQuery();
             }
 
-            using (SqlConnection minionsDbSqlConnection = new SqlConnection("Server=.\\SQLEXPRESS;Database=MinionsDB;Integrated security=true;"))
+            using (SqlConnection minionsDbSqlConnection = new SqlConnection(MinionsDBConnectionString))
             {
                 minionsDbSqlConnection.Open();
 
@@ -121,7 +124,7 @@ namespace _01.InitialSetup
         {
             using (SqlCommand createCommand = new SqlCommand(query, connection))
             {
-                createCommand.ExecuteNonQuery();
+                Console.WriteLine(createCommand.ExecuteNonQuery());  
             }
         }
     }

@@ -3,20 +3,23 @@ using Microsoft.Data.SqlClient;
 
 namespace _02.VillainNames
 {
-    class Program
+    class StartUp
     {
+        private const string ConnectionString = @"Server=.\SQLEXPRESS;Database=MinionsDB;Integrated Security=true;";
+
         static void Main(string[] args)
         {
-            using (SqlConnection sqlConnection = new SqlConnection("Server=.\\SQLEXPRESS;Database=MinionsDB;Integrated Security=true;"))
+            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
             {
                 sqlConnection.Open();
                 string query = 
                     "SELECT v.Name, " +
-                    "COUNT(mv.VillainId) AS MinionsCount  " +
+                    "COUNT(mv.MinionId) AS MinionsCount  " +
                         "FROM Villains AS v " +
                         "JOIN MinionsVillains AS mv ON v.Id = mv.VillainId " +
-                    "GROUP BY v.Id, v.Name HAVING COUNT(mv.VillainId) > 3 " +
-                    "ORDER BY COUNT(mv.VillainId)";
+                    "GROUP BY v.Name " +
+                    "HAVING COUNT(mv.MinionId) > 3 " +
+                    "ORDER BY COUNT(mv.MinionId) DESC";
 
                 SqlCommand command = new SqlCommand(query, sqlConnection);
                 SqlDataReader sqlDataReader = command.ExecuteReader();
