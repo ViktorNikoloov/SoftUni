@@ -100,9 +100,6 @@ namespace _03.MinionNames
                 
             return sb.ToString().TrimEnd();
         }
-
-       
-
         
     }
 }
