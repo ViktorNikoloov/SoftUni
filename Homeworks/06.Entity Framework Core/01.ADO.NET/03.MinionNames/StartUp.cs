@@ -1,25 +1,95 @@
 ﻿using System;
+using System.Text;
 using Microsoft.Data.SqlClient;
 
 namespace _03.MinionNames
 {
-    class StartUp
+    public class StartUp
     {
         private const string ConnectionString = @"Server=.\SQLEXPRESS;Database=MinionsDB;Integrated Security=true;";
 
         static void Main(string[] args)
         {
-            using (SqlConnection sqlConnection = new SqlConnection(ConnectionString))
+            using SqlConnection sqlConnection = new SqlConnection(ConnectionString);
+            sqlConnection.Open();
+
+            string villainId = Console.ReadLine();
+            string result = GetMinionsInfoAboutVillain(sqlConnection, villainId);
+            Console.WriteLine(result);
+
+        }
+
+        private static string GetMinionsInfoAboutVillain(SqlConnection sqlConnection, string villainId)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            string getVillainNameQuery = 
+                @"SELECT Name 
+                    FROM Villains 
+                    WHERE Id = @villainId";
+
+            using SqlCommand getVillainNameCmd = new SqlCommand(getVillainNameQuery, sqlConnection);
+            getVillainNameCmd.Parameters.AddWithValue("@villainId", villainId);
+
+            string villainName = getVillainNameCmd.ExecuteScalar()?.ToString();
+
+            if (villainName == null)
             {
-                sqlConnection.Open();
+                sb.AppendLine($"No villain with ID {villainId} exists in the database.");
+            }
+            else
+            {
+                string villainMinionsInfo = GetVillainMinions(sqlConnection, villainId);
 
-                string villainId = Console.ReadLine();
+                sb.AppendLine($"Villain: {villainName}");
+                sb.AppendLine(villainMinionsInfo);
+            }
+                
+            return sb.ToString().TrimEnd();
+        }
 
-                SqlCommand command = new SqlCommand($"SELECT Name FROM Villains WHERE Id = {villainId}", sqlConnection);
+        private static string GetVillainMinions(SqlConnection sqlConnection, string villainId)
+        {
+            StringBuilder sb = new StringBuilder();
 
+            string getVillainMinionsQuery =
+                    @"SELECT ROW_NUMBER() OVER (ORDER BY m.Name) as RowNum,
+                             m.Name, 
+                             m.Age
+                        FROM MinionsVillains AS mv
+                        JOIN Minions As m ON mv.MinionId = m.Id
+                        WHERE mv.VillainId = @villainId
+                        ORDER BY m.Name";
+
+            using SqlCommand getVillainMinionsCmd = new SqlCommand(getVillainMinionsQuery, sqlConnection);
+            getVillainMinionsCmd.Parameters.AddWithValue("@villainId", villainId);
+
+            using SqlDataReader minionInfo = getVillainMinionsCmd.ExecuteReader();
+
+            if (minionInfo.Read())
+            {
+                int row = 1;
+                while (true)
+                {
+                    string minionName = minionInfo["Name"]?.ToString();
+                    string minionAge = minionInfo["Age"]?.ToString();
+
+                    sb.AppendLine($"{row}. {minionName} {minionAge}");
+
+                    if (!minionInfo.Read())
+                    {
+                        break;
+                    }
+                    row++;
+                }
 
             }
+            else
+            {
+                sb.AppendLine("(no minions)");
+            }
 
+            return sb.ToString().TrimEnd();
         }
     }
 }
