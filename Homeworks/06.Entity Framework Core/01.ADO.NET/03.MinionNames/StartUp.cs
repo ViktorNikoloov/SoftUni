@@ -19,12 +19,10 @@ namespace _03.MinionNames
 
         }
 
-        private static string GetMinionsInfoAboutVillain(SqlConnection sqlConnection, string villainId)
+        private static string GetVillainName(SqlConnection sqlConnection, string villainId)
         {
-            StringBuilder sb = new StringBuilder();
-
-            string getVillainNameQuery = 
-                @"SELECT Name 
+            string getVillainNameQuery =
+               @"SELECT Name 
                     FROM Villains 
                     WHERE Id = @villainId";
 
@@ -33,19 +31,7 @@ namespace _03.MinionNames
 
             string villainName = getVillainNameCmd.ExecuteScalar()?.ToString();
 
-            if (villainName == null)
-            {
-                sb.AppendLine($"No villain with ID {villainId} exists in the database.");
-            }
-            else
-            {
-                string villainMinionsInfo = GetVillainMinions(sqlConnection, villainId);
-
-                sb.AppendLine($"Villain: {villainName}");
-                sb.AppendLine(villainMinionsInfo);
-            }
-                
-            return sb.ToString().TrimEnd();
+            return villainName;
         }
 
         private static string GetVillainMinions(SqlConnection sqlConnection, string villainId)
@@ -91,5 +77,32 @@ namespace _03.MinionNames
 
             return sb.ToString().TrimEnd();
         }
+
+
+        private static string GetMinionsInfoAboutVillain(SqlConnection sqlConnection, string villainId)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            string villainName = GetVillainName(sqlConnection, villainId);
+           
+
+            if (villainName == null)
+            {
+                sb.AppendLine($"No villain with ID {villainId} exists in the database.");
+            }
+            else
+            {
+                string villainMinionsInfo = GetVillainMinions(sqlConnection, villainId);
+
+                sb.AppendLine($"Villain: {villainName}");
+                sb.AppendLine(villainMinionsInfo);
+            }
+                
+            return sb.ToString().TrimEnd();
+        }
+
+       
+
+        
     }
 }
