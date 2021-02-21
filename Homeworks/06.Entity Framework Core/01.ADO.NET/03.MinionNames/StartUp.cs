@@ -26,7 +26,7 @@ namespace _03.MinionNames
                     FROM Villains 
                     WHERE Id = @villainId";
 
-            using SqlCommand getVillainNameCmd = new SqlCommand(getVillainNameQuery, sqlConnection);
+            using SqlCommand getVillainNameCmd = new SqlCommand(getVillainNameQuery);
             getVillainNameCmd.Parameters.AddWithValue("@villainId", villainId);
 
             string villainName = getVillainNameCmd.ExecuteScalar()?.ToString();
