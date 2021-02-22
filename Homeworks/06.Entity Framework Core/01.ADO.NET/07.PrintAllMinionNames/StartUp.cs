@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+
 using Microsoft.Data.SqlClient;
 
 namespace _07.PrintAllMinionNames
@@ -50,7 +50,7 @@ namespace _07.PrintAllMinionNames
                     FROM Minions";
             using SqlCommand allMinionNamesCmd = new SqlCommand(allMinionNamesQuery, sqlConnection);
 
-            SqlDataReader currName = allMinionNamesCmd.ExecuteReader();
+            using SqlDataReader currName = allMinionNamesCmd.ExecuteReader();
             while (currName.Read())
             {
                 minionNames.Add(currName["Name"].ToString());
