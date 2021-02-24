@@ -18,6 +18,3 @@
    |<a href="https://softuni.bg/trainings/3221/entity-framework-core-february-2021"> Entity Framework Core </a>| *In Progress* |
 
 <p align="center">All tasks and homeworks are done with result 100/100 points<p>
-
-# SoftUni
-Homeworks and projects during my education at SoftUni. 
