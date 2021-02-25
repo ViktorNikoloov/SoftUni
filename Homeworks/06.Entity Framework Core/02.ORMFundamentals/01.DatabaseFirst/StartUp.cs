@@ -36,6 +36,12 @@ namespace _01.DatabaseFirst
             {
                 Console.WriteLine($"Department: {department.GroupName} => Count: {department.EmployeesCount}");
             }
+
+            var changeEmployeesSalary = db.Employees.ToList();
+            foreach (var person in changeEmployeesSalary)
+            {
+                person.Salary *= 1.1M;
+            }
         }
     }
 }
