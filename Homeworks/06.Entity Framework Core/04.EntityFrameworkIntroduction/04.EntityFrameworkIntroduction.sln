@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31019.35
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftUni", "SoftUni\SoftUni.csproj", "{481E17DF-8F8A-467A-BF60-324DA546DA0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SoftUni", "SoftUni\SoftUni.csproj", "{31B695EA-2D65-4AAB-B7DD-6D931C61526D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{481E17DF-8F8A-467A-BF60-324DA546DA0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{481E17DF-8F8A-467A-BF60-324DA546DA0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{481E17DF-8F8A-467A-BF60-324DA546DA0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{481E17DF-8F8A-467A-BF60-324DA546DA0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{31B695EA-2D65-4AAB-B7DD-6D931C61526D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{31B695EA-2D65-4AAB-B7DD-6D931C61526D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{31B695EA-2D65-4AAB-B7DD-6D931C61526D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{31B695EA-2D65-4AAB-B7DD-6D931C61526D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {8BE95B10-F4BB-459C-B40D-47837525F858}
+		SolutionGuid = {A3595E09-1BD6-47CD-84CA-F3DE558AE33C}
 	EndGlobalSection
 EndGlobal
