@@ -3,6 +3,7 @@ using System.Text;
 using System.Linq;
 
 using SoftUni.Data;
+using SoftUni.Models;
 
 namespace SoftUni
 {
@@ -31,9 +32,13 @@ namespace SoftUni
             //var employeesFromResearchAndDevelopment = GetEmployeesFromResearchAndDevelopment(softUniContext);
             //Console.WriteLine(employeesFromResearchAndDevelopment);
 
-            // 06.Adding a New Address and Updating Employee
-            var addNewAddressToEmployee = AddNewAddressToEmployee(softUniContext);
-            Console.WriteLine(addNewAddressToEmployee);
+            //// 06.Adding a New Address and Updating Employee
+            //var addNewAddressToEmployee = AddNewAddressToEmployee(softUniContext);
+            //Console.WriteLine(addNewAddressToEmployee);
+
+            // 07.Employees and Projects
+            var employeesInPeriod = AddNewAddressToEmployee(softUniContext);
+            Console.WriteLine(employeesInPeriod);
 
         }
 
@@ -114,16 +119,50 @@ namespace SoftUni
         // 06.Adding a New Address and Updating Employee
         public static string AddNewAddressToEmployee(SoftUniContext context)
         {
-            //Create a new address with text "Vitoshka 15" and TownId 4. 
-            //Set that address to the employee with last name "Nakov".
-            //Then order by descending all the employees by their Address’ Id, take 10 rows and from them, take the AddressText. 
-            //Return the results each on a new line:
+            /*First solution to save Nakov's new address*/
+            //var newAddress = new Address
+            //{
+            //    AddressText = "Vitoshka 15",
+            //    TownId = 4
+            //};
+
+            //context.Addresses.Add(newAddress);
+            //context.SaveChanges();
+
+            //var setAdressToNakov = context.Employees.FirstOrDefault(x => x.LastName == "Nakov");
+
+            //setAdressToNakov.AddressId = newAddress.AddressId;
+            //context.SaveChanges();
+
+            /*Second solution to save Nakov's new address*/
+            var setAdressToNakov = context.Employees.FirstOrDefault(x => x.LastName == "Nakov");
+            setAdressToNakov.Address = new Address
+            {
+                AddressText = "Vitoshka 15",
+                TownId = 4
+            };
+            context.SaveChanges();
+
+
+            var addresses = context.Employees
+                .OrderByDescending(x => x.AddressId)
+                .Select(x =>x.Address.AddressText)
+                .Take(10)
+                .ToList();
 
             StringBuilder sb = new StringBuilder();
-
-
-
+            foreach (var address in addresses)
+            {
+                sb.AppendLine(address);
+            }
+            
             return sb.ToString().TrimEnd();
+        }
+
+        // 07.Employees and Projects
+        public static string GetEmployeesInPeriod(SoftUniContext context)
+        {
+
         }
     }
 }
