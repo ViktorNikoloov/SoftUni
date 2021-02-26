@@ -14,12 +14,18 @@ namespace SoftUni
             Install-Package Microsoft.EntityFrameworkCore.SqlServer –v 3.1.3
             Install-Package Microsoft.EntityFrameworkCore.SqlServer.Design
             */
-
             var softUniContext = new SoftUniContext();
 
-            var result = GetEmployeesFullInformation(softUniContext);
+            // 03.Employees Full Information
+            var EmployeesFullInformation = GetEmployeesFullInformation(softUniContext);
 
-            Console.WriteLine(result);
+            Console.WriteLine(EmployeesFullInformation);
+
+            // 4.Employees with Salary Over 50 000
+            var EmployeesWithSalaryOver50000 = GetEmployeesWithSalaryOver50000(softUniContext);
+
+            Console.WriteLine(EmployeesWithSalaryOver50000);
+
         }
 
         // 03.Employees Full Information
@@ -51,7 +57,25 @@ namespace SoftUni
         // 4.Employees with Salary Over 50 000
         public static string GetEmployeesWithSalaryOver50000(SoftUniContext context)
         {
+            StringBuilder sb = new StringBuilder();
 
+            var employees = context.Employees
+                .Select(x => new
+                {
+                    x.FirstName,
+                    x.Salary
+                })
+                .Where(x => x.Salary > 50000)
+                .OrderBy(x => x.FirstName)
+                .ToList();
+
+            foreach (var employee in employees)
+            {
+                sb.AppendLine($"{employee.FirstName} - {employee.Salary:F2}");
+            }
+
+            return sb.ToString().TrimEnd();
         }
     }
 }
+
