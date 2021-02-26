@@ -22,7 +22,7 @@ namespace SoftUni.Data
         public virtual DbSet<Address> Addresses { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
-        public virtual DbSet<EmployeeProject> EmployeeProjects { get; set; }
+        public virtual DbSet<EmployeeProject> EmployeesProjects { get; set; }
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<Town> Towns { get; set; }
 
