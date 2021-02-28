@@ -38,10 +38,13 @@ namespace SoftUni
             //var addNewAddressToEmployee = AddNewAddressToEmployee(softUniContext);
             //Console.WriteLine(addNewAddressToEmployee);
 
-            // 07.Employees and Projects
-            var employeesInPeriod = GetEmployeesInPeriod(softUniContext);
-            Console.WriteLine(employeesInPeriod);
+            //// 07.Employees and Projects
+            //var employeesInPeriod = GetEmployeesInPeriod(softUniContext);
+            //Console.WriteLine(employeesInPeriod);
 
+            //// 08.Addresses by Town
+            //var addressesByTown = GetAddressesByTown(softUniContext);
+            //Console.WriteLine(addressesByTown);
         }
 
         // 03.Employees Full Information
@@ -197,6 +200,28 @@ namespace SoftUni
                     sb.AppendLine($"--{project.ProjectName} - {project.ProjectStartDate.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture)} - {hasEndDate}");
                 }
             }
+            return sb.ToString().TrimEnd();
+        }
+
+        // 08.Addresses by Town
+        public static string GetAddressesByTown(SoftUniContext context)
+        {
+            var addresses = context.Addresses.OrderByDescending(x => x.Employees.Count()).ThenBy(x => x.Town.Name).ThenBy(x => x.AddressText)
+                .Take(10)
+                .Select(x => new
+                {
+                    EmployeeCount = x.Employees.Count(),
+                    TownName = x.Town.Name,
+                    x.AddressText
+                })
+                .ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var address in addresses)
+            {
+                sb.AppendLine($"{address.AddressText}, {address.TownName} - {address.EmployeeCount} employees");
+            }
+
             return sb.ToString().TrimEnd();
         }
     }
