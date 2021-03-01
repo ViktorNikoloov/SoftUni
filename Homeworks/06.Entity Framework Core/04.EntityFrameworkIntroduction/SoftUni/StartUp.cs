@@ -45,6 +45,10 @@ namespace SoftUni
             //// 08.Addresses by Town
             //var addressesByTown = GetAddressesByTown(softUniContext);
             //Console.WriteLine(addressesByTown);
+
+            ////09. Employee 147
+            var employee147 = GetEmployee147(softUniContext);
+            Console.WriteLine(employee147);
         }
 
         // 03.Employees Full Information
@@ -220,6 +224,37 @@ namespace SoftUni
             foreach (var address in addresses)
             {
                 sb.AppendLine($"{address.AddressText}, {address.TownName} - {address.EmployeeCount} employees");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        // 09.Employee 147
+        public static string GetEmployee147(SoftUniContext context)
+        {
+            var theEmployee = context.Employees
+                .Where(x => x.EmployeeId == 147)
+                .Select(x => new
+                {
+                    x.FirstName,
+                    x.LastName,
+                    x.JobTitle,
+                    Projects = x.EmployeesProjects.Select(x => new
+                    {
+                        ProjectName = x.Project.Name
+                    })
+                })
+                .ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var employee in theEmployee)
+            {
+                sb.AppendLine($"{employee.FirstName} {employee.LastName} - {employee.JobTitle}");
+
+                foreach (var projects in employee.Projects.OrderBy(x=>x.ProjectName))
+                {
+                    sb.AppendLine(projects.ProjectName);
+                }
             }
 
             return sb.ToString().TrimEnd();
