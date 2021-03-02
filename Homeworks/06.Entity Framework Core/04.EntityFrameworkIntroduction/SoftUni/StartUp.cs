@@ -377,22 +377,45 @@ namespace SoftUni
         //12.Increase Salaries
         public static string IncreaseSalaries(SoftUniContext context)
         {
-            //Write a program that increase salaries of all employees that are in the Engineering, Tool Design, Marketing or Information Services department by 12%.
-            //Then return first name, last name and salary (2 symbols after the decimal separator) for those employees whose salary was increased. 
-            //Order them by first name (ascending), then by last name (ascending). Format of the output.
-
-            context.Employees.Where(x => new[] 
-            { 
-                "Engineering", 
-                "Tool Design", 
-                "Marketing", 
-                "Information Services" 
+            context.Employees.Where(x => new[]
+            {
+                "Engineering",
+                "Tool Design",
+                "Marketing",
+                "Information Services"
             }.Contains(x.Department.Name))
-             .ToList()
-             .ForEach(x=>x.Salary *= 1.12M);
+            .ToList()
+            .ForEach(x => x.Salary *= 1.12M);
 
             context.SaveChanges();
-            
+
+            var increasedSalary = context.Employees
+                .Where(x => new[]
+                {
+                    "Engineering",
+                    "Tool Design",
+                    "Marketing",
+                    "Information Services"
+                 }.Contains(x.Department.Name))
+                .Select(x => new
+                {
+                    EmployeeFirstName = x.FirstName,
+                    EmployeeLastName = x.LastName,
+                    EmployeeSalary = x.Salary
+                })
+                .OrderBy(x => x.EmployeeFirstName)
+                .ThenBy(x => x.EmployeeLastName)
+                .ToList();
+
+
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var emp in increasedSalary)
+            {
+                sb.AppendLine($"{emp.EmployeeFirstName} {emp.EmployeeLastName} (${emp.EmployeeSalary:F2})");
+            }
+
+            return sb.ToString().TrimEnd();
 
         }
 
