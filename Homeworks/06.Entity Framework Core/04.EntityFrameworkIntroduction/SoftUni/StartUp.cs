@@ -51,8 +51,16 @@ namespace SoftUni
             //Console.WriteLine(employee147);
 
             ////10.Departments With More Than 5 Employees
-            var departmentsWithMoreThan5Employees = GetDepartmentsWithMoreThan5Employees(softUniContext);
-            Console.WriteLine(departmentsWithMoreThan5Employees);
+            //var departmentsWithMoreThan5Employees = GetDepartmentsWithMoreThan5Employees(softUniContext);
+            //Console.WriteLine(departmentsWithMoreThan5Employees);
+
+            //// 11.Find Latest 10 Projects
+            //var getLatestProjects = GetLatestProjects(softUniContext);
+            //Console.WriteLine(getLatestProjects);
+
+            //// 12.Increase Salaries
+            var increasedSalaries = IncreaseSalaries(softUniContext);
+            Console.WriteLine(increasedSalaries);
         }
 
         // 03.Employees Full Information
@@ -337,5 +345,56 @@ namespace SoftUni
 
             return sb.ToString().TrimEnd();
         }
+
+        // 11.Find Latest 10 Projects
+        public static string GetLatestProjects(SoftUniContext context)
+        {
+            var latestProjects = context.Projects
+                .OrderByDescending(x => x.StartDate)
+                .Take(10)
+                .Select(p => new
+                {
+                    Length = p.Name.Length,
+                    ProjectName = p.Name,
+                    ProjectDescribtion = p.Description,
+                    ProjectStartDate = p.StartDate.ToString("M/d/yyyy h:mm:ss tt", CultureInfo.InvariantCulture)
+                })
+                .OrderBy(x => x.ProjectName)
+                .ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var project in latestProjects)
+            {
+                sb
+                    .AppendLine(project.ProjectName)
+                    .AppendLine(project.ProjectDescribtion)
+                    .AppendLine(project.ProjectStartDate);
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        //12.Increase Salaries
+        public static string IncreaseSalaries(SoftUniContext context)
+        {
+            //Write a program that increase salaries of all employees that are in the Engineering, Tool Design, Marketing or Information Services department by 12%.
+            //Then return first name, last name and salary (2 symbols after the decimal separator) for those employees whose salary was increased. 
+            //Order them by first name (ascending), then by last name (ascending). Format of the output.
+
+            context.Employees.Where(x => new[] 
+            { 
+                "Engineering", 
+                "Tool Design", 
+                "Marketing", 
+                "Information Services" 
+            }.Contains(x.Department.Name))
+             .ToList()
+             .ForEach(x=>x.Salary *= 1.12M);
+
+            context.SaveChanges();
+            
+
+        }
+
     }
 }
