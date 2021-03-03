@@ -59,8 +59,16 @@ namespace SoftUni
             //Console.WriteLine(getLatestProjects);
 
             //// 12.Increase Salaries
-            var increasedSalaries = IncreaseSalaries(softUniContext);
-            Console.WriteLine(increasedSalaries);
+            //var increasedSalaries = IncreaseSalaries(softUniContext);
+            //Console.WriteLine(increasedSalaries);
+
+            //// 13.EmployeesByFirstNameStartingWithSa
+            //var employeesByFirstNameStartingWithSa = GetEmployeesByFirstNameStartingWithSa(softUniContext);
+            //Console.WriteLine(employeesByFirstNameStartingWithSa);
+
+            //// 14.Delete Project by Id
+            var project = DeleteProjectById(softUniContext);
+            Console.WriteLine(project);
         }
 
         // 03.Employees Full Information
@@ -419,5 +427,37 @@ namespace SoftUni
 
         }
 
+        // 13.Find Employees by First Name Starting with "Sa"
+        public static string GetEmployeesByFirstNameStartingWithSa(SoftUniContext context)
+        {
+            var employees = context.Employees
+                .Where(n => n.FirstName.StartsWith("SA"))
+                .Select(e => new
+                {
+                    EmployeeFirstName = e.FirstName,
+                    EmployeeLastName = e.LastName,
+                    EmployeeJobTitle = e.JobTitle,
+                    EmployeeSalary = $"{e.Salary:F2}"
+
+                })
+                .OrderBy(x => x.EmployeeFirstName)
+                .ThenBy(x => x.EmployeeLastName)
+                .ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var employee in employees)
+            {
+                sb.AppendLine($"{employee.EmployeeFirstName} {employee.EmployeeLastName} - {employee.EmployeeJobTitle} - (${employee.EmployeeSalary})");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        //14.Delete Project by Id
+
+        public static string DeleteProjectById(SoftUniContext context)
+        {
+
+        }
     }
 }
