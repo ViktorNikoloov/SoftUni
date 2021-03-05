@@ -82,9 +82,9 @@ namespace P03_FootballBetting.Data
                 .OnDelete(DeleteBehavior.Restrict);
 
                 entity
-                .HasOne(team => team.Town)
-                .WithMany(town => town.Teams)
-                .HasForeignKey(team => team.TownId)
+                .HasOne(t => t.Town)
+                .WithMany(to => to.Teams)
+                .HasForeignKey(t => t.TownId)
                 .OnDelete(DeleteBehavior.Restrict);
             });
 
