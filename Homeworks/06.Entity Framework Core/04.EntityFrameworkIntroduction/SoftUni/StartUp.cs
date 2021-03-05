@@ -20,57 +20,57 @@ namespace SoftUni
             */
             var softUniContext = new SoftUniContext();
 
-            //// 03.Employees Full Information
-            //var employeesFullInformation = GetEmployeesFullInformation(softUniContext);
+            // 03.Employees Full Information
+            var employeesFullInformation = GetEmployeesFullInformation(softUniContext);
 
-            //Console.WriteLine(employeesFullInformation);
+            Console.WriteLine(employeesFullInformation);
 
-            //// 4.Employees with Salary Over 50 000
-            //var employeesWithSalaryOver50000 = GetEmployeesWithSalaryOver50000(softUniContext);
+            // 4.Employees with Salary Over 50 000
+            var employeesWithSalaryOver50000 = GetEmployeesWithSalaryOver50000(softUniContext);
 
-            //Console.WriteLine(employeesWithSalaryOver50000);
+            Console.WriteLine(employeesWithSalaryOver50000);
 
-            //// 05.GetEmployeesFromResearchAndDevelopment
-            //var employeesFromResearchAndDevelopment = GetEmployeesFromResearchAndDevelopment(softUniContext);
-            //Console.WriteLine(employeesFromResearchAndDevelopment);
+            // 05.GetEmployeesFromResearchAndDevelopment
+            var employeesFromResearchAndDevelopment = GetEmployeesFromResearchAndDevelopment(softUniContext);
+            Console.WriteLine(employeesFromResearchAndDevelopment);
 
-            //// 06.Adding a New Address and Updating Employee
-            //var addNewAddressToEmployee = AddNewAddressToEmployee(softUniContext);
-            //Console.WriteLine(addNewAddressToEmployee);
+            // 06.Adding a New Address and Updating Employee
+            var addNewAddressToEmployee = AddNewAddressToEmployee(softUniContext);
+            Console.WriteLine(addNewAddressToEmployee);
 
-            //// 07.Employees and Projects
-            //var employeesInPeriod = GetEmployeesInPeriod(softUniContext);
-            //Console.WriteLine(employeesInPeriod);
+            // 07.Employees and Projects
+            var employeesInPeriod = GetEmployeesInPeriod(softUniContext);
+            Console.WriteLine(employeesInPeriod);
 
-            //// 08.Addresses by Town
-            //var addressesByTown = GetAddressesByTown(softUniContext);
-            //Console.WriteLine(addressesByTown);
+            // 08.Addresses by Town
+            var addressesByTown = GetAddressesByTown(softUniContext);
+            Console.WriteLine(addressesByTown);
 
-            ////09. Employee 147
-            //var employee147 = GetEmployee147(softUniContext);
-            //Console.WriteLine(employee147);
+            //09. Employee 147
+            var employee147 = GetEmployee147(softUniContext);
+            Console.WriteLine(employee147);
 
-            ////10.Departments With More Than 5 Employees
-            //var departmentsWithMoreThan5Employees = GetDepartmentsWithMoreThan5Employees(softUniContext);
-            //Console.WriteLine(departmentsWithMoreThan5Employees);
+            //10.Departments With More Than 5 Employees
+            var departmentsWithMoreThan5Employees = GetDepartmentsWithMoreThan5Employees(softUniContext);
+            Console.WriteLine(departmentsWithMoreThan5Employees);
 
-            //// 11.Find Latest 10 Projects
-            //var getLatestProjects = GetLatestProjects(softUniContext);
-            //Console.WriteLine(getLatestProjects);
+            // 11.Find Latest 10 Projects
+            var getLatestProjects = GetLatestProjects(softUniContext);
+            Console.WriteLine(getLatestProjects);
 
-            //// 12.Increase Salaries
-            //var increasedSalaries = IncreaseSalaries(softUniContext);
-            //Console.WriteLine(increasedSalaries);
+            // 12.Increase Salaries
+            var increasedSalaries = IncreaseSalaries(softUniContext);
+            Console.WriteLine(increasedSalaries);
 
-            //// 13.EmployeesByFirstNameStartingWithSa
-            //var employeesByFirstNameStartingWithSa = GetEmployeesByFirstNameStartingWithSa(softUniContext);
-            //Console.WriteLine(employeesByFirstNameStartingWithSa);
+            // 13.EmployeesByFirstNameStartingWithSa
+            var employeesByFirstNameStartingWithSa = GetEmployeesByFirstNameStartingWithSa(softUniContext);
+            Console.WriteLine(employeesByFirstNameStartingWithSa);
 
-            //// 14.Delete Project by Id
-            //var projects = DeleteProjectById(softUniContext);
-            //Console.WriteLine(projects);
+            // 14.Delete Project by Id
+            var projects = DeleteProjectById(softUniContext);
+            Console.WriteLine(projects);
 
-            ////15. Remove Town
+            //15. Remove Town
             var removedAddresses = RemoveTown(softUniContext);
             Console.WriteLine(removedAddresses);
         }
