@@ -12,6 +12,6 @@
 
         public int Assists { get; set; }
 
-        public double MinutesPlayed { get; set; }
+        public int MinutesPlayed { get; set; }
     }
 }

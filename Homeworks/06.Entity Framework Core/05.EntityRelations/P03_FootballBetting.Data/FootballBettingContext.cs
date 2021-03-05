@@ -72,17 +72,20 @@ namespace P03_FootballBetting.Data
                 entity
                 .HasOne(t => t.PrimaryKitColor)
                 .WithMany(c => c.PrimaryKitTeams)
-                .HasForeignKey(t => t.PrimaryKitColorId);
+                .HasForeignKey(t => t.PrimaryKitColorId)
+                .OnDelete(DeleteBehavior.Restrict);
 
                 entity
                 .HasOne(t => t.SecondaryKitColor)
                 .WithMany(c => c.SecondaryKitTeams)
-                .HasForeignKey(t => t.SecondaryKitColorId);
+                .HasForeignKey(t => t.SecondaryKitColorId)
+                .OnDelete(DeleteBehavior.Restrict);
 
                 entity
                 .HasOne(team => team.Town)
                 .WithMany(town => town.Teams)
-                .HasForeignKey(team => team.TownId);
+                .HasForeignKey(team => team.TownId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Color>(entity =>
@@ -109,7 +112,8 @@ namespace P03_FootballBetting.Data
                 entity
                 .HasOne(t => t.Country)
                 .WithMany(c => c.Towns)
-                .HasForeignKey(t => t.CountryId);
+                .HasForeignKey(t => t.CountryId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -136,12 +140,14 @@ namespace P03_FootballBetting.Data
                 entity
                 .HasOne(p => p.Team)
                 .WithMany(t => t.Players)
-                .HasForeignKey(p => p.TeamId);
+                .HasForeignKey(p => p.TeamId)
+                .OnDelete(DeleteBehavior.Restrict);
 
                 entity
                 .HasOne(p => p.Position)
                 .WithMany(pos => pos.Players)
-                .HasForeignKey(p => p.PositionId);
+                .HasForeignKey(p => p.PositionId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Position>(entity =>
@@ -166,12 +172,14 @@ namespace P03_FootballBetting.Data
                 entity
                 .HasOne(ps => ps.Player)
                 .WithMany(p => p.PlayerStatistics)
-                .HasForeignKey(ps => ps.PlayerId);
+                .HasForeignKey(ps => ps.PlayerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
                 entity
                 .HasOne(ps => ps.Game)
                 .WithMany(g => g.PlayerStatistics)
-                .HasForeignKey(ps => ps.GameId);
+                .HasForeignKey(ps => ps.GameId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Game>(entity =>
@@ -181,12 +189,14 @@ namespace P03_FootballBetting.Data
                 entity
                 .HasOne(g => g.HomeTeam)
                 .WithMany(t => t.HomeGames)
-                .HasForeignKey(g => g.HomeTeamId);
+                .HasForeignKey(g => g.HomeTeamId)
+                .OnDelete(DeleteBehavior.Restrict);
 
                 entity
                 .HasOne(g => g.AwayTeam)
                 .WithMany(t => t.AwayGames)
-                .HasForeignKey(g => g.AwayTeamId);
+                .HasForeignKey(g => g.AwayTeamId)
+                .OnDelete(DeleteBehavior.Restrict);
 
                 entity
                 .Property(g => g.Result)
@@ -202,12 +212,14 @@ namespace P03_FootballBetting.Data
                 entity
                 .HasOne(b => b.User)
                 .WithMany(u => u.Bets)
-                .HasForeignKey(b => b.UserId);
+                .HasForeignKey(b => b.UserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
                 entity
                 .HasOne(b => b.Game)
                 .WithMany(g => g.Bets)
-                .HasForeignKey(b => b.GameId);
+                .HasForeignKey(b => b.GameId)
+                .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<User>(entity =>
