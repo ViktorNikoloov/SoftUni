@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using P03_FootballBetting.Data.Configurations;
 using P03_FootballBetting.Data.Models;
 
