@@ -1,10 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using P03_FootballBetting.Data.Models;
 
 namespace P03_FootballBetting.Data.Configurations
 {
-    class PositionConfiguration
+    public class PositionConfiguration : IEntityTypeConfiguration<Position>
     {
+        public void Configure(EntityTypeBuilder<Position> position)
+        {
+            position.HasKey(p => p.PositionId);
+
+            position
+            .Property(p => p.Name)
+            .IsRequired(true)
+            .IsUnicode(false)
+            .HasMaxLength(30);
+        }
     }
 }
