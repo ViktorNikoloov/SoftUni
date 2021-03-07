@@ -9,12 +9,12 @@ namespace P01_StudentSystem.Data.Models
     {
         public int ResourceId { get; set; }
 
-        [Required]
-        [MaxLength(50)]
+       // [Required]
+       // [MaxLength(50)]
         public string Name { get; set; }
 
-        [Required]
-        [Column(TypeName = "varchar(max)")]
+       // [Required]
+       // [Column(TypeName = "varchar(max)")]
         public string Url { get; set; }
 
         public ResourceType ResourceType { get; set; }

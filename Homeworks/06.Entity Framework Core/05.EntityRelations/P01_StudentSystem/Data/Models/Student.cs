@@ -15,13 +15,13 @@ namespace P01_StudentSystem.Data.Models
 
         public int StudentId { get; set; }
 
-        [Required]
-        [MaxLength(100)]
+        // [Required]
+        // [MaxLength(100)]
         public string Name { get; set; }
 
-        [Column(TypeName = "varchar(10)")]
-        [StringLength(10, MinimumLength = 10)]
-        //TODO: [Column(TypeName = "char(10)")]
+        // [Column(TypeName = "varchar(10)")]
+        // [StringLength(10, MinimumLength = 10)]
+        // TODO: [Column(TypeName = "char(10)")]
         public string PhoneNumber { get; set; }
 
         public DateTime RegisteredOn { get; set; }

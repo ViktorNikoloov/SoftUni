@@ -10,11 +10,11 @@ namespace P01_StudentSystem.Data.Models
     {
         public int HomeworkId { get; set; }
 
-        [Required]
-        [Column(TypeName = "varchar(max)")]
+       // [Required]
+       // [Column(TypeName = "varchar(max)")]
         public string Content { get; set; }
 
-        [Required]
+       //TODO: is [Required] ?
         public ContentType ContentType { get; set; }
 
         public DateTime SubmissionTime { get; set; }

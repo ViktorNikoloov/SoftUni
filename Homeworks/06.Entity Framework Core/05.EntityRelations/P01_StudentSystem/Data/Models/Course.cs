@@ -14,8 +14,8 @@ namespace P01_StudentSystem.Data.Models
         }
         public int CourseId { get; set; }
 
-        [Required]
-        [MaxLength(80)]
+        //[Required]
+        //[MaxLength(80)]
         public string Name { get; set; }
 
         public string Description { get; set; }
