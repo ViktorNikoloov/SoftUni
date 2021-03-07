@@ -10,7 +10,7 @@ using P03_FootballBetting.Data;
 namespace P03_FootballBetting.Data.Migrations
 {
     [DbContext(typeof(FootballBettingContext))]
-    [Migration("20210305233513_InitialCreate")]
+    [Migration("20210307222656_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
