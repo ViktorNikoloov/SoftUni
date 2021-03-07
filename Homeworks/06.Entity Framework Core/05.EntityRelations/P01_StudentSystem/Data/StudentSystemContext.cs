@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using P01_StudentSystem.Data.Configurations;
 using P01_StudentSystem.Data.Models;
 
 namespace P01_StudentSystem.Data
@@ -37,14 +38,20 @@ namespace P01_StudentSystem.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<StudentCourse>(x =>
-            {
-                x.HasKey(x => new
-                {
-                    x.CourseId,
-                    x.StudentId
-                });
-            });
+            modelBuilder.ApplyConfiguration(new CourseConfiguration());
+            modelBuilder.ApplyConfiguration(new HomeworkConfiguration());
+            modelBuilder.ApplyConfiguration(new ResourceConfiguration());
+            modelBuilder.ApplyConfiguration(new StudentConfiguration());
+            modelBuilder.ApplyConfiguration(new StudentCourseConfiguration());
+
+            //modelBuilder.Entity<StudentCourse>(x =>
+            //{
+            //    x.HasKey(x => new
+            //    {
+            //        x.CourseId,
+            //        x.StudentId
+            //    });
+            //});
         }
     }
 }
