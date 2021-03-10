@@ -1,12 +1,15 @@
-﻿using MusicHub.Data.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace MusicHub.Data.Models
+﻿namespace MusicHub.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+
+    using System.ComponentModel.DataAnnotations;
+
+    using MusicHub.Data.Models.Enums;
+
     public class Song
     {
+
         public Song()
         {
             SongPerformers = new HashSet<SongPerformer>();

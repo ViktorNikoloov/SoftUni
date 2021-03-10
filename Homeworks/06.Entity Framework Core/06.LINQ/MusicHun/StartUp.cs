@@ -1,54 +1,49 @@
-﻿using System;
-using System.Text;
-using System.Linq;
-using System.Globalization;
-
-using Microsoft.EntityFrameworkCore;
-
-using MusicHub.Data;
-using MusicHub.Initializer;
-
-namespace MusicHub
+﻿namespace MusicHub
 {
+    using System;
+    using System.Globalization;
+    using System.Linq;
+    using System.Text;
+
+    using Data;
+    using Initializer;
+
     public class StartUp
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            var context = new MusicHubDbContext();
+            MusicHubDbContext context =
+                new MusicHubDbContext();
 
             DbInitializer.ResetDatabase(context);
-            // int producerId = int.Parse(Console.ReadLine());
 
-            var albumsInfo = ExportAlbumsInfo(context, 9);
-            Console.WriteLine(albumsInfo);
+            Console.WriteLine(ExportAlbumsInfo(context, 4));
         }
 
-
-
-        private static string ExportAlbumsInfo(MusicHubDbContext context, int producerId)
+        public static string ExportAlbumsInfo(MusicHubDbContext context, int producerId)
         {
-            var albumsInfo = context.
-                Producers
+            var albumsInfo = context
+               .Producers
                 .FirstOrDefault(i => i.Id == producerId)
                 .Albums
-                .Select(a => new
-                {
-                    AlbumName = a.Name,
-                    AlbumRealeaseDate = a.ReleaseDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture),
-                    ProducerName = a.Producer.Name,
-                    AlbumSongs = a.Songs.Select(s => new
-                    {
-                        SongName = s.Name,
-                        SongPrice = $"{s.Price}",
-                        SongWriterName = s.Writer.Name
-                    })
-                        .OrderByDescending(n => n.SongName)
-                        .ThenBy(w => w.SongWriterName)
-                        .ToList(),
-                    TotalAlbumPrice = $"{a.Price}",
-                })
-                 .OrderByDescending(a => a.TotalAlbumPrice)
-                 .ToList();
+               .Select(a => new
+               {
+                   AlbumName = a.Name,
+                   AlbumRealeaseDate = a.ReleaseDate.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture),
+                   ProducerName = a.Producer.Name,
+                   AlbumSongs = a.Songs.Select(s => new
+                   {
+                       SongName = s.Name,
+                       SongPrice = s.Price,
+                       SongWriterName = s.Writer.Name
+                   })
+                       .OrderByDescending(n => n.SongName)
+                       .ThenBy(w => w.SongWriterName)
+                       .ToList(),
+                   TotalAlbumPrice = a.Price,
+               })
+                .OrderByDescending(a => a.TotalAlbumPrice)
+                .ToList();
 
             StringBuilder sb = new StringBuilder();
             foreach (var album in albumsInfo)
@@ -56,7 +51,8 @@ namespace MusicHub
                 sb
                     .AppendLine($"-AlbumName: {album.AlbumName}")
                     .AppendLine($"-ReleaseDate: {album.AlbumRealeaseDate}")
-                    .AppendLine($"-ProducerName: {album.ProducerName}");
+                    .AppendLine($"-ProducerName: {album.ProducerName}")
+                    .AppendLine($"-Songs:");
 
                 int counter = 1;
 
@@ -65,12 +61,12 @@ namespace MusicHub
                     sb
                         .AppendLine($"---#{counter}")
                         .AppendLine($"---SongName: {song.SongName}")
-                        .AppendLine($"---Price: {song.SongPrice}")
+                        .AppendLine($"---Price: {song.SongPrice:F2}")
                         .AppendLine($"---Writer: {song.SongWriterName}");
                     counter++;
                 }
 
-                sb.AppendLine($"-AlbumPrice: {album.TotalAlbumPrice}");
+                sb.AppendLine($"-AlbumPrice: {album.TotalAlbumPrice:F2}");
             }
 
             return sb.ToString().TrimEnd();
@@ -82,4 +78,3 @@ namespace MusicHub
         }
     }
 }
-

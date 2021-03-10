@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace MusicHub.Data.Models
+﻿namespace MusicHub.Data.Models
 {
-   public  class Producer
+    using System.Collections.Generic;
+
+    using System.ComponentModel.DataAnnotations;
+
+    public class Producer
     {
         public Producer()
         {
