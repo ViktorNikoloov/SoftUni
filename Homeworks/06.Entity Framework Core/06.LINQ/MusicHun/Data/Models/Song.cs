@@ -24,11 +24,10 @@ namespace MusicHub.Data.Models
         [Required]
         public Genre Genre { get; set; }
 
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
         public Album Album { get; set; }
 
         public int WriterId { get; set; }
-
         public Writer Writer { get; set; }
 
         public decimal Price { get; set; }
