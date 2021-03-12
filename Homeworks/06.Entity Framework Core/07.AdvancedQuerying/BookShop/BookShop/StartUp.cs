@@ -44,11 +44,15 @@
             //Console.WriteLine(result);
 
             ////08.Author Search
+            //var input = Console.ReadLine();
+            //var result = GetAuthorNamesEndingIn(db, input);
+            //Console.WriteLine(result);
+
+
+            ////09.Book Search
             var input = Console.ReadLine();
-            var result = GetAuthorNamesEndingIn(db, input);
+            var result = GetBookTitlesContaining(db, input);
             Console.WriteLine(result);
-
-
         }
 
         //02.AgeRestriction
@@ -220,6 +224,22 @@
 
         }
 
+        //09.Book Search
+        public static string GetBookTitlesContaining(BookShopContext context, string input)
+        {
+            //Return the titles of book, which contain a given string. Ignore casing.
+            //Return all titles in a single string, each on a new row, ordered alphabetically.
+            string lowerInput = input.ToLower();
+
+            var books = context
+                .Books
+                .Where(b => b.Title.ToLower().Contains(lowerInput))
+                .Select(t => t.Title)
+                .OrderBy(x => x)
+                .ToList();
+
+            return string.Join(Environment.NewLine, books);
+        }
 
     }
 
