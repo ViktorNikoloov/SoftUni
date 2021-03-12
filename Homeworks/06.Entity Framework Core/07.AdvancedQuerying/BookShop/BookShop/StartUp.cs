@@ -39,9 +39,15 @@
             //Console.WriteLine(result);
 
             ////07.Released Before Date
-            var date = Console.ReadLine();
-            var result = GetBooksReleasedBefore(db, date);
+            //var date = Console.ReadLine();
+            //var result = GetBooksReleasedBefore(db, date);
+            //Console.WriteLine(result);
+
+            ////08.Author Search
+            var input = Console.ReadLine();
+            var result = GetAuthorNamesEndingIn(db, input);
             Console.WriteLine(result);
+
 
         }
 
@@ -171,7 +177,7 @@
         //07.Released Before Date
         public static string GetBooksReleasedBefore(BookShopContext context, string date)
         {
-            DateTime dateInFormat = DateTime.ParseExact(date, "dd-MM-yyyy", CultureInfo.InvariantCulture); 
+            DateTime dateInFormat = DateTime.ParseExact(date, "dd-MM-yyyy", CultureInfo.InvariantCulture);
 
             var books = context
                 .Books
@@ -193,6 +199,28 @@
 
             return sb.ToString().TrimEnd();
         }
+
+        //08.Author Search
+        public static string GetAuthorNamesEndingIn(BookShopContext context, string input)
+        {
+            var authors = context
+                            .Authors
+                            .Where(a => a.FirstName.EndsWith(input))
+                            .Select(a => a.FirstName + " " + a.LastName)
+                            .OrderBy(x => x)
+                            .ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var author in authors)
+            {
+                sb.AppendLine($"{author}");
+            }
+
+            return sb.ToString().TrimEnd();
+
+        }
+
+
     }
 
 }
