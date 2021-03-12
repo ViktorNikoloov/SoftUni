@@ -4,6 +4,7 @@
     using Initializer;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Text;
 
@@ -14,31 +15,37 @@
             using var db = new BookShopContext();
             DbInitializer.ResetDatabase(db);
 
-            ////01.AgeRestriction
+            ////02.AgeRestriction
             //var input = Console.ReadLine();
             //var result = GetBooksByAgeRestriction(db, input);
             //Console.WriteLine(result);
 
-            ////02.Golden Books
+            ////03.Golden Books
             //var result = GetGoldenBooks(db);
             //Console.WriteLine(result);
 
-            ////03.Books by Price
+            ////04.Books by Price
             //var result = GetBooksByPrice(db);
             //Console.WriteLine(result);
 
-            ////03.Not Released In
+            ////05.Not Released In
             //var year = int.Parse(Console.ReadLine());
             //var result = GetBooksNotReleasedIn(db, year);
             //Console.WriteLine(result);
 
-            //06.Book Titles by Category
-            var book = Console.ReadLine();
-            var result = GetBooksByCategory(db, book);
+            ////06.Book Titles by Category
+            //var book = Console.ReadLine();
+            //var result = GetBooksByCategory(db, book);
+            //Console.WriteLine(result);
+
+            ////07.Released Before Date
+            var date = Console.ReadLine();
+            var result = GetBooksReleasedBefore(db, date);
             Console.WriteLine(result);
 
         }
 
+        //02.AgeRestriction
         public static string GetBooksByAgeRestriction(BookShopContext context, string command)
         {
             var titles = context
@@ -61,6 +68,7 @@
 
         }
 
+        //03.Golden Books
         public static string GetGoldenBooks(BookShopContext context)
         {
             var books = context
@@ -87,6 +95,7 @@
 
         }
 
+        //04.Books by Price
         public static string GetBooksByPrice(BookShopContext context)
         {
             var books = context
@@ -110,6 +119,7 @@
             return sb.ToString().TrimEnd();
         }
 
+        //05.Not Released In
         public static string GetBooksNotReleasedIn(BookShopContext context, int year)
         {
             var books = context
@@ -133,6 +143,7 @@
             // return string.Join(Environment.NewLine, books);
         }
 
+        //06.Book Titles by Category
         public static string GetBooksByCategory(BookShopContext context, string input)
         {
             var categories = input
@@ -155,6 +166,32 @@
             bookTitles = bookTitles.OrderBy(x => x).ToList();
 
             return string.Join(Environment.NewLine, bookTitles);
+        }
+
+        //07.Released Before Date
+        public static string GetBooksReleasedBefore(BookShopContext context, string date)
+        {
+            DateTime dateInFormat = DateTime.ParseExact(date, "dd-MM-yyyy", CultureInfo.InvariantCulture); 
+
+            var books = context
+                .Books
+                .Where(x => x.ReleaseDate < dateInFormat)
+                .OrderByDescending(x => x.ReleaseDate)
+                .Select(b => new
+                {
+                    BookTitle = b.Title,
+                    BookType = b.EditionType,
+                    BookPrice = b.Price
+                })
+                .ToList();
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var book in books)
+            {
+                sb.AppendLine($"{book.BookTitle} - {book.BookType} - ${book.BookPrice:F2}");
+            }
+
+            return sb.ToString().TrimEnd();
         }
     }
 
