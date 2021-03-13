@@ -55,8 +55,17 @@
             //Console.WriteLine(result);
 
             //10.Book Search by Author
-            var input = Console.ReadLine();
-            var result = GetBooksByAuthor(db, input);
+            //var input = Console.ReadLine();
+            //var result = GetBooksByAuthor(db, input);
+            //Console.WriteLine(result);
+
+            ////11.Count Books
+            //var lengthCheck = int.Parse(Console.ReadLine());
+            //var result = CountBooks(db, lengthCheck);
+            //Console.WriteLine($"There are {result} books with longer title than {lengthCheck} symbols");
+
+            ////12.Total Book Copies
+            var result = CountCopiesByAuthor(db);
             Console.WriteLine(result);
         }
 
@@ -272,6 +281,33 @@
 
             return sb.ToString().TrimEnd();
         }
+
+        //11.Count Books
+        public static int CountBooks(BookShopContext context, int lengthCheck)
+        {
+            //Return the number of books, which have a title longer than the number given as an input.
+
+            var result = context
+                .Books
+                .Where(b => b.Title.Length > lengthCheck)
+                .Count();
+
+            return result;
+        }
+
+        //12.Total Book Copies
+        public static string CountCopiesByAuthor(BookShopContext context)
+        {
+            //Return the total number of book copies for each author.Order the results descending by total book copies.
+            //Return all results in a single string, each on a new line.
+
+            var result = context
+                .Authors
+                .Select(a=>a.Books)
+
+
+        }
+
 
 
     }
