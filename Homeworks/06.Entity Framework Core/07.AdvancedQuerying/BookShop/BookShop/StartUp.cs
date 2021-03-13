@@ -74,8 +74,13 @@
             //Console.WriteLine(result);
 
             ////14.Most Recent Books
-            var result = GetMostRecentBooks(db);
-            Console.WriteLine(result);
+            //var result = GetMostRecentBooks(db);
+            //Console.WriteLine(result);
+
+            ////15.Increase Prices
+            IncreasePrices(db);
+
+
 
         }
 
@@ -391,6 +396,30 @@
 
             return sb.ToString().TrimEnd();
         }
+
+        //15.Increase Prices
+        public static void IncreasePrices(BookShopContext context)
+        {
+            //context
+            //    .Books
+            //    .Where(b => b.ReleaseDate.Value.Year < 2010)
+            //    .ToList()
+            //    .ForEach(b => b.Price += 5);
+
+            var books = context
+                .Books
+                .Where(b => b.ReleaseDate.Value.Year < 2010)
+                .ToList();
+
+            foreach (var book in books)
+            {
+                book.Price += 5;
+            }
+
+            context.SaveChanges();
+        }
+
+
 
 
     }
