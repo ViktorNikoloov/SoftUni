@@ -2,7 +2,6 @@
 {
     using Data;
     using Initializer;
-    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -78,10 +77,11 @@
             //Console.WriteLine(result);
 
             ////15.Increase Prices
-            IncreasePrices(db);
+            //IncreasePrices(db);
 
-
-
+            //////16.Remove Books
+            //var result = RemoveBooks(db);
+            //Console.WriteLine(result);
         }
 
         //02.AgeRestriction
@@ -419,8 +419,25 @@
             context.SaveChanges();
         }
 
+        //16.Remove Books
+        public static int RemoveBooks(BookShopContext context)
+        {
+            var updatedBooks = context
+                .Books
+                .Where(b => b.Copies < 4200)
+                .ToList();
 
+            foreach (var book in updatedBooks)
+            {
+                context.Books.Remove(book);
+            }
 
+            context.SaveChanges();
+
+            var result = updatedBooks.Count();
+
+            return result;
+        }
 
     }
 
