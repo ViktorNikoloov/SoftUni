@@ -70,9 +70,12 @@
             //Console.WriteLine(result);
 
             ////13.Profit by Category
-            var result = GetTotalProfitByCategory(db);
-            Console.WriteLine(result);
+            //var result = GetTotalProfitByCategory(db);
+            //Console.WriteLine(result);
 
+            ////14.Most Recent Books
+            var result = GetMostRecentBooks(db);
+            Console.WriteLine(result);
 
         }
 
@@ -327,11 +330,67 @@
         //13.Profit by Category
         public static string GetTotalProfitByCategory(BookShopContext context)
         {
-            //Return the total profit of all books by category.Profit for a book can be calculated by multiplying its number of copies by the price per single book.
-            //Order the results by descending by total profit for category and ascending by category name.
+            var profits = context
+                .Categories
+                .Select(bc => new
+                {
+                    CategoryName = bc.Name,
+                    TotalProfit = bc.CategoryBooks
+                        .Select(b => new
+                        {
+                            BookProfit = b.Book.Copies * b.Book.Price
+                        })
+                        .Sum(x => x.BookProfit)
+                })
+                .OrderByDescending(x => x.TotalProfit)
+                .ThenBy(x => x.CategoryName)
+                .ToList();
 
+            StringBuilder sb = new StringBuilder();
+            foreach (var profit in profits)
+            {
+                sb.AppendLine($"{profit.CategoryName} ${profit.TotalProfit:f2}");
+            }
+
+            return sb.ToString().TrimEnd();
         }
 
+        //14.Most Recent Books
+        public static string GetMostRecentBooks(BookShopContext context)
+        {
+            var Categories = context
+                .Categories
+                .Select(c => new
+                {
+                    CategoryName = c.Name,
+                    Books = c.CategoryBooks.Select(b => new
+                    {
+                        BookTitle = b.Book.Title,
+                        BooksReleaseDate = b.Book.ReleaseDate
+                    })
+                    .OrderByDescending(x => x.BooksReleaseDate)
+                    .Take(3)
+                    .ToList()
+
+                })
+                .OrderBy(x => x.CategoryName)
+                .ToList();
+
+
+
+            StringBuilder sb = new StringBuilder();
+            foreach (var Category in Categories)
+            {
+                sb.AppendLine($"--{Category.CategoryName}");
+
+                foreach (var book in Category.Books)
+                {
+                    sb.AppendLine($"{book.BookTitle} ({book.BooksReleaseDate.Value.Year})");
+                }
+            }
+
+            return sb.ToString().TrimEnd();
+        }
 
 
     }
