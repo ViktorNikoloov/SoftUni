@@ -2,6 +2,7 @@
 {
     using Data;
     using Initializer;
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.Globalization;
@@ -65,8 +66,14 @@
             //Console.WriteLine($"There are {result} books with longer title than {lengthCheck} symbols");
 
             ////12.Total Book Copies
-            var result = CountCopiesByAuthor(db);
+            //var result = CountCopiesByAuthor(db);
+            //Console.WriteLine(result);
+
+            ////13.Profit by Category
+            var result = GetTotalProfitByCategory(db);
             Console.WriteLine(result);
+
+
         }
 
         //02.AgeRestriction
@@ -241,13 +248,12 @@
         //09.Book Search
         public static string GetBookTitlesContaining(BookShopContext context, string input)
         {
-            //Return the titles of book, which contain a given string. Ignore casing.
-            //Return all titles in a single string, each on a new row, ordered alphabetically.
-            string lowerInput = input.ToLower();
+            //string lowerInput = input.ToLower();
 
             var books = context
                 .Books
-                .Where(b => b.Title.ToLower().Contains(lowerInput))
+                //.Where(b => b.Title.ToLower().Contains(lowerInput))
+                .Where(b => b.Title.Contains(input, StringComparison.InvariantCultureIgnoreCase))
                 .Select(t => t.Title)
                 .OrderBy(x => x)
                 .ToList();
@@ -298,13 +304,31 @@
         //12.Total Book Copies
         public static string CountCopiesByAuthor(BookShopContext context)
         {
-            //Return the total number of book copies for each author.Order the results descending by total book copies.
-            //Return all results in a single string, each on a new line.
+            var results = context
+                           .Authors
+                           .Select(a => new
+                           {
+                               FullName = a.FirstName + " " + a.LastName,
+                               TotalCopies = a.Books.Sum(b => b.Copies)
 
-            var result = context
-                .Authors
-                .Select(a=>a.Books)
+                           })
+                           .OrderByDescending(x => x.TotalCopies)
+                           .ToList();
 
+            StringBuilder sb = new StringBuilder();
+            foreach (var result in results)
+            {
+                sb.AppendLine($"{result.FullName} - {result.TotalCopies}");
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
+        //13.Profit by Category
+        public static string GetTotalProfitByCategory(BookShopContext context)
+        {
+            //Return the total profit of all books by category.Profit for a book can be calculated by multiplying its number of copies by the price per single book.
+            //Order the results by descending by total profit for category and ascending by category name.
 
         }
 
