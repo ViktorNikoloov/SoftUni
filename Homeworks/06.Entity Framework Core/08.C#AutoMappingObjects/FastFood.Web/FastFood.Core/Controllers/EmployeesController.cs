@@ -19,18 +19,13 @@
 
         public IActionResult Register()
         {
-            return this.View();
+            throw new NotImplementedException();
         }
 
         [HttpPost]
         public IActionResult Register(RegisterEmployeeInputModel model)
         {
             throw new NotImplementedException();
-
-            //    if (!ModelState.IsValid)
-            //    {
-            //        return RedirectToAction("Error", "Home");
-            //    }
         }
 
         public IActionResult All()

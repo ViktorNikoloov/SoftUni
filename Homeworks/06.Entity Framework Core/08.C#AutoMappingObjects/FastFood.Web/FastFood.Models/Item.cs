@@ -2,6 +2,7 @@ namespace FastFood.Models
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Item
 	{
@@ -15,6 +16,7 @@ namespace FastFood.Models
 		[Required]
 		public Category Category { get; set; }
 
+		[Column(TypeName = "decimal(18,2)")]
 		[Range(typeof(decimal), "0.01", "79228162514264337593543950335")]
 		public decimal Price { get; set; }
 

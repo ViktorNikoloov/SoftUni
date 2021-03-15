@@ -11,7 +11,6 @@ using Microsoft.Extensions.Hosting;
 
 namespace FastFood.Core
 {
-    using AutoMapper;
     using Data;
     using Microsoft.EntityFrameworkCore;
 
@@ -31,10 +30,7 @@ namespace FastFood.Core
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddAutoMapper(typeof(Startup));
-
             services.AddControllersWithViews();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

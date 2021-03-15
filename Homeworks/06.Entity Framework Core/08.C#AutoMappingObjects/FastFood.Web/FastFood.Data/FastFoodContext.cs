@@ -11,9 +11,12 @@
         }
 
         public FastFoodContext(DbContextOptions<FastFoodContext> options)
-            : base(options)
+            :base(options)
         {
+
         }
+        
+        
 
         public DbSet<Category> Categories { get; set; }
 
@@ -37,10 +40,6 @@
 
             builder.Entity<Item>()
                 .HasAlternateKey(i => i.Name);
-
-            builder.Entity<Item>()
-                 .Property(p => p.Price)
-                 .HasColumnType("decimal(18,2)");
         }
     }
 }
