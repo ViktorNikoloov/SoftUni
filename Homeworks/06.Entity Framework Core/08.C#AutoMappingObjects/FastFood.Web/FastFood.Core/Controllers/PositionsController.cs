@@ -1,5 +1,6 @@
-﻿namespace FastFood.Core.Controllers
+﻿ namespace FastFood.Core.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using AutoMapper;
     using AutoMapper.QueryableExtensions;
@@ -43,11 +44,11 @@
 
         public IActionResult All()
         {
-            var categories = this.context.Positions
+            List<PositionsAllViewModel> positions = this.context.Positions
                 .ProjectTo<PositionsAllViewModel>(mapper.ConfigurationProvider)
                 .ToList();
 
-            return this.View(categories);
+            return this.View(positions);
         }
     }
 }

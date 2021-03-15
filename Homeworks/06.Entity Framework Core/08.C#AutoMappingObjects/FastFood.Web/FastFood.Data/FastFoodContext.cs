@@ -37,6 +37,10 @@
 
             builder.Entity<Item>()
                 .HasAlternateKey(i => i.Name);
+
+            builder.Entity<Item>()
+                 .Property(p => p.Price)
+                 .HasColumnType("decimal(18,2)");
         }
     }
 }
