@@ -13,12 +13,25 @@
         </tr>
     </thead>
     <tbody>
-        @for(var i = 0; i < Model.Count(); i++)
-    {
-        <tr class="row">
-            <th class="col-md-1">@(i + 1)</th>
-            <td class="col-md-2">@Model[i].Name</td>
-        </tr>
-    }
+        @for (var i = 0; i < Model.Count(); i++)
+        {
+            <tr class="row">
+                <th class="col-md-1">@(i + 1)</th>
+                <td class="col-md-2">@Model[i].Name</td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<div class="button-holder d-flex justify-content-center text-center">
+    <a asp-controller="Positions" asp-action="Create" class="btn btn-info">Create</a>
+    <a asp-controller="Home" asp-action="Index" class="btn btn-default">Back</a>
+</div>          
+
+
+
+
+
+
+
+
