@@ -26,14 +26,19 @@ namespace ProductShop
             //string result = ImportProducts(db, inputJson);
             //Console.WriteLine(result);
 
-            ////4.Import Categories
+            ////04.Import Categories
             //string inputJson = File.ReadAllText("../../../Datasets/categories.json");
             //string result = ImportCategories(db, inputJson);
             //Console.WriteLine(result);
 
-            ////4.Import Categories and Products
-            string inputJson = File.ReadAllText("../../../Datasets/categories-products.json");
-            string result = ImportCategoryProducts(db, inputJson);
+            ////05.Import Categories and Products
+            //string inputJson = File.ReadAllText("../../../Datasets/categories-products.json");
+            //string result = ImportCategoryProducts(db, inputJson);
+            //Console.WriteLine(result);
+
+            ////06.Export Products in Range
+            string result = GetSoldProducts(db);
+
             Console.WriteLine(result);
         }
 
@@ -70,7 +75,7 @@ namespace ProductShop
             return $"Successfully imported {products.Length}";
         }
 
-        //4.Import Categories
+        //04.Import Categories
         public static string ImportCategories(ProductShopContext context, string inputJson)
         {
             /*First Solution*/
@@ -110,6 +115,63 @@ namespace ProductShop
 
             return $"Successfully imported {categoryProducts.Length}";
 
+        }
+
+        //06.Export Products in Range
+        public static string GetProductsInRange(ProductShopContext context)
+        {
+            var products = context
+                .Products
+                .Where(p => p.Price >= 500 && p.Price <= 1000)
+                .OrderBy(p => p.Price)
+                .Select(p => new
+                {
+                    name = p.Name,
+                    price = p.Price,
+                    seller = p.Seller.FirstName + " " + p.Seller.LastName
+                })
+                .ToList();
+
+            var jsonFile = JsonConvert.SerializeObject(products, Formatting.Indented);
+
+            return jsonFile;
+        }
+
+        //07.Export Successfully Sold Products
+        public static string GetSoldProducts(ProductShopContext context)
+        {
+            //Get all users who have at least 1 sold item with a buyer.
+            //Order them by last name, then by first name. 
+            //Select the person's first and last name.
+            //For each of the sold products (products with buyers), select the product's name, price and the buyer's first and last name.
+
+            var users = context
+                .Users
+                .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(x=>x.Buyer != null))
+
+                .OrderBy(u => u.LastName)
+                .ThenBy(u => u.FirstName)
+                .Select(u => new
+                {
+                    firstName = u.FirstName,
+                    lastName = u.LastName,
+                    soldProducts = u.ProductsSold
+                    .Where(p=>p.Buyer != null)
+                    .Select(p => new
+                    {
+                        name = p.Name,
+                        price = p.Price,
+                        buyerFirstName = p.Buyer.FirstName,
+                        buyerLastName = p.Buyer.LastName
+
+                    })
+                    .ToList()
+                })
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(users, Formatting.Indented);
+
+            return json;
         }
     }
 }
