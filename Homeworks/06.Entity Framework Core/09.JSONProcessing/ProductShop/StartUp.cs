@@ -36,10 +36,19 @@ namespace ProductShop
             //string result = ImportCategoryProducts(db, inputJson);
             //Console.WriteLine(result);
 
-            ////06.Export Products in Range
-            string result = GetSoldProducts(db);
+            //////06.Export Products in Range
+            //string result = GetProductsInRange(db);
+            //Console.WriteLine(result);
 
+            ////07.Export Successfully Sold Products
+            //string result = GetSoldProducts(db);
+            //Console.WriteLine(result);
+
+            //08.Export Categories by Products Count
+            string result = GetCategoriesByProductsCount(db);
             Console.WriteLine(result);
+
+
         }
 
         private static void ResetDatabase(ProductShopContext db)
@@ -140,15 +149,9 @@ namespace ProductShop
         //07.Export Successfully Sold Products
         public static string GetSoldProducts(ProductShopContext context)
         {
-            //Get all users who have at least 1 sold item with a buyer.
-            //Order them by last name, then by first name. 
-            //Select the person's first and last name.
-            //For each of the sold products (products with buyers), select the product's name, price and the buyer's first and last name.
-
             var users = context
                 .Users
                 .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(x=>x.Buyer != null))
-
                 .OrderBy(u => u.LastName)
                 .ThenBy(u => u.FirstName)
                 .Select(u => new
@@ -170,6 +173,25 @@ namespace ProductShop
                 .ToList();
 
             var json = JsonConvert.SerializeObject(users, Formatting.Indented);
+
+            return json;
+        }
+
+        //08.Export Categories by Products Count
+        public static string GetCategoriesByProductsCount(ProductShopContext context)
+        {
+            var products = context
+                .Categories
+                .OrderByDescending(x => x.CategoryProducts.Count)
+                .Select(c => new
+                {
+                    category = c.Name,
+                    productsCount = c.CategoryProducts.Count,
+                    averagePrice = c.CategoryProducts.Average(cp=>cp.Product.Price).ToString("F2"),
+                    totalRevenue = c.CategoryProducts.Sum(cp=>cp.Product.Price).ToString("F2")
+                });
+
+            var json = JsonConvert.SerializeObject(products, Formatting.Indented);
 
             return json;
         }
