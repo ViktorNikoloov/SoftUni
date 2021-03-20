@@ -44,9 +44,14 @@ namespace ProductShop
             //string result = GetSoldProducts(db);
             //Console.WriteLine(result);
 
-            //08.Export Categories by Products Count
-            string result = GetCategoriesByProductsCount(db);
+            ////08.Export Categories by Products Count
+            //string result = GetCategoriesByProductsCount(db);
+            //Console.WriteLine(result);
+
+            //08.Export Users and Products
+            string result = GetUsersWithProducts(db);
             Console.WriteLine(result);
+
 
 
         }
@@ -151,7 +156,7 @@ namespace ProductShop
         {
             var users = context
                 .Users
-                .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(x=>x.Buyer != null))
+                .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(x => x.Buyer != null))
                 .OrderBy(u => u.LastName)
                 .ThenBy(u => u.FirstName)
                 .Select(u => new
@@ -159,7 +164,7 @@ namespace ProductShop
                     firstName = u.FirstName,
                     lastName = u.LastName,
                     soldProducts = u.ProductsSold
-                    .Where(p=>p.Buyer != null)
+                    .Where(p => p.Buyer != null)
                     .Select(p => new
                     {
                         name = p.Name,
@@ -187,13 +192,53 @@ namespace ProductShop
                 {
                     category = c.Name,
                     productsCount = c.CategoryProducts.Count,
-                    averagePrice = c.CategoryProducts.Average(cp=>cp.Product.Price).ToString("F2"),
-                    totalRevenue = c.CategoryProducts.Sum(cp=>cp.Product.Price).ToString("F2")
+                    averagePrice = c.CategoryProducts.Average(cp => cp.Product.Price).ToString("F2"),
+                    totalRevenue = c.CategoryProducts.Sum(cp => cp.Product.Price).ToString("F2")
                 });
 
             var json = JsonConvert.SerializeObject(products, Formatting.Indented);
 
             return json;
         }
+
+        //08.Export Users and Products
+        public static string GetUsersWithProducts(ProductShopContext context)
+        {
+            //et all users who have at least 1 sold product with a buyer.
+            //Order them in descending order by the number of sold products with a buyer.
+            //Select only their first and last name, age and for each product - name and price.
+            //Ignore all null values.
+
+            var users = context
+                .Users
+                .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(b => b.Buyer != null))
+                .OrderByDescending(x => x.ProductsSold.Count())
+                .Select(u => new
+                {
+                    firstName = u.FirstName,
+                    lastName = u.LastName,
+                    age = u.Age,
+                    soldProducts = new
+                    {
+                        count = u.ProductsSold.Count(),
+                        products = u.ProductsSold.Select(sp => new
+                        {
+                            name = sp.Name,
+                            price = sp.Price
+                        })
+                        .ToList()
+                    }
+                })
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(users, new JsonSerializerSettings 
+            {
+                Formatting = Formatting.Indented,
+                NullValueHandling = NullValueHandling.Ignore 
+            });
+
+            return json;
+        }
+
     }
 }
