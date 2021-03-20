@@ -48,7 +48,7 @@ namespace ProductShop
             //string result = GetCategoriesByProductsCount(db);
             //Console.WriteLine(result);
 
-            //08.Export Users and Products
+            //09.Export Users and Products
             string result = GetUsersWithProducts(db);
             Console.WriteLine(result);
 
@@ -201,7 +201,7 @@ namespace ProductShop
             return json;
         }
 
-        //08.Export Users and Products
+        //09.Export Users and Products
         public static string GetUsersWithProducts(ProductShopContext context)
         {
             //et all users who have at least 1 sold product with a buyer.
