@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ProductShop.Data;
 using ProductShop.Models;
@@ -15,7 +14,7 @@ namespace ProductShop
         {
             ProductShopContext db = new ProductShopContext();
 
-            ResetDatabase(db);
+            //ResetDatabase(db);
 
             ////02.Import Users
             //string inputJson = File.ReadAllText("../../../Datasets/users.json");
@@ -37,7 +36,7 @@ namespace ProductShop
             //string result = ImportCategoryProducts(db, inputJson);
             //Console.WriteLine(result);
 
-            ////06.Export Products in Range
+            //////06.Export Products in Range
             //string result = GetProductsInRange(db);
             //Console.WriteLine(result);
 
@@ -49,9 +48,12 @@ namespace ProductShop
             //string result = GetCategoriesByProductsCount(db);
             //Console.WriteLine(result);
 
-            ////08.Export Users and Products
-            //string result = GetUsersWithProducts(db);
-            //Console.WriteLine(result);
+            //09.Export Users and Products
+            string result = GetUsersWithProducts(db);
+            Console.WriteLine(result);
+
+
+
         }
 
         private static void ResetDatabase(ProductShopContext db)
@@ -199,14 +201,18 @@ namespace ProductShop
             return json;
         }
 
-        //08.Export Users and Products
+        //09.Export Users and Products
         public static string GetUsersWithProducts(ProductShopContext context)
         {
+            //et all users who have at least 1 sold product with a buyer.
+            //Order them in descending order by the number of sold products with a buyer.
+            //Select only their first and last name, age and for each product - name and price.
+            //Ignore all null values.
+
             var users = context
                 .Users
-                .Include(ps=>ps.ProductsSold)
-                .ToList()
-                .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(b => b.BuyerId != null))
+                .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(b => b.Buyer != null))
+                .OrderByDescending(x => x.ProductsSold.Count())
                 .Select(u => new
                 {
                     firstName = u.FirstName,
@@ -214,8 +220,8 @@ namespace ProductShop
                     age = u.Age,
                     soldProducts = new
                     {
-                        count = u.ProductsSold.Where(b => b.BuyerId != null).Count(),
-                        products = u.ProductsSold.Where(b => b.BuyerId != null).Select(sp => new
+                        count = u.ProductsSold.Count(),
+                        products = u.ProductsSold.Select(sp => new
                         {
                             name = sp.Name,
                             price = sp.Price
@@ -223,16 +229,9 @@ namespace ProductShop
                         .ToList()
                     }
                 })
-                .OrderByDescending(x => x.soldProducts.products.Count())
                 .ToList();
 
-            var resultObject = new
-            {
-                usersCount = users.Count(),
-                users = users,
-            };
-
-            var json = JsonConvert.SerializeObject(resultObject, new JsonSerializerSettings 
+            var json = JsonConvert.SerializeObject(users, new JsonSerializerSettings 
             {
                 Formatting = Formatting.Indented,
                 NullValueHandling = NullValueHandling.Ignore 
