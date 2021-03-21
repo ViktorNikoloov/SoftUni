@@ -17,41 +17,41 @@ namespace ProductShop
 
             ResetDatabase(db);
 
-            //02.Import Users
-            string inputJson = File.ReadAllText("../../../Datasets/users.json");
-            string result = ImportUsers(db, inputJson);
-            Console.WriteLine(result);
+            ////02.Import Users
+            //string inputJson = File.ReadAllText("../../../Datasets/users.json");
+            //string result = ImportUsers(db, inputJson);
+            //Console.WriteLine(result);
 
-            //03.Import Products
-            string inputJson = File.ReadAllText("../../../Datasets/products.json");
-            string result = ImportProducts(db, inputJson);
-            Console.WriteLine(result);
+            ////03.Import Products
+            //string inputJson = File.ReadAllText("../../../Datasets/products.json");
+            //string result = ImportProducts(db, inputJson);
+            //Console.WriteLine(result);
 
-            //04.Import Categories
-            string inputJson = File.ReadAllText("../../../Datasets/categories.json");
-            string result = ImportCategories(db, inputJson);
-            Console.WriteLine(result);
+            ////04.Import Categories
+            //string inputJson = File.ReadAllText("../../../Datasets/categories.json");
+            //string result = ImportCategories(db, inputJson);
+            //Console.WriteLine(result);
 
-            //05.Import Categories and Products
-            string inputJson = File.ReadAllText("../../../Datasets/categories-products.json");
-            string result = ImportCategoryProducts(db, inputJson);
-            Console.WriteLine(result);
+            ////05.Import Categories and Products
+            //string inputJson = File.ReadAllText("../../../Datasets/categories-products.json");
+            //string result = ImportCategoryProducts(db, inputJson);
+            //Console.WriteLine(result);
 
-            //06.Export Products in Range
-            string result = GetProductsInRange(db);
-            Console.WriteLine(result);
+            ////06.Export Products in Range
+            //string result = GetProductsInRange(db);
+            //Console.WriteLine(result);
 
-            //07.Export Successfully Sold Products
-            string result = GetSoldProducts(db);
-            Console.WriteLine(result);
+            ////07.Export Successfully Sold Products
+            //string result = GetSoldProducts(db);
+            //Console.WriteLine(result);
 
-            //08.Export Categories by Products Count
-            string result = GetCategoriesByProductsCount(db);
-            Console.WriteLine(result);
+            ////08.Export Categories by Products Count
+            //string result = GetCategoriesByProductsCount(db);
+            //Console.WriteLine(result);
 
-            //08.Export Users and Products
-            string result = GetUsersWithProducts(db);
-            Console.WriteLine(result);
+            ////08.Export Users and Products
+            //string result = GetUsersWithProducts(db);
+            //Console.WriteLine(result);
         }
 
         private static void ResetDatabase(ProductShopContext db)
