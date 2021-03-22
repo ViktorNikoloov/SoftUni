@@ -2,58 +2,88 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ProductShop.Data;
+using ProductShop.DataTransferObject.Product;
 using ProductShop.Models;
 
 namespace ProductShop
 {
     public class StartUp
     {
+        static IMapper mapper;
+
         public static void Main(string[] args)
         {
             ProductShopContext db = new ProductShopContext();
 
+            //InitializeMapper(); // static
+
+
+
             //ResetDatabase(db);
 
-            ////02.Import Users
+            //02.Import Users
             //string inputJson = File.ReadAllText("../../../Datasets/users.json");
             //string result = ImportUsers(db, inputJson);
             //Console.WriteLine(result);
 
-            ////03.Import Products
-            //string inputJson = File.ReadAllText("../../../Datasets/products.json");
-            //string result = ImportProducts(db, inputJson);
-            //Console.WriteLine(result);
+            //03.Import Products
+            string inputJson = File.ReadAllText("../../../Datasets/products.json");
+            string result = ImportProducts(db, inputJson);
+            Console.WriteLine(result);
 
-            ////04.Import Categories
+            //04.Import Categories
             //string inputJson = File.ReadAllText("../../../Datasets/categories.json");
             //string result = ImportCategories(db, inputJson);
             //Console.WriteLine(result);
 
-            ////05.Import Categories and Products
+            //05.Import Categories and Products
             //string inputJson = File.ReadAllText("../../../Datasets/categories-products.json");
             //string result = ImportCategoryProducts(db, inputJson);
             //Console.WriteLine(result);
 
-            //////06.Export Products in Range
+            //06.Export Products in Range
             //string result = GetProductsInRange(db);
             //Console.WriteLine(result);
 
-            ////07.Export Successfully Sold Products
+            //07.Export Successfully Sold Products
             //string result = GetSoldProducts(db);
             //Console.WriteLine(result);
 
-            ////08.Export Categories by Products Count
+            //08.Export Categories by Products Count
             //string result = GetCategoriesByProductsCount(db);
             //Console.WriteLine(result);
 
             //09.Export Users and Products
-            string result = GetUsersWithProducts(db);
-            Console.WriteLine(result);
+            //string result = GetUsersWithProducts(db);
+            //Console.WriteLine(result);
+        }
 
+        /*We can use it for export*/
+        //private static void InitializeMapper()
+        //{
+        //    /*Static Mapper*/
+        //    Mapper.Initialize(cfg => 
+        //    {
+        //        cfg.AddProfile<ProductShopProfile>();
+        //    });
+        //}
 
+        /*We need to use it for import*/
+        private static void InitializeMapper()
+        {
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<ProductShopProfile>();
+            });
 
+            mapper = config.CreateMapper();
         }
 
         private static void ResetDatabase(ProductShopContext db)
@@ -68,25 +98,33 @@ namespace ProductShop
         //02.Import Users
         public static string ImportUsers(ProductShopContext context, string inputJson)
         {
-            User[] users = JsonConvert
-                .DeserializeObject<User[]>(inputJson);
+            InitializeMapper();
+
+            IEnumerable<UserInputModel> dtoUsers = JsonConvert
+                .DeserializeObject<IEnumerable<UserInputModel>>(inputJson);
+
+            var users = mapper.Map<IEnumerable<User>>(dtoUsers);
 
             context.Users.AddRange(users);
             context.SaveChanges();
 
-            return $"Successfully imported {users.Length}";
+            return $"Successfully imported {users.Count()}";
         }
 
         //03.Import Products
         public static string ImportProducts(ProductShopContext context, string inputJson)
         {
-            Product[] products = JsonConvert.DeserializeObject<Product[]>(inputJson);
+            InitializeMapper();
+
+           IEnumerable<ProductInputModel> productsDto= JsonConvert.DeserializeObject<IEnumerable<ProductInputModel>>(inputJson);
+
+            var products = mapper.Map<IEnumerable<Product>>(productsDto);
 
             context.Products.AddRange(products);
             context.SaveChanges();
 
 
-            return $"Successfully imported {products.Length}";
+            return $"Successfully imported {products.Count()}";
         }
 
         //04.Import Categories
@@ -138,13 +176,26 @@ namespace ProductShop
                 .Products
                 .Where(p => p.Price >= 500 && p.Price <= 1000)
                 .OrderBy(p => p.Price)
-                .Select(p => new
-                {
-                    name = p.Name,
-                    price = p.Price,
-                    seller = p.Seller.FirstName + " " + p.Seller.LastName
-                })
+                /*Select Solution*/
+                //.Select(p => new
+                //{
+                //    name = p.Name,
+                //    price = p.Price,
+                //    seller = p.Seller.FirstName + " " + p.Seller.LastName
+                //})
+
+                /*DTO Solution*/
+                //.Select(p =>  new ListProductInRange
+                //{
+                //    Name = p.Name,
+                //    Price = p.Price,
+                //    SellerName = p.Seller.FirstName + " " + p.Seller.LastName
+                //})
+                /*Mapper Solution*/
+                .ProjectTo<ListProductInRange>()
                 .ToList();
+
+
 
             var jsonFile = JsonConvert.SerializeObject(products, Formatting.Indented);
 
@@ -204,15 +255,11 @@ namespace ProductShop
         //09.Export Users and Products
         public static string GetUsersWithProducts(ProductShopContext context)
         {
-            //et all users who have at least 1 sold product with a buyer.
-            //Order them in descending order by the number of sold products with a buyer.
-            //Select only their first and last name, age and for each product - name and price.
-            //Ignore all null values.
-
             var users = context
                 .Users
-                .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(b => b.Buyer != null))
-                .OrderByDescending(x => x.ProductsSold.Count())
+                .Include(ps => ps.ProductsSold)
+                .ToList()
+                .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(b => b.BuyerId != null))
                 .Select(u => new
                 {
                     firstName = u.FirstName,
@@ -220,25 +267,35 @@ namespace ProductShop
                     age = u.Age,
                     soldProducts = new
                     {
-                        count = u.ProductsSold.Count(),
-                        products = u.ProductsSold.Select(sp => new
-                        {
-                            name = sp.Name,
-                            price = sp.Price
-                        })
-                        .ToList()
+                        count = u.ProductsSold.Count(b => b.BuyerId != null),
+                        products = u.ProductsSold
+                        .Where(b => b.BuyerId != null)
+                            .Select(ps => new
+                            {
+                                name = ps.Name,
+                                price = ps.Price
+                            })
+                                 .ToList()
                     }
                 })
+                .OrderByDescending(x => x.soldProducts.products.Count)
                 .ToList();
 
-            var json = JsonConvert.SerializeObject(users, new JsonSerializerSettings 
+            var displayObject = new
+            {
+                usersCount = users.Count(),
+                users = users
+            };
+
+            JsonSerializerSettings settings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
-                NullValueHandling = NullValueHandling.Ignore 
-            });
+                NullValueHandling = NullValueHandling.Ignore
+            };
+
+            var json = JsonConvert.SerializeObject(displayObject, settings);
 
             return json;
         }
-
     }
 }
