@@ -44,17 +44,17 @@ namespace ProductShop
             //Console.WriteLine(result);
 
             //05.Import Categories and Products
-            string inputJson = File.ReadAllText("../../../Datasets/categories-products.json");
-            string result = ImportCategoryProducts(db, inputJson);
-            Console.WriteLine(result);
+            //string inputJson = File.ReadAllText("../../../Datasets/categories-products.json");
+            //string result = ImportCategoryProducts(db, inputJson);
+            //Console.WriteLine(result);
 
             //06.Export Products in Range
             //string result = GetProductsInRange(db);
             //Console.WriteLine(result);
 
             //07.Export Successfully Sold Products
-            //string result = GetSoldProducts(db);
-            //Console.WriteLine(result);
+            string result = GetSoldProducts(db);
+            Console.WriteLine(result);
 
             //08.Export Categories by Products Count
             //string result = GetCategoriesByProductsCount(db);
@@ -66,17 +66,17 @@ namespace ProductShop
         }
 
         /*We can use it for export*/
-        //private static void InitializeMapper()
-        //{
-        //    /*Static Mapper*/
-        //    Mapper.Initialize(cfg => 
-        //    {
-        //        cfg.AddProfile<ProductShopProfile>();
-        //    });
-        //}
+        private static void InitializeStaticMapper()
+        {
+            /*Static Mapper*/
+            Mapper.Initialize(cfg =>
+            {
+                cfg.AddProfile<ProductShopProfile>();
+            });
+        }
 
         /*We need to use it for import*/
-        private static void InitializeMapper()
+        private static void InitializeInstanceMapper()
         {
             var config = new MapperConfiguration(cfg =>
             {
@@ -86,6 +86,7 @@ namespace ProductShop
             mapper = config.CreateMapper();
         }
 
+        /*Delete old DB and create new one*/
         private static void ResetDatabase(ProductShopContext db)
         {
             db.Database.EnsureDeleted();
@@ -98,7 +99,7 @@ namespace ProductShop
         //02.Import Users
         public static string ImportUsers(ProductShopContext context, string inputJson)
         {
-            InitializeMapper();
+            InitializeInstanceMapper();
 
             var dtoUsers = JsonConvert
                 .DeserializeObject<IEnumerable<UserInputModel>>(inputJson);
@@ -114,7 +115,7 @@ namespace ProductShop
         //03.Import Products
         public static string ImportProducts(ProductShopContext context, string inputJson)
         {
-            InitializeMapper();
+            InitializeInstanceMapper();
 
             IEnumerable<ProductInputModel> productsDto = JsonConvert
                  .DeserializeObject<IEnumerable<ProductInputModel>>(inputJson);
@@ -131,7 +132,7 @@ namespace ProductShop
         //04.Import Categories
         public static string ImportCategories(ProductShopContext context, string inputJson)
         {
-            InitializeMapper();
+            InitializeInstanceMapper();
 
             /*First Solution*/
             //var categoriesDto = JsonConvert
@@ -167,17 +168,17 @@ namespace ProductShop
         //05.Import Categories and Products
         public static string ImportCategoryProducts(ProductShopContext context, string inputJson)
         {
-            InitializeMapper();
+            InitializeInstanceMapper();
 
-            var categoryProductsDto = JsonConvert.DeserializeObject<IEnumerable<CategoryProductsInput>>(inputJson);
+            var categoryProductsDto = JsonConvert
+                .DeserializeObject<IEnumerable<CategoryProductsInput>>(inputJson);
 
-            var categoryProducts = mapper.Map<CategoryProduct>(categoryProductsDto);
+            var categoryProducts = mapper.Map<IEnumerable<CategoryProduct>>(categoryProductsDto);
 
             context.CategoryProducts.AddRange(categoryProducts);
             context.SaveChanges();
 
-            return $"Successfully imported {categoryProducts.GetHashCode()}";
-
+            return $"Successfully imported {categoryProducts.Count()}";
         }
 
         //06.Export Products in Range

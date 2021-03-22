@@ -14,6 +14,8 @@ namespace ProductShop
 
             CreateMap<CategoryInputModel, Category>();
 
+            CreateMap<CategoryProductsInput, CategoryProduct>();
+
             CreateMap<Product, ListProductInRange>()
                 .ForMember(x=>x.SellerName, y=>y.MapFrom(x=>x.Seller.FirstName + " " + x.Seller.LastName));
         }
