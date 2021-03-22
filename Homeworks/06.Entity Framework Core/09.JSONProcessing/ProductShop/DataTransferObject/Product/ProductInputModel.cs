@@ -1,4 +1,6 @@
-﻿namespace ProductShop.DataTransferObject.Product
+﻿using Newtonsoft.Json;
+
+namespace ProductShop.DataTransferObject.Product
 {
     public class ProductInputModel
     {

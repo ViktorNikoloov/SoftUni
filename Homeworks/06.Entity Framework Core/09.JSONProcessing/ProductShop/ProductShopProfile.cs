@@ -8,9 +8,11 @@ namespace ProductShop
     {
         public ProductShopProfile()
         {
-            CreateMap<User, UserInputModel>();
+            CreateMap<UserInputModel, User>();
 
-            CreateMap<Product, ProductInputModel>();
+            CreateMap<ProductInputModel, Product>();
+
+            CreateMap<CategoryInputModel, Category>();
 
             CreateMap<Product, ListProductInRange>()
                 .ForMember(x=>x.SellerName, y=>y.MapFrom(x=>x.Seller.FirstName + " " + x.Seller.LastName));

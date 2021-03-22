@@ -34,9 +34,9 @@ namespace ProductShop
             //Console.WriteLine(result);
 
             //03.Import Products
-            string inputJson = File.ReadAllText("../../../Datasets/products.json");
-            string result = ImportProducts(db, inputJson);
-            Console.WriteLine(result);
+            //string inputJson = File.ReadAllText("../../../Datasets/products.json");
+            //string result = ImportProducts(db, inputJson);
+            //Console.WriteLine(result);
 
             //04.Import Categories
             //string inputJson = File.ReadAllText("../../../Datasets/categories.json");
@@ -44,9 +44,9 @@ namespace ProductShop
             //Console.WriteLine(result);
 
             //05.Import Categories and Products
-            //string inputJson = File.ReadAllText("../../../Datasets/categories-products.json");
-            //string result = ImportCategoryProducts(db, inputJson);
-            //Console.WriteLine(result);
+            string inputJson = File.ReadAllText("../../../Datasets/categories-products.json");
+            string result = ImportCategoryProducts(db, inputJson);
+            Console.WriteLine(result);
 
             //06.Export Products in Range
             //string result = GetProductsInRange(db);
@@ -100,7 +100,7 @@ namespace ProductShop
         {
             InitializeMapper();
 
-            IEnumerable<UserInputModel> dtoUsers = JsonConvert
+            var dtoUsers = JsonConvert
                 .DeserializeObject<IEnumerable<UserInputModel>>(inputJson);
 
             var users = mapper.Map<IEnumerable<User>>(dtoUsers);
@@ -116,7 +116,8 @@ namespace ProductShop
         {
             InitializeMapper();
 
-           IEnumerable<ProductInputModel> productsDto= JsonConvert.DeserializeObject<IEnumerable<ProductInputModel>>(inputJson);
+            IEnumerable<ProductInputModel> productsDto = JsonConvert
+                 .DeserializeObject<IEnumerable<ProductInputModel>>(inputJson);
 
             var products = mapper.Map<IEnumerable<Product>>(productsDto);
 
@@ -130,9 +131,13 @@ namespace ProductShop
         //04.Import Categories
         public static string ImportCategories(ProductShopContext context, string inputJson)
         {
+            InitializeMapper();
+
             /*First Solution*/
-            //List<Category> categories = JsonConvert
-            //    .DeserializeObject<List<Category>>(inputJson);
+            //var categoriesDto = JsonConvert
+            //    .DeserializeObject<IEnumerable<CategoryInputModel>>(inputJson);
+
+            //var categories = mapper.Map<IEnumerable<Category>>(categoriesDto);
 
             //foreach (var category in categories)
             //{
@@ -146,10 +151,12 @@ namespace ProductShop
             //return $"Successfully imported {context.Categories.Count()}";
 
             /*Second Solution*/
-            List<Category> categories = JsonConvert
-                .DeserializeObject<List<Category>>(inputJson)
-                .Where(n => n.Name != null)
-                .ToList();
+            var categoriesDto = JsonConvert
+                .DeserializeObject<IEnumerable<CategoryInputModel>>(inputJson);
+
+            var categories = mapper.Map<IEnumerable<Category>>(categoriesDto)
+            .Where(n => n.Name != null)
+            .ToList();
 
             context.Categories.AddRange(categories);
             context.SaveChanges();
@@ -160,12 +167,16 @@ namespace ProductShop
         //05.Import Categories and Products
         public static string ImportCategoryProducts(ProductShopContext context, string inputJson)
         {
-            CategoryProduct[] categoryProducts = JsonConvert.DeserializeObject<CategoryProduct[]>(inputJson);
+            InitializeMapper();
+
+            var categoryProductsDto = JsonConvert.DeserializeObject<IEnumerable<CategoryProductsInput>>(inputJson);
+
+            var categoryProducts = mapper.Map<CategoryProduct>(categoryProductsDto);
 
             context.CategoryProducts.AddRange(categoryProducts);
             context.SaveChanges();
 
-            return $"Successfully imported {categoryProducts.Length}";
+            return $"Successfully imported {categoryProducts.GetHashCode()}";
 
         }
 
