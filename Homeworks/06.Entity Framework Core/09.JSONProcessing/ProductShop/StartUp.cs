@@ -8,9 +8,13 @@ using AutoMapper.QueryableExtensions;
 
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+
+using ProductShop.Models;
 using ProductShop.Data;
 using ProductShop.DataTransferObject.Product;
-using ProductShop.Models;
+using ProductShop.DataTransferObject.UsersProducts;
+using ProductShop.DataTransferObject.Category;
+using ProductShop.DataTransferObject.ExportUserAndProducts;
 
 namespace ProductShop
 {
@@ -22,9 +26,7 @@ namespace ProductShop
         {
             ProductShopContext db = new ProductShopContext();
 
-            //InitializeMapper(); // static
-
-
+            InitializeStaticMapper();
 
             //ResetDatabase(db);
 
@@ -53,16 +55,16 @@ namespace ProductShop
             //Console.WriteLine(result);
 
             //07.Export Successfully Sold Products
-            string result = GetSoldProducts(db);
-            Console.WriteLine(result);
+            //string result = GetSoldProducts(db);
+            //Console.WriteLine(result);
 
             //08.Export Categories by Products Count
             //string result = GetCategoriesByProductsCount(db);
             //Console.WriteLine(result);
 
             //09.Export Users and Products
-            //string result = GetUsersWithProducts(db);
-            //Console.WriteLine(result);
+            string result = GetUsersWithProducts(db);
+            Console.WriteLine(result);
         }
 
         /*We can use it for export*/
@@ -104,9 +106,9 @@ namespace ProductShop
             var dtoUsers = JsonConvert
                 .DeserializeObject<IEnumerable<UserInputModel>>(inputJson);
 
-            var users = mapper.Map<IEnumerable<User>>(dtoUsers);
+            var users = mapper.Map<IEnumerable<UserDTO>>(dtoUsers);
 
-            context.Users.AddRange(users);
+            context.Users.AddRange((User)users);
             context.SaveChanges();
 
             return $"Successfully imported {users.Count()}";
@@ -120,9 +122,9 @@ namespace ProductShop
             IEnumerable<ProductInputModel> productsDto = JsonConvert
                  .DeserializeObject<IEnumerable<ProductInputModel>>(inputJson);
 
-            var products = mapper.Map<IEnumerable<Product>>(productsDto);
+            var products = mapper.Map<IEnumerable<ProductDTO>>(productsDto);
 
-            context.Products.AddRange(products);
+            context.Products.AddRange((Product)products);
             context.SaveChanges();
 
 
@@ -222,23 +224,45 @@ namespace ProductShop
                 .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(x => x.Buyer != null))
                 .OrderBy(u => u.LastName)
                 .ThenBy(u => u.FirstName)
-                .Select(u => new
-                {
-                    firstName = u.FirstName,
-                    lastName = u.LastName,
-                    soldProducts = u.ProductsSold
-                    .Where(p => p.Buyer != null)
-                    .Select(p => new
-                    {
-                        name = p.Name,
-                        price = p.Price,
-                        buyerFirstName = p.Buyer.FirstName,
-                        buyerLastName = p.Buyer.LastName
+            /*Select Solution*/
+            //    .Select(u => new
+            //    {
+            //        firstName = u.FirstName,
+            //        lastName = u.LastName,
+            //        soldProducts = u.ProductsSold
+            //        .Where(p => p.Buyer != null)
+            //        .Select(p => new
+            //        {
+            //            name = p.Name,
+            //            price = p.Price,
+            //            buyerFirstName = p.Buyer.FirstName,
+            //            buyerLastName = p.Buyer.LastName
 
-                    })
-                    .ToList()
-                })
-                .ToList();
+            //        })
+            //    .ToList()
+            //    })
+            //.ToList();
+
+            /*DTO Solution*/
+            //.Select(u => new UsersSoldProductsDTO
+            //{
+            //    FirstName = u.FirstName,
+            //    LastName = u.LastName,
+            //    SoldProducts = u.ProductsSold.Select(ps => new UserProducts
+            //    {
+            //        Name = ps.Name,
+            //        Price = ps.Price,
+            //        BuyerFirstName = ps.Buyer.FirstName,
+            //        BuyerLastName = ps.Buyer.LastName
+            //    })
+            //    .ToList()
+            //})
+            //.ToList();
+
+            /*Mapping Solution*/
+            .ProjectTo<UsersSoldProductsDTO>()
+            .ToList();
+
 
             var json = JsonConvert.SerializeObject(users, Formatting.Indented);
 
@@ -251,13 +275,26 @@ namespace ProductShop
             var products = context
                 .Categories
                 .OrderByDescending(x => x.CategoryProducts.Count)
-                .Select(c => new
-                {
-                    category = c.Name,
-                    productsCount = c.CategoryProducts.Count,
-                    averagePrice = c.CategoryProducts.Average(cp => cp.Product.Price).ToString("F2"),
-                    totalRevenue = c.CategoryProducts.Sum(cp => cp.Product.Price).ToString("F2")
-                });
+            /*Select Solution*/
+            //.Select(c => new
+            //{
+            //    category = c.Name,
+            //    productsCount = c.CategoryProducts.Count,
+            //    averagePrice = c.CategoryProducts.Average(cp => cp.Product.Price).ToString("F2"),
+            //    totalRevenue = c.CategoryProducts.Sum(cp => cp.Product.Price).ToString("F2")
+            //});
+
+            /*DTO Solution*/
+            //.Select(c => new CategoryByProductCountDTO
+            //{
+            //    Category = c.Name,
+            //    ProductsCount = c.CategoryProducts.Count,
+            //    AveragePrice = c.CategoryProducts.Average(cp => cp.Product.Price).ToString("F2"),
+            //    TotalRevenue = c.CategoryProducts.Sum(cp => cp.Product.Price).ToString("F2")
+            //});
+
+            .ProjectTo<CategoryByProductCountDTO>()
+            .ToList();
 
             var json = JsonConvert.SerializeObject(products, Formatting.Indented);
 
@@ -272,26 +309,52 @@ namespace ProductShop
                 .Include(ps => ps.ProductsSold)
                 .ToList()
                 .Where(u => u.ProductsSold.Count() >= 1 && u.ProductsSold.Any(b => b.BuyerId != null))
-                .Select(u => new
-                {
-                    firstName = u.FirstName,
-                    lastName = u.LastName,
-                    age = u.Age,
-                    soldProducts = new
-                    {
-                        count = u.ProductsSold.Count(b => b.BuyerId != null),
-                        products = u.ProductsSold
-                        .Where(b => b.BuyerId != null)
-                            .Select(ps => new
-                            {
-                                name = ps.Name,
-                                price = ps.Price
-                            })
+                 //.ProjectTo<UserDTO>()
+
+                 /*Select Solution*/
+                 //.Select(u => new
+                 //{
+                 //    firstName = u.FirstName,
+                 //    lastName = u.LastName,
+                 //    age = u.Age,
+                 //    soldProducts = new
+                 //    {
+                 //        count = u.ProductsSold.Count(b => b.BuyerId != null),
+                 //        products = u.ProductsSold
+                 //        .Where(b => b.BuyerId != null)
+                 //            .Select(ps => new
+                 //            {
+                 //                name = ps.Name,
+                 //                price = ps.Price
+                 //            })
+                 //             .ToList()
+                 //    }
+                 //})
+                 //.OrderByDescending(x => x.soldProducts.products.Count)
+                 //.ToList();
+
+                 /*DTO Solution*/
+                 .Select(u => new UserDTO()
+                 {
+                     FirstName = u.FirstName,
+                     LastName = u.LastName,
+                     Age = u.Age,
+                     SoldProducts = new SoldProductDTO()
+                     {
+                         Count = u.ProductsSold.Count(b => b.BuyerId != null),
+                         Products = u.ProductsSold
                                  .ToList()
-                    }
-                })
-                .OrderByDescending(x => x.soldProducts.products.Count)
-                .ToList();
+                                 .Where(b => b.BuyerId != null)
+                                 .Select(ps => new ProductDTO()
+                                 {
+                                     Name = ps.Name,
+                                     Price = ps.Price
+                                 }).ToList()
+                     }
+                 })
+                  .OrderByDescending(x => x.SoldProducts.Products.Count)
+                  .ToList();
+
 
             var displayObject = new
             {
@@ -309,5 +372,6 @@ namespace ProductShop
 
             return json;
         }
+
     }
 }
