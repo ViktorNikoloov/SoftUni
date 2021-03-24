@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using AutoMapper;
 using CarDealer.Data;
+using CarDealer.DTO.CarsListOfPartsDto;
 using CarDealer.DTO.SalesDTOs;
 using CarDealer.Models;
 using Newtonsoft.Json;
@@ -37,9 +38,9 @@ namespace CarDealer
             //Console.WriteLine(result);
 
             //04.Import Customers
-            var inputJson = File.ReadAllText("../../../Datasets/customers.json");
-            var result = ImportCustomers(db, inputJson);
-            Console.WriteLine(result);
+            //var inputJson = File.ReadAllText("../../../Datasets/customers.json");
+            //var result = ImportCustomers(db, inputJson);
+            //Console.WriteLine(result);
 
 
             //05.Import Sales
@@ -47,7 +48,29 @@ namespace CarDealer
             //var result = ImportSales(db, inputJson);
             //Console.WriteLine(result);
 
+            //06.Export Ordered Customers
+            //var result = GetOrderedCustomers(db);
+            //Console.WriteLine(result);
 
+            //07.Export Cars from Make Toyota
+            //var result = GetCarsFromMakeToyota(db);
+            //Console.WriteLine(result);
+
+            //08.Export Local Suppliers
+            //var result = GetLocalSuppliers(db);
+            //Console.WriteLine(result);
+
+            //09.Export Cars with Their List of Parts
+            //var result = GetCarsWithTheirListOfParts(db);
+            //Console.WriteLine(result);
+
+            //10.Export Total Sales by Customer
+            var result = GetTotalSalesByCustomer(db);
+            Console.WriteLine(result);
+
+            //11.Export Sales with Applied Discount
+            //var result = GetTotalSalesByCustomer(db);
+            //Console.WriteLine(result);
         }
 
         /*We can use it for export*/
@@ -174,6 +197,130 @@ namespace CarDealer
             return $"Successfully imported {sales.Count()}.";
         }
 
+        //06.Export Ordered Customers
+        public static string GetOrderedCustomers(CarDealerContext context)
+        {
+            var custumers = context
+                .Customers
+                .OrderBy(c => c.BirthDate)
+                .ThenBy(c => c.IsYoungDriver/*==false*/)
+                .Select(c=> new
+                {
+                    Name = c.Name,
+                    BirthDate = c.BirthDate.ToString("dd/MM/yyyy"),
+                    IsYoungDriver = c.IsYoungDriver
+                })
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(custumers, Formatting.Indented);
+
+            return json;
+        }
+
+        //07.Export Cars from Make Toyota
+        public static string GetCarsFromMakeToyota(CarDealerContext context)
+        {
+            var cars = context
+                .Cars
+                .Where(c => c.Make == "Toyota")
+                .OrderBy(c => c.Model)
+                .ThenByDescending(x => x.TravelledDistance)
+                .Select(c => new
+                {
+                    Id = c.Id,
+                    Make = c.Make,
+                    Model = c.Model,
+                    TravelledDistance = c.TravelledDistance
+                })
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(cars, Formatting.Indented);
+
+            return json;
+        }
+
+        //08.Export Local Suppliers
+        public static string GetLocalSuppliers(CarDealerContext context)
+        {
+            var suppliers = context.
+                Suppliers
+                .Where(s => s.IsImporter != true)
+                .Select(s => new
+                {
+                    Id = s.Id,
+                    Name = s.Name,
+                    PartsCount = s.Parts.Count()
+                })
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(suppliers, Formatting.Indented);
+
+            return json;
+        }
+
+        //09.Export Cars with Their List of Parts
+        public static string GetCarsWithTheirListOfParts(CarDealerContext context)
+        {
+            var partsCars = context
+                .Cars
+                .Select(c => new CarsListDto()
+                {
+                    Car = new CarsWithPartsListDto()
+                    {
+                        Make = c.Make,
+                        Model = c.Model,
+                        TravelledDistance = c.TravelledDistance
+                    },
+                    Parts = c.PartCars.Select(p => new PartsList()
+                    {
+                        Name = p.Part.Name,
+                        Price = p.Part.Price.ToString("F2")
+                    }).ToList()
+
+                })
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(partsCars, Formatting.Indented);
+
+            return json;
+        }
+
+        //10.Export Total Sales by Customer
+        public static string GetTotalSalesByCustomer(CarDealerContext context)
+        {
+            //Get all customers that have bought at least 1 car and get their names, bought cars count and total spent money on cars.
+            //Order the result list by total spent money descending then by total bought cars again in descending order. 
+            //Export the list of customers to JSON in the format provided below.
+
+            var customers = context
+                .Customers
+                .Where(c=>c.Sales.Count >= 1)
+                .Select(c => new
+                {
+                    fullName = c.Name,
+                    boughtCars = c.Sales.Count(),
+                    spentMoney = c.Sales
+                                    .Select(car=>car.Car.PartCars
+                                      .Select(x=>x.Part)
+                                         .Sum(p => p.Price))
+                                            .Sum()
+
+                })
+                .OrderByDescending(x=>x.spentMoney)
+                .ThenByDescending(x=>x.boughtCars)
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(customers, Formatting.Indented);
+
+            return json;
+        }
+
+        //11.Export Sales with Applied Discount
+        public static string GetSalesWithAppliedDiscount(CarDealerContext context)
+        {
+
+            return "";
+        }
     }
 
 }
