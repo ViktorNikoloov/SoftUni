@@ -1,7 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CarDealer.DTO.SalesDTOs
 {
@@ -16,6 +13,7 @@ namespace CarDealer.DTO.SalesDTOs
         [JsonProperty("travelledDistance")]
         public long TravelledDistance { get; set; }
 
-        public int[] PartId { get; set; }
+        [JsonProperty("partsId")]
+        public int[] PartsId { get; set; }
     }
 }

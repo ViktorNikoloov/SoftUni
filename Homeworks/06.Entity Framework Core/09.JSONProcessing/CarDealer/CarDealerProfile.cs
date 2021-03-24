@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AutoMapper;
+﻿using AutoMapper;
+using CarDealer.DTO.SalesDTOs;
 using CarDealer.Models;
 
 namespace CarDealer
@@ -10,7 +8,7 @@ namespace CarDealer
     {
         public CarDealerProfile()
         {
-        
+            CreateMap<ImportCustomersDto, Customer>();
         }
     }
 }
