@@ -41,6 +41,13 @@ namespace CarDealer
             var result = ImportCustomers(db, inputJson);
             Console.WriteLine(result);
 
+
+            //05.Import Sales
+            //var inputJson = File.ReadAllText("../../../Datasets/sales.json");
+            //var result = ImportSales(db, inputJson);
+            //Console.WriteLine(result);
+
+
         }
 
         /*We can use it for export*/
@@ -136,20 +143,35 @@ namespace CarDealer
         //04.Import Customers
         public static string ImportCustomers(CarDealerContext context, string inputJson)
         {
-            var customersDto = JsonConvert.DeserializeObject <IEnumerable<ImportCustomersDto>>(inputJson);
+            //var customers = JsonConvert.DeserializeObject <IEnumerable<Customer>>(inputJson);
 
-            context.AddRange(customersDto);
-            context.SaveChanges();
-
-            return $"Successfully imported {customersDto.Count()}.";
-
-                    /*Mapper Solution*/
-            //var customers = mapper.Map<IEnumerable<Customer>>(customersDto);
-
-            //context.AddRange(customers);
+            //context.Customers.AddRange(customers);
             //context.SaveChanges();
 
             //return $"Successfully imported {customers.Count()}.";
+
+            /*Mapper Solution*/
+            InitializeInstanceMapper();
+
+            var customersDto = JsonConvert.DeserializeObject<IEnumerable<ImportCustomersDto>>(inputJson);
+
+            var customers = mapper.Map<IEnumerable<Customer>>(customersDto);
+
+            context.Customers.AddRange(customers);
+            context.SaveChanges();
+
+            return $"Successfully imported {customers.Count()}.";
+        }
+
+        //05.Import Sales
+        public static string ImportSales(CarDealerContext context, string inputJson)
+        {
+            var sales = JsonConvert.DeserializeObject <IEnumerable<Sale>>(inputJson);
+
+            context.Sales.AddRange(sales);
+            context.SaveChanges();
+
+            return $"Successfully imported {sales.Count()}.";
         }
 
     }
