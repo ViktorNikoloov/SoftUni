@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+
 using AutoMapper;
+using Newtonsoft.Json;
+
 using CarDealer.Data;
+using CarDealer.Models;
 using CarDealer.DTO.CarSalesWithDiscount;
 using CarDealer.DTO.CarsListOfPartsDto;
 using CarDealer.DTO.SalesDTOs;
-using CarDealer.Models;
-using Newtonsoft.Json;
 
 namespace CarDealer
 {
@@ -66,12 +68,12 @@ namespace CarDealer
             //Console.WriteLine(result);
 
             //10.Export Total Sales by Customer
-            //var result = GetTotalSalesByCustomer(db);
-            //Console.WriteLine(result);
+            var result = GetTotalSalesByCustomer(db);
+            Console.WriteLine(result);
 
             //11.Export Sales with Applied Discount
-            var result = GetSalesWithAppliedDiscount(db);
-            Console.WriteLine(result);
+            //var result = GetSalesWithAppliedDiscount(db);
+            //Console.WriteLine(result);
         }
 
         /*We can use it for export*/
@@ -296,20 +298,20 @@ namespace CarDealer
             var customers = context
                 .Customers
                 .Where(c => c.Sales.Count >= 1)
-                .Select(c => new
-                {
-                    fullName = c.Name,
-                    boughtCars = c.Sales.Count(),
-                    spentMoney = c.Sales
-                                    .Select(car => car.Car.PartCars
-                                      .Select(x => x.Part)
-                                         .Sum(p => p.Price))
-                                            .Sum()
+            .Select(c => new
+            {
+                fullName = c.Name,
+                boughtCars = c.Sales.Count(),
+                spentMoney = c.Sales
+                                .Select(car => car.Car.PartCars
+                                  .Select(x => x.Part)
+                                     .Sum(p => p.Price))
+                                        .Sum()
 
-                })
-                .OrderByDescending(x => x.spentMoney)
-                .ThenByDescending(x => x.boughtCars)
-                .ToList();
+            })
+            .OrderByDescending(x => x.spentMoney)
+            .ThenByDescending(x => x.boughtCars)
+            .ToList();
 
             var json = JsonConvert.SerializeObject(customers, Formatting.Indented);
 
@@ -319,25 +321,23 @@ namespace CarDealer
         //11.Export Sales with Applied Discount
         public static string GetSalesWithAppliedDiscount(CarDealerContext context)
         {
-            //Get first 10 sales with information about the car,
-            //customer and price of the sale with and without discount.
-            //Export the list of sales to JSON in the format provided below.
-
             var sales = context
-                .Cars
-                .Select(c => new CarInfo()
+                .Sales
+                .Select(s => new CarInfo()
                 {
                     Car = new CarDto()
                     {
-                        Make = c.Make,
-                        Model = c.Model,
-                        TravelledDistance = c.TravelledDistance
+                        Make = s.Car.Make,
+                        Model = s.Car.Model,
+                        TravelledDistance = s.Car.TravelledDistance
                     },
-                    CustomerName = c.Sales.Select(x => x.Customer.Name).ToString(),
-                    Discount = c.Sales.Select(d => d.Discount),
-                    Price = c.PartCars.Select(pc => pc.Part.Price),
-
+                    CustomerName = s.Customer.Name,
+                    Discount = s.Discount.ToString("F2"),
+                    Price = s.Car.PartCars.Sum(p=>p.Part.Price).ToString("F2"),
+                    PriceWithDiscount =
+                  (s.Car.PartCars.Sum(p => p.Part.Price) - (s.Car.PartCars.Sum(p => p.Part.Price) * s.Discount / 100)).ToString("F2")
                 })
+                .Take(10)
                 .ToList();
 
             var json = JsonConvert.SerializeObject(sales, Formatting.Indented);

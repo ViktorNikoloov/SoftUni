@@ -10,13 +10,12 @@ namespace CarDealer.DTO.CarSalesWithDiscount
         [JsonProperty("customerName")]
         public string CustomerName { get; set; }
 
-        public decimal Discount { get; set; }
+        public string Discount { get; set; }
 
         [JsonProperty("price")]
-        public decimal Price { get; set; }
+        public string Price { get; set; }
 
        [JsonProperty("priceWithDiscount")]
-       public decimal PriceWithDiscount
-       => Price - Discount;
+       public string PriceWithDiscount { get; set; }
     }
 }
