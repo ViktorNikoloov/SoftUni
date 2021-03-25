@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using AutoMapper;
 using CarDealer.Data;
+using CarDealer.DTO.CarSalesWithDiscount;
 using CarDealer.DTO.CarsListOfPartsDto;
 using CarDealer.DTO.SalesDTOs;
 using CarDealer.Models;
@@ -65,12 +66,12 @@ namespace CarDealer
             //Console.WriteLine(result);
 
             //10.Export Total Sales by Customer
-            var result = GetTotalSalesByCustomer(db);
-            Console.WriteLine(result);
-
-            //11.Export Sales with Applied Discount
             //var result = GetTotalSalesByCustomer(db);
             //Console.WriteLine(result);
+
+            //11.Export Sales with Applied Discount
+            var result = GetSalesWithAppliedDiscount(db);
+            Console.WriteLine(result);
         }
 
         /*We can use it for export*/
@@ -189,7 +190,7 @@ namespace CarDealer
         //05.Import Sales
         public static string ImportSales(CarDealerContext context, string inputJson)
         {
-            var sales = JsonConvert.DeserializeObject <IEnumerable<Sale>>(inputJson);
+            var sales = JsonConvert.DeserializeObject<IEnumerable<Sale>>(inputJson);
 
             context.Sales.AddRange(sales);
             context.SaveChanges();
@@ -204,7 +205,7 @@ namespace CarDealer
                 .Customers
                 .OrderBy(c => c.BirthDate)
                 .ThenBy(c => c.IsYoungDriver/*==false*/)
-                .Select(c=> new
+                .Select(c => new
                 {
                     Name = c.Name,
                     BirthDate = c.BirthDate.ToString("dd/MM/yyyy"),
@@ -294,20 +295,20 @@ namespace CarDealer
 
             var customers = context
                 .Customers
-                .Where(c=>c.Sales.Count >= 1)
+                .Where(c => c.Sales.Count >= 1)
                 .Select(c => new
                 {
                     fullName = c.Name,
                     boughtCars = c.Sales.Count(),
                     spentMoney = c.Sales
-                                    .Select(car=>car.Car.PartCars
-                                      .Select(x=>x.Part)
+                                    .Select(car => car.Car.PartCars
+                                      .Select(x => x.Part)
                                          .Sum(p => p.Price))
                                             .Sum()
 
                 })
-                .OrderByDescending(x=>x.spentMoney)
-                .ThenByDescending(x=>x.boughtCars)
+                .OrderByDescending(x => x.spentMoney)
+                .ThenByDescending(x => x.boughtCars)
                 .ToList();
 
             var json = JsonConvert.SerializeObject(customers, Formatting.Indented);
@@ -318,8 +319,30 @@ namespace CarDealer
         //11.Export Sales with Applied Discount
         public static string GetSalesWithAppliedDiscount(CarDealerContext context)
         {
+            //Get first 10 sales with information about the car,
+            //customer and price of the sale with and without discount.
+            //Export the list of sales to JSON in the format provided below.
 
-            return "";
+            var sales = context
+                .Cars
+                .Select(c => new CarInfo()
+                {
+                    Car = new CarDto()
+                    {
+                        Make = c.Make,
+                        Model = c.Model,
+                        TravelledDistance = c.TravelledDistance
+                    },
+                    CustomerName = c.Sales.Select(x => x.Customer.Name).ToString(),
+                    Discount = c.Sales.Select(d => d.Discount),
+                    Price = c.PartCars.Select(pc => pc.Part.Price),
+
+                })
+                .ToList();
+
+            var json = JsonConvert.SerializeObject(sales, Formatting.Indented);
+
+            return json;
         }
     }
 
