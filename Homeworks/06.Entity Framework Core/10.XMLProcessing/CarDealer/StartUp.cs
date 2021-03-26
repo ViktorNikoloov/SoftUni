@@ -1,7 +1,9 @@
 ﻿using CarDealer.Data;
 using CarDealer.DataTransferObjects.Input;
+using CarDealer.DataTransferObjects.Input.CarInputDto;
 using CarDealer.Models;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
@@ -22,11 +24,14 @@ namespace CarDealer
             //Console.WriteLine(result);
 
             //02.Import Parts
-            var inputXml = File.ReadAllText("./Datasets/parts.xml");
-            var result = ImportParts(db, inputXml);
+            //var inputXml = File.ReadAllText("./Datasets/parts.xml");
+            //var result = ImportParts(db, inputXml);
+            //Console.WriteLine(result);
+
+            //03. Import Cars
+            var inputXml = File.ReadAllText("./Datasets/cars.xml");
+            var result = ImportCars(db, inputXml);
             Console.WriteLine(result);
-
-
         }
 
         private static void ResetDatabase(CarDealerContext db)
@@ -38,7 +43,7 @@ namespace CarDealer
 
         }
 
-        //Query 1.Import Suppliers
+        //Query 01.Import Suppliers
         public static string ImportSuppliers(CarDealerContext context, string inputXml)
         {
             const string root = "Suppliers";
@@ -93,6 +98,54 @@ namespace CarDealer
             context.SaveChanges();
 
             return $"Successfully imported {parts.Count}";
+        }
+
+        //03.Import Cars
+        public static string ImportCars(CarDealerContext context, string inputXml)
+        {
+            const string root = "Cars";
+
+            var xmlSerializer = new XmlSerializer(typeof(CarInputModel[]), new XmlRootAttribute(root));
+
+            var textReader = new StringReader(inputXml);
+
+            var carsDto = xmlSerializer.Deserialize(textReader) as CarInputModel[];
+
+            var partsId = context.Parts.Select(p => p.Id).ToList();
+
+            var cars = new List<Car>();
+            foreach (var carDto in carsDto)
+            {
+                var distinctedParts = carDto.Parts.Select(x => x.Id).Distinct();
+                var parts = distinctedParts.Intersect(partsId);
+
+                var car = new Car()
+                {
+                    Make = carDto.Make,
+                    Model = carDto.Model,
+                    TravelledDistance = carDto.TraveledDistance
+                };
+
+                foreach (var partId in parts)
+                {
+                    var partCar = new PartCar
+                    {
+                        PartId = partId
+                    };
+
+                    car.PartCars.Add(partCar);
+                }
+
+                cars.Add(car);
+
+            }
+
+            context.AddRange(cars);
+
+            context.SaveChanges();
+
+
+            return $"Successfully imported {cars.Count}";
         }
     }
 
