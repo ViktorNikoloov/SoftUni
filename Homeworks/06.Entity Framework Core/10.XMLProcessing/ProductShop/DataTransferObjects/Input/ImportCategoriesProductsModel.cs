@@ -3,7 +3,7 @@
 namespace ProductShop.DataTransferObjects.Input
 {
     [XmlType("CategoryProduct")]
-    class ImportCategoriesProductsModel
+    public class ImportCategoriesProductsModel
     {
         [XmlElement("CategoryId")]
         public int CategoryId { get; set; }
