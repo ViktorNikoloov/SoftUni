@@ -6,17 +6,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Dtos\**" />
+    <EmbeddedResource Remove="Dtos\**" />
+    <None Remove="Dtos\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Dtos\Export\" />
-    <Folder Include="Dtos\Import\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +33,10 @@
     <None Update="Datasets\users.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="DataTransferObjects\Output\" />
   </ItemGroup>
 
 </Project>
