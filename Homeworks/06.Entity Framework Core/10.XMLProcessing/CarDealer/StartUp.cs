@@ -3,6 +3,7 @@ using CarDealer.DataTransferObjects.Input;
 using CarDealer.DataTransferObjects.Input.CarInputDto;
 using CarDealer.DataTransferObjects.Output;
 using CarDealer.DataTransferObjects.Output.GetCarsWithTheirListOfParts;
+using CarDealer.DataTransferObjects.Output.GetSalesWithDiscount;
 using CarDealer.Models;
 using System;
 using System.Collections.Generic;
@@ -401,8 +402,37 @@ namespace CarDealer
         //11.Sales with Applied Discount
         public static string GetSalesWithAppliedDiscount(CarDealerContext context)
         {
-            //Get all sales with information about the car, customer and price of the sale with and without discount.
+            var allSales = context
+                .Sales
+                .Select(s => new SalesWithDiscountModel()
+                {
+                    Car = new CarOutputModel()
+                    {
+                        Make = s.Car.Make,
+                        Model = s.Car.Model,
+                        TravelledDistance = s.Car.TravelledDistance
+                    },
+                    Discount = s.Discount,
+                    CustomerName = s.Customer.Name,
+                    Price = s.Car.PartCars.Sum(p => p.Part.Price),
+                    PriceWithDiscount =
+                    s.Car.PartCars.Sum(p => p.Part.Price) - (s.Car.PartCars.Sum(p => p.Part.Price) * s.Discount / 100)
 
+                })
+                .ToArray();
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(SalesWithDiscountModel[]), new XmlRootAttribute("sales"));
+
+            var nameSpace = new XmlSerializerNamespaces();
+            nameSpace.Add("", "");
+
+            var textWriter = new StringWriter();
+
+            xmlSerializer.Serialize(textWriter, allSales, nameSpace);
+
+            var result = textWriter.ToString();
+
+            return result;
         }
     }
 }
