@@ -181,6 +181,30 @@ namespace CarDealer
         }
 
         //05.Import Sales
+        public static string ImportSales(CarDealerContext context, string inputXml)
+        {
+            const string root = "Sales";
+
+            var serializer = new XmlSerializer(typeof(SaleInputModel[]), new XmlRootAttribute(root));
+
+            var textReader = new StringReader(inputXml);
+
+            var salesDto = serializer.Deserialize(textReader) as SaleInputModel[];
+
+            var carsId = context.Cars.Select(i => i.Id).ToList();
+
+            var sales = salesDto
+                .Where(s => carsId.Contains(s.CarId))
+                .Select(s => new Sale()
+                {
+                    CarId = s.CarId,
+                    CustomerId = s.CustomerId,
+                    Discount = s.Discount
+                })
+                .ToList();
+
+            return $"Successfully imported {sales.Count}";
+        }
 
     }
 
