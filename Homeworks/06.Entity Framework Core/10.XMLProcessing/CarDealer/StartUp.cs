@@ -29,8 +29,13 @@ namespace CarDealer
             //Console.WriteLine(result);
 
             //03. Import Cars
-            var inputXml = File.ReadAllText("./Datasets/cars.xml");
-            var result = ImportCars(db, inputXml);
+            //var inputXml = File.ReadAllText("./Datasets/cars.xml");
+            //var result = ImportCars(db, inputXml);
+            //Console.WriteLine(result);
+
+            //04.Import Customers
+            var inputXml = File.ReadAllText("./Datasets/customers.xml");
+            var result = ImportCustomers(db, inputXml);
             Console.WriteLine(result);
         }
 
@@ -147,6 +152,36 @@ namespace CarDealer
 
             return $"Successfully imported {cars.Count}";
         }
+
+        //04.Import Customers
+        public static string ImportCustomers(CarDealerContext context, string inputXml)
+        {
+            const string root = "Customers";
+
+            var serializer = new XmlSerializer(typeof(CostumersInputModel[]), new XmlRootAttribute(root));
+
+            var textReader = new StringReader(inputXml);
+
+            var customersDto = serializer.Deserialize(textReader) as CostumersInputModel[];
+
+            var customers = customersDto
+                .Select(c => new Customer()
+                {
+                    Name = c.Name,
+                    BirthDate = c.BirthDate,
+                    IsYoungDriver = c.IsYoungDriver
+
+                })
+                .ToList();
+
+            context.AddRange(customers);
+            context.SaveChanges();
+
+            return $"Successfully imported {customers.Count}";
+        }
+
+        //05.Import Sales
+
     }
 
 
