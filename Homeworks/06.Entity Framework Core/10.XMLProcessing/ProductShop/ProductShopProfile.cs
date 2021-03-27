@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using ProductShop.DataTransferObjects.Input;
+using ProductShop.Models;
 
 namespace ProductShop
 {
@@ -6,6 +8,9 @@ namespace ProductShop
     {
         public ProductShopProfile()
         {
+            CreateMap<ImportUserModel, User>();
+
+            CreateMap<ImportProductModel, Product>();
         }
     }
 }
