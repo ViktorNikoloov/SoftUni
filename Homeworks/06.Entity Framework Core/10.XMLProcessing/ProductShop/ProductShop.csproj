@@ -35,8 +35,4 @@
     </None>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="DataTransferObjects\Output\" />
-  </ItemGroup>
-
 </Project>

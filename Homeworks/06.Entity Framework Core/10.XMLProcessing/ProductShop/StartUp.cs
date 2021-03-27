@@ -8,6 +8,7 @@ using AutoMapper;
 using ProductShop.Models;
 using System.Collections;
 using System.Collections.Generic;
+using ProductShop.DataTransferObjects.Output;
 
 namespace ProductShop
 {
@@ -29,8 +30,16 @@ namespace ProductShop
             //Console.WriteLine(result);
 
             //03.Import Categories
-            var inputXml = File.ReadAllText("./Datasets/categories.xml");
-            var result = ImportCategories(db, inputXml);
+            //var inputXml = File.ReadAllText("./Datasets/categories.xml");
+            //var result = ImportCategories(db, inputXml);
+            //Console.WriteLine(result);
+
+            //05.Products In Range
+            //var result = GetProductsInRange(db);
+            //Console.WriteLine(result);
+
+            //06.Sold Products
+            var result = GetProductsInRange(db);
             Console.WriteLine(result);
 
         }
@@ -114,7 +123,6 @@ namespace ProductShop
             return $"Successfully imported {categories.Count}"; ;
         }
 
-
         //04.Import Categories and Products
         public static string ImportCategoryProducts(ProductShopContext context, string inputXml)
         {
@@ -152,6 +160,44 @@ namespace ProductShop
 
             return $"Successfully imported {categoryProducts.Count}";
 
+
+        }
+
+        //05.Products In Range
+        public static string GetProductsInRange(ProductShopContext context)
+        {
+            const string root = "Products";
+
+            var products = context
+                .Products
+                .Where(p => p.Price >= 500 && p.Price <= 1000)
+                .Select(p => new ProductInRangeModel()
+                {
+                    Name = p.Name,
+                    Price = p.Price,
+                    Buyer = p.Buyer.FirstName + " " + p.Buyer.LastName
+                })
+                .OrderBy(x => x.Price)
+                .Take(10)
+                .ToArray();
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ProductInRangeModel[]), new XmlRootAttribute(root));
+
+            var textWriter = new StringWriter();
+
+            var nameSpace = new XmlSerializerNamespaces();
+            nameSpace.Add("", "");
+
+            xmlSerializer.Serialize(textWriter, products, nameSpace);
+
+            var result = textWriter.ToString();
+
+            return result;
+        }
+
+        //06.Sold Products
+        public static string GetSoldProducts(ProductShopContext context)
+        {
 
         }
     }
