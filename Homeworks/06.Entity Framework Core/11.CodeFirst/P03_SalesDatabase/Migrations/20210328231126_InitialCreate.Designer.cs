@@ -10,7 +10,7 @@ using P03_SalesDatabase.Data;
 namespace P03_SalesDatabase.Migrations
 {
     [DbContext(typeof(SalesContext))]
-    [Migration("20210328224837_InitialCreate")]
+    [Migration("20210328231126_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

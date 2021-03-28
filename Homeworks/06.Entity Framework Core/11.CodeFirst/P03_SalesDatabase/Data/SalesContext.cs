@@ -34,7 +34,28 @@ namespace P03_SalesDatabase.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<Sale>(entity =>
+            {
+                entity.HasOne(s => s.Product)
+                .WithMany(p => p.Sales)
+                .HasForeignKey(s => s.ProductId);
+
+                entity
+                .HasOne(s => s.Store)
+                .WithMany(st => st.Sales)
+                .HasForeignKey(s => s.StoreId);
+
+                entity
+                .HasOne(s => s.Customer)
+                .WithMany(c => c.Sales)
+                .HasForeignKey(s => s.CustomerId);
+
+                //entity.Property(s => s.Date)
+                //.HasColumnName("DATETIME2")
+                //.HasDefaultValueSql("GETDATE()");
+
+
+            });
         }
     }
 }
