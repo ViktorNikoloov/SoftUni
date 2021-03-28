@@ -22,9 +22,9 @@ namespace P03_SalesDatabase.Data.Models
         [Required]
         public decimal Price { get; set; }
 
-        //[MaxLength(200)]
-        //[DefaultValue("No description")]
-        //public string Description { get; set; }
+        [MaxLength(200)]
+        [DefaultValue("No description")]
+        public string Description { get; set; }
 
         public virtual ICollection<Sale> Sales { get; set; }
     }
