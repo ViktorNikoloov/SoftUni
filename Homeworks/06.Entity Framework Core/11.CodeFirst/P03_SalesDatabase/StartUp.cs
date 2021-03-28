@@ -8,6 +8,7 @@ namespace P03_SalesDatabase
     {
         static void Main(string[] args)
         {
+
             var dbContext = new SalesContext();
             dbContext.Database.Migrate();
         }
