@@ -1,12 +1,15 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+
+using P03_SalesDatabase.Data;
 
 namespace P03_SalesDatabase
 {
-    class StartUp
+    public class StartUp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var dbContext = new SalesContext();
+            dbContext.Database.Migrate();
         }
     }
 }
