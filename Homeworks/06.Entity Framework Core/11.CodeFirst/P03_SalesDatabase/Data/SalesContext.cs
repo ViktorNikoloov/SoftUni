@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using P03_SalesDatabase.Data.Models;
 
 namespace P03_SalesDatabase.Data
@@ -11,7 +12,7 @@ namespace P03_SalesDatabase.Data
         }
 
         public SalesContext(DbContextOptions options)
-            :base(options)
+            : base(options)
         {
 
         }
@@ -50,9 +51,9 @@ namespace P03_SalesDatabase.Data
                 .WithMany(c => c.Sales)
                 .HasForeignKey(s => s.CustomerId);
 
-                //entity.Property(s => s.Date)
-                //.HasColumnName("DATETIME2")
-                //.HasDefaultValueSql("GETDATE()");
+                entity.Property(s => s.Date)
+                .HasColumnName("DATETIME2")
+                .HasDefaultValueSql("GETDATE()");
 
 
             });
