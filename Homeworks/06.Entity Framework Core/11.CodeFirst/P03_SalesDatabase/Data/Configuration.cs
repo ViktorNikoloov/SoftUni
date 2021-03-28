@@ -2,6 +2,6 @@
 {
     internal static class Configuration
     {
-        internal static string ConfigurationString = @"Server=.\SQLEXPRESS;DataBase=HospitalDatabase;Integrated Security=true";
+        internal static string ConfigurationString = @"Server=.\SQLEXPRESS;DataBase=SalesDatabase;Integrated Security=true";
     }
 }
