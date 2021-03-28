@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using P03_SalesDatabase.Data.Models;
 
 namespace P03_SalesDatabase.Data
 {
@@ -15,7 +16,13 @@ namespace P03_SalesDatabase.Data
 
         }
 
+        public DbSet<Product> Products { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<Store> Stores { get; set; }
+
+        public DbSet<Sale> Sales { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
