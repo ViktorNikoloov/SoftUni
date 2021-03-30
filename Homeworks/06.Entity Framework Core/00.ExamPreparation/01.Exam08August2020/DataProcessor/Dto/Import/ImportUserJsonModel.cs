@@ -19,6 +19,7 @@ namespace VaporStore.DataProcessor.Dto.Import
         [Range(minimum: 3, maximum: 103)]
         public int Age { get; set; }
 
+        [MinLength(1)]
         public CardModel[] Cards { get; set; }
 
 
