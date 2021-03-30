@@ -3,11 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
+    using System.IO;
     using System.Linq;
     using System.Text;
+    using System.Xml.Serialization;
+
     using Data;
     using Newtonsoft.Json;
+
     using VaporStore.Data.Models;
+    using VaporStore.Data.Models.Enums;
     using VaporStore.DataProcessor.Dto.Import;
 
     public static class Deserializer
@@ -108,7 +114,47 @@
 
         public static string ImportPurchases(VaporStoreDbContext context, string xmlString)
         {
-            return "TODO";
+            const string root = "Purchases";
+            var xmlSerializer = new XmlSerializer(typeof(ImportPurchasesXmlModel[]), new XmlRootAttribute(root));
+
+            var readReader = new StringReader(xmlString);
+
+            var purchasesDto = xmlSerializer.Deserialize(readReader) as ImportPurchasesXmlModel[];
+
+            var output = new StringBuilder();
+            foreach (var purchaseDto in purchasesDto)
+            {
+                if (!IsValid(purchaseDto))
+                {
+                    output.AppendLine("Invalid Data");
+                }
+
+                var game = context.Games.FirstOrDefault(g => g.Name == purchaseDto.GameName);
+                var card = context.Cards.FirstOrDefault(g => g.Number == purchaseDto.CardNumber);
+                var IsEnumValid = Enum.TryParse<PurchaseType>(purchaseDto.Type, out PurchaseType key);
+
+                if (game == null || card == null || IsEnumValid == false)
+                {
+                    output.AppendLine("Invalid Data");
+                    continue;
+                }
+
+                var purchase = new Purchase
+                {
+                    Type = key,
+                    ProductKey = purchaseDto.Key,
+                    Card = card,
+                    Game = game,
+                    Date = DateTime.ParseExact(purchaseDto.Date, "dd/MM/yyyy HH:mm", CultureInfo.InvariantCulture)
+                };
+
+                context.Purchases.Add(purchase);
+                context.SaveChanges();
+
+                output.AppendLine($"Imported {purchaseDto.GameName} for {purchase.Card.User.Username}");
+            }
+
+            return output.ToString();
 
         }
 
