@@ -53,58 +53,58 @@
             return output.ToString();
         }
 
-        //public static string ImportUsers(VaporStoreDbContext context, string jsonString)
-        //{
-        //    var output = new StringBuilder();
+        public static string ImportUsers(VaporStoreDbContext context, string jsonString)
+        {
+            var output = new StringBuilder();
 
-        //    var usersJson = JsonConvert.DeserializeObject<IEnumerable<ImportUserJsonModel>>(jsonString);
+            var usersJson = JsonConvert.DeserializeObject<IEnumerable<ImportUserJsonModel>>(jsonString);
 
-        //    foreach (var userJson in usersJson)
-        //    {
-        //        if (!IsValid(userJson))
-        //        {
-        //            output.AppendLine("Invalid Data");
-        //            continue;
-        //        }
+            foreach (var userJson in usersJson)
+            {
+                if (!IsValid(userJson))
+                {
+                    output.AppendLine("Invalid Data");
+                    continue;
+                }
 
-        //        var user = new User
-        //        {
-        //            FullName = userJson.FullName,
-        //            Username = userJson.Username,
-        //            Email = userJson.Email,
-        //            Age = userJson.Age
-        //        };
+                var user = new User
+                {
+                    FullName = userJson.FullName,
+                    Username = userJson.Username,
+                    Email = userJson.Email,
+                    Age = userJson.Age
+                };
 
-        //        foreach (var cardJson in userJson.Cards)
-        //        {
-        //            if (!IsValid(cardJson))
-        //            {
-        //                output.AppendLine("Invalid Data");
-        //                continue;
-        //            }
+                foreach (var cardJson in userJson.Cards)
+                {
+                    if (!IsValid(cardJson))
+                    {
+                        output.AppendLine("Invalid Data");
+                        continue;
+                    }
 
-        //            user.Cards.Add(new Card
-        //            {
-        //                Number = cardJson.Number,
-        //                Cvc = cardJson.CVC,
-        //                Type = cardJson.Type
-        //            });
+                    user.Cards.Add(new Card
+                    {
+                        Number = cardJson.Number,
+                        Cvc = cardJson.CVC,
+                        Type = cardJson.Type
+                    });
 
 
-        //        }
+                }
 
-        //        if (user.Cards.Any())
-        //        {
-        //            context.Users.Add(user);
-        //            context.SaveChanges();
+                if (user.Cards.Any())
+                {
+                    context.Users.Add(user);
+                    context.SaveChanges();
 
-        //            output.AppendLine($"Imported {user.Username} with {user.Cards.Count()} cards");
-        //        }
+                    output.AppendLine($"Imported {user.Username} with {user.Cards.Count()} cards");
+                }
 
-        //    }
+            }
 
-        //    return output.ToString();
-        //}
+            return output.ToString();
+        }
 
         public static string ImportPurchases(VaporStoreDbContext context, string xmlString)
         {
