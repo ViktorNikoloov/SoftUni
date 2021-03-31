@@ -1,9 +1,13 @@
 ﻿namespace VaporStore.DataProcessor
 {
     using System;
+    using System.Globalization;
+    using System.IO;
     using System.Linq;
+    using System.Xml.Serialization;
     using Data;
     using Newtonsoft.Json;
+    using VaporStore.DataProcessor.Dto.Export;
 
     public static class Serializer
     {
@@ -41,7 +45,50 @@
 
         public static string ExportUserPurchasesByType(VaporStoreDbContext context, string storeType)
         {
-            return "TODO";
+            var data = context
+                .Users
+                .Where(u => u.Cards.Any(p => p.Purchases.Any()))
+                .Select(u => new UserModel()
+                {
+                    Username = u.Username,
+                    Purchases = u.Cards
+                        .Where(p => p.Purchases.Any(t => t.Type.ToString() == storeType))
+                        .Select(p => new UserPurchasesModel()
+                        {
+                            Card = p.Number,
+                            Cvc = p.Cvc,
+                            Date = DateTime.Parse(p.Purchases.Select(x => x.Date).ToString()),
+                            Game = p.Purchases.Select(g => new UserPurchasesGameModel()
+                            {
+                                Title = g.Game.Name,
+                                Genre = g.Game.Genre.ToString(),
+                                Price = g.Game.Price
+                            })
+                             .ToArray()
+
+                        })
+                        .OrderByDescending(x=>x.Date)
+                        .ToArray(),
+                    TotalSpent = u.Cards
+                   .Sum(p => p.Purchases.Where(p => p.Type.ToString() == storeType)
+                   .Sum(g => g.Game.Price))
+
+
+                })
+                .OrderByDescending(x => x.TotalSpent)
+                .ThenBy(x => x.Username)
+                .ToArray();
+
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(UserModel[]), new XmlRootAttribute("Users"));
+            var textWriter = new StringWriter();
+
+            var ns = new XmlSerializerNamespaces();
+            ns.Add("", "");
+
+
+            xmlSerializer.Serialize(textWriter, data, ns);
+
+            return textWriter.ToString().TrimEnd();
         }
     }
 }
