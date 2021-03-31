@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01.Exam08August2020", "01.E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VaporStore", "01.Exam08August2020\VaporStore.csproj", "{7610D5D6-B855-42B3-9124-E0CB937E99FA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02.Exam14August2020", "02.Exam14August2020", "{F8BD76EB-E640-422D-9A8A-6CCD35617358}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SoftJail", "02.Exam14August2020\SoftJail.csproj", "{36B6516D-4E2D-459D-90EF-68A3CB400175}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,17 @@ Global
 		{7610D5D6-B855-42B3-9124-E0CB937E99FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7610D5D6-B855-42B3-9124-E0CB937E99FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7610D5D6-B855-42B3-9124-E0CB937E99FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36B6516D-4E2D-459D-90EF-68A3CB400175}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36B6516D-4E2D-459D-90EF-68A3CB400175}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36B6516D-4E2D-459D-90EF-68A3CB400175}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36B6516D-4E2D-459D-90EF-68A3CB400175}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7610D5D6-B855-42B3-9124-E0CB937E99FA} = {4B6CE1B3-E3CA-43F7-97D2-619A847BC4FA}
+		{36B6516D-4E2D-459D-90EF-68A3CB400175} = {F8BD76EB-E640-422D-9A8A-6CCD35617358}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FFD78913-8A69-4E5B-8716-6B8819333993}
