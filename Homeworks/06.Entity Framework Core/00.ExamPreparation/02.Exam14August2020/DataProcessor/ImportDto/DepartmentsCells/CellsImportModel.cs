@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SoftJail.DataProcessor.ImportDto
+namespace SoftJail.DataProcessor.ImportDto.DepartmentsCells
 {
    public  class CellsImportModel
     {
