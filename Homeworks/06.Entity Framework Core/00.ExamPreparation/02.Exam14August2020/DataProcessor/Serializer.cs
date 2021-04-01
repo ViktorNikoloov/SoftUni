@@ -8,12 +8,14 @@
     {
         public static string ExportPrisonersByCells(SoftJailDbContext context, int[] ids)
         {
-            throw new NotImplementedException();
+            return "TODO";
+
         }
 
         public static string ExportPrisonersInbox(SoftJailDbContext context, string prisonersNames)
         {
-            throw new NotImplementedException();
+            return "TODO";
+
         }
     }
 }
