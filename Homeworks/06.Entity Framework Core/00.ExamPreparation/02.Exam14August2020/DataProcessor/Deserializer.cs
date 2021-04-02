@@ -96,7 +96,7 @@
 
                 sb.AppendLine($"Imported {prisoner.FullName} {prisoner.Age} years old");
             }
-            sb.AppendLine($"Prisoners: {context.Prisoners.Count()} and email: {context.Prisoners.Select(e => e.Mails).Count()}");
+            
             return sb.ToString().TrimEnd();
         }
 
