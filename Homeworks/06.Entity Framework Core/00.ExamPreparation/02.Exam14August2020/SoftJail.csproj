@@ -28,7 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataProcessor\ExportDto\" />
+    <Folder Include="DataProcessor\ExportDto\InboxPrisoner\" />
   </ItemGroup>
 
 </Project>
