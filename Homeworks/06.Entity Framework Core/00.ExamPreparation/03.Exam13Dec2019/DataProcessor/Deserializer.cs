@@ -8,13 +8,16 @@
     using System.Linq;
     using System.Text;
     using System.Xml.Serialization;
+
+    using Data;
+    using Newtonsoft.Json;
+
+    using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
     using BookShop.Data.Models;
+
     using BookShop.Data.Models.Enums;
     using BookShop.DataProcessor.ImportDto.ImportBooks;
     using BookShop.DataProcessor.ImportDto.ImportBooks.ImportAuthors;
-    using Data;
-    using Newtonsoft.Json;
-    using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
     public class Deserializer
     {
