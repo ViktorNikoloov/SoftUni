@@ -11,6 +11,7 @@
     using BookShop.Data.Models;
     using BookShop.Data.Models.Enums;
     using BookShop.DataProcessor.ImportDto.ImportBooks;
+    using BookShop.DataProcessor.ImportDto.ImportBooks.ImportAuthors;
     using Data;
     using Newtonsoft.Json;
     using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
@@ -65,7 +66,62 @@
 
         public static string ImportAuthors(BookShopContext context, string jsonString)
         {
-            return "TODO";
+            StringBuilder sb = new StringBuilder();
+
+            List<Author> departments = new List<Author>();
+
+            var jsonAuthors = JsonConvert.DeserializeObject<IEnumerable<AuthorsJsonModel>>(jsonString);
+
+            foreach (var jsonAuthor in jsonAuthors)
+            {
+                var isEmailExist = context.Authors.Any(e => e.Email == jsonAuthor.Email);
+
+                if (!IsValid(jsonAuthor) || isEmailExist)
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                var author = new Author()
+                {
+                    FirstName = jsonAuthor.FirstName,
+                    LastName = jsonAuthor.LastName,
+                    Phone = jsonAuthor.Phone,
+                    Email = jsonAuthor.Email,
+                };
+
+                foreach (var book in jsonAuthor.Books)
+                {
+                    var isBookExist = context.Books.FirstOrDefault(i => i.Id == book.Id);
+
+                    if (isBookExist == null)
+                    {
+                        continue;
+                    }
+
+                    author.AuthorsBooks.Add(new AuthorBook()
+                    {
+                        Author =author,
+                        Book = isBookExist
+                    });
+                }
+
+                if (author.AuthorsBooks.Count == 0)
+                {
+                    sb.AppendLine(ErrorMessage);
+                    continue;
+                }
+
+                context.Authors.Add(author);
+                context.SaveChanges();
+
+                var authorFullName = author.FirstName + " " + author.LastName;
+                sb.AppendLine(string.Format(SuccessfullyImportedAuthor, authorFullName, author.AuthorsBooks.Count()));
+
+            }
+
+
+            return sb.ToString().TrimEnd();
 
         }
 
