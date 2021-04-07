@@ -16,6 +16,18 @@ namespace RealEstates.Data
 
         }
 
+        public DbSet<Property> Properties { get; set; }
+
+        public DbSet<BuildingType> Buildings { get; set; }
+
+        public DbSet<District> Districts { get; set; }
+
+        public DbSet<PropertyType> PropertyTypes { get; set; }
+
+        public DbSet<Tag> Tags { get; set; }
+
+        public DbSet<PropertyTag> PropertiesTags { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
