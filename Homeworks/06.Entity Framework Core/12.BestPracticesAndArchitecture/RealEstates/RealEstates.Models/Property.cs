@@ -33,10 +33,7 @@ namespace RealEstates.Models
         public virtual PropertyType Type { get; set; }
 
         public int BuildingTypeId { get; set; }
-        public virtual PropertyType BuildingType { get; set; }
-
-        public int TagId { get; set; }
-        public virtual Tag Tag { get; set; }
+        public virtual BuildingType BuildingType { get; set; }
 
         public virtual ICollection<Tag> Tags { get; set; }
 
