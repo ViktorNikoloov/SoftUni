@@ -4,7 +4,7 @@
     {
         public string Name { get; set; }
 
-        public decimal EveragePricePerSquareMeter { get; set; }
+        public decimal AveragePricePerSquareMeter { get; set; }
 
         public int PropertiesCount { get; set; }
     }
