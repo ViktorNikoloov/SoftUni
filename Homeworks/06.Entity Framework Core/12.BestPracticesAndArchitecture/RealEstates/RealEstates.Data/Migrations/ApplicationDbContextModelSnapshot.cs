@@ -80,7 +80,7 @@ namespace RealEstates.Data.Migrations
                     b.Property<byte?>("Floor")
                         .HasColumnType("tinyint");
 
-                    b.Property<int>("Price")
+                    b.Property<int?>("Price")
                         .HasColumnType("int");
 
                     b.Property<int>("Size")
