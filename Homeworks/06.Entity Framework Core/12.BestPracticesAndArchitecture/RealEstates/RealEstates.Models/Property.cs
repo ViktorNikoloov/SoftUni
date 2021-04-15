@@ -24,7 +24,7 @@ namespace RealEstates.Models
         /// <summary>
         /// Gets or sets the property price in Euro
         /// </summary>
-        public int Price { get; set; }
+        public int? Price { get; set; }
 
         public int DistrictId { get; set; }
         public virtual District District { get; set; }
