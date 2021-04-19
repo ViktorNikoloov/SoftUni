@@ -70,7 +70,7 @@ namespace RealEstates.ConsoleApplication
             var districts = districtsService.GetMostExpensiveDistricts(count);
             foreach (var distrct in districts)
             {
-                Console.WriteLine($"{distrct.Name} => {distrct.AveragePricePerSquareMeter}€/m² ({distrct.PropertiesCount})");
+                Console.WriteLine($"{distrct.Name} => {distrct.AveragePricePerSquareMeter:F2}€/m² ({distrct.PropertiesCount})");
             }
         }
 
