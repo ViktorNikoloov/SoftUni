@@ -7,6 +7,8 @@ namespace Quiz.Models
         public Question()
         {
             Answers = new HashSet<Answer>();
+
+            UserAnswers = new HashSet<UserAnswer>();
         }
 
         public int Id { get; set; }
