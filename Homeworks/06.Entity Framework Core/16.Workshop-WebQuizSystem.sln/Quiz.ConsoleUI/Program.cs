@@ -16,6 +16,21 @@ namespace Quiz.ConsoleUI
             ConfigureServices(serviceCollection);
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
+            var quizService = serviceProvider.GetService<IQuizService>();
+            var quiz = quizService.GetQuizById(1);
+
+            System.Console.WriteLine(quiz.Title);
+
+            foreach (var question in quiz.Questions)
+            {
+                System.Console.WriteLine(question.Title);
+
+                foreach (var answer in question.Answers)
+                {
+                    System.Console.WriteLine(answer.Title);
+                }
+            }
+
             //var quizService = serviceProvider.GetService<IQuizService>();
             //quizService.Add("C# DB");
 
@@ -25,8 +40,10 @@ namespace Quiz.ConsoleUI
             //var answerService = serviceProvider.GetService<IAnswerService>();
             //answerService.Add("it is MicroORM", 0, false, 1);
 
-            var userAnswerService = serviceProvider.GetService<IUserAnswerService>();
-            userAnswerService.AddUserAnswer("1bc16e6d-4e4b-425f-85ad-0ebeaafb064c", 1, 1, 2);
+            //var userAnswerService = serviceProvider.GetService<IUserAnswerService>();
+            //userAnswerService.AddUserAnswer("1bc16e6d-4e4b-425f-85ad-0ebeaafb064c", 1, 1, 2);
+
+
         }
 
         private static void ConfigureServices(IServiceCollection services)
