@@ -15,6 +15,6 @@
    |<a href="https://softuni.bg/trainings/3007/csharp-advanced-september-2020"> C# Advanced </a>| <a href="https://softuni.bg/certificates/details/90411/003b73d8"> Link</a> |
    |<a href="https://softuni.bg/trainings/3008/csharp-oop-october-2020"> C# OOP </a>| <a href="https://softuni.bg/certificates/details/95831/26523c53"> Link</a> |
    |<a href="https://softuni.bg/trainings/3272/ms-sql-january-2021"> MS SQL Server </a>| <a href="https://softuni.bg/certificates/details/98015/bb686a60"> Link</a> |
-   |<a href="https://softuni.bg/trainings/3221/entity-framework-core-february-2021"> Entity Framework Core </a>| *In Progress* |
+   |<a href="https://softuni.bg/trainings/3221/entity-framework-core-february-2021"> Entity Framework Core </a>| <a href="https://softuni.bg/certificates/details/102724/5f0e3a60"> Link</a> |
 
 <p align="center">All tasks and homeworks are done with result 100/100 points<p>
