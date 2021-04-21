@@ -26,6 +26,18 @@ namespace Quiz.Data
 
         public DbSet<Answer> Answers { get; set; }
 
+        public DbSet<UserAnswer> UserAnswers { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<UserAnswer>()
+                .HasKey(ua => new
+                {
+                    ua.UserId,
+                    ua.AnswerId
+                });
+            base.OnModelCreating(builder);
+        }
     }
 
 }
