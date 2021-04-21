@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Quiz.Web.Data;
+using Quiz.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
