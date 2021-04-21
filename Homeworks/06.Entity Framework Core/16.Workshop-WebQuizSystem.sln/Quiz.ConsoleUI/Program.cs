@@ -16,8 +16,11 @@ namespace Quiz.ConsoleUI
             ConfigureServices(serviceCollection);
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var quizService = serviceProvider.GetService<IQuizService>();
-            quizService.Add("C# DB");
+            //var quizService = serviceProvider.GetService<IQuizService>();
+            //quizService.Add("C# DB");
+
+            //var questionService = serviceProvider.GetService<IQuestionService>();
+            //questionService.Add("What is Entity Framework Core", 1);
         }
 
         private static void ConfigureServices(IServiceCollection services)
@@ -35,6 +38,9 @@ namespace Quiz.ConsoleUI
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddTransient<IQuizService, QuizService>();
+            services.AddTransient<IQuestionService, QuestionService>();
+
+
         }
     }
 }
