@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
 
-namespace Quiz.Web.Data.Migrations
+using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+
+namespace Quiz.Data.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {
