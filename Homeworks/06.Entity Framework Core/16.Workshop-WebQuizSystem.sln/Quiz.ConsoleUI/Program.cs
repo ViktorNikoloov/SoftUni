@@ -21,6 +21,12 @@ namespace Quiz.ConsoleUI
 
             //var questionService = serviceProvider.GetService<IQuestionService>();
             //questionService.Add("What is Entity Framework Core", 1);
+
+            //var answerService = serviceProvider.GetService<IAnswerService>();
+            //answerService.Add("it is MicroORM", 0, false, 1);
+
+            var userAnswerService = serviceProvider.GetService<IUserAnswerService>();
+            userAnswerService.AddUserAnswer("1bc16e6d-4e4b-425f-85ad-0ebeaafb064c", 1, 1, 2);
         }
 
         private static void ConfigureServices(IServiceCollection services)
@@ -39,7 +45,8 @@ namespace Quiz.ConsoleUI
 
             services.AddTransient<IQuizService, QuizService>();
             services.AddTransient<IQuestionService, QuestionService>();
-
+            services.AddTransient<IAnswerService, AnswerService>();
+            services.AddTransient<IUserAnswerService, UserAnswerService>();
 
         }
     }
