@@ -8,7 +8,7 @@
 <br/>
 <br/>
 
-   |**Course**|**Certificate**| 
+   |**Courses**|**Certificates**| 
    | :---:  | :---:  |
    |<a href="https://softuni.bg/trainings/2808/programming-basics-with-c-sharp-march-2020" > Programming Basics with C# </a>   | <a href="https://softuni.bg/certificates/details/81371/99d70d1e"> Link</a> |
    |<a href="https://softuni.bg/trainings/2830/csharp-fundamentals-may-2020"> Fundamentals with C# </a>| <a href="https://softuni.bg/certificates/details/86238/dcced4d2"> Link</a> |
