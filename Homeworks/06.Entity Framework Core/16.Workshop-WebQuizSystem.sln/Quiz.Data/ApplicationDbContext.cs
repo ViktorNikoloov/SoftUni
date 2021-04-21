@@ -33,7 +33,7 @@ namespace Quiz.Data
             builder.Entity<UserAnswer>()
                 .HasKey(ua => new
                 {
-                    ua.UserId,
+                    ua.IdentityUserId,
                     ua.AnswerId
                 });
             base.OnModelCreating(builder);
