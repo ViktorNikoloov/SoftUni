@@ -19,19 +19,22 @@ namespace Quiz.ConsoleUI
             ConfigureServices(serviceCollection);
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var questionService = serviceProvider.GetService<IQuestionService>();
-            questionService.Add("1+1", 1);
+            //var addQuiz = serviceProvider.GetService<IQuizService>();
+            //addQuiz.Add("SoftUniQuiz");
+
+            //var questionService = serviceProvider.GetService<IQuestionService>();
+            //questionService.Add("1+1", 1);
 
             var answerService = serviceProvider.GetService<IAnswerService>();
-            answerService.Add("2", 5, true, 2);
+            answerService.Add("2", 5, true, 3);
 
             var userAnswerService = serviceProvider.GetService<IUserAnswerService>();
             userAnswerService
-                .AddUserAnswer("1bc16e6d-4e4b-425f-85ad-0ebeaafb064c", 1, 2, 1);
+                .AddUserAnswer("fdb3074e-caa7-4fea-b798-4df63a06d935", 1, 3, 1);
 
             var quizService = serviceProvider.GetService<IUserAnswerService>();
             var quiz = quizService
-                .GetUserResult("1bc16e6d-4e4b-425f-85ad-0ebeaafb064c", 1);
+                .GetUserResult("fdb3074e-caa7-4fea-b798-4df63a06d935", 1);
 
             Console.WriteLine(quiz);
 
