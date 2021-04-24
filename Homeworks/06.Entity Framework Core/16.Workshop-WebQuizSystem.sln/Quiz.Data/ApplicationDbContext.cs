@@ -33,6 +33,9 @@ namespace Quiz.Data
             //        ua.AnswerId
             //    });
 
+            builder.Entity<UserAnswer>()
+                .HasKey(k => k.Id);
+
             //FK_Answers_Questions_QuestionId
             builder.Entity<Answer>()
                 .HasOne(x => x.Question)
