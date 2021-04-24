@@ -16,13 +16,11 @@ namespace Quiz.Services
             this.applicationDbContext = applicationDbContext;
         }
 
-        public void AddUserAnswer(string userId, int quizId, int questionId, int answerId)
+        public void AddUserAnswer(string userId, int answerId)
         {
             var userAnswer = new UserAnswer()
             {
                 IdentityUserId = userId,
-                QuizId = quizId,
-                QuestionId = questionId,
                 AnswerId = answerId,
 
             };
@@ -40,10 +38,8 @@ namespace Quiz.Services
                 var userAnswer = new UserAnswer
                 {
                     IdentityUserId = quizInputModel.UserId,
-                    QuizId = quizInputModel.QuizId,
                     AnswerId = item.AnswerId,
                     QuestionId = item.QuestionId
-
                 };
 
                 userAnswers.Add(userAnswer);
@@ -56,14 +52,20 @@ namespace Quiz.Services
         public int GetUserResult(string userId, int quizId)
         {
             var totalPoints = applicationDbContext
-                .Quizzes
-                .Include(q => q.Questions)
-                .ThenInclude(a => a.Answers)
-                .ThenInclude(ua => ua.UserAnswers)
-                .Where(x => x.Id == quizId && x.UserAnswers.Any(x => x.IdentityUserId == userId))
-                .SelectMany(x => x.UserAnswers)
-                .Where(x => x.Answer.IsCorrect)
+                .UserAnswers
+                .Where(x => x.IdentityUserId == userId && x.QuestionId == quizId)
                 .Sum(x => x.Answer.Points);
+
+
+            //var totalPoints = applicationDbContext
+            //    .Quizzes
+            //    .Include(q => q.Questions)
+            //    .ThenInclude(a => a.Answers)
+            //    .ThenInclude(ua => ua.UserAnswers)
+            //    .Where(x => x.Id == quizId && x.UserAnswers.Any(x => x.IdentityUserId == userId))
+            //    .SelectMany(x => x.UserAnswers)
+            //    .Where(x => x.Answer.IsCorrect)
+            //    .Sum(x => x.Answer.Points);
 
             //var userAnswers = applicationDbContext
             //    .UserAnswers

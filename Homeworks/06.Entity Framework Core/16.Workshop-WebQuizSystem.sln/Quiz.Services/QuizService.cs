@@ -14,7 +14,7 @@ namespace Quiz.Services
             this.applicationDbContext = applicationDbContext;
         }
 
-        public void Add(string title)
+        public int Add(string title)
         {
             var quiz = new Quiz.Models.Quiz
             {
@@ -23,6 +23,8 @@ namespace Quiz.Services
 
             applicationDbContext.Quizzes.Add(quiz);
             applicationDbContext.SaveChanges();
+
+            return quiz.Id;
         }
 
         public QuizViewModel GetQuizById(int quizId)
