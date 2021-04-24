@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System;
+using System.IO;
+
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using Quiz.Data;
 using Quiz.Services;
-using System.IO;
 
 namespace Quiz.ConsoleUI
 {
@@ -16,34 +19,24 @@ namespace Quiz.ConsoleUI
             ConfigureServices(serviceCollection);
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var quizService = serviceProvider.GetService<IQuizService>();
-            var quiz = quizService.GetQuizById(1);
+            var questionService = serviceProvider.GetService<IQuestionService>();
+            questionService.Add("1+1", 1);
 
-            System.Console.WriteLine(quiz.Title);
+            var answerService = serviceProvider.GetService<IAnswerService>();
+            answerService.Add("2", 5, true, 2);
 
-            foreach (var question in quiz.Questions)
-            {
-                System.Console.WriteLine(question.Title);
+            var userAnswerService = serviceProvider.GetService<IUserAnswerService>();
+            userAnswerService
+                .AddUserAnswer("1bc16e6d-4e4b-425f-85ad-0ebeaafb064c", 1, 2, 1);
 
-                foreach (var answer in question.Answers)
-                {
-                    System.Console.WriteLine(answer.Title);
-                }
-            }
+            var quizService = serviceProvider.GetService<IUserAnswerService>();
+            var quiz = quizService
+                .GetUserResult("1bc16e6d-4e4b-425f-85ad-0ebeaafb064c", 1);
+
+            Console.WriteLine(quiz);
 
             //var quizService = serviceProvider.GetService<IQuizService>();
             //quizService.Add("C# DB");
-
-            //var questionService = serviceProvider.GetService<IQuestionService>();
-            //questionService.Add("What is Entity Framework Core", 1);
-
-            //var answerService = serviceProvider.GetService<IAnswerService>();
-            //answerService.Add("it is MicroORM", 0, false, 1);
-
-            //var userAnswerService = serviceProvider.GetService<IUserAnswerService>();
-            //userAnswerService.AddUserAnswer("1bc16e6d-4e4b-425f-85ad-0ebeaafb064c", 1, 1, 2);
-
-
         }
 
         private static void ConfigureServices(IServiceCollection services)
