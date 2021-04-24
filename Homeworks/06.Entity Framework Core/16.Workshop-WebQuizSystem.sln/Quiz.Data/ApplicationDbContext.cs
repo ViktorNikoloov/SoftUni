@@ -9,11 +9,6 @@ namespace Quiz.Data
 {
     public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
-        public ApplicationDbContext()
-        {
-                
-        }
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -30,14 +25,15 @@ namespace Quiz.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<UserAnswer>()
-                .HasKey(ua => new
-                {
-                    ua.IdentityUserId,
-                    ua.AnswerId
-                });
-            base.OnModelCreating(builder);
+            /*No need primary key if we want multiple choice questions*/
+            //builder.Entity<UserAnswer>()
+            //    .HasKey(ua => new
+            //    {
+            //        ua.IdentityUserId,
+            //        ua.AnswerId
+            //    });
 
+            //FK_Answers_Questions_QuestionId
             builder.Entity<Answer>()
                 .HasOne(x => x.Question)
                 .WithMany(x => x.Answers)
@@ -49,6 +45,8 @@ namespace Quiz.Data
                 .WithMany(x => x.Questions)
                 .HasForeignKey(x => x.QuizId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            base.OnModelCreating(builder);
         }
     }
 
