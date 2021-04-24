@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using Newtonsoft.Json;
+
 using Quiz.Data;
 using Quiz.Services;
 
@@ -21,8 +21,8 @@ namespace Quiz.ConsoleUI
             ConfigureServices(serviceCollection);
             var serviceProvider = serviceCollection.BuildServiceProvider();
 
-            var dbContext = serviceProvider.GetService<ApplicationDbContext>();
-            dbContext.Database.Migrate();
+            //var dbContext = serviceProvider.GetService<ApplicationDbContext>();
+            //dbContext.Database.Migrate();
 
             var json = File.ReadAllText("EF-Core-Quiz.json");
             var questions = JsonConvert.DeserializeObject<IEnumerable<JsonQuestion>>(json);
@@ -35,7 +35,10 @@ namespace Quiz.ConsoleUI
             foreach (var question in questions)
             {
                 var questionId = questionService.Add(question.Question, quizId);
-
+                foreach (var answer in question.Answers)
+                {
+                    answerService.Add(answer.Answer, answer.Correct ? 1 : 0, answer.Correct, questionId);
+                }
             }
 
 
