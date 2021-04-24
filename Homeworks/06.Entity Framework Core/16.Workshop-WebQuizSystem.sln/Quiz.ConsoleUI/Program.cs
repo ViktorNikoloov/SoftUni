@@ -1,15 +1,13 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using Newtonsoft.Json;
-
 using Quiz.Data;
 using Quiz.Services;
+using Quiz.Services.Models;
 
 namespace Quiz.ConsoleUI
 {
@@ -24,22 +22,8 @@ namespace Quiz.ConsoleUI
             //var dbContext = serviceProvider.GetService<ApplicationDbContext>();
             //dbContext.Database.Migrate();
 
-            var json = File.ReadAllText("EF-Core-Quiz.json");
-            var questions = JsonConvert.DeserializeObject<IEnumerable<JsonQuestion>>(json);
-
-            var quizService = serviceProvider.GetService<IQuizService>();
-            var questionService = serviceProvider.GetService<IQuestionService>();
-            var answerService = serviceProvider.GetService<IAnswerService>();
-
-            var quizId = quizService.Add("EF Core Test");
-            foreach (var question in questions)
-            {
-                var questionId = questionService.Add(question.Question, quizId);
-                foreach (var answer in question.Answers)
-                {
-                    answerService.Add(answer.Answer, answer.Correct ? 1 : 0, answer.Correct, questionId);
-                }
-            }
+            var jsonImporter = serviceProvider.GetService<IJsonImportService>();
+            jsonImporter.Import("EF-Core-Quiz.json", "EF Core Test");
 
 
             //var addQuiz = serviceProvider.GetService<IQuizService>();
@@ -83,7 +67,7 @@ namespace Quiz.ConsoleUI
             services.AddTransient<IQuestionService, QuestionService>();
             services.AddTransient<IAnswerService, AnswerService>();
             services.AddTransient<IUserAnswerService, UserAnswerService>();
-
+            services.AddTransient<IJsonImportService, JsonImportService>();
         }
     }
 }
