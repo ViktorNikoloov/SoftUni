@@ -1,5 +1,7 @@
 ﻿using Quiz.Services.Models;
 
+using System.Collections.Generic;
+
 namespace Quiz.Services
 {
     public interface IQuizService
@@ -7,5 +9,7 @@ namespace Quiz.Services
         int Add(string title);
 
         QuizViewModel GetQuizById(int quizId);
+
+        IEnumerable<UserQuizViewModel> GetQuizzesByUserName(string userName);
     }
 }
