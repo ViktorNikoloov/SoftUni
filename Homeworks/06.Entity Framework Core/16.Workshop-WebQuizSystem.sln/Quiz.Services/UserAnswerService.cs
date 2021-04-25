@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Linq;
+
 using Quiz.Data;
 using Quiz.Models;
 using Quiz.Services.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Quiz.Services
 {
@@ -16,16 +16,19 @@ namespace Quiz.Services
             this.applicationDbContext = applicationDbContext;
         }
 
-        public void AddUserAnswer(string userId, int answerId)
+        public void AddUserAnswer(string userName, int questionId, int answerId)
         {
-            var userAnswer = new UserAnswer()
-            {
-                IdentityUserId = userId,
-                AnswerId = answerId,
+            var userId = applicationDbContext
+                .Users
+                .Where(x => x.UserName == userName)
+                .Select(x => x.Id)
+                .FirstOrDefault();
 
-            };
-
-            applicationDbContext.UserAnswers.Add(userAnswer);
+            var userAnswer = applicationDbContext
+                .UserAnswers
+                .FirstOrDefault(x => x.IdentityUserId == userId && x.QuestionId == questionId);
+            userAnswer.AnswerId = answerId;
+           
             applicationDbContext.SaveChanges();
         }
 
@@ -49,13 +52,19 @@ namespace Quiz.Services
             applicationDbContext.SaveChanges();
         }
 
-        public int GetUserResult(string userId, int quizId)
+        public int GetUserResult(string userName, int quizId)
         {
+            var userId = applicationDbContext
+                .Users
+                .Where(x => x.UserName == userName)
+                .Select(x => x.Id)
+                .FirstOrDefault();
             var totalPoints = applicationDbContext
                 .UserAnswers
-                .Where(x => x.IdentityUserId == userId && x.QuestionId == quizId)
+                .Where(x => x.IdentityUserId == userId && x.Question.QuizId == quizId)
                 .Sum(x => x.Answer.Points);
 
+            return totalPoints;
 
             //var totalPoints = applicationDbContext
             //    .Quizzes
@@ -84,7 +93,6 @@ namespace Quiz.Services
             //        ?.Points;
             //} 
 
-            return totalPoints;
         }
     }
 }
