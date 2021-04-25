@@ -1,8 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Collections.Generic;
+using System.Linq;
+
+using Microsoft.EntityFrameworkCore;
+
 using Quiz.Data;
 using Quiz.Services.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Quiz.Services
 {
@@ -88,8 +90,10 @@ namespace Quiz.Services
                     quiz.Status = QuizStatus.InProgress;
                 }
 
-                return quizzes;
             }
+
+            return quizzes;
+
         }
     }
 }
