@@ -20,15 +20,17 @@
             <td>
                 @if (quiz.Status == Quiz.Services.Models.QuizStatus.NotStarted)
                 {
-                    <a href="" class="btn btn-success">Start test</a>
+                    //<a href="/Quiz/Test/@quiz.QuizId" class="btn btn-success">Start test</a>
+                    <a asp-controller="Quiz" asp-action="Test" asp-route-id="@quiz.QuizId" class="btn btn-success">Start test</a>
+
                 }
                 else if (quiz.Status == Quiz.Services.Models.QuizStatus.InProgress)
                 {
-                    <a href="" class="btn btn-warning">Continue test</a>
+                    <a href="Quiz/Test/@quiz.QuizId" class="btn btn-warning">Continue test</a>
                 }
                 else
                 {
-                    <a href="" class="btn btn-secondary">View results</a>
+                    <a href="Quiz/Results/@quiz.QuizId" class="btn btn-secondary">View results</a>
                 }
             </td>
         </tr>
