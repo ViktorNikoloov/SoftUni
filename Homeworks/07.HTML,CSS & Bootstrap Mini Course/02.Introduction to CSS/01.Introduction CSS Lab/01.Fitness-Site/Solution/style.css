@@ -21,16 +21,18 @@ header nav ul li{
     padding: 5px;
 }
 
-nav a{
-    text-decoration: none;
-}
-
-main section:nth-child(1) button:hover{
-    background-color: white;
-    color: #F9690E;
+header nav ul li:hover{
+    background-color: #F9690E;
     cursor: pointer;
 }
 
+header nav ul li a:hover{
+    color: whitesmoke;
+}
+
+nav a{
+    text-decoration: none;
+}
 
 main section:nth-child(1){
     background: url("Images/picture.jpg") no-repeat;
@@ -56,8 +58,15 @@ main section:nth-child(1) button{
     background: #F9690E;
     color: white;
     border: none;
-    padding: 10px;
-    margin-top: 25px;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+main section:nth-child(1) button:hover{
+    background-color: white;
+    color: #F9690E;
+    cursor: pointer;
+    border: 5px solid #F9690E;
 }
 
 main section:nth-child(2) article{
@@ -72,19 +81,37 @@ padding: 30px 60px;
 main section:nth-child(2) article p{
     text-align: left;
     padding: 2rem ;
-    }
+}
+
+main section:nth-child(2) article:hover{
+    background-color: darkslategray;
+    color: #F9690E;
+    cursor: pointer;
+}
+
+main section:nth-child(2) article h3, p:hover{
+    border: 3px solid #F9690E;
+}
 
 footer{
         padding: 30px 0 10px 0;
-    }
+}
 
 footer article:nth-child(1) {
     display: inline-block;
     width: 730px;
     
-    }
+}
 
 footer article:nth-child(2) {
     text-align: right;
     margin-right: 20px;
-    }
+    font-size: 35px;
+}
+
+footer article:nth-child(2) i:hover{
+    background-color: #F9690E;
+    color: while;
+    border: 7px solid #F9690E;
+    cursor: pointer;
+}
