@@ -35,7 +35,7 @@ main section:nth-child(1) button:hover{
 main section:nth-child(1){
     background: url("Images/picture.jpg") no-repeat;
     background-size: cover;
-    height: 350px;
+    height: 580px;
     padding-top: 250px;
     text-align: center;
     
@@ -65,7 +65,7 @@ background: #F9690E;
 color: white;
 text-align: center;
 display: inline-block;
-width: 688px;
+width: 684px;
 padding: 30px 60px;
 }
 
