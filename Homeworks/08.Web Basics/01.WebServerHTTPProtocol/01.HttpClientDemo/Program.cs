@@ -15,14 +15,14 @@ namespace _01.HttpClientDemo
             const string NewLine = "\r\n";
             //await ReadData();
 
-            TcpListener tcpListener = new TcpListener(IPAddress.Loopback, 12345);
+            TcpListener tcpListener = new TcpListener(IPAddress.Loopback, 12345); // default local port:80 ! // default https port: 443 !
             tcpListener.Start();
 
             //demon //service
             while (true)
             {
-               var client = tcpListener.AcceptTcpClient();
-               using var stream = client.GetStream();
+                var client = tcpListener.AcceptTcpClient();
+                using var stream = client.GetStream();
 
                 //int byteLenght = 0;
                 //byte[] buffer = new byte[4096];
@@ -48,7 +48,7 @@ namespace _01.HttpClientDemo
                     $"<input type=Submit /></form>"; //No personal data in the Url when we use post method !
 
                 /*Contetnt-Types: text/html, image/png, text/plain, application/xml, application/pdf, and more*/
-                string responseOk = "HTTP/1.1 200 OK" + NewLine + 
+                string responseOk = "HTTP/1.1 200 OK" + NewLine +
                     "Server: ViktorServer 2021" + NewLine +
                     "Content-Type: text/html; charset=utf-8" + NewLine +
                     "Content-Lenght:" + html.Length + NewLine +
@@ -60,12 +60,24 @@ namespace _01.HttpClientDemo
                     "Location: https://www.google.bg/" + NewLine +
                     "Content-Type: text/html; charset=utf-8" + NewLine +
                     "Content-Lenght:" + html.Length + NewLine +
-                    NewLine + 
+                    NewLine +
                     html + NewLine;
+
+                string responseDisposition = "HTTP/1.1 200 OK" + NewLine +
+                    "Server: ViktorServer 2021" + NewLine +
+                    "Content-Type: text/plain; charset=utf-8" + NewLine +
+                    "Content-Disposition: attachment; filename=Viktor.txt" + NewLine +
+                    "Content-Lenght:" + html.Length + NewLine +
+                    NewLine +
+                    html + NewLine + signUpForm + NewLine;
 
                 byte[] responseOkByte = Encoding.UTF8.GetBytes(responseOk);
                 byte[] responseRedirectByte = Encoding.UTF8.GetBytes(responseRedirect);
-                stream.Write(responseOkByte);
+                byte[] responseDispositionByte = Encoding.UTF8.GetBytes(responseDisposition);
+
+                //stream.Write(responseOkByte);
+                //stream.Write(responseRedirectByte);
+                stream.Write(responseDispositionByte);
 
                 Console.WriteLine(new string('=', 70));
             }
@@ -84,7 +96,7 @@ namespace _01.HttpClientDemo
 
             Console.WriteLine(response.StatusCode);
             Console.WriteLine(string.Join(Environment.NewLine,
-                response.Headers.Select(x=> x.Key + ": " + x.Value.First())));
+                response.Headers.Select(x => x.Key + ": " + x.Value.First())));
 
             //var html = await httpClient.GetStringAsync(url);
             //Console.WriteLine(html);
