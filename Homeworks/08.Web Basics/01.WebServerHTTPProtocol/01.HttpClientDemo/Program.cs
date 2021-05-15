@@ -44,6 +44,8 @@ namespace _01.HttpClientDemo
                 Console.WriteLine(requestString);
 
                 string html = $"<h1>Hello from ViktorServer {DateTime.UtcNow}</h1>";
+                string signUpForm = $"<form method=post><input name=Username /><input name=Password />" +
+                    $"<input type=Submit /></form>"; //No personal data in the Url when we use post method !
 
                 /*Contetnt-Types: text/html, image/png, text/plain, application/xml, application/pdf, and more*/
                 string responseOk = "HTTP/1.1 200 OK" + NewLine + 
@@ -51,19 +53,19 @@ namespace _01.HttpClientDemo
                     "Content-Type: text/html; charset=utf-8" + NewLine +
                     "Content-Lenght:" + html.Length + NewLine +
                     NewLine +
-                    html + NewLine;
+                    html + NewLine + signUpForm + NewLine;
 
                 string responseRedirect = "HTTP/1.1 307 Redirect" + NewLine +
                     "Server: ViktorServer 2021" + NewLine +
                     "Location: https://www.google.bg/" + NewLine +
                     "Content-Type: text/html; charset=utf-8" + NewLine +
                     "Content-Lenght:" + html.Length + NewLine +
-                    NewLine +
+                    NewLine + 
                     html + NewLine;
 
                 byte[] responseOkByte = Encoding.UTF8.GetBytes(responseOk);
                 byte[] responseRedirectByte = Encoding.UTF8.GetBytes(responseRedirect);
-                stream.Write(responseRedirectByte);
+                stream.Write(responseOkByte);
 
                 Console.WriteLine(new string('=', 70));
             }
