@@ -36,7 +36,7 @@ namespace _01.HttpClientDemo
                 //}
 
                 int byteLenght = 0;
-                byte[] buffer = new byte[1000000];
+                byte[] buffer = new byte[1000000]; // The byte[] lenght is only for the demo
                 var lenght = stream.Read(buffer, byteLenght, buffer.Length);
 
                 string requestString = Encoding.UTF8.GetString(buffer, 0, lenght);
