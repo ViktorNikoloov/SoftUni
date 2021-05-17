@@ -7,9 +7,14 @@ namespace _01.PrimeNumberCounter
     {
         static void Main(string[] args)
         {
-            //Count and Time at the begining
-            //664580
-            //00:00:13.8449974
+            // Synchronous code's Count and Time // PrintPrimeCount
+            // 664580
+            // 00:00:13.8449974
+            
+        }
+
+        static void PrintPrimeCount()
+        {
             Stopwatch sw = Stopwatch.StartNew();
 
             int n = 10_000_000;
