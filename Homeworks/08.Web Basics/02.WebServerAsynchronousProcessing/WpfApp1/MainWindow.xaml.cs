@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -17,14 +18,15 @@ namespace WpfApp1
         }
 
         // Event Handler
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            ShowImage(Image1, "https://http.cat/301");
-            ShowImage(Image2, "https://http.cat/404");
-            ShowImage(Image3, "https://http.cat/500");
-            ShowImage(Image4, "https://http.cat/200");
-            ShowImage(Image5, "https://http.cat/403");
-            ShowImage(Image6, "https://http.cat/307");
+           
+         /* await*/ ShowImageAsync(Image1, "https://http.cat/301");
+         /* await*/ ShowImageAsync(Image2, "https://http.cat/404");
+         /* await*/ ShowImageAsync(Image3, "https://http.cat/500");
+         /* await*/ ShowImageAsync(Image4, "https://http.cat/200");
+         /* await*/ ShowImageAsync(Image5, "https://http.cat/403");
+         /* await*/ ShowImageAsync(Image6, "https://http.cat/307");
         }
 
         private void ShowImage(Image image, string url)
@@ -33,6 +35,14 @@ namespace WpfApp1
             var response = httpClient.GetAsync(url).GetAwaiter().GetResult();
             byte[] imageBytes = response.Content.ReadAsByteArrayAsync().GetAwaiter().GetResult();
             image.Source = LoadImage(imageBytes);
+        }
+
+        private async Task ShowImageAsync(Image image, string url)
+        {
+            HttpClient httpClient = new HttpClient();
+            var response = await httpClient.GetAsync(url);
+            byte[] imageBytes = await response.Content.ReadAsByteArrayAsync();
+            image.Source = await Task.Run(() => LoadImage(imageBytes));
         }
 
         private static BitmapImage LoadImage(byte[] imageData)
