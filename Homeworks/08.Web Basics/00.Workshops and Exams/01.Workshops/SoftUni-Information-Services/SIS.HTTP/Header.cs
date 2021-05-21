@@ -4,6 +4,12 @@ namespace SIS.HTTP
 {
     public class Header
     {
+        public Header(string name, string value)
+        {
+            Name = name;
+            Value = value;
+        }
+
         public Header(string headerLine)
         {
             var headerParts = headerLine
