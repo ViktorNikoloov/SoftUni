@@ -3,9 +3,26 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SIS.HTTP", "SIS.HTTP", "{91F1FC8B-EB82-45BE-8C86-F54FCA0851EA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIS.HTTP", "SIS.HTTP\SIS.HTTP.csproj", "{4233F794-E99C-4E1B-8C50-11820639638A}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4233F794-E99C-4E1B-8C50-11820639638A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4233F794-E99C-4E1B-8C50-11820639638A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4233F794-E99C-4E1B-8C50-11820639638A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4233F794-E99C-4E1B-8C50-11820639638A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4233F794-E99C-4E1B-8C50-11820639638A} = {91F1FC8B-EB82-45BE-8C86-F54FCA0851EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2938EC31-1F02-4350-A531-6EAB231AA19E}
