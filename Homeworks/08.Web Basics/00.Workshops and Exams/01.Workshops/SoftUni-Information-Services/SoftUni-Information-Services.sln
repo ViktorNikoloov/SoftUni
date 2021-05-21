@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SIS.HTTP", "SIS.HTTP", "{91
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIS.HTTP", "SIS.HTTP\SIS.HTTP.csproj", "{4233F794-E99C-4E1B-8C50-11820639638A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SIS.MvcFramework", "SIS.MvcFramework", "{FAE6330F-B3B1-49C5-B011-764FC9B037C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIS.MvcFramework", "SIS.MvcFramework\SIS.MvcFramework.csproj", "{D9ECA3F6-7429-469E-8408-EC87508F5961}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,17 @@ Global
 		{4233F794-E99C-4E1B-8C50-11820639638A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4233F794-E99C-4E1B-8C50-11820639638A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4233F794-E99C-4E1B-8C50-11820639638A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9ECA3F6-7429-469E-8408-EC87508F5961}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9ECA3F6-7429-469E-8408-EC87508F5961}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9ECA3F6-7429-469E-8408-EC87508F5961}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9ECA3F6-7429-469E-8408-EC87508F5961}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{4233F794-E99C-4E1B-8C50-11820639638A} = {91F1FC8B-EB82-45BE-8C86-F54FCA0851EA}
+		{D9ECA3F6-7429-469E-8408-EC87508F5961} = {FAE6330F-B3B1-49C5-B011-764FC9B037C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2938EC31-1F02-4350-A531-6EAB231AA19E}
