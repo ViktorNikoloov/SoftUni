@@ -1,6 +1,10 @@
-﻿using System.Threading.Tasks;
-using MyFirstMvcApp.Controllers;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+
+using SIS.MvcFramework;
 using SIS.HTTP;
+
+using MyFirstMvcApp.Controllers;
 
 namespace MyFirstMvcApp
 {
@@ -8,21 +12,17 @@ namespace MyFirstMvcApp
     {
         static async Task Main(string[] args)
         {
-            //TODO: {controller}/{action}/{id}
-            IHttpServer server = new HttpServer();
-
             /*route table*/
-            server.AddRoute("/", new HomeController().Index);
-            server.AddRoute("/users/login", new UsersController().Login);
-            server.AddRoute("/users/register", new UsersController().Register);
-            server.AddRoute("/cards/add", new CardsController().Add);
-            server.AddRoute("/cards/all", new CardsController().All);
-            server.AddRoute("/cards/collection", new CardsController().Collection);
-            server.AddRoute("/favicon.ico", new StaticFilesController().Favicon);
+            List<Route> routeTable = new List<Route>();
+            routeTable.Add(new Route("/", new HomeController().Index));
+            routeTable.Add(new Route("/users/login", new UsersController().Login));
+            routeTable.Add(new Route("/users/register", new UsersController().Register));
+            routeTable.Add(new Route("/cards/add", new CardsController().Add));
+            routeTable.Add(new Route("/cards/all", new CardsController().All));
+            routeTable.Add(new Route("/cards/collection", new CardsController().Collection));
+            routeTable.Add(new Route("/favicon.ico", new StaticFilesController().Favicon));
 
-            //If we want to auto-start the HomePage
-            //Process.Start(@"C:\Program Files\Mozilla Firefox\firefox.exe", "http://localhost/");
-            await server.StartAsync(80);
+            await Host.CreateHostAsync(routeTable);
         }
     }
 }

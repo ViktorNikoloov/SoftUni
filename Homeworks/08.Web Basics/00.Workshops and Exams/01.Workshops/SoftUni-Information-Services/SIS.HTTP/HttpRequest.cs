@@ -1,8 +1,9 @@
-﻿using SIS.HTTP.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+
+using SIS.HTTP.Enums;
 
 namespace SIS.HTTP
 {
