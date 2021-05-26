@@ -5,6 +5,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
 
+using HttpStatusCode = SIS.HTTP.Enums.HttpStatusCode;
+
 namespace SIS.HTTP
 {
     public class HttpServer : IHttpServer
@@ -47,8 +49,7 @@ namespace SIS.HTTP
             byte[] buffer = new byte[HttpConstants.BufferSize];
             while (true)
             {
-                int count =
-                await stream.ReadAsync(buffer, position, buffer.Length);
+                int count = await stream.ReadAsync(buffer, position, buffer.Length);
                 position += count;
 
                 if (count < buffer.Length)
@@ -68,7 +69,7 @@ namespace SIS.HTTP
             var requestAsString = Encoding.UTF8.GetString(data.ToArray());
             var request = new HttpRequest(requestAsString);
             Console.WriteLine($"{request.Method} {request.Path} => {request.Headers.Count} headers");
-            
+
 
             HttpResponse response;
             if (routeTable.ContainsKey(request.Path))
@@ -78,10 +79,12 @@ namespace SIS.HTTP
             }
             else
             {
-                //Not Found 404
-                response = new HttpResponse("text/html", Array.Empty<byte>(), Enums.HttpStatusCode.NotFound);
+                //var responseHtml = $"<h1>{(int)(HttpStatusCode.NotFound)} {HttpStatusCode.NotFound}</h1>";
+                //var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
+                response = new HttpResponse("text/html", Array.Empty<byte>(), HttpStatusCode.NotFound);
             }
-            Console.WriteLine((int)(response.StatusCode) + " " +  response.StatusCode.ToString());
+            Console.WriteLine((int)(response.StatusCode) + " " + response.StatusCode.ToString());
+
 
             response.Cookies.Add(new ResponseCookie("sid", Guid.NewGuid().ToString())
             { HttpOnly = true, MaxAge = 60 * 24 * 60 * 60 });
@@ -91,7 +94,7 @@ namespace SIS.HTTP
             await stream.WriteAsync(responseHeaderBytes, 0, responseHeaderBytes.Length);
             await stream.WriteAsync(response.Body, 0, response.Body.Length);
 
-            tcpClient.Close();
+           // tcpClient.Close();
         }
     }
 }

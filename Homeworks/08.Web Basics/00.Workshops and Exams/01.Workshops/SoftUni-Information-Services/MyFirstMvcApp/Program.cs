@@ -14,7 +14,7 @@ namespace MyFirstMvcApp
 
             /*route table*/
             server.AddRoute("/", HomePage);
-            server.AddRoute("/favico.ico", Favicon);
+            server.AddRoute("/favicon.ico", Favicon);
             server.AddRoute("/about", About);
             server.AddRoute("/users/login", Login);
 
