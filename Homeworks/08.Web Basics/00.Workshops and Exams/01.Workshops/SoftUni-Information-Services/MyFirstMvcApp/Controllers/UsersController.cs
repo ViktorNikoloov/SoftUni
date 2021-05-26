@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-using SIS.HTTP;
+﻿using SIS.HTTP;
 using SIS.MvcFramework;
 
 namespace MyFirstMvcApp.Controllers
@@ -9,20 +7,12 @@ namespace MyFirstMvcApp.Controllers
     {
         public HttpResponse Login(HttpRequest request)
         {
-            var responseHtml = "<h1>! Login !</h1>";
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
-
-            return response;
+            return View("Views/Users/Login.cshtml");
         }
 
         public HttpResponse Register(HttpRequest request)
         {
-            var responseHtml = "<h1>! Register !</h1>";
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
-
-            return response;
+            return View("Views/Users/Register.cshtml");
         }
     }
 }
