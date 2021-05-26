@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using System.Text;
-
-using SIS.HTTP;
+﻿using SIS.HTTP;
 using SIS.MvcFramework;
 
 namespace MyFirstMvcApp.Controllers
@@ -10,21 +7,8 @@ namespace MyFirstMvcApp.Controllers
     {
         public HttpResponse Index(HttpRequest request)
         {
-            var responseHtml = "<h1>Welcome!</h1>" +
-                request.Headers.FirstOrDefault(x => x.Name == "User-Agent")?.Value;
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
-
-            return response;
+            return View("Views/Home/Index.cshtml");
         }
 
-        public HttpResponse About(HttpRequest request)
-        {
-            var responseHtml = "<h1>About...</h1>";
-            var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
-            var response = new HttpResponse("text/html", responseBodyBytes);
-
-            return response;
-        }
     }
 }
