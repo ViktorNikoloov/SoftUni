@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,19 +12,11 @@ namespace SIS.HTTP
 {
     public class HttpServer : IHttpServer
     {
-        IDictionary<string, Func<HttpRequest, HttpResponse>> routeTable =
-            new Dictionary<string, Func<HttpRequest, HttpResponse>>();
+        IList<Route> routeTable;
 
-        public void AddRoute(string path, Func<HttpRequest, HttpResponse> action)
+        public HttpServer(List<Route> routeTable)
         {
-            if (routeTable.ContainsKey(path))
-            {
-                routeTable[path] = action;
-            }
-            else
-            {
-                routeTable.Add(path, action);
-            }
+            this.routeTable = routeTable;
         }
 
         public async Task StartAsync(int port)
@@ -72,10 +65,10 @@ namespace SIS.HTTP
 
 
             HttpResponse response;
-            if (routeTable.ContainsKey(request.Path))
+            var route = routeTable.FirstOrDefault(x => x.Path == request.Path);
+            if (route != null)
             {
-                var action = routeTable[request.Path];
-                response = action(request);
+                response = route.Action(request);
             }
             else
             {
