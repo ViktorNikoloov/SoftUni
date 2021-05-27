@@ -7,12 +7,12 @@ namespace MyFirstMvcApp.Controllers
     {
         public HttpResponse Login(HttpRequest request)
         {
-            return View("Views/Users/Login.cshtml");
+            return View();
         }
 
         public HttpResponse Register(HttpRequest request)
         {
-            return View("Views/Users/Register.cshtml");
+            return View();
         }
     }
 }
