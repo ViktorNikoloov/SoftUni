@@ -65,7 +65,8 @@ namespace SIS.HTTP
 
 
             HttpResponse response;
-            var route = routeTable.FirstOrDefault(x => x.Path == request.Path);
+            var route = routeTable
+                .FirstOrDefault(x => string.Compare(x.Path, request.Path,true) == 0);
             if (route != null)
             {
                 response = route.Action(request);
