@@ -1,0 +1,16 @@
+﻿<h1>Hello</h1>
+<ul>
+    @for (int i = 1; i <= 20; i+= 2)
+    {
+    @if(i % 3 == 0)
+    {
+    <li>@i</li>
+    }
+    }
+</ul>
+@if(DataTime.UtcNow.Year >= 2020)
+{
+<h2>Welcome in @DataTime.UtcNow.Year !</h2>
+}
+
+021 !</h2>

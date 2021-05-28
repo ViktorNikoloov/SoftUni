@@ -15,6 +15,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SIS.Apps", "SIS.Apps", "{FC
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyFirstMvcApp", "MyFirstMvcApp\MyFirstMvcApp.csproj", "{2F72EAA4-ACB0-4946-9541-AE600EBE6FA0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sis.MvcFramework.Tests", "Sis.MvcFramework.Tests", "{F82383FC-DE1E-438B-9B6E-F1152564A699}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sis.MvcFramework.Tests", "Sis.MvcFramework.Tests\Sis.MvcFramework.Tests.csproj", "{1FD2F2F3-A2B6-4074-BDFA-82A07D441C9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,10 @@ Global
 		{2F72EAA4-ACB0-4946-9541-AE600EBE6FA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F72EAA4-ACB0-4946-9541-AE600EBE6FA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F72EAA4-ACB0-4946-9541-AE600EBE6FA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FD2F2F3-A2B6-4074-BDFA-82A07D441C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD2F2F3-A2B6-4074-BDFA-82A07D441C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD2F2F3-A2B6-4074-BDFA-82A07D441C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD2F2F3-A2B6-4074-BDFA-82A07D441C9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -41,6 +49,7 @@ Global
 		{4233F794-E99C-4E1B-8C50-11820639638A} = {91F1FC8B-EB82-45BE-8C86-F54FCA0851EA}
 		{D9ECA3F6-7429-469E-8408-EC87508F5961} = {FAE6330F-B3B1-49C5-B011-764FC9B037C6}
 		{2F72EAA4-ACB0-4946-9541-AE600EBE6FA0} = {FC5701EF-0B51-40AD-B64F-EE80A0BB73F2}
+		{1FD2F2F3-A2B6-4074-BDFA-82A07D441C9E} = {F82383FC-DE1E-438B-9B6E-F1152564A699}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2938EC31-1F02-4350-A531-6EAB231AA19E}
