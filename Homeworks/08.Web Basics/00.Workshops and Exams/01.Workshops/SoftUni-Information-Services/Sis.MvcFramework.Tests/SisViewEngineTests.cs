@@ -34,13 +34,4 @@ namespace Sis.MvcFramework.Tests
             Assert.Equal(expectedResult, result);
         }
     }
-
-    public class TestViewModel
-    {
-        public string Name { get; set; }
-
-        public decimal Price { get; set; }
-
-        public DateTime DateOfBirth { get; set; }
-    }
 }
