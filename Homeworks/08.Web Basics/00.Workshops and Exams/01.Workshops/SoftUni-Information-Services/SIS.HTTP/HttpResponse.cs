@@ -8,6 +8,13 @@ namespace SIS.HTTP
 {
     public class HttpResponse
     {
+        public HttpResponse(HttpStatusCode statusCode)
+        {
+            StatusCode = statusCode;
+            Headers = new List<Header>();
+            Cookies = new List<Cookie>();
+        }
+
         public HttpResponse(string contentType, byte[] body, HttpStatusCode statusCode = HttpStatusCode.OK)
         {
             if (body == null)
