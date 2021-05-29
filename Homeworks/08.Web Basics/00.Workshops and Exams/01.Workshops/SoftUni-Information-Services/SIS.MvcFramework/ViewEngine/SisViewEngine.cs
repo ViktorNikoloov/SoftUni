@@ -25,7 +25,22 @@ namespace SIS.MvcFramework.ViewEngine
 
         private string GenerateCSharpFromTemplate(string templateCode, object viewModel)
         {
-            string typeOfModel = viewModel == null ? "object": viewModel.GetType().FullName;
+            string typeOfModel = "object";
+            if (viewModel != null)
+            {
+                if (viewModel.GetType().IsGenericType)
+                {
+                    var modelName = viewModel.GetType().FullName;
+                    var genericarguments = viewModel.GetType().GenericTypeArguments;
+                    typeOfModel = modelName.Substring(0, modelName.IndexOf('`')) 
+                        + "<" + string.Join(",", genericarguments.Select(x => x.FullName)) + ">";
+                }
+                else
+                {
+                    typeOfModel = viewModel.GetType().FullName;
+                }
+            }
+
             string csharpCode = @"
 using System;
 using System.Text;
@@ -48,8 +63,7 @@ namespace ViewNamespace
             return html.ToString().TrimEnd();
         }
     }
-}
-";
+}";
             return csharpCode;
         }
 
