@@ -42,5 +42,15 @@ namespace SIS.MvcFramework
 
             return response;
         }
+
+        public HttpResponse Redirect(string url)
+        {
+            // post => 302 => get
+            // post => 307 => post
+            var response = new HttpResponse(HTTP.Enums.HttpStatusCode.Found);
+            response.Headers.Add(new Header("Location", url));
+
+            return response;
+        }
     }
 }

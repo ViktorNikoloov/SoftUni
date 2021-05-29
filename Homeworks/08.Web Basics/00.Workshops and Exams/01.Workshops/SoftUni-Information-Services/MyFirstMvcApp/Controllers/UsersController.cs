@@ -1,5 +1,6 @@
 ﻿using SIS.HTTP;
 using SIS.MvcFramework;
+using System;
 
 namespace MyFirstMvcApp.Controllers
 {
@@ -13,6 +14,15 @@ namespace MyFirstMvcApp.Controllers
         public HttpResponse Register(HttpRequest request)
         {
             return View();
+        }
+
+        public HttpResponse DoLogin(HttpRequest request)
+        {
+            //TODO: read data
+            //TODO: check user
+            //TODO: log user
+
+            return Redirect("/");
         }
     }
 }
