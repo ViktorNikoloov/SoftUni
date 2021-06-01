@@ -5,7 +5,7 @@ namespace MyFirstMvcApp.Controllers
 {
     public class StaticFilesController : Controller
     {
-        /*It's not necessary anymore* becouse of the auto */
+        /* No need anymore because of AutoRegisterStaticFiles method in Host.cs*/
 
         //public HttpResponse Favicon(HttpRequest request)
         //{

@@ -1,5 +1,9 @@
-﻿using SIS.HTTP;
+﻿using System;
+
+using SIS.HTTP;
 using SIS.MvcFramework;
+
+using MyFirstMvcApp.ViewModels;
 
 namespace MyFirstMvcApp.Controllers
 {
@@ -7,8 +11,16 @@ namespace MyFirstMvcApp.Controllers
     {
         public HttpResponse Index(HttpRequest request)
         {
-            return View();
+            var viewModel = new IndexViewModel();
+            viewModel.CurrentYear = DateTime.UtcNow.Year;
+            viewModel.Message = "Welcome to Battle Cards";
+
+            return View(viewModel);
         }
 
+        public HttpResponse About(HttpRequest request)
+        {
+            return View();
+        }
     }
 }
