@@ -1,6 +1,6 @@
 ﻿using SIS.HTTP;
 using SIS.MvcFramework;
-using System;
+using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
 
 namespace MyFirstMvcApp.Controllers
 {
@@ -16,6 +16,7 @@ namespace MyFirstMvcApp.Controllers
             return View();
         }
 
+        [HttpPost]
         public HttpResponse DoLogin(HttpRequest request)
         {
             //TODO: read data

@@ -2,6 +2,7 @@
 
 using SIS.HTTP;
 using SIS.MvcFramework;
+using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
 
 using MyFirstMvcApp.ViewModels;
 
@@ -9,6 +10,7 @@ namespace MyFirstMvcApp.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet("/")]
         public HttpResponse Index(HttpRequest request)
         {
             var viewModel = new IndexViewModel();
