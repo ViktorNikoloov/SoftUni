@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
 
 
 using SIS.HTTP;
 using SIS.HTTP.Enums;
+using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
 
 namespace SIS.MvcFramework
 {
@@ -16,6 +18,8 @@ namespace SIS.MvcFramework
             List<Route> routeTable = new List<Route>();
 
             AutoRegisterStaticFiles(routeTable );
+            AutoRegisterRoutes(routeTable, application);
+
             application.ConfigureServices();
             application.Configure(routeTable);
 
@@ -30,6 +34,52 @@ namespace SIS.MvcFramework
             //If we want to auto-start the HomePage or any other page
             //Process.Start(@"C:\Program Files\Mozilla Firefox\firefox.exe", "http://localhost/");
             await server.StartAsync(80);
+        }
+
+        private static void AutoRegisterRoutes(List<Route> routeTable, IMvcApplication application)
+        {
+            var controllerTypes = application.GetType().Assembly.GetTypes()
+                .Where(x => x.IsClass && !x.IsAbstract && x.IsSubclassOf(typeof(Controller)));
+            foreach (var controllerType in controllerTypes)
+            {
+                var methods = controllerType.GetMethods()
+                    .Where(x=>
+                    x.IsPublic &&
+                    x.DeclaringType == controllerType &&
+                    !x.IsStatic && 
+                    !x.IsAbstract && 
+                    !x.IsConstructor &&
+                    !x.IsSpecialName);
+
+                foreach (var method in methods)
+                {
+                    var url = "/" + controllerType.Name.Replace("Controller", string.Empty) + "/" + method.Name;
+
+                    var attribute = method.GetCustomAttributes(false)
+                        .Where(x => x.GetType().IsSubclassOf(typeof(BaseHttpAttribute)))
+                        .FirstOrDefault() as BaseHttpAttribute;
+
+                    var httpMethod = HttpMethod.Get;
+
+                    if (attribute != null)
+                    {
+                        httpMethod = attribute.Method;
+                    }
+
+                    if (!string.IsNullOrEmpty(attribute?.Url))
+                    {
+                        url = attribute.Url;
+                    }
+
+                    routeTable.Add(new Route(url, httpMethod, (request) =>
+                    {
+                        var instance = Activator.CreateInstance(controllerType);
+                        var response = method.Invoke(instance, new[] { request }) as HttpResponse;
+
+                        return response;
+                    }));
+                }
+            }
         }
 
         private static void AutoRegisterStaticFiles(List<Route> routeTable)
