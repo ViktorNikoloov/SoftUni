@@ -75,7 +75,7 @@ namespace ViewNamespace
             StringBuilder csharpCode = new StringBuilder();
             StringReader sr = new StringReader(templateCode);
 
-            string line;
+            string line = string.Empty;
             while ((line = sr.ReadLine()) != null)
             {
                 if (line.TrimStart().StartsWith("@") &&

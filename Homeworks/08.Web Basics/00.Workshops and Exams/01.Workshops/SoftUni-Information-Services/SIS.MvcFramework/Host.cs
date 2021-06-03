@@ -4,7 +4,6 @@ using System.IO;
 using System.Threading.Tasks;
 using System.Linq;
 
-
 using SIS.HTTP;
 using SIS.HTTP.Enums;
 using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
@@ -73,8 +72,10 @@ namespace SIS.MvcFramework
 
                     routeTable.Add(new Route(url, httpMethod, (request) =>
                     {
-                        var instance = Activator.CreateInstance(controllerType);
-                        var response = method.Invoke(instance, new[] { request }) as HttpResponse;
+                        /*There's no need to give parameters to action methods*/
+                        var instance = Activator.CreateInstance(controllerType) as Controller;
+                        instance.Request = request;
+                        var response = method.Invoke(instance, new object[] { }) as HttpResponse;
 
                         return response;
                     }));

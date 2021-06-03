@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 
 using SIS.HTTP.Enums;
@@ -13,6 +14,7 @@ namespace SIS.HTTP
         {
             Headers = new List<Header>();
             Cookies = new List<Cookie>();
+            FormData = new Dictionary<string, string>();
 
             var lines = requestString
                 .Split(HttpConstants.NewLine, StringSplitOptions.None);
@@ -47,10 +49,10 @@ namespace SIS.HTTP
                 }
             }
 
-            if (Headers.Any(x=>x.Name == HttpConstants.RequestCookieHeader))
+            if (Headers.Any(x => x.Name == HttpConstants.RequestCookieHeader))
             {
                 var cookiesAsString = Headers
-                    .FirstOrDefault(x=>x.Name == HttpConstants.RequestCookieHeader).Value;
+                    .FirstOrDefault(x => x.Name == HttpConstants.RequestCookieHeader).Value;
                 var cookies = cookiesAsString.Split(": ", StringSplitOptions.RemoveEmptyEntries);
                 foreach (var cookieAsSring in cookies)
                 {
@@ -59,7 +61,20 @@ namespace SIS.HTTP
             }
 
             Body = bodyBuilder.ToString();
-            
+            var parameters = Body.Split('&', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var parameter in parameters)
+            {
+                var parameterParts = parameter.Split('=');
+                var name = parameterParts[0];
+                //var value = WebUtility.UrlDecode(parameterParts[1]);
+                var value = parameterParts[1];
+
+                if (!FormData.ContainsKey(name))
+                {
+                    FormData.Add(name, value);
+                }
+            }
+
         }
 
         public string Path { get; set; }
@@ -69,6 +84,8 @@ namespace SIS.HTTP
         public ICollection<Header> Headers { get; set; }
 
         public ICollection<Cookie> Cookies { get; set; }
+
+        public IDictionary<string, string> FormData { get; set; }
 
         public string Body { get; set; }
     }
