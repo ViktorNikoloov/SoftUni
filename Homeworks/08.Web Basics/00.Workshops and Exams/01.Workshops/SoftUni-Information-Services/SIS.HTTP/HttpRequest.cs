@@ -60,14 +60,14 @@ namespace SIS.HTTP
                 }
             }
 
-            Body = bodyBuilder.ToString();
+            Body = bodyBuilder.ToString().TrimEnd();
             var parameters = Body.Split('&', StringSplitOptions.RemoveEmptyEntries);
             foreach (var parameter in parameters)
             {
                 var parameterParts = parameter.Split('=');
                 var name = parameterParts[0];
-                //var value = WebUtility.UrlDecode(parameterParts[1]);
-                var value = parameterParts[1];
+                var value = WebUtility.UrlDecode(parameterParts[1]);
+                //var value = parameterParts[1];
 
                 if (!FormData.ContainsKey(name))
                 {
