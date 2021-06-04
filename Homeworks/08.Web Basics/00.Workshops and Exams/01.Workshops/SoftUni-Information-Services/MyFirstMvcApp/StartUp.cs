@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
+using MyFirstMvcApp.Controllers; // Use id, if you want to add into routeTable
 
-using MyFirstMvcApp.Controllers;
+using Microsoft.EntityFrameworkCore;
+
+using MyFirstMvcApp.Data;
 using SIS.HTTP;
 using SIS.MvcFramework;
 
@@ -15,6 +18,8 @@ namespace MyFirstMvcApp
 
         public void Configure(List<Route> routeTable)
         {
+            new ApplicationDbContext().Database.Migrate();
+
             /* No need anymore because of AutoRegisterRoutes method in Host.cs*/
 
             //routeTable.Add(new Route("/", SIS.HTTP.Enums.HttpMethod.Get, new HomeController().Index));
