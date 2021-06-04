@@ -66,7 +66,7 @@ namespace SIS.HTTP
 
             HttpResponse response;
             var route = routeTable
-                .FirstOrDefault(x => string.Compare(x.Path, request.Path,true) == 0 &&
+                .FirstOrDefault(x => string.Compare(x.Path, request.Path, true) == 0 &&
                 x.Method == request.Method);
             if (route != null)
             {
@@ -74,22 +74,25 @@ namespace SIS.HTTP
             }
             else
             {
-                //var responseHtml = $"<h1>{(int)(HttpStatusCode.NotFound)} {HttpStatusCode.NotFound}</h1>";
-                //var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
+                // Not Found 404
                 response = new HttpResponse("text/html", Array.Empty<byte>(), HttpStatusCode.NotFound);
             }
-            Console.WriteLine((int)(response.StatusCode) + " " + response.StatusCode.ToString());
-
-
-            response.Cookies.Add(new ResponseCookie("sid", Guid.NewGuid().ToString())
-            { HttpOnly = true, MaxAge = 60 * 24 * 60 * 60 });
             response.Headers.Add(new Header("Server", "SIS Server 1.0"));
-           
+
+            var sessionCookie = request.Cookies.FirstOrDefault(x => x.Name == HttpConstants.SessionCookieName);
+            if (sessionCookie != null)
+            {
+                var responseSessionCookie = new ResponseCookie(sessionCookie.Name, sessionCookie.Value);
+                responseSessionCookie.Path = "/";
+                response.Cookies.Add(responseSessionCookie);
+            }
+
+
             var responseHeaderBytes = Encoding.UTF8.GetBytes(response.ToString());
             await stream.WriteAsync(responseHeaderBytes, 0, responseHeaderBytes.Length);
             await stream.WriteAsync(response.Body, 0, response.Body.Length);
 
-           // tcpClient.Close();
+            // tcpClient.Close();
         }
     }
 }

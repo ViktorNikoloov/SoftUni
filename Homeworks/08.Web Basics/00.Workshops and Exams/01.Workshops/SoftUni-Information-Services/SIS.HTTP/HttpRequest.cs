@@ -10,6 +10,9 @@ namespace SIS.HTTP
 {
     public class HttpRequest
     {
+        public static IDictionary<string, Dictionary<string, string>> Sessions =
+            new Dictionary<string, Dictionary<string, string>>();
+
         public HttpRequest(string requestString)
         {
             Headers = new List<Header>();
@@ -60,6 +63,25 @@ namespace SIS.HTTP
                 }
             }
 
+            var sessionCookie = Cookies.FirstOrDefault(x => x.Name == HttpConstants.SessionCookieName);
+            if (sessionCookie == null)
+            {
+                var sessionId = Guid.NewGuid().ToString();
+                Session = new Dictionary<string, string>();
+
+                Sessions.Add(sessionId, Session);
+                Cookies.Add(new Cookie(HttpConstants.SessionCookieName, sessionId));
+            }
+            else if (!Sessions.ContainsKey(sessionCookie.Value))
+            {
+                Session = new Dictionary<string, string>();
+                Sessions.Add(sessionCookie.Value, Session);
+            }
+            else
+            {
+                Session = Sessions[sessionCookie.Value];
+            }
+
             Body = bodyBuilder.ToString().TrimEnd();
             var parameters = Body.Split('&', StringSplitOptions.RemoveEmptyEntries);
             foreach (var parameter in parameters)
@@ -86,6 +108,8 @@ namespace SIS.HTTP
         public ICollection<Cookie> Cookies { get; set; }
 
         public IDictionary<string, string> FormData { get; set; }
+
+        public Dictionary<string, string> Session { get; set; }
 
         public string Body { get; set; }
     }
