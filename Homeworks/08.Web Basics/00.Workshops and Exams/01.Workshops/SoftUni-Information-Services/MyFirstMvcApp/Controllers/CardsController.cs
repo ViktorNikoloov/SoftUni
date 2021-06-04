@@ -4,6 +4,7 @@ using MyFirstMvcApp.ViewModels;
 using SIS.HTTP;
 using SIS.MvcFramework;
 using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
+using System.Linq;
 
 namespace MyFirstMvcApp.Controllers
 {
@@ -36,7 +37,18 @@ namespace MyFirstMvcApp.Controllers
 
         public HttpResponse All()
         {
-            return View();
+            var db = new ApplicationDbContext();
+            var cardViewModel = db.Cards.Select(x => new CardViewModel
+            {
+                Name = x.Name,
+                Attack = x.Attack,
+                Health = x.Health,
+                ImageUrl = x.ImageUrl,
+                Description = x.Description,
+                Type = x.Keyword,
+            }).ToList();
+
+            return View(new AllCardsViewModel { Cards = cardViewModel });
         }
 
         public HttpResponse Collection()
