@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 
 using SIS.HTTP;
 using SIS.MvcFramework;
@@ -17,11 +17,17 @@ namespace MyFirstMvcApp.Controllers
             viewModel.CurrentYear = DateTime.UtcNow.Year;
             viewModel.Message = "Welcome to Battle Cards";
 
+            if (Request.Session.ContainsKey("about"))
+            {
+                viewModel.Message += "YOU ARE ON THE ABOUT PAGE";
+            }
+
             return View(viewModel);
         }
 
         public HttpResponse About()
         {
+            Request.Session["about"] = "yes";
             return View();
         }
     }

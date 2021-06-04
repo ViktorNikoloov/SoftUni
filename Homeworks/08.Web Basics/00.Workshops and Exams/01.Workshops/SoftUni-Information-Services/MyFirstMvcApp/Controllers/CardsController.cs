@@ -1,10 +1,12 @@
-﻿using MyFirstMvcApp.Data;
+﻿using System.Linq;
+
+using MyFirstMvcApp.Data;
 using MyFirstMvcApp.Data.Models;
 using MyFirstMvcApp.ViewModels;
+
 using SIS.HTTP;
 using SIS.MvcFramework;
 using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
-using System.Linq;
 
 namespace MyFirstMvcApp.Controllers
 {
@@ -18,8 +20,12 @@ namespace MyFirstMvcApp.Controllers
         [HttpPost("/Cards/Add")]
         public HttpResponse DoAdd()
         {
-            var request = Request;
             var dbContext = new ApplicationDbContext();
+
+            if (Request.FormData["name"].Length < 5)
+            {
+                return Error("Name should be at least 5 characters long.");
+            }
 
             dbContext.Cards.Add(new Card
             {
