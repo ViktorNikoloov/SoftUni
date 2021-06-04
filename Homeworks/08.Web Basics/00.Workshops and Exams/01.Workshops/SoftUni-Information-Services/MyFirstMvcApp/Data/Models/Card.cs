@@ -31,7 +31,7 @@ namespace MyFirstMvcApp.Data.Models
 
         [Required]
         [MaxLength(200)]
-        public string Discription { get; set; }
+        public string Description { get; set; }
 
         public virtual ICollection<UserCard> Users { get; set; }
     }
