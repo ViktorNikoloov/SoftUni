@@ -54,7 +54,7 @@ namespace MyFirstMvcApp.Controllers
                 Type = x.Keyword,
             }).ToList();
 
-            return View(new AllCardsViewModel { Cards = cardViewModel });
+            return View(cardViewModel);
         }
 
         public HttpResponse Collection()
