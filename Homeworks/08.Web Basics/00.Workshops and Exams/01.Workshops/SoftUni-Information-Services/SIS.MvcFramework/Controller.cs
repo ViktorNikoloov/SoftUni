@@ -8,6 +8,7 @@ namespace SIS.MvcFramework
 {
     public abstract class Controller
     {
+        private const string UserIdSessionName = "UserId";
         private SisViewEngine viewEngine;
 
         public Controller()
@@ -17,7 +18,7 @@ namespace SIS.MvcFramework
 
         public HttpRequest Request { get; set; }
 
-        public HttpResponse View(object viewModel = null,
+        protected HttpResponse View(object viewModel = null,
             [CallerMemberName] string viewPath = null)
         {
             var viewContent = System.IO.File
@@ -32,9 +33,7 @@ namespace SIS.MvcFramework
             return response;
         }
 
-
-
-        public HttpResponse File(string filePath, string contentType)
+        protected HttpResponse File(string filePath, string contentType)
         {
             var fileBytes = System.IO.File.ReadAllBytes(filePath);
             var response = new HttpResponse(contentType, fileBytes);
@@ -42,7 +41,7 @@ namespace SIS.MvcFramework
             return response;
         }
 
-        public HttpResponse Redirect(string url)
+        protected HttpResponse Redirect(string url)
         {
             // post => 302 => get
             // post => 307 => post
@@ -52,7 +51,7 @@ namespace SIS.MvcFramework
             return response;
         }
 
-        public HttpResponse Error(string errorText)
+        protected HttpResponse Error(string errorText)
         {
             var viewContent = $"<div class=\"alert alert-danger\" role=\"alert\">{errorText}</div ";
             var responseHtml = PutViewInLayout(viewContent);
@@ -61,6 +60,18 @@ namespace SIS.MvcFramework
 
             return response;
         }
+
+        protected void SignIn(string userId)
+        => Request.Session[UserIdSessionName] = userId;
+
+        protected void SignOut(string userId)
+        => Request.Session[UserIdSessionName] = null;
+
+        protected bool IsUserSignIn()
+        => Request.Session[UserIdSessionName] != null;
+
+        protected string GetUserId()
+        => Request.Session[UserIdSessionName];
 
         private string PutViewInLayout(string viewContent, object viewModel = null)
         {
