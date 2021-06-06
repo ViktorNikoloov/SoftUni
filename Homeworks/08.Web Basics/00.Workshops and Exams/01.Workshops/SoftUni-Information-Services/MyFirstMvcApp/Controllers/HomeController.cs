@@ -1,10 +1,7 @@
-﻿using System;
-
-using SIS.HTTP;
+﻿using SIS.HTTP;
 using SIS.MvcFramework;
 using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
 
-using MyFirstMvcApp.ViewModels;
 
 namespace MyFirstMvcApp.Controllers
 {
@@ -13,21 +10,11 @@ namespace MyFirstMvcApp.Controllers
         [HttpGet("/")]
         public HttpResponse Index()
         {
-            var viewModel = new IndexViewModel();
-            viewModel.CurrentYear = DateTime.UtcNow.Year;
-            viewModel.Message = "Welcome to Battle Cards";
-
-            if (Request.Session.ContainsKey("about"))
+            if (IsUserSignIn())
             {
-                viewModel.Message += "YOU ARE ON THE ABOUT PAGE";
+                return Redirect("/Cards/All");
             }
 
-            return View(viewModel);
-        }
-
-        public HttpResponse About()
-        {
-            Request.Session["about"] = "yes";
             return View();
         }
     }

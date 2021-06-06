@@ -8,7 +8,7 @@ namespace SIS.MvcFramework
 
         [Required]
         [MaxLength(20)]
-        public string UserName { get; set; }
+        public string Username { get; set; }
 
         [Required]
         public string Email { get; set; }

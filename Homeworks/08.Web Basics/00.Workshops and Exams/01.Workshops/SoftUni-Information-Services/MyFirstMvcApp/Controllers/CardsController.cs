@@ -14,8 +14,14 @@ namespace MyFirstMvcApp.Controllers
     {
         public HttpResponse Add()
         {
+            if (!IsUserSignIn())
+            {
+                return Error("You don't have permission to access this page.");
+            }
+
             return View();
         }
+
 
         [HttpPost("/Cards/Add")]
         public HttpResponse DoAdd()
@@ -38,11 +44,16 @@ namespace MyFirstMvcApp.Controllers
             });
             dbContext.SaveChanges();
 
-            return Redirect("/");
+            return Redirect("/Cards/All");
         }
 
         public HttpResponse All()
         {
+            if (!IsUserSignIn())
+            {
+                return Error("You don't have permission to access this page.");
+            }
+
             var db = new ApplicationDbContext();
             var cardViewModel = db.Cards.Select(x => new CardViewModel
             {
@@ -59,6 +70,11 @@ namespace MyFirstMvcApp.Controllers
 
         public HttpResponse Collection()
         {
+            if (!IsUserSignIn())
+            {
+                return Error("You don't have permission to access this page.");
+            }
+
             return View();
         }
     }

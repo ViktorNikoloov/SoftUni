@@ -86,7 +86,7 @@ namespace SIS.HTTP
             var parameters = Body.Split('&', StringSplitOptions.RemoveEmptyEntries);
             foreach (var parameter in parameters)
             {
-                var parameterParts = parameter.Split('=');
+                var parameterParts = parameter.Split('=', 2);
                 var name = parameterParts[0];
                 var value = WebUtility.UrlDecode(parameterParts[1]);
                 //var value = parameterParts[1];

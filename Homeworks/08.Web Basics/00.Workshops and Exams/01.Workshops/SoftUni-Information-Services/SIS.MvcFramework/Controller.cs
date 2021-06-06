@@ -23,7 +23,7 @@ namespace SIS.MvcFramework
         {
             var viewContent = System.IO.File
                 .ReadAllText($"Views/{this.GetType().Name.Replace("Controller", string.Empty)}/{viewPath}.cshtml");
-            viewContent = viewEngine.GetHtml(viewContent, viewModel);
+            viewContent = viewEngine.GetHtml(viewContent, viewModel, GetUserId());
 
             var responseHtml = PutViewInLayout(viewContent, viewModel);
 
@@ -53,7 +53,8 @@ namespace SIS.MvcFramework
 
         protected HttpResponse Error(string errorText)
         {
-            var viewContent = $"<div class=\"alert alert-danger\" role=\"alert\">{errorText}</div ";
+            var viewContent = $"<div class=\"alert alert-danger\" role=\"alert\">{errorText}</div" + HttpConstants.NewLine +
+                $"<div class=\"index - div bg - blur border border-white\"><h3><a class=\"text-primay\" href=\"/Users/Login\">Login</a> if you have an account or <a class=\"text-primay\" href=\"/Users/Register\">Register</a> now and check our deals.</h3></div>";
             var responseHtml = PutViewInLayout(viewContent);
             var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
             var response = new HttpResponse("text/html", responseBodyBytes, HTTP.Enums.HttpStatusCode.ServerError);
@@ -64,20 +65,21 @@ namespace SIS.MvcFramework
         protected void SignIn(string userId)
         => Request.Session[UserIdSessionName] = userId;
 
-        protected void SignOut(string userId)
+        protected void SignOut()
         => Request.Session[UserIdSessionName] = null;
 
         protected bool IsUserSignIn()
-        => Request.Session[UserIdSessionName] != null;
+        => Request.Session.ContainsKey(UserIdSessionName) && 
+           Request.Session[UserIdSessionName] != null;
 
         protected string GetUserId()
-        => Request.Session[UserIdSessionName];
+        => Request.Session.ContainsKey(UserIdSessionName) ? Request.Session[UserIdSessionName] : null;
 
         private string PutViewInLayout(string viewContent, object viewModel = null)
         {
             var layout = System.IO.File.ReadAllText("Views/Shared/_Layout.cshtml");
             layout = layout.Replace("@RenderBody()", "____VIEW_GOES_HERE____");
-            layout = viewEngine.GetHtml(layout, viewModel);
+            layout = viewEngine.GetHtml(layout, viewModel, GetUserId());
             var responseHtml = layout.Replace("____VIEW_GOES_HERE____", viewContent);
 
             return responseHtml;

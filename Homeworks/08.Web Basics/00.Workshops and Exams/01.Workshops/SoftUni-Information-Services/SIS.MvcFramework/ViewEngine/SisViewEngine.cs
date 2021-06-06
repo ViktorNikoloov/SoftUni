@@ -14,11 +14,11 @@ namespace SIS.MvcFramework.ViewEngine
 {
     public class SisViewEngine : IViewEngine
     {
-        public string GetHtml(string templateCode, object viewModel)
+        public string GetHtml(string templateCode, object viewModel, string user)
         {
             string csharpCode = GenerateCSharpFromTemplate(templateCode, viewModel);
             IView executableObject = GenerateExecutableCode(csharpCode, viewModel);
-            string html = executableObject.ExecuteTemplate(viewModel);
+            string html = executableObject.ExecuteTemplate(viewModel, user);
 
             return html;
         }
@@ -53,8 +53,9 @@ namespace ViewNamespace
 {
     public class ViewClass : IView
     {
-        public string ExecuteTemplate(object viewModel)
+        public string ExecuteTemplate(object viewModel, string user)
         {
+            var User = user;
             var Model = viewModel as " + typeOfModel + @";
             var html = new StringBuilder();
 
