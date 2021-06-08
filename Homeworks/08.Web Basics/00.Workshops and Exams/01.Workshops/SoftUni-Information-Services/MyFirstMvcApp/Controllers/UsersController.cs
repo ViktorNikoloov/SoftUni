@@ -29,11 +29,10 @@ namespace MyFirstMvcApp.Controllers
         }
 
         [HttpPost("/Users/Login")]
-        public HttpResponse DoLogin()
+        public HttpResponse DoLogin(string username, string password)
         {
-            var username = Request.FormData["username"];
-            var password = Request.FormData["password"];
             var userId = usersService.GetUserId(username, password);
+
             if (userId == null)
             {
                 return Error("Invalid username or password");
@@ -55,12 +54,12 @@ namespace MyFirstMvcApp.Controllers
         }
 
         [HttpPost("/Users/Register")]
-        public HttpResponse DoRegister()
+        public HttpResponse DoRegister(string username, string email, string password, string confirmPassword)
         {
-            var username = Request.FormData["username"];
-            var email = Request.FormData["email"];
-            var password = Request.FormData["password"];
-            var confirmPassword = Request.FormData["confirmPassword"];
+            if (IsUserSignIn())
+            {
+                return Redirect("/");
+            }
 
             if (username == null || username.Length < 5 || username.Length > 20)
             {

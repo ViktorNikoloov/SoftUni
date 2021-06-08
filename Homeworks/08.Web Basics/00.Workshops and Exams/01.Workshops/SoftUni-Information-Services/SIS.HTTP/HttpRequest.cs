@@ -18,6 +18,7 @@ namespace SIS.HTTP
             Headers = new List<Header>();
             Cookies = new List<Cookie>();
             FormData = new Dictionary<string, string>();
+            QueryData = new Dictionary<string, string>();
 
             var lines = requestString
                 .Split(HttpConstants.NewLine, StringSplitOptions.None);
@@ -82,24 +83,42 @@ namespace SIS.HTTP
                 Session = Sessions[sessionCookie.Value];
             }
 
+            if (Path.Contains("?"))
+            {
+                var pathParts = Path.Split('?', 2);
+                Path = pathParts[0];
+                QueryString = pathParts[1];
+            }
+            else
+            {
+                QueryString = string.Empty;
+            }
+
             Body = bodyBuilder.ToString().TrimEnd();
-            var parameters = Body.Split('&', StringSplitOptions.RemoveEmptyEntries);
+
+            SplitParameters(Body, FormData);
+            SplitParameters(QueryString, QueryData);
+        }
+
+        private static void SplitParameters(string parametersAsString, IDictionary<string, string> output)
+        {
+            var parameters = parametersAsString.Split('&', StringSplitOptions.RemoveEmptyEntries);
             foreach (var parameter in parameters)
             {
                 var parameterParts = parameter.Split('=', 2);
                 var name = parameterParts[0];
                 var value = WebUtility.UrlDecode(parameterParts[1]);
-                //var value = parameterParts[1];
 
-                if (!FormData.ContainsKey(name))
+                if (!output.ContainsKey(name))
                 {
-                    FormData.Add(name, value);
+                    output.Add(name, value);
                 }
             }
-
         }
 
         public string Path { get; set; }
+
+        public string QueryString { get; set; }
 
         public HttpMethod Method { get; set; }
 
@@ -109,9 +128,15 @@ namespace SIS.HTTP
 
         public IDictionary<string, string> FormData { get; set; }
 
+        public IDictionary<string, string> QueryData { get; set; }
+
         public Dictionary<string, string> Session { get; set; }
 
         public string Body { get; set; }
+
+
+        
+
     }
 }
 
