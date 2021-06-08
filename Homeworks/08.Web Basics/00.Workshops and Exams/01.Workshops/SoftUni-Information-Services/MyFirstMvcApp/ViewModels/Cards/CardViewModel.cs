@@ -1,4 +1,4 @@
-﻿namespace MyFirstMvcApp.ViewModels
+﻿namespace MyFirstMvcApp.ViewModels.Cards
 {
     public class CardViewModel
     {

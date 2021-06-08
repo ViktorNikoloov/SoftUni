@@ -2,7 +2,7 @@
 
 using MyFirstMvcApp.Data;
 using MyFirstMvcApp.Data.Models;
-using MyFirstMvcApp.ViewModels;
+using MyFirstMvcApp.ViewModels.Cards;
 
 using SIS.HTTP;
 using SIS.MvcFramework;
@@ -31,7 +31,7 @@ namespace MyFirstMvcApp.Controllers
 
 
         [HttpPost("/Cards/Add")]
-        public HttpResponse DoAdd(string attack, string health, string description, string name, string image, string keyword)
+        public HttpResponse DoAdd(AddCardInputModel model)
         {
 
             if (Request.FormData["name"].Length < 5)
@@ -41,12 +41,12 @@ namespace MyFirstMvcApp.Controllers
 
             db.Cards.Add(new Card
             {
-                Attack = int.Parse(attack),
-                Health = int.Parse(health),
-                Description = description,
-                Name = name,
-                ImageUrl = image,
-                Keyword = keyword,
+                Attack = model.Attack,
+                Health = model.Health,
+                Description = model.Description,
+                Name = model.Name,
+                ImageUrl = model.Image,
+                Keyword = model.Keyword,
             });
             db.SaveChanges();
 

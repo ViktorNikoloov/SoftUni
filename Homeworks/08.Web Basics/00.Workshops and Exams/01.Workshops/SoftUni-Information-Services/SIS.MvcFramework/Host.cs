@@ -90,11 +90,26 @@ namespace SIS.MvcFramework
 
             foreach (var parameter in parameters)
             {
-                var parameterValue = GetParameterFromRequest(request, parameter.Name);
+                var httpParameterValue = GetParameterFromRequest(request, parameter.Name);
+                var parameterValue = Convert.ChangeType(httpParameterValue, parameter.ParameterType);
+
+                if (parameterValue == null && parameter.ParameterType != typeof(string))
+                {
+                    parameterValue = Activator.CreateInstance(parameter.ParameterType);
+                    var properties = parameter.ParameterType.GetProperties();
+                    foreach (var property in properties)
+                    {
+                        var propertyHttpParameterValue = GetParameterFromRequest(request, property.Name);
+                        var propertyParameterValue = Convert.ChangeType(propertyHttpParameterValue, property.PropertyType);
+                        property.SetValue(parameterValue, propertyParameterValue);
+                    }
+
+                }
+
                 arguments.Add(parameterValue);
             }
 
-            var response = action.Invoke(instance,arguments.ToArray()) as HttpResponse;
+            var response = action.Invoke(instance, arguments.ToArray()) as HttpResponse;
 
             return response;
 
@@ -102,15 +117,18 @@ namespace SIS.MvcFramework
 
         private static string GetParameterFromRequest(HttpRequest request, string parameterName)
         {
-            if (request.FormData.ContainsKey(parameterName))
+            parameterName = parameterName.ToLower();
+
+            if (request.FormData.Any(x => x.Key.ToLower() == parameterName))
             {
-                return request.FormData[parameterName];
+                return request.FormData
+                    .FirstOrDefault(x => x.Key.ToLower() == parameterName).Value;
             }
 
-            if (request.QueryData.ContainsKey(parameterName))
+            if (request.QueryData.Any(x => x.Key.ToLower() == parameterName))
             {
-                return request.QueryData[parameterName];
-
+                return request.QueryData
+                    .FirstOrDefault(x => x.Key.ToLower() == parameterName).Value;
             }
 
             return null;
