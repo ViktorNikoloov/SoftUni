@@ -6,6 +6,7 @@ using System.Linq;
 
 using SIS.HTTP;
 using SIS.HTTP.Enums;
+
 using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
 
 namespace SIS.MvcFramework
@@ -15,12 +16,14 @@ namespace SIS.MvcFramework
         public static async Task CreateHostAsync(IMvcApplication application, int post = 80)
         {
             List<Route> routeTable = new List<Route>();
+            IServiceCollection serviceCollection = new ServiceCollection();
 
-            AutoRegisterStaticFiles(routeTable );
-            AutoRegisterRoutes(routeTable, application);
+            AutoRegisterStaticFiles(routeTable);
 
-            application.ConfigureServices();
+            application.ConfigureServices(serviceCollection);
             application.Configure(routeTable);
+
+            AutoRegisterRoutes(routeTable, application, serviceCollection);
 
             Console.WriteLine("All registered routes:");
             foreach (var route in routeTable)
@@ -35,18 +38,18 @@ namespace SIS.MvcFramework
             await server.StartAsync(80);
         }
 
-        private static void AutoRegisterRoutes(List<Route> routeTable, IMvcApplication application)
+        private static void AutoRegisterRoutes(List<Route> routeTable, IMvcApplication application, IServiceCollection serviceCollection)
         {
             var controllerTypes = application.GetType().Assembly.GetTypes()
                 .Where(x => x.IsClass && !x.IsAbstract && x.IsSubclassOf(typeof(Controller)));
             foreach (var controllerType in controllerTypes)
             {
                 var methods = controllerType.GetMethods()
-                    .Where(x=>
+                    .Where(x =>
                     x.IsPublic &&
                     x.DeclaringType == controllerType &&
-                    !x.IsStatic && 
-                    !x.IsAbstract && 
+                    !x.IsStatic &&
+                    !x.IsAbstract &&
                     !x.IsConstructor &&
                     !x.IsSpecialName);
 
@@ -73,7 +76,7 @@ namespace SIS.MvcFramework
                     routeTable.Add(new Route(url, httpMethod, (request) =>
                     {
                         /*There's no need to give parameters to action methods*/
-                        var instance = Activator.CreateInstance(controllerType) as Controller;
+                        var instance = serviceCollection.CreateInstance(controllerType) as Controller;
                         instance.Request = request;
                         var response = method.Invoke(instance, new object[] { }) as HttpResponse;
 

@@ -4,6 +4,8 @@ using MyFirstMvcApp.Controllers; // Use id, if you want to add into routeTable
 using Microsoft.EntityFrameworkCore;
 
 using MyFirstMvcApp.Data;
+using MyFirstMvcApp.Services;
+
 using SIS.HTTP;
 using SIS.MvcFramework;
 
@@ -11,9 +13,10 @@ namespace MyFirstMvcApp
 {
     public class StartUp : IMvcApplication
     {
-        public void ConfigureServices()
+        public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            System.Console.WriteLine("123");
+            serviceCollection.Add<IUsersService, UsersService>();
+            serviceCollection.Add<ICardsService, CardsServices>();
         }
 
         public void Configure(List<Route> routeTable)

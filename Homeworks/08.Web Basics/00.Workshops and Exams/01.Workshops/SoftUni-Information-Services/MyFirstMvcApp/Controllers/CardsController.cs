@@ -12,6 +12,13 @@ namespace MyFirstMvcApp.Controllers
 {
     public class CardsController : Controller
     {
+        private readonly ApplicationDbContext db;
+
+        public CardsController(ApplicationDbContext db)
+        {
+            this.db = db;
+        }
+
         public HttpResponse Add()
         {
             if (!IsUserSignIn())
@@ -26,14 +33,13 @@ namespace MyFirstMvcApp.Controllers
         [HttpPost("/Cards/Add")]
         public HttpResponse DoAdd()
         {
-            var dbContext = new ApplicationDbContext();
 
             if (Request.FormData["name"].Length < 5)
             {
                 return Error("Name should be at least 5 characters long.");
             }
 
-            dbContext.Cards.Add(new Card
+            db.Cards.Add(new Card
             {
                 Attack = int.Parse(Request.FormData["attack"]),
                 Health = int.Parse(Request.FormData["health"]),
@@ -42,7 +48,7 @@ namespace MyFirstMvcApp.Controllers
                 ImageUrl = Request.FormData["image"],
                 Keyword = Request.FormData["keyword"],
             });
-            dbContext.SaveChanges();
+            db.SaveChanges();
 
             return Redirect("/Cards/All");
         }
@@ -54,7 +60,6 @@ namespace MyFirstMvcApp.Controllers
                 return Error("You don't have permission to access this page.");
             }
 
-            var db = new ApplicationDbContext();
             var cardViewModel = db.Cards.Select(x => new CardViewModel
             {
                 Name = x.Name,

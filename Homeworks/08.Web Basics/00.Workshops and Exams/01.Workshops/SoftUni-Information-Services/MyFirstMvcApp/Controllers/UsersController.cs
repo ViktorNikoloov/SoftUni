@@ -11,11 +11,11 @@ namespace MyFirstMvcApp.Controllers
 {
     public class UsersController : Controller
     {
-        private UsersService usersService;
+        private readonly IUsersService usersService;
 
-        public UsersController()
+        public UsersController(IUsersService usersService)
         {
-            usersService = new UsersService();
+            this.usersService = usersService;
         }
 
         public HttpResponse Login()
