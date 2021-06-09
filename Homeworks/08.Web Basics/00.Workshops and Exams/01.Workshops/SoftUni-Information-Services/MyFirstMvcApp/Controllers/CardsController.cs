@@ -1,7 +1,6 @@
-﻿using System.Linq;
+﻿using System;
 
-using MyFirstMvcApp.Data;
-using MyFirstMvcApp.Data.Models;
+using MyFirstMvcApp.Services;
 using MyFirstMvcApp.ViewModels.Cards;
 
 using SIS.HTTP;
@@ -12,11 +11,11 @@ namespace MyFirstMvcApp.Controllers
 {
     public class CardsController : Controller
     {
-        private readonly ApplicationDbContext db;
+        private readonly ICardsService cardsService;
 
-        public CardsController(ApplicationDbContext db)
+        public CardsController(ICardsService cardsService)
         {
-            this.db = db;
+            this.cardsService = cardsService;
         }
 
         public HttpResponse Add()
@@ -24,33 +23,62 @@ namespace MyFirstMvcApp.Controllers
             if (!IsUserSignIn())
             {
                 return Error("You don't have permission to access this page.");
+                //return Redirect("/Users/Login");
             }
 
             return View();
         }
 
 
-        [HttpPost("/Cards/Add")]
-        public HttpResponse DoAdd(AddCardInputModel model)
+        [HttpPost]
+        public HttpResponse Add(AddCardInputModel model)
         {
-
-            if (Request.FormData["name"].Length < 5)
+            if (!IsUserSignIn())
             {
-                return Error("Name should be at least 5 characters long.");
+                return Error("You don't have permission to access this page.");
+                //return Redirect("/Users/Login");
             }
 
-            db.Cards.Add(new Card
+            if (string.IsNullOrWhiteSpace(model.Name) || (model.Name.Length < 5 ||
+                model.Name.Length > 15))
             {
-                Attack = model.Attack,
-                Health = model.Health,
-                Description = model.Description,
-                Name = model.Name,
-                ImageUrl = model.Image,
-                Keyword = model.Keyword,
-            });
-            db.SaveChanges();
+                return Error("Name should be between 5 and 15 characters long.");
+            }
 
-            return Redirect("/Cards/All");
+            if (string.IsNullOrWhiteSpace(model.Image))
+            {
+                return Error("The image is required!");
+            }
+
+            if (!Uri.TryCreate(model.Image, UriKind.Absolute, out _))
+            {
+                return Error("Image url should be valied.");
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Keyword))
+            {
+                return Error("The Keyword is required!");
+            }
+
+            if (model.Attack < 0)
+            {
+                return Error("Atack should be non-negative integer.");
+            }
+
+            if (model.Health < 0)
+            {
+                return Error("Health should be non-negative integer.");
+            }
+
+            if (string.IsNullOrWhiteSpace(model.Description) && model.Description.Length > 200)
+            {
+                return Error("The Description is required and its length should be at most 200 characters");
+            }
+
+            var cardId = this.cardsService.AddCard(model);
+            return AddToCollection(cardId);
+
+            //return Redirect("/Cards/All");
         }
 
         public HttpResponse All()
@@ -58,17 +86,10 @@ namespace MyFirstMvcApp.Controllers
             if (!IsUserSignIn())
             {
                 return Error("You don't have permission to access this page.");
+                //return Redirect("/Users/Login");
             }
 
-            var cardViewModel = db.Cards.Select(x => new CardViewModel
-            {
-                Name = x.Name,
-                Attack = x.Attack,
-                Health = x.Health,
-                ImageUrl = x.ImageUrl,
-                Description = x.Description,
-                Type = x.Keyword,
-            }).ToList();
+            var cardViewModel = this.cardsService.GetAll();
 
             return View(cardViewModel);
         }
@@ -78,9 +99,53 @@ namespace MyFirstMvcApp.Controllers
             if (!IsUserSignIn())
             {
                 return Error("You don't have permission to access this page.");
+                //return Redirect("/Users/Login");
             }
 
-            return View();
+            var viewModel = this.cardsService.GetByUserID(GetUserId());
+
+            return View(viewModel);
+        }
+
+        public HttpResponse AddToCollection(int cardId)
+        {
+            if (!IsUserSignIn())
+            {
+                return Error("You don't have permission to access this page.");
+                //return Redirect("/Users/Login");
+            }
+
+            var userId = GetUserId();
+            this.cardsService.AddCardToUserCollection(userId, cardId);
+            return Redirect("/Cards/All");
+        }
+
+        public HttpResponse RemoveFromCollection(int cardId)
+        {
+            if (!IsUserSignIn())
+            {
+                return Error("You don't have permission to access this page.");
+                //return Redirect("/Users/Login");
+            }
+
+            var userId = GetUserId();
+            cardsService.RemoveCardFromUserCollection(userId, cardId);
+
+            return Redirect("/Cards/Collection");
+        }
+
+        public HttpResponse DeleteCard(int cardId)
+        {
+            if (!IsUserSignIn())
+            {
+                return Error("You don't have permission to access this page.");
+                //return Redirect("/Users/Login");
+            }
+            var userId = GetUserId();
+
+            this.cardsService.DeleteCard(userId, cardId);
+
+            return Redirect("/Cards/All");
         }
     }
 }

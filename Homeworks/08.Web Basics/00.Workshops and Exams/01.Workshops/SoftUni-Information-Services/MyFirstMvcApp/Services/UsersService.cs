@@ -2,10 +2,10 @@
 using System.Text;
 using System.Security.Cryptography;
 
-using SIS.MvcFramework;
 using MyFirstMvcApp.Data;
 using MyFirstMvcApp.Data.Models;
-using System.Threading.Tasks;
+
+using SIS.MvcFramework;
 
 namespace MyFirstMvcApp.Services
 {
@@ -13,9 +13,9 @@ namespace MyFirstMvcApp.Services
     {
         private readonly ApplicationDbContext db;
 
-        public UsersService()
+        public UsersService(ApplicationDbContext db)
         {
-            db = new ApplicationDbContext();
+            this.db = db;
         }
 
         public string CreateUser(string username, string email, string password)
@@ -41,6 +41,7 @@ namespace MyFirstMvcApp.Services
             {
                 return null;
             }
+
             return user?.Id;
         }
 

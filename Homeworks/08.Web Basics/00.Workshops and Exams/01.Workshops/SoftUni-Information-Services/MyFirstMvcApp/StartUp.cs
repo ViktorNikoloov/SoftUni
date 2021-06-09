@@ -8,6 +8,7 @@ using MyFirstMvcApp.Services;
 
 using SIS.HTTP;
 using SIS.MvcFramework;
+using SIS.MvcFramework.ViewEngine;
 
 namespace MyFirstMvcApp
 {
@@ -17,6 +18,8 @@ namespace MyFirstMvcApp
         {
             serviceCollection.Add<IUsersService, UsersService>();
             serviceCollection.Add<ICardsService, CardsServices>();
+            serviceCollection.Add<IViewEngine, SisViewEngine>();
+            serviceCollection.Add<IUsersService, UsersService>();
         }
 
         public void Configure(List<Route> routeTable)

@@ -2,7 +2,6 @@
 using SIS.MvcFramework;
 using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
 
-
 namespace MyFirstMvcApp.Controllers
 {
     public class HomeController : Controller

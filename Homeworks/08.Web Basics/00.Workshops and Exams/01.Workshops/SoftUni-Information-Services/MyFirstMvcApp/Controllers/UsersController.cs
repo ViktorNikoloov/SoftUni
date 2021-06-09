@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 
 using MyFirstMvcApp.Services;
+using MyFirstMvcApp.ViewModels.Users;
 
 using SIS.HTTP;
 using SIS.MvcFramework;
@@ -28,8 +29,8 @@ namespace MyFirstMvcApp.Controllers
             return View();
         }
 
-        [HttpPost("/Users/Login")]
-        public HttpResponse DoLogin(string username, string password)
+        [HttpPost]
+        public HttpResponse Login(string username, string password)
         {
             var userId = usersService.GetUserId(username, password);
 
@@ -53,50 +54,50 @@ namespace MyFirstMvcApp.Controllers
             return View();
         }
 
-        [HttpPost("/Users/Register")]
-        public HttpResponse DoRegister(string username, string email, string password, string confirmPassword)
+        [HttpPost]
+        public HttpResponse Register(DoRegisterViewModel model)
         {
             if (IsUserSignIn())
             {
                 return Redirect("/");
             }
 
-            if (username == null || username.Length < 5 || username.Length > 20)
+            if (model.Username == null || model.Username.Length < 5 || model.Username.Length > 20)
             {
                 return Error("Invalid username. The username should be between 5 and 20 characters.");
             }
 
-            if (!Regex.IsMatch(username, @"^[a-zA-Z0-9\.]+$"))
+            if (!Regex.IsMatch(model.Username, @"^[a-zA-Z0-9\.]+$"))
             {
                 return Error("Invalid username. Only aphanumeric character are allowed.");
             }
 
-            if (string.IsNullOrWhiteSpace(email) || !new EmailAddressAttribute().IsValid(email))
+            if (string.IsNullOrWhiteSpace(model.Email) || !new EmailAddressAttribute().IsValid(model.Email))
             {
                 return Error("Invalid email.");
             }
 
-            if (password == null || password.Length < 6 || password.Length > 20)
+            if (model.Password == null || model.Password.Length < 6 || model.Password.Length > 20)
             {
                 return Error("Invalid password. The password should be between 6 and 20 characters.");
             }
 
-            if (password != confirmPassword)
+            if (model.Password != model.ConfirmPassword)
             {
                 return Error("Passwords does not match.");
             }
 
-            if (!usersService.IsUsernameAvaible(username))
+            if (!usersService.IsUsernameAvaible(model.Username))
             {
                 return Error("Username already taken.");
             }
 
-            if (!usersService.IsEmailAvaible(email))
+            if (!usersService.IsEmailAvaible(model.Email))
             {
                 return Error("Email already taken.");
             }
 
-            usersService.CreateUser(username, email, password);
+            usersService.CreateUser(model.Username, model.Email, model.Password);
 
             return Redirect("/Users/Login");
         }
@@ -109,6 +110,7 @@ namespace MyFirstMvcApp.Controllers
             }
 
             SignOut();
+
             return Redirect("/");
         }
     }

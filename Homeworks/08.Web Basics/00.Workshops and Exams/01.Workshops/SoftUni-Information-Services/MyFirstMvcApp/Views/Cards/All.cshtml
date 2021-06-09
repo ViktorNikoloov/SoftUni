@@ -1,6 +1,6 @@
 ﻿<h1 class="text-center mt-2">All Cards</h1>
 <div class="row mt-2 mb-4">
-    @foreach (var card in Model)
+    @foreach (MyFirstMvcApp.ViewModels.Cards.CardViewModel card in Model)
     {
         <div class="card col-6 col-lg-3 game-card">
             <img src=@card.ImageUrl
@@ -16,7 +16,8 @@
                         <span class="attack-stat">@card.Attack</span><span class="health-stat">@card.Health</span>
                     </li>
                 </ul>
-                <a href="/Cards/AddToCollection?cardId=X" class="btn btn-block btn-primary">Add to Collection</a>
+                <a href="/Cards/AddToCollection?cardId=@card.Id" class="btn btn-block btn-primary">Add to Collection</a>
+                <a href="/Cards/DeleteCard?cardId=@card.Id" class="btn btn-block btn-outline-warning">Delete Card</a>
             </div>
         </div>
     }
