@@ -1,6 +1,6 @@
 ﻿namespace SULS.App.Services
 {
-    public class ProblemsService
+    public class ProblemsService : IProblemsService
     {
     }
 }

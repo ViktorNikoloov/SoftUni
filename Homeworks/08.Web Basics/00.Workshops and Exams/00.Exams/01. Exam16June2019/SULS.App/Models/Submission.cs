@@ -21,10 +21,8 @@ namespace SULS.App.Models
 
         public DateTime CreatedOn { get; set; }
 
-        public int ProblemId { get; set; }
         public virtual Problem Problem { get; set; }
 
-        public int UserId { get; set; }
         public virtual User User { get; set; }
     }
 }
