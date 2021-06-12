@@ -1,6 +1,6 @@
-﻿using SIS.MvcFramework;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
+using SIS.MvcFramework;
 
 namespace SharedTrip.App
 {

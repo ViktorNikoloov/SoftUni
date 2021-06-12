@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using SharedTrip.App.Data;
-using SIS.HTTP;
 
+using Microsoft.EntityFrameworkCore;
+
+using SIS.HTTP;
 using SIS.MvcFramework;
+
+using SharedTrip.App.Data;
+
 
 namespace SharedTrip.App
 {

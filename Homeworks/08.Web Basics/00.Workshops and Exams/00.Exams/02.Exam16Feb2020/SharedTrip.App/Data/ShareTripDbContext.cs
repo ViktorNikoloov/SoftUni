@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+
 using SharedTrip.App.Models;
 
 namespace SharedTrip.App.Data
