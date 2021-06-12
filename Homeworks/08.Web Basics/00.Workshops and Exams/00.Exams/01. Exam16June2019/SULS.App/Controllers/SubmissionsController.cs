@@ -45,7 +45,7 @@ namespace SULS.App.Controllers
 
             if (string.IsNullOrWhiteSpace(code)|| 30 > code.Length || code.Length > 800)
             {
-                return Error("The text should be between 30 and 800 character long.");
+                return Error("The text should be between 30 and 800 characters long.");
             }
 
             var userId = GetUserId();

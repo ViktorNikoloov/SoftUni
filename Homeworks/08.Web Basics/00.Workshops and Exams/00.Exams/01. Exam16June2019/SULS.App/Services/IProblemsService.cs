@@ -14,6 +14,6 @@ namespace SULS.App.Services
 
         IEnumerable<HomePageProblemViewModel> GetAllProblems();
 
-       // IEnumerable<HomePageProblemViewModel> GetAllSubmissions();
+        DetailsInputModel GetById(string id);
     }
 }

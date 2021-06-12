@@ -64,12 +64,15 @@ namespace SULS.App.Controllers
         }
 
         [HttpPost]
-        public HttpResponse Details(DetailsInputModel model)
+        public HttpResponse Details(string id)
         {
             if (!IsUserSignIn())
             {
                 Redirect("/");
             }
+
+
+
             return View();
         }
     }

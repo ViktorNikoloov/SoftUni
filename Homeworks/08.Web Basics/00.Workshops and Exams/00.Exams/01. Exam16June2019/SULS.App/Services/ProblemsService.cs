@@ -37,23 +37,34 @@ namespace SULS.App.Services
                 Count = x.Submissions.Count,
             }).ToList();
 
-        //public IEnumerable<HomePageProblemViewModel> GetAllSubmissions()
-        //=> db.Users
-        //    .Select(x => new DetailsInputModel
-        //    {
-        //        Username = x.Username,
 
-        //        AchievedResult = x.Submissions.Select(s=>s.AchievedResult)
-        //    }).ToList();
 
         public string GetNameById(string id)
         => db.Problems
             .Where(x => x.Id == id)
-            .Select(x=>x.Name)
+            .Select(x => x.Name)
             .FirstOrDefault();
 
-        public bool IsProblemExist(string name)
-        => db.Problems.Any(x => x.Name == name);
+        public DetailsInputModel GetById(string id)
+        {
+            return db.Problems.Where(x => x.Id == id)
+                .Select(x => new DetailsInputModel
+                {
+                    ProblemName = x.Name,
+                    ProblemInfo = x.Submissions.Select(s => new ProblemInfoModel
+                    {
+                        CreatedOn = s.CreatedOn.ToShortDateString(),
+                        SubmissionId = s.Id,
+                        AchievedResult = s.AchievedResult,
+                        Username = s.User.Username,
+                        MaxPoints = x.Points,
+                    })
+                }).FirstOrDefault();
+        }
 
+        public bool IsProblemExist(string name)
+            => db.Problems.Any(x => x.Name == name);
     }
+
 }
+
