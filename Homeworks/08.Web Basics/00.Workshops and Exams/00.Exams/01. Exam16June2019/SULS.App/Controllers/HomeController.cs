@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-
-using SIS.HTTP;
+﻿using SIS.HTTP;
 using SIS.MvcFramework;
 using SIS.MvcFramework.SIS.MvcFramework.CustomAttributes;
 
 using SULS.App.Services;
-using SULS.App.ViewModels.Problems;
 
 namespace SULS.App.Controllers
 {

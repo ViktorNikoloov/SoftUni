@@ -45,13 +45,13 @@ namespace SULS.App.Services
             .Select(x => x.Name)
             .FirstOrDefault();
 
-        public DetailsInputModel GetById(string id)
+        public ProblemViewModel GetById(string id)
         {
             return db.Problems.Where(x => x.Id == id)
-                .Select(x => new DetailsInputModel
+                .Select(x => new ProblemViewModel
                 {
-                    ProblemName = x.Name,
-                    ProblemInfo = x.Submissions.Select(s => new ProblemInfoModel
+                    Name = x.Name,
+                    Submissions = x.Submissions.Select(s => new SubmissionViewModel
                     {
                         CreatedOn = s.CreatedOn.ToShortDateString(),
                         SubmissionId = s.Id,
@@ -65,6 +65,5 @@ namespace SULS.App.Services
         public bool IsProblemExist(string name)
             => db.Problems.Any(x => x.Name == name);
     }
-
 }
 

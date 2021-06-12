@@ -36,7 +36,15 @@ namespace SULS.App.Services
                     AchievedResult = random.Next(0, problemMaxpoints + 1),
                 });
 
-            db.SaveChanges(); 
+            db.SaveChanges();
+        }
+
+        public void Delete(string id)
+        {
+            var submission = db.Submissions.FirstOrDefault(x => x.Id == id);
+
+            db.Submissions.Remove(submission);
+            db.SaveChanges();
         }
     }
 }

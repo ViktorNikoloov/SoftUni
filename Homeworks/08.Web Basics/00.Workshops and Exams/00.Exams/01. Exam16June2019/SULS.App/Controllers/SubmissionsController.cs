@@ -23,7 +23,7 @@ namespace SULS.App.Controllers
         {
             if (!IsUserSignIn())
             {
-                Redirect("/");
+                return Redirect("/Users/Login");
             }
 
             var viewModel = new SubmissionInputModel
@@ -40,7 +40,7 @@ namespace SULS.App.Controllers
         {
             if (!IsUserSignIn())
             {
-                Redirect("/");
+                return Redirect("/Users/Login");
             }
 
             if (string.IsNullOrWhiteSpace(code)|| 30 > code.Length || code.Length > 800)
@@ -50,6 +50,18 @@ namespace SULS.App.Controllers
 
             var userId = GetUserId();
             submissionService.Create(problemId, userId, code);
+
+            return Redirect("/");
+        }
+
+        public HttpResponse Delete(string id)
+        {
+            if (!IsUserSignIn())
+            {
+                return Redirect("/Users/Login");
+            }
+
+            submissionService.Delete(id);
 
             return Redirect("/");
         }

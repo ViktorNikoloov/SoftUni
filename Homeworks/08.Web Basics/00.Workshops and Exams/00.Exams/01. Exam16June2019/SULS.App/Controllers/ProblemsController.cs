@@ -20,7 +20,7 @@ namespace SULS.App.Controllers
         {
             if (!IsUserSignIn())
             {
-                return Redirect("/");
+                return Redirect("/Users/Login");
             }
 
             return View();
@@ -35,7 +35,7 @@ namespace SULS.App.Controllers
 
             if (!IsUserSignIn())
             {
-                return Redirect("/");
+                return Redirect("/Users/Login");
             }
 
             if (string.IsNullOrWhiteSpace(name) || 5 > name.Length || name.Length > 20 || isProblemExist)
@@ -53,27 +53,16 @@ namespace SULS.App.Controllers
             return Redirect("/");
         }
 
-        public HttpResponse Details()
-        {
-            if (!IsUserSignIn())
-            {
-                Redirect("/");
-            }
-
-            return View();
-        }
-
-        [HttpPost]
         public HttpResponse Details(string id)
         {
             if (!IsUserSignIn())
             {
-                Redirect("/");
+                return Redirect("/Users/Login");
             }
 
+            var viewModel = problemService.GetById(id);
 
-
-            return View();
+            return View(viewModel);
         }
     }
 }

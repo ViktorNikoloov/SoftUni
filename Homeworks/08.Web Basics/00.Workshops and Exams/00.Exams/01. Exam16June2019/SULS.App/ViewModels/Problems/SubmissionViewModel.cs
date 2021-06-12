@@ -2,7 +2,7 @@
 
 namespace SULS.App.ViewModels.Problems
 {
-    public class ProblemInfoModel
+    public class SubmissionViewModel
     {
         public string Username { get; set; }
 
@@ -13,5 +13,8 @@ namespace SULS.App.ViewModels.Problems
         public string CreatedOn { get; set; }
 
         public string SubmissionId { get; set; }
+
+        public int Percentage
+            => (int)Math.Round(AchievedResult * 100.0M / MaxPoints);
     }
 }

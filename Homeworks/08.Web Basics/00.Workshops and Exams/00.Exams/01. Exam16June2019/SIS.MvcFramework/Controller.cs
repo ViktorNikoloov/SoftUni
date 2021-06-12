@@ -53,8 +53,8 @@ namespace SIS.MvcFramework
 
         protected HttpResponse Error(string errorText)
         {
-            var viewContent = $"<div class=\"alert alert-danger\" role=\"alert\">{errorText}</div" + HttpConstants.NewLine +
-                $"<div class=\"index - div bg - blur border border-white\"><h3><a class=\"text-primay\" href=\"/Users/Login\">Login</a> if you have an account or <a class=\"text-primay\" href=\"/Users/Register\">Register</a> now and check our deals.</h3></div>";
+            var viewContent = $"<div class=\"alert alert-danger\" role=\"alert\">{errorText}</div";
+
             var responseHtml = PutViewInLayout(viewContent);
             var responseBodyBytes = Encoding.UTF8.GetBytes(responseHtml);
             var response = new HttpResponse("text/html", responseBodyBytes, HTTP.Enums.HttpStatusCode.ServerError);
