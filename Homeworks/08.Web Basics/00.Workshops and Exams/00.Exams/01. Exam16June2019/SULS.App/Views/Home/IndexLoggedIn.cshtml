@@ -12,7 +12,7 @@
             </thead>
             <tbody>
                 <tr class="row">
-                    @foreach(var problem in Model.Problems)
+                    @foreach(SULS.App.ViewModels.Problems.HomePageProblemViewModel problem in Model)
                     {
                     <td class="col-lg-3 suls-text-color">@problem.Name</td>
                     <td class="col-lg-3 suls-text-color">@problem.Count</td>
