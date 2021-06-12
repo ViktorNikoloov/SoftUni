@@ -1,6 +1,6 @@
 ﻿namespace SharedTrip.App.Services.Users
 {
-    public class IUsersService
+    public interface IUsersService
     {
         string CreateUser(string username, string email, string password);
 
