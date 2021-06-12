@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-
+using Microsoft.EntityFrameworkCore;
+using SharedTrip.App.Data;
 using SIS.HTTP;
 
 using SIS.MvcFramework;
@@ -15,7 +16,7 @@ namespace SharedTrip.App
 
         public void Configure(List<Route> routeTable)
         {
-
+            new ShareTripDbContext().Database.Migrate();
         }
     }
 }

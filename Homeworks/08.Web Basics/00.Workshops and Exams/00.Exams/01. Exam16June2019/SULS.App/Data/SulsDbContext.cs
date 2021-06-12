@@ -22,6 +22,8 @@ namespace SULS.App.Data
 
         public DbSet<Submission> Submissions { get; set; }
 
+       
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
