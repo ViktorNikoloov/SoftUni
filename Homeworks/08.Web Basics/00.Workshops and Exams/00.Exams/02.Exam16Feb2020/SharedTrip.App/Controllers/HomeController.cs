@@ -10,6 +10,11 @@ namespace SharedTrip.App.Controllers
         [HttpGet("/")]
         public HttpResponse Index()
         {
+            if (IsUserSignIn())
+            {
+                Redirect("/Trips/All");
+            }
+
             return View();
         }
     }

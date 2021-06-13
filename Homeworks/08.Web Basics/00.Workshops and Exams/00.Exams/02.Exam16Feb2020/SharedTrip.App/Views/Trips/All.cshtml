@@ -13,7 +13,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach(var trip in Model.Trips)
+                    @foreach(SharedTrip.App.ViewModels.Trips.TripsAllViewModel trip in Model)
                     {
                     <tr>
                         <th scope="row">@trip.StartPoint</th>
