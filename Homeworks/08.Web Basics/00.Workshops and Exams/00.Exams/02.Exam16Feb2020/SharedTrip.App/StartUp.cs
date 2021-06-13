@@ -6,7 +6,8 @@ using SIS.HTTP;
 using SIS.MvcFramework;
 
 using SharedTrip.App.Data;
-
+using SharedTrip.App.Services.Trips;
+using SharedTrip.App.Services.Users;
 
 namespace SharedTrip.App
 {
@@ -14,7 +15,8 @@ namespace SharedTrip.App
     {
         public void ConfigureServices(IServiceCollection serviceCollection)
         {
-            
+            serviceCollection.Add<IUsersService, UsersService>();
+            serviceCollection.Add<ITripsService, TripsService>();
         }
 
         public void Configure(List<Route> routeTable)
