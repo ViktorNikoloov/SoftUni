@@ -6,6 +6,8 @@ using MyWebServer;
 using MyWebServer.Controllers;
 
 using CarShop.Data;
+using MyWebServer.Results.Views;
+using System.ComponentModel.DataAnnotations;
 
 namespace CarShop
 {
@@ -16,6 +18,9 @@ namespace CarShop
                 .WithRoutes(routes => routes
                     .MapStaticFiles()
                     .MapControllers())
+                .WithServices(services => services
+                    .Add<IViewEngine, CompilationViewEngine>()
+                    .Add<CarShopDbContext>())
                 .WithConfiguration<CarShopDbContext>(context => context
                     .Database.Migrate())
                 .Start();

@@ -6,17 +6,6 @@ namespace CarShop.Data
 {
     public class CarShopDbContext : DbContext
     {
-        public CarShopDbContext()
-        {
-
-        }
-
-        public CarShopDbContext(DbContextOptions options)
-            :base(options)
-        {
-
-        }
-
         public DbSet<User> Users { get; set; }
 
         public DbSet<Car> Cars { get; set; }
