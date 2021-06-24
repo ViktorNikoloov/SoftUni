@@ -7,6 +7,11 @@ namespace CarShop.Controllers
     {
         public HttpResponse Index()
         {
+            if (User.IsAuthenticated)
+            {
+                return Redirect("/Cars/All");
+            }
+
             return View();
         }
     }

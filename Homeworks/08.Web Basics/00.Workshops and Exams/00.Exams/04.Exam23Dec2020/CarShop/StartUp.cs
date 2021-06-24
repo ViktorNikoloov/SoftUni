@@ -7,7 +7,9 @@ using MyWebServer.Controllers;
 
 using CarShop.Data;
 using MyWebServer.Results.Views;
-using System.ComponentModel.DataAnnotations;
+using CarShop.Services.Users;
+using CarShop.Services.Validator;
+using CarShop.Services.PasswordHasher;
 
 namespace CarShop
 {
@@ -20,7 +22,10 @@ namespace CarShop
                     .MapControllers())
                 .WithServices(services => services
                     .Add<IViewEngine, CompilationViewEngine>()
-                    .Add<CarShopDbContext>())
+                    .Add<CarShopDbContext>()
+                .Add<IUsersService, UsersService>()
+                .Add<IValidator, Validator>()
+                .Add<IPasswordHasher, PasswordHasher>())
                 .WithConfiguration<CarShopDbContext>(context => context
                     .Database.Migrate())
                 .Start();
