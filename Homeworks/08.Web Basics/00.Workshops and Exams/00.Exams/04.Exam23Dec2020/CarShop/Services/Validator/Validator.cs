@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
 using CarShop.Data;
 using CarShop.ViewModels;
+using CarShop.ViewModels.Cars;
 
 using static CarShop.Data.DataConstants;
 
@@ -16,6 +18,37 @@ namespace CarShop.Services.Validator
         public Validator(CarShopDbContext db)
         {
             this.db = db;
+        }
+
+        public ICollection<string> ValidateCar(AddCarFormViewModel car)
+        {
+            var errors = new List<string>();
+
+            if (string.IsNullOrWhiteSpace(car.Model) || car.Model.Length < CarModelMinLength || car.Model.Length > DefaultMaxLength)
+            {
+                errors.Add($"Model '{car.Model}' is not valid. It must be between {CarModelMinLength} and {DefaultMaxLength} characters long.");
+            }
+
+            if (car.Year == null)
+            {
+                errors.Add($"Car's year can not be empty");
+            }
+
+            Uri uriResult;
+            bool result = Uri.TryCreate(car.Image, UriKind.Absolute, out uriResult)
+                && uriResult.Scheme == Uri.UriSchemeHttp;
+            if (result)
+            {
+                errors.Add($"Invalid url address \"{car.Image}\"");
+            }
+
+            if (!Regex.IsMatch(car.PlateNumber, @"[A-Z]{2}[0-9]{4}[A-Z]{2}"))
+            {
+                errors.Add($"Invalid plate number \"{car.PlateNumber}\"");
+            }
+
+
+            return errors;
         }
 
         public ICollection<string> ValidateUser(RegisterUserFormModel user)
@@ -63,6 +96,7 @@ namespace CarShop.Services.Validator
             {
                 errors.Add($"User with '{user.Email}' e-mail already exists.");
             }
+
             return errors;
         }
     }
