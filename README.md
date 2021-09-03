@@ -17,5 +17,6 @@
    |<a href="https://softuni.bg/trainings/3272/ms-sql-january-2021"> **MS SQL Server** </a>| <a href="https://softuni.bg/certificates/details/98015/bb686a60"> Link</a> |
    |<a href="https://softuni.bg/trainings/3221/entity-framework-core-february-2021"> **Entity Framework Core** </a>| <a href="https://softuni.bg/certificates/details/102724/5f0e3a60"> Link</a> |
    |<a href="https://softuni.bg/trainings/3353/csharp-web-basics-basics-may-2021/internal"> **C# Web Basics - May 2021** </a>| <a href="https://softuni.bg/certificates/details/109513/8a54da9d"> Link</a> |
+   |<a href="https://softuni.bg/trainings/3354/asp-dot-net-core-june-2021"> **C# Web Basics - May 2021** </a>| <a href="https://softuni.bg/certificates/details/113479/bb8087ea"> Link</a> |
 
 <p align="center">All tasks and homeworks are done with result 100/100 points<p>
