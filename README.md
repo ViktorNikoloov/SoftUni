@@ -18,7 +18,7 @@
    |<a href="https://softuni.bg/trainings/3221/entity-framework-core-february-2021"> **Entity Framework Core** </a>| <a href="https://softuni.bg/certificates/details/102724/5f0e3a60"> Link</a> |
    |<a href="https://softuni.bg/trainings/3353/csharp-web-basics-basics-may-2021/internal"> **C# Web Basics - May 2021** </a>| <a href="https://softuni.bg/certificates/details/109513/8a54da9d"> Link</a> |
    |<a href="https://softuni.bg/trainings/3354/asp-dot-net-core-june-2021"> **ASP.NET Core - June 2021** </a>| <a href="https://softuni.bg/certificates/details/113479/bb8087ea"> Link</a> |
-   |<a href="https://softuni.bg/trainings/3487/js-advanced-september-2021"> **Next Goal - JS Advanced - start on September 2021** </a>| <a href="https://github.com/ViktorNikoloov/SoftUni/tree/master/Homeworks"> Link</a> |
+   |<a href="https://softuni.bg/trainings/3487/js-advanced-september-2021"> **JS Advanced - Studying now** </a>| <a href="https://github.com/ViktorNikoloov/SoftUni/tree/master/Homeworks/10.JS%20Advanced"> Link</a> |
    |<a href="https://softuni.bg/trainings/3488/js-applications-october-2021"> **Next Goal - JS Applications - start on October 2021** </a>| <a href="https://github.com/ViktorNikoloov/SoftUni/tree/master/Homeworks"> Link</a> |
 
 <p align="center">All tasks and homeworks are done with result 100/100 points<p>
