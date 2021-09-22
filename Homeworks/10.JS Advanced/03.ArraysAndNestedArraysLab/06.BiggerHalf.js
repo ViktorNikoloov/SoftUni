@@ -5,7 +5,7 @@ function getBiggerHalf(arr) {
     result = orderArray.slice(-half);
 
 
-    return result.join(', ');
+    return result;
 }
 
 console.log(getBiggerHalf([4, 7, 2, 5]));
