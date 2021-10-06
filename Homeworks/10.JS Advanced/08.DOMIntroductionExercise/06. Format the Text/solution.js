@@ -8,15 +8,14 @@ function solve() {
     if (counter == 1) {
       currString = '<p>'
     }
-    currString += input.shift() + '. ';
+    currString += input.shift() + '.';
 
     if (counter === 3 || input.length === 1) {
-      currString += '</p>\n'
+      currString += '</p>'
       result.push(currString);
       counter = 0;
     }
-
   }
-
   document.getElementById('output').innerHTML = result.join('\n');
+
 }
