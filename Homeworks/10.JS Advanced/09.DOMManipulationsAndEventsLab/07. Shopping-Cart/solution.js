@@ -15,8 +15,14 @@ function solve() {
 
          textArea.textContent += `Added ${product} for ${price} to the cart.\n`
       } else {
-         textArea.textContent += `You bought ${allProducts.join(', ')} for ${totalPrice.toFixed(2)}.`;
+         let getUniqueProducts = allProducts.filter(onlyUnique);
+         textArea.textContent += `You bought ${getUniqueProducts.join(', ')} for ${totalPrice.toFixed(2)}.`;
          [...document.querySelectorAll('button')].map(b => b.disabled = true);
       }
    })
+
+   function onlyUnique(value, index, self) {
+      return self.indexOf(value) === index;
+    }
 }
+
