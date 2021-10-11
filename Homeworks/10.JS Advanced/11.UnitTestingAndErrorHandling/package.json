@@ -1,0 +1,16 @@
+{
+  "name": "mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "01.SubSum.js",
+  "scripts": {
+    "test": "mocha /Test Exercises/2.EvenOrOdd.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.2"
+  }
+}
