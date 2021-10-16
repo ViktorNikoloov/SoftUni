@@ -4,7 +4,7 @@
   "description": "",
   "main": "01.SubSum.js",
   "scripts": {
-    "test": "mocha /Test Exercises/2.EvenOrOdd.test.js"
+    "test": "mocha 07.AddSubtract.test.js"
   },
   "keywords": [],
   "author": "",
