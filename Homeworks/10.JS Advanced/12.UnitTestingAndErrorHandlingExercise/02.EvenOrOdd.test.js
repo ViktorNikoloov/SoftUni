@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const isOddOrEven = require('./02.EvenOrOdd');
 
 describe('Check is string, odd or even length', () => {
-    
+
     describe('True path', () => {
         it('When input is with odd length return odd', () => {
             expect(isOddOrEven("Odd")).to.be.equal('odd');
@@ -13,7 +13,7 @@ describe('Check is string, odd or even length', () => {
         });
 
     });
-    
+
     describe('Wrong path', () => {
 
         it('When input is not a string return undefined', () => {
