@@ -46,9 +46,6 @@ public class SinglyLinkedList<T> : IAbstractLinkedList<T>
 
     public void AddLast(T item)
     {
-        // 01. Create node
-        // 02. Iterate n elements and add to the .Next for the last
-        // 03. Increase Count
         Node toInsert = new (item);
         Node current = this.head;
 
