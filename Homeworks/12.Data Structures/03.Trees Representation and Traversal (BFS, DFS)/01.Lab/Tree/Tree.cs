@@ -59,6 +59,25 @@ public class Tree<T> : IAbstractTree<T>
         return list;
     }
 
+    public IEnumerable<T> OrderDfsWithStack()
+    {
+        Stack<T> result = new();
+        Stack<Tree<T>> stack = new ();
+        stack.Push(this);
+
+        while (stack.Count > 0)
+        {
+            var node = stack.Pop();
+
+            foreach (var child in node.children)
+            {
+                stack.Push(child);
+            }
+        }
+
+        return result;
+    }
+
     public void RemoveNode(T nodeKey)
     {
         throw new NotImplementedException();
