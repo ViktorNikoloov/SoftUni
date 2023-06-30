@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "01.TBC", "01.TBC\01.TBC.csproj", "{2D7E7718-3F8D-49A3-8F2B-E3F8F065BEF3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "02.Socks", "02.Socks\02.Socks.csproj", "{843960F9-C9AF-44BB-B6C9-74FBD7894EA6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "03.Path-Finder", "03.Path-Finder\03.Path-Finder.csproj", "{41DD4BFF-165B-4827-BFB2-E486C27BA0A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{2D7E7718-3F8D-49A3-8F2B-E3F8F065BEF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D7E7718-3F8D-49A3-8F2B-E3F8F065BEF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D7E7718-3F8D-49A3-8F2B-E3F8F065BEF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{843960F9-C9AF-44BB-B6C9-74FBD7894EA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{843960F9-C9AF-44BB-B6C9-74FBD7894EA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{843960F9-C9AF-44BB-B6C9-74FBD7894EA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{843960F9-C9AF-44BB-B6C9-74FBD7894EA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41DD4BFF-165B-4827-BFB2-E486C27BA0A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41DD4BFF-165B-4827-BFB2-E486C27BA0A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41DD4BFF-165B-4827-BFB2-E486C27BA0A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41DD4BFF-165B-4827-BFB2-E486C27BA0A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
